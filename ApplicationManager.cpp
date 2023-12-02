@@ -1,5 +1,6 @@
 #include "ApplicationManager.h"
 #include "Actions\AddRectAction.h"
+#include"Actions/AddcircleAction.h"
 
 
 //Constructor
@@ -36,8 +37,11 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		case DRAW_RECT:
 			pAct = new AddRectAction(this);
 			break;
+		case DRAW_CIRC :
+			pAct = new AddcircleAction(this);
+			break;
 
-		case EXIT:
+		case FUNC_EXIT:
 			///create ExitAction here
 			
 			break;
