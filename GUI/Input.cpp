@@ -52,7 +52,10 @@ ActionType Input::GetUserAction() const
 			switch (ClickedItemOrder)
 			{
 			case ITM_RECT: return DRAW_RECT;
-			case ITM_EXIT: return EXIT;	
+			case ITM_EXIT: return FUNC_EXIT;
+			case ITM_CIRC: return DRAW_CIRC;
+			case ITM_TRIA: return DRAW_TRIA;
+			case ITM_SQUA:return DRAW_SQUA;
 			
 			default: return EMPTY;	//A click on empty place in desgin toolbar
 			}
@@ -72,7 +75,7 @@ ActionType Input::GetUserAction() const
 		///TODO:
 		//perform checks similar to Draw mode checks above
 		//and return the correspoding action
-		return TO_PLAY;	//just for now. This should be updated
+		return ENTER_PLAY_MODE;	//just for now. This should be updated
 	}	
 
 }

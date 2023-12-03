@@ -15,7 +15,7 @@ Output::Output()
 
 	UI.StatusBarHeight = 50;
 	UI.ToolBarHeight = 50;
-	UI.MenuItemWidth = 40;
+	UI.MenuItemWidth = 45;
 
 	UI.DrawColor = BLUE;	//Drawing color
 	UI.FillColor = GREEN;	//Filling color
@@ -75,6 +75,12 @@ void Output::CreateDrawToolBar() const
 {
 	UI.InterfaceMode = MODE_DRAW;
 
+	//You can draw the tool bar icons in any way you want.
+	//Below is one possible way
+
+	//First prepare List of images for each menu item
+	//To control the order of these images in the menu, 
+	//reoder them in UI_Info.h ==> enum DrawMenuItem
 	string MenuItemImages[DRAW_ITM_COUNT];
 
 	MenuItemImages[ITM_RECT] = "images\\MenuItems\\rectangle.jpg";

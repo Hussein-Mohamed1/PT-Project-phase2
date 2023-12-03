@@ -15,9 +15,6 @@ enum GUI_MODE	//Graphical user interface mode
 
 enum DrawMenuItem //The items of the Draw menu (you should add more items)
 {
-	//Note: Items are **(ordered)** here as they appear in menu
-	//If you want to change the menu items order, change the order here
-		//Exit item
 	ITM_RECT,		//Recangle item in menu
 	ITM_CIRC,
 	ITM_TRIA,
@@ -47,6 +44,7 @@ enum DrawMenuItem //The items of the Draw menu (you should add more items)
 	DRAW_ITM_COUNT,
 
 	//no. of menu items ==> This should be the last line in this enum
+
 
 };
 

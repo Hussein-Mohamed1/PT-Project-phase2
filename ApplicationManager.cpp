@@ -1,6 +1,8 @@
 #include "ApplicationManager.h"
 #include "Actions\AddRectAction.h"
-#include"Actions/AddcircleAction.h"
+#include"Actions\AddcircleAction.h"
+#include"Actions\AddTriangleAction.h"
+#include"Actions/AddSquareAction.h"
 
 
 //Constructor
@@ -34,22 +36,29 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 	//According to Action Type, create the corresponding action object
 	switch (ActType)
 	{
-		case DRAW_RECT:
-			pAct = new AddRectAction(this);
-			break;
-		case DRAW_CIRC :
-			pAct = new AddcircleAction(this);
-			break;
+	case DRAW_RECT:
+		pAct = new AddRectAction(this);
+		break;
+	case DRAW_CIRC :
+		pAct = new AddcircleAction(this);
+		break;
+	case DRAW_TRIA :
+		pAct = new AddTriangleAction(this);
+		break;
+	case DRAW_SQUA :
+		pAct = new AddSquareAction(this);
+		break;
 
-		case FUNC_EXIT:
-			///create ExitAction here
-			
-			break;
-		
-		case STATUS:	//a click on the status bar ==> no action
-			return;
+
+	case FUNC_EXIT:
+		///create ExitAction here
+
+		break;
+
+	case STATUS:	//a click on the status bar ==> no action
+		return;
 	}
-	
+
 	//Execute the created action
 	if(pAct != NULL)
 	{

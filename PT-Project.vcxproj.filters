@@ -148,14 +148,23 @@
     <ClCompile Include="CMUgraphicsLib\colors.cpp">
       <Filter>CMUgraphicsLib</Filter>
     </ClCompile>
-    <ClCompile Include="Actions\AddcircleAction.cpp">
-      <Filter>Action Classes</Filter>
-    </ClCompile>
     <ClCompile Include="Figures\CCircle.cpp">
       <Filter>Figures Classes</Filter>
     </ClCompile>
     <ClCompile Include="Figures\CTriangle.cpp">
       <Filter>Figures Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="Actions\AddTriangleAction.cpp">
+      <Filter>Action Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="Actions\AddSquareAction.cpp">
+      <Filter>Action Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="Figures\CSquare.cpp">
+      <Filter>Figures Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="Actions\AddcircleAction.cpp">
+      <Filter>Action Classes</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -244,14 +253,23 @@
       <Filter>Application Manager</Filter>
     </ClInclude>
     <ClInclude Include="DEFS.h" />
-    <ClInclude Include="Actions\AddcircleAction.h">
-      <Filter>Action Classes</Filter>
-    </ClInclude>
     <ClInclude Include="Figures\CCircle.h">
       <Filter>Figures Classes</Filter>
     </ClInclude>
     <ClInclude Include="Figures\CTriangle.h">
       <Filter>Figures Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="Actions\AddTriangleAction.h">
+      <Filter>Action Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="Actions\AddSquareAction.h">
+      <Filter>Action Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="Figures\CSquare.h">
+      <Filter>Figures Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="Actions\AddcircleAction.h">
+      <Filter>Action Classes</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
