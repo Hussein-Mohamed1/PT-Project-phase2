@@ -231,10 +231,29 @@ void Output::DrawRect(Point P1, Point P2, GfxInfo RectGfxInfo, bool selected) co
 
 	 pWind->DrawTriangle(x1, y1, x2, y2, x3, y3, style);
 
+ }
+ void Output::Drawhexagon(const int* xcoordinates, const int* ycoordinates, GfxInfo RectGfxInfo, bool selected) const
+ {
+	 color DrawingClr;
+	 if (selected)
+		 DrawingClr = UI.HighlightColor; //Figure should be drawn highlighted
+	 else
+		 DrawingClr = RectGfxInfo.DrawClr;
 
+	 pWind->SetPen(DrawingClr, 1);
+	 drawstyle style;
+	 if (RectGfxInfo.isFilled)
+	 {
+		 style = FILLED;
+		 pWind->SetBrush(RectGfxInfo.FillClr);
+	 }
+	 else
+		 style = FRAME;
+
+
+	 pWind->DrawPolygon(xcoordinates, ycoordinates, 8, style);
 
  }
-
 
 
 

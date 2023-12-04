@@ -3,6 +3,8 @@
 #include"Actions\AddcircleAction.h"
 #include"Actions\AddTriangleAction.h"
 #include"Actions/AddSquareAction.h"
+#include"Actions/AddHexaAction.h"
+
 
 
 //Constructor
@@ -48,7 +50,9 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 	case DRAW_SQUA :
 		pAct = new AddSquareAction(this);
 		break;
-
+	case DRAW_HEXA:
+		pAct = new AddHexaAction(this);
+		break;
 
 	case FUNC_EXIT:
 		///create ExitAction here

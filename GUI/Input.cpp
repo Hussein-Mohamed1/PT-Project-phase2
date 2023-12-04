@@ -51,12 +51,36 @@ ActionType Input::GetUserAction() const
 
 			switch (ClickedItemOrder)
 			{
+
 			case ITM_RECT: return DRAW_RECT;
-			case ITM_EXIT: return FUNC_EXIT;
 			case ITM_CIRC: return DRAW_CIRC;
 			case ITM_TRIA: return DRAW_TRIA;
-			case ITM_SQUA:return DRAW_SQUA;
-			
+			case ITM_SQUA: return DRAW_SQUA;
+			case ITM_HEXA: return DRAW_HEXA;
+			case ADD_IMAGE: return FUNC_ADD_IMAGE;
+			case ITM_SELECT: return FUNC_SELECT;
+			case ITM_DELETE: return FUNC_DELETE;
+			case ITM_BLACK: return COLOR_BLACK;
+			case ITM_RED: return COLOR_RED;
+			case ITM_BLUE: return COLOR_BLUE;
+			case ITM_GREEN: return COLOR_GREEN;
+			case ITM_YELLOW: return COLOR_YELLOW;
+			case ITM_ORANGE: return COLOR_ORANGE;
+			case ITM_UNDO: return FUNC_UNDO;
+			case ITM_REDO: return FUNC_REDO;
+			case ITM_START_REC: return FUNC_START_REC;
+			case ITM_PLAY_REC: return FUNC_PLAY_REC;
+			case ITM_STOP_REC: return FUNC_STOP_REC;
+			case ITM_SAVE: return FUNC_SAVE;
+			case ITM_LOAD: return FUNC_LOAD;
+			case PLAY_MODE: return ENTER_PLAY_MODE;
+			case CLEAR_CANVAS: return FUNC_CLEAR_CANVAS;
+			case ITM_EXIT: return FUNC_EXIT;
+			case ITM_FILL: return FUNC_FILL;
+			case ITM_MOVE: return FUNC_MOVE;
+
+
+
 			default: return EMPTY;	//A click on empty place in desgin toolbar
 			}
 		}
