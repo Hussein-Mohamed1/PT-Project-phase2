@@ -1,5 +1,6 @@
 #include "CFigure.h"
 
+
 CFigure::CFigure(GfxInfo FigureGfxInfo)
 { 
 	FigGfxInfo = FigureGfxInfo;	//Default status is non-filled.

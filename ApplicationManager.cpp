@@ -4,6 +4,7 @@
 #include"Actions\AddTriangleAction.h"
 #include"Actions/AddSquareAction.h"
 #include"Actions/AddHexaAction.h"
+#include"Actions/SelectAction.h"
 
 
 
@@ -53,6 +54,9 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 	case DRAW_HEXA:
 		pAct = new AddHexaAction(this);
 		break;
+	case FUNC_SELECT :
+		pAct = new SelectAction(this);
+		break;
 
 	case FUNC_EXIT:
 		///create ExitAction here
@@ -86,10 +90,10 @@ CFigure *ApplicationManager::GetFigure(int x, int y) const
 {
 	//If a figure is found return a pointer to it.
 	//if this point (x,y) does not belong to any figure return NULL
-
-
+	// 
 	//Add your code here to search for a figure given a point x,y	
 	//Remember that ApplicationManager only calls functions do NOT implement it.
+
 
 	return NULL;
 }
