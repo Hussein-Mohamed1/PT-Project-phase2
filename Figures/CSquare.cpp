@@ -4,6 +4,8 @@ CSquare::CSquare(Point p1, Point p2, GfxInfo FigureGfxInfo) :CFigure(FigureGfxIn
 {
 	P1 = p1;
 	P2 = p2;
+	ID++;
+
 }
 void CSquare::Draw(Output* pOut) const
 {
@@ -13,7 +15,6 @@ bool CSquare::checkselection(int x, int y)
 {
 	if ((x >= P1.x && x <= P2.x) && (y >= P1.y && y <= P2.y))
 	{
-		Selected = true;
 		return true;
 	}
 	return false;

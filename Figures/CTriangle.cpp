@@ -4,6 +4,8 @@ CTriangle::CTriangle(Point p1, Point p2, Point p3, GfxInfo FigureGfxInfo) : CFig
 	P1 = p1;
 	P2 = p2;
 	P3 = p3;
+	ID++;
+
 }
 void CTriangle::Draw(Output* pOut) const
 {
@@ -20,7 +22,6 @@ bool CTriangle::checkselection(int x, int y)
 	int a4 = abs((x1 * (y2 - y) + x2 * (y - y1) + x * (y1 - y2)) / 2.0);
 	if (a1 == a2 + a3 + a4)
 	{
-		Selected = true;
 		return true;
 	}
 

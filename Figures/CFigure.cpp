@@ -1,5 +1,6 @@
 #include "CFigure.h"
 
+int CFigure::ID = 0;
 
 CFigure::CFigure(GfxInfo FigureGfxInfo)
 { 
@@ -8,7 +9,18 @@ CFigure::CFigure(GfxInfo FigureGfxInfo)
 }
 
 void CFigure::SetSelected(bool s)
-{	Selected = s; }
+{
+	Selected = s; 
+	if (s)
+	{
+		ChngDrawClr(MAGENTA);
+	}
+	else 
+	{
+		ChngDrawClr(BLUE);
+	}
+
+}
 
 bool CFigure::IsSelected() const
 {	return Selected; }
@@ -21,8 +33,5 @@ void CFigure::ChngFillClr(color Fclr)
 	FigGfxInfo.isFilled = true;
 	FigGfxInfo.FillClr = Fclr; 
 }
-bool CFigure::checkselection(int x , int y)
-{
-	return 0;
-}
-
+void CFigure::PrintInfo(Output* pOut)
+{}

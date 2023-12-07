@@ -10,6 +10,8 @@ public:
     CTriangle(Point p1, Point p2, Point p3, GfxInfo FigureGfxInfo);
     virtual void Draw(Output* pOut) const;
     bool checkselection(int x, int y);
+   // void PrintInfo(Output* pOut);
+
 
 };
 

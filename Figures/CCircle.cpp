@@ -4,6 +4,8 @@ CCircle::CCircle(Point p1,  Point p2, GfxInfo FigureGfxInfo) : CFigure(FigureGfx
 {
 	P1 = p1;
 	P2 = p2;
+	ID++;
+
 }
 void CCircle::Draw(Output* pOut) const
 {
@@ -17,8 +19,11 @@ bool CCircle::checkselection(int x, int y)
 	int Given_radius= sqrt((P1.x - x) * (P1.x - x) + (P1.y - y) * (P1.y - y));
 	if (Cicle_radius >= Given_radius)
 	{
-		Selected = true;
 		return true;
 	}
 	return false;
+}
+void CCircle::PrintInfo(Output* pOut)
+{
+
 }

@@ -12,6 +12,8 @@ public:
 	CRectangle(Point , Point, GfxInfo FigureGfxInfo );
 	virtual void Draw(Output* pOut) const;
 	bool checkselection(int x, int y);
+	//void PrintInfo(Output* pOut);
+
 };
 
 #endif

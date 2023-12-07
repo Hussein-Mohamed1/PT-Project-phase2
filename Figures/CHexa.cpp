@@ -3,6 +3,8 @@
 CHexa::CHexa( Point c,GfxInfo FigureGfxInfo) : CFigure(FigureGfxInfo)
 {
 	centre = c;
+	ID++;
+
 }
 
 void CHexa::Draw(Output* pOut) const
@@ -22,7 +24,6 @@ bool CHexa::checkselection(int x, int y)
 	int dis = sqrt((x - centre.x)* (x - centre.x) + (y - centre.y) * (y - centre.y));
 	if (dis <= 80)   // you must change it if you change lenght of Hexa to be finaly  l;
 	{
-		Selected = true;
 		return true;
 	}
 	return false;

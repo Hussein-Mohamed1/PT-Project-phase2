@@ -28,7 +28,7 @@ ApplicationManager::ApplicationManager()
 ActionType ApplicationManager::GetUserAction() const
 {
 	//Ask the input to get the action from the user.
-	return pIn->GetUserAction();		
+	return pIn->GetUserAction();
 }
 ////////////////////////////////////////////////////////////////////////////////////
 //Creates an action and executes it
@@ -95,10 +95,26 @@ CFigure *ApplicationManager::GetFigure(int x, int y) const
 	{
 		if (FigList[i]->checkselection(x, y))
 		{
-			FigList[i]->ChngDrawClr(MAGENTA);
+			if (FigList[i]->IsSelected())                 /// check any figure is selected
+			{
+				FigList[i]->SetSelected(false);          // case selected before  un select it
+			}
+		    else FigList[i]->SetSelected(true);          // case unselected before select it
+
+			int k = 0;
+			while (k != FigCount)                       // to validate multiply selection 
+			{
+				if (FigList[k] != FigList[i])
+				{
+					FigList[k]->SetSelected(false);
+				}
+				k++;
+			}
+
 			return FigList[i];
 		}
-		
+
+	
 	}
 
 	pOut->PrintMessage(" No Selected Figure , To Select Figure Click on select icon agian ");

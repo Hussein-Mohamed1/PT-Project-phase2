@@ -19,8 +19,8 @@ void AddHexaAction::ReadActionParameters()
 	do
 	{
 		pIn->GetPointClicked(P1.x, P1.y);  // CENTRE OF HEXA
-		if ((P1.y) - 61 < (UI.ToolBarHeight + 5) || (P1.y) + 61 > (UI.height - UI.StatusBarHeight + 5)  //  vertical validation : window hieght - tool bat height + 5 to be in safe
-			|| ((P1.x) + 61) > (UI.width - 175) || (P1.x) - 61 < 0) // horizontal validation 
+		if ((P1.y) - 80 < (UI.ToolBarHeight + 5) || (P1.y) + 61 > (UI.height - UI.StatusBarHeight + 5)  //  vertical validation : window hieght - tool bat height + 5 to be in safe
+			|| ((P1.x) + 80) > (UI.width - 5) || (P1.x) - 80 < 0)           // horizontal validation 
 		{
 			pOut->PrintMessage("Invalid centre , click anthor centre ");
 
