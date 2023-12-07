@@ -3,19 +3,21 @@
 int CFigure::ID = 0;
 
 CFigure::CFigure(GfxInfo FigureGfxInfo)
-{ 
+{
 	FigGfxInfo = FigureGfxInfo;	//Default status is non-filled.
 	Selected = false;
 }
 
+CFigure::CFigure() {}
+
 void CFigure::SetSelected(bool s)
 {
-	Selected = s; 
+	Selected = s;
 	if (s)
 	{
 		ChngDrawClr(MAGENTA);
 	}
-	else 
+	else
 	{
 		ChngDrawClr(BLUE);
 	}
@@ -23,15 +25,32 @@ void CFigure::SetSelected(bool s)
 }
 
 bool CFigure::IsSelected() const
-{	return Selected; }
+{
+	return Selected;
+}
 
 void CFigure::ChngDrawClr(color Dclr)
-{	FigGfxInfo.DrawClr = Dclr; }
+{
+	FigGfxInfo.DrawClr = Dclr;
+}
 
 void CFigure::ChngFillClr(color Fclr)
-{	
+{
 	FigGfxInfo.isFilled = true;
-	FigGfxInfo.FillClr = Fclr; 
+	FigGfxInfo.FillClr = Fclr;
 }
-void CFigure::PrintInfo(Output* pOut)
-{}
+ostream& operator<<(ostream& op, const Point& p) {
+	op << p.x << " " << p.y;
+	return op;
+}
+
+ostream& operator << (ostream& op, const GfxInfo& gfx) {
+	op << gfx.DrawClr << " " << gfx.FillClr << " " << gfx.isFilled << " " << gfx.BorderWdth;
+	return op;
+};
+
+ostream& operator << (ostream& op, const GfxInfo& gfx) {
+	op << gfx.DrawClr << " " << gfx.FillClr << " " << gfx.isFilled << " " << gfx.BorderWdth;
+	return op;
+};
+

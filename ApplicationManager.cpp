@@ -5,8 +5,11 @@
 #include"Actions/AddSquareAction.h"
 #include"Actions/AddHexaAction.h"
 #include"Actions/SelectAction.h"
-
-
+#include "Actions/PrepareExport.h"
+#include "Actions/PrepareImport.h"
+#include "fstream"
+#include "Figures/CCircle.h"
+using namespace std;
 
 //Constructor
 ApplicationManager::ApplicationManager()
@@ -14,12 +17,12 @@ ApplicationManager::ApplicationManager()
 	//Create Input and output
 	pOut = new Output;
 	pIn = pOut->CreateInput();
-	
+
 	FigCount = 0;
-		
+
 	//Create an array of figure pointers and set them to NULL		
-	for(int i=0; i<MaxFigCount; i++)
-		FigList[i] = NULL;	
+	for (int i = 0; i < MaxFigCount; i++)
+		FigList[i] = NULL;
 }
 
 //==================================================================================//
@@ -32,32 +35,37 @@ ActionType ApplicationManager::GetUserAction() const
 }
 ////////////////////////////////////////////////////////////////////////////////////
 //Creates an action and executes it
-void ApplicationManager::ExecuteAction(ActionType ActType) 
+void ApplicationManager::ExecuteAction(ActionType ActType)
 {
 	Action* pAct = NULL;
-	
+
 	//According to Action Type, create the corresponding action object
 	switch (ActType)
 	{
 	case DRAW_RECT:
 		pAct = new AddRectAction(this);
 		break;
-	case DRAW_CIRC :
+	case DRAW_CIRC:
 		pAct = new AddcircleAction(this);
 		break;
-	case DRAW_TRIA :
+	case DRAW_TRIA:
 		pAct = new AddTriangleAction(this);
 		break;
-	case DRAW_SQUA :
+	case DRAW_SQUA:
 		pAct = new AddSquareAction(this);
 		break;
 	case DRAW_HEXA:
 		pAct = new AddHexaAction(this);
 		break;
-	case FUNC_SELECT :
+	case FUNC_SELECT:
 		pAct = new SelectAction(this);
 		break;
-
+	case FUNC_SAVE:
+		pAct = new PrepareExport(this);
+		break;
+	case FUNC_LOAD:
+		pAct = new PrepareImport(this);
+		break;
 	case FUNC_EXIT:
 		///create ExitAction here
 
@@ -68,7 +76,7 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 	}
 
 	//Execute the created action
-	if(pAct != NULL)
+	if (pAct != NULL)
 	{
 		pAct->Execute();//Execute
 		delete pAct;	//You may need to change this line depending to your implementation
@@ -82,11 +90,11 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 //Add a figure to the list of figures
 void ApplicationManager::AddFigure(CFigure* pFig)
 {
-	if(FigCount < MaxFigCount )
-		FigList[FigCount++] = pFig;	
+	if (FigCount < MaxFigCount)
+		FigList[FigCount++] = pFig;
 }
 ////////////////////////////////////////////////////////////////////////////////////
-CFigure *ApplicationManager::GetFigure(int x, int y) const
+CFigure* ApplicationManager::GetFigure(int x, int y) const
 {
 	//If a figure is found return a pointer to it.
 	//if this point (x,y) does not belong to any figure return NULL
@@ -130,24 +138,39 @@ CFigure *ApplicationManager::GetFigure(int x, int y) const
 
 //Draw all figures on the user interface
 void ApplicationManager::UpdateInterface() const
-{	
-	for(int i=0; i<FigCount; i++)
+{
+	for (int i = 0; i < FigCount; i++)
 		FigList[i]->Draw(pOut);		//Call Draw function (virtual member fn)
 }
 ////////////////////////////////////////////////////////////////////////////////////
 //Return a pointer to the input
-Input *ApplicationManager::GetInput() const
-{	return pIn; }
+Input* ApplicationManager::GetInput() const
+{
+	return pIn;
+}
 //Return a pointer to the output
-Output *ApplicationManager::GetOutput() const
-{	return pOut; }
+Output* ApplicationManager::GetOutput() const
+{
+	return pOut;
+}
 ////////////////////////////////////////////////////////////////////////////////////
+// Makes Each Figure save its data
+void ApplicationManager::SaveAll(fstream& OutputFile) const {
+	if (OutputFile.good()) {
+		for (int i = 0; i < FigCount; i++) {
+			if (FigList[i] != nullptr)
+				FigList[i]->Save(OutputFile);
+		}
+		OutputFile.close();
+	}
+}
+
 //Destructor
 ApplicationManager::~ApplicationManager()
 {
-	for(int i=0; i<FigCount; i++)
+	for (int i = 0; i < FigCount; i++)
 		delete FigList[i];
 	delete pIn;
 	delete pOut;
-	
+
 }
