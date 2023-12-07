@@ -7,10 +7,23 @@ CHexa::CHexa( Point c,GfxInfo FigureGfxInfo) : CFigure(FigureGfxInfo)
 
 void CHexa::Draw(Output* pOut) const
 {
-	int xc = centre.x, yc = centre.y;
+    int xc = centre.x, yc = centre.y;
+	int l = 80;
+	int small_height = l *0.87;         // cos(60)  (from geometry of shape)
+	int small_lenght = l * 0.5;       // sin(60) (from geometry of shape)
+	int xcoordiantes[6] = { xc + l , xc + small_lenght,xc - small_lenght , xc - l , xc - small_lenght , xc + small_lenght };
+	int ycoordinates[6] = { yc     , yc - small_height,yc - small_height , yc     , yc + small_height , yc + small_height };
 
-	int x8coordinates[8] = { xc + 61,xc + 43,xc , xc - 43,xc - 63,xc - 43,xc,xc + 43 };
-	int y8coordinates[8] = { yc ,yc - 43,yc - 61 ,yc - 43,yc,yc + 43,yc + 63,yc + 43 };
-	pOut->Drawhexagon(x8coordinates, y8coordinates, FigGfxInfo);
+	pOut->Drawhexagon(xcoordiantes, ycoordinates, FigGfxInfo);
 
+}
+bool CHexa::checkselection(int x, int y)
+{
+	int dis = sqrt((x - centre.x)* (x - centre.x) + (y - centre.y) * (y - centre.y));
+	if (dis <= 80)   // you must change it if you change lenght of Hexa to be finaly  l;
+	{
+		Selected = true;
+		return true;
+	}
+	return false;
 }

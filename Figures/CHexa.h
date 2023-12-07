@@ -9,5 +9,7 @@ public:
 	CHexa( Point c ,GfxInfo FigureGfxInfo);
 
 	void Draw(Output* pOut) const;
+
+	bool  checkselection(int x, int y);
 };
 

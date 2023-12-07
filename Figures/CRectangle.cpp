@@ -12,3 +12,32 @@ void CRectangle::Draw(Output* pOut) const
 	//Call Output::DrawRect to draw a rectangle on the screen	
 	pOut->DrawRect(Corner1, Corner2, FigGfxInfo, Selected);
 }
+bool CRectangle::checkselection(int x , int y)
+{
+	if ((x >= Corner1.x && x <= Corner2.x) && (y >= Corner1.y && y <= Corner2.y))
+	{
+		Selected = true;
+		return true;
+	}
+	if ((x <= Corner1.x && x >= Corner2.x) && (y >= Corner1.y && y <= Corner2.y))
+	{
+		Selected = true;
+		return true;
+	}
+	if ((x >= Corner1.x && x <= Corner2.x) && (y <= Corner1.y && y >= Corner2.y))
+	{
+		Selected = true;
+		return true;
+	}
+
+	if ((x <= Corner1.x && x >= Corner2.x) && (y <= Corner1.y && y >= Corner2.y))
+	{
+		Selected = true;
+		return true;
+	}
+
+
+
+	return false;
+
+}

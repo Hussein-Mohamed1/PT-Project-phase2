@@ -20,7 +20,7 @@ Output::Output()
 	UI.DrawColor = BLUE;	//Drawing color
 	UI.FillColor = GREEN;	//Filling color
 	UI.MsgColor = RED;		//Messages color
-	UI.BkGrndColor = LIGHTGOLDENRODYELLOW;	//Background color
+	UI.BkGrndColor = GREY;	//Background color
 	UI.HighlightColor = MAGENTA;	//This color should NOT be used to draw figures. use if for highlight only
 	UI.StatusBarColor = TURQUOISE;
 	UI.PenWidth = 3;	//width of the figures frames
@@ -251,7 +251,7 @@ void Output::DrawRect(Point P1, Point P2, GfxInfo RectGfxInfo, bool selected) co
 		 style = FRAME;
 
 
-	 pWind->DrawPolygon(xcoordinates, ycoordinates, 8, style);
+	 pWind->DrawPolygon(xcoordinates, ycoordinates, 6, style);
 
  }
 

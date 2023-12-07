@@ -8,6 +8,7 @@ private:
 public:
     CSquare(Point p1, Point p2, GfxInfo FigureGfxInfo);
     virtual void Draw(Output* pOut) const;
+    bool checkselection(int x, int y);
 
 
 };
