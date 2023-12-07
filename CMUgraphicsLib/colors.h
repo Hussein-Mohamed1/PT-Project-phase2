@@ -5,9 +5,10 @@ This file was last modified on 05.16.1999
 
 #ifndef COLORS_H
 #define COLORS_H
-
 #include "version.h"
-
+#include <iostream>
+#include <fstream>
+using namespace std;
 class color {
 
   public:
@@ -22,9 +23,8 @@ class color {
     unsigned char ucRed;
     unsigned char ucGreen;
     unsigned char ucBlue;
-
+    friend ostream& operator <<(ostream&,const color &);
 };
-
 bool operator==(color a, color b);
 bool operator!=(color a, color b);
 

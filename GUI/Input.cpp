@@ -20,7 +20,7 @@ string Input::GetSrting(Output *pO) const
 	{
 		pWind->WaitKeyPress(Key);
 		if(Key == 27 )	//ESCAPE key is pressed
-			return "";	//returns nothing as user has cancelled label
+			return "-1";	//returns -1 as user has cancelled label
 		if(Key == 13 )	//ENTER key is pressed
 			return Label;
 		if((Key == 8) && (Label.size() >= 1))	//BackSpace is pressed

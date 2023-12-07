@@ -361,3 +361,14 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/.idea/.gitignore
+/.idea/.name
+/.idea/PT-Project-phase2.iml
+*.xml
+/cmake-build-debug
+*.txt
+*.rc
+/PT-Project.vcxproj
+/resource.h
+/PT-Project.vcxproj
+/PT-Project.vcxproj.filters
