@@ -18,7 +18,7 @@ public:
 
 	bool checkselection(int x, int y);
 	//void PrintInfo(Output* pOut);
-?
+
 };
 
 #endif

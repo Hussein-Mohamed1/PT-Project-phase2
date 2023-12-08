@@ -8,7 +8,7 @@
 class CFigure
 {
 protected:
-	static int ID;		//Each figure has an ID
+    static int ID;		//Each figure has an ID
 	bool Selected;	//true if the figure is selected.
 	GfxInfo FigGfxInfo;	//Figure graphis info
 
@@ -36,7 +36,6 @@ public:
 	virtual void Save(fstream& OutFile) const =0;	//Save the figure parameters to the file
 	virtual void Load(string &) = 0;	//Load the figure parameters to the file
 
-	virtual void PrintInfo(Output* pOut) ;	//print all figure info on the status bar
 };
 
 #endif

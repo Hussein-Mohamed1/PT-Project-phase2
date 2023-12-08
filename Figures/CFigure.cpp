@@ -1,6 +1,6 @@
 #include "CFigure.h"
 
-int CFigure::ID = 0;
+int CFigure:: ID = 0;
 
 CFigure::CFigure(GfxInfo FigureGfxInfo)
 {
@@ -44,10 +44,6 @@ ostream& operator<<(ostream& op, const Point& p) {
 	return op;
 }
 
-ostream& operator << (ostream& op, const GfxInfo& gfx) {
-	op << gfx.DrawClr << " " << gfx.FillClr << " " << gfx.isFilled << " " << gfx.BorderWdth;
-	return op;
-};
 
 ostream& operator << (ostream& op, const GfxInfo& gfx) {
 	op << gfx.DrawClr << " " << gfx.FillClr << " " << gfx.isFilled << " " << gfx.BorderWdth;

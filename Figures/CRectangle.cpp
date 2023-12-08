@@ -12,11 +12,12 @@ void CRectangle::Draw(Output* pOut) const
 {
 	//Call Output::DrawRect to draw a rectangle on the screen	
 	pOut->DrawRect(Corner1, Corner2, FigGfxInfo, Selected);
-}}
-ostream& operator<<(ostream& op, const CRectangle& Fig) {
+}
+ostream& operator<<(ostream& op, const CRectangle& Fig) 
+{
 	op << Fig.ID << " " << Fig.Corner1 << " " << Fig.Corner2 << " " << Fig.FigGfxInfo << endl;
 	return op;
-};
+}
 void CRectangle::Save(fstream& op) const
 {
 	op << "Rectangle: " << *this << endl;
@@ -69,7 +70,7 @@ bool CRectangle::checkselection(int x, int y)
 
 	return false;
 
-}
+};
 
 
 

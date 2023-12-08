@@ -2,6 +2,9 @@
 #include <fstream>
 #include <sstream>
 #include "cstring"
+#include<iostream>
+using namespace std;
+
 ostream& operator<<(ostream& op, const color& c) {
 	op << int(c.ucRed) << " " << int(c.ucGreen) << " " << int(c.ucBlue);
 	return op;
@@ -10,7 +13,6 @@ CCircle::CCircle(Point p1, Point p2, GfxInfo FigureGfxInfo) : CFigure(FigureGfxI
 {
 	P1 = p1;
 	P2 = p2;
-	ID++;
 
 }
 
@@ -21,6 +23,7 @@ void CCircle::Draw(Output* pOut) const
 
 }
 CCircle::CCircle() {};
+
 ostream& operator<<(ostream& op, const CCircle& c)
 {
 	op << c.ID << " " << c.P1 << " " << c.P2 << " " << c.FigGfxInfo << endl;
@@ -57,7 +60,6 @@ void CCircle::Load(string& line)
 	this->FigGfxInfo.BorderWdth = stoi(datum[13]);
 
 
-	pOut->DrawCirc(P1, P2, FigGfxInfo, Selected);
 
 }
 bool CCircle::checkselection(int x, int y)
@@ -70,9 +72,5 @@ bool CCircle::checkselection(int x, int y)
 	}
 	return false;
 }
-void CCircle::PrintInfo(Output* pOut)
-{
 
-}
-
-}
+;

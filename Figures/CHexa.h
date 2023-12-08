@@ -10,7 +10,6 @@ public:
 	CHexa();
 
 	void Draw(Output* pOut) const;
-	void Draw(Output* pOut) const;
 	friend ostream& operator<<(ostream&, const CHexa&);
 	void Save(fstream&)const;
 	void Load(string&);

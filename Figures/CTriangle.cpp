@@ -9,7 +9,61 @@ CTriangle::CTriangle(Point p1, Point p2, Point p3, GfxInfo FigureGfxInfo) : CFig
 
 }
 CTriangle::CTriangle() {};
+
 void CTriangle::Draw(Output* pOut) const
 {
 	pOut->Drawrtriangle(P1.x, P1.y, P2.x, P2.y, P3.x, P3.y, FigGfxInfo, Selected);
 }
+bool CTriangle::checkselection(int x, int y)
+{
+	int x1 = P1.x;	int x2 = P2.x;	int x3 = P3.x;
+	int y1 = P1.y;	int y2 = P2.y;	int y3 = P3.y;
+
+
+	int a1 = abs((x1 * (y2 - y3) + x2 * (y3 - y1) + x3 * (y1 - y2)) / 2.0);
+	int a2 = abs((x * (y2 - y3) + x2 * (y3 - y) + x3 * (y - y2)) / 2.0);
+	int a3 = abs((x1 * (y - y3) + x * (y3 - y1) + x3 * (y1 - y)) / 2.0);
+	int a4 = abs((x1 * (y2 - y) + x2 * (y - y1) + x * (y1 - y2)) / 2.0);
+	if (a1 == a2 + a3 + a4)
+		return true;
+
+	return false;
+
+
+}
+void CTriangle::Save(fstream& op) const
+{
+	op << "Triangle: " << *this << endl;
+}
+void CTriangle::Load(string& line)
+{
+	SetSelected(0);
+	const int NoOfSpaces = 16;
+
+
+	stringstream ss(line); // string stream is used as it splits the line based on white spaces
+	string temp;
+	string datum[NoOfSpaces]; // increased the size to accommodate maximum possible data fields
+
+	for (int i = 0; i < NoOfSpaces; i++) {
+		ss >> datum[i];
+	}
+	this->P1.x = stoi(datum[2]);
+	this->P1.y = stoi(datum[3]);
+	this->P2.x = stoi(datum[4]);
+	this->P2.y = stoi(datum[5]);
+	this->P3.x = stoi(datum[6]);
+	this->P3.y = stoi(datum[7]);
+	this->FigGfxInfo.DrawClr = color(stoi(datum[8]), stoi(datum[9]), stoi(datum[10]));
+	this->FigGfxInfo.FillClr = color(stoi(datum[11]), stoi(datum[12]), stoi(datum[13]));
+	this->FigGfxInfo.isFilled = (unsigned int)stoi(datum[14]);
+	this->FigGfxInfo.BorderWdth = (unsigned int)stoi(datum[15]);
+}
+
+
+ostream& operator<<(ostream& op, const CTriangle& Fig) {
+	op << Fig.ID << " " << Fig.P1 << " " << Fig.P2 << " " << Fig.P3 << " " << " " << Fig.FigGfxInfo << endl;
+	return op;
+};
+
+

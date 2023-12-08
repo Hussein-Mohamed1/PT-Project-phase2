@@ -32,7 +32,7 @@ void PrepareImport::Execute() {
 			string line;
 
 			while (getline(*OutputFile, line)) {
-				stringstream ss(line); // string stream is used as it splits the line based on white spaces
+				stringstream ss(line);           // string stream is used as it splits the line based on white spaces
 				string temp;
 				ss >> temp;
 
