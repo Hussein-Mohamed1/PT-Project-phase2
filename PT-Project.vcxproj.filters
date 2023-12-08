@@ -295,7 +295,6 @@
     <ClInclude Include="Actions\SelectAction.h">
       <Filter>Action Classes</Filter>
     </ClInclude>
-    <ClInclude Include="resource.h" />
     <ClInclude Include="Actions\PrepareExport.h">
       <Filter>Action Classes</Filter>
     </ClInclude>
@@ -305,8 +304,5 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />
-  </ItemGroup>
-  <ItemGroup>
-    <ResourceCompile Include="PT Project.rc" />
   </ItemGroup>
 </Project>
