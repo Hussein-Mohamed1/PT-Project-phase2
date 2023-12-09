@@ -4,7 +4,7 @@
 
 #include "..\GUI\input.h"
 #include "..\GUI\Output.h"
-
+int AddHexaAction::numofhexa = 0;
 AddHexaAction::AddHexaAction( ApplicationManager * pApp):Action(pApp)
 {}
 void AddHexaAction::ReadActionParameters()
@@ -39,6 +39,7 @@ void AddHexaAction::ReadActionParameters()
 }
 void AddHexaAction::Execute()
 {
+	numofhexa++;
 	ReadActionParameters();
 
 	/// create New Hexa

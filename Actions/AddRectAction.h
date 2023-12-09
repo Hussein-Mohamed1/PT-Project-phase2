@@ -9,7 +9,9 @@ class AddRectAction: public Action
 private:
 	Point P1, P2; //Rectangle Corners
 	GfxInfo RectGfxInfo;
+	
 public:
+	static int numofrect;
 	AddRectAction(ApplicationManager *pApp);
 
 	//Reads rectangle parameters

@@ -5,7 +5,7 @@
 
 #include "..\GUI\input.h"
 #include "..\GUI\Output.h"
-
+int AddcircleAction::numofcirc = 0;
 
 AddcircleAction::AddcircleAction(ApplicationManager* pApp) :Action(pApp)
 { }
@@ -46,6 +46,7 @@ AddcircleAction::AddcircleAction(ApplicationManager* pApp) :Action(pApp)
 }
   void AddcircleAction::Execute()
   {
+	  numofcirc++;
 	  //This action needs to read some parameters first
 	  ReadActionParameters();
 

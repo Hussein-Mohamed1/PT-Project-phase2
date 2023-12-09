@@ -6,7 +6,9 @@ class AddTriangleAction :
 private :
     Point P1, P2, P3;
     GfxInfo RectGfxInfo;
+    
 public :
+    static int numoftria;
     AddTriangleAction(ApplicationManager* pApp);
 
     virtual void ReadActionParameters();
