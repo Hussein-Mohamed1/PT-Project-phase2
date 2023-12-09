@@ -3,6 +3,9 @@
 #include "..\GUI\Output.h"
 #include "..\ApplicationManager.h"
 
+
+CFigure* SelectAction::Selected_Figure = NULL;
+
 SelectAction::SelectAction(ApplicationManager* pApp) :Action(pApp)
 {}
  
@@ -21,8 +24,12 @@ void SelectAction::ReadActionParameters()
 void SelectAction::Execute()
 {
 
-	ReadActionParameters();
+	  ReadActionParameters();
 
-	pManager->GetFigure(p.x, p.y);
+	Selected_Figure =  pManager->GetFigure(p.x, p.y);
 
+}
+CFigure* SelectAction::GetSelected_Figure()
+{
+	return Selected_Figure;
 }

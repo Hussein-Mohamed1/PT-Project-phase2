@@ -9,6 +9,9 @@
 #include "Actions/PrepareImport.h"
 #include "fstream"
 #include "Figures/CCircle.h"
+#include"Actions/ChangecolorAction.h"
+#include"DEFS.h"
+
 using namespace std;
 
 //Constructor
@@ -17,8 +20,10 @@ ApplicationManager::ApplicationManager()
 	//Create Input and output
 	pOut = new Output;
 	pIn = pOut->CreateInput();
-
 	FigCount = 0;
+	Draw_color = BLUE;
+
+	SelectedFig = NULL;
 
 	//Create an array of figure pointers and set them to NULL		
 	for (int i = 0; i < MaxFigCount; i++)
@@ -66,9 +71,16 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 	case FUNC_LOAD:
 		pAct = new PrepareImport(this);
 		break;
+	case COLOR_RED:
+		pAct = new ChangecolorAction(this,RED);
+		break;
+	case COLOR_BLACK:
+		pAct = new ChangecolorAction(this, BLACK);
+		break;
+
+
 	case FUNC_EXIT:
 		///create ExitAction here
-
 		break;
 
 	case STATUS:	//a click on the status bar ==> no action
@@ -92,6 +104,7 @@ void ApplicationManager::AddFigure(CFigure* pFig)
 {
 	if (FigCount < MaxFigCount)
 		FigList[FigCount++] = pFig;
+
 }
 ////////////////////////////////////////////////////////////////////////////////////
 CFigure* ApplicationManager::GetFigure(int x, int y) const
@@ -106,8 +119,12 @@ CFigure* ApplicationManager::GetFigure(int x, int y) const
 			if (FigList[i]->IsSelected())                 /// check any figure is selected
 			{
 				FigList[i]->SetSelected(false);          // case selected before  un select it
+				return NULL;
 			}
-		    else FigList[i]->SetSelected(true);          // case unselected before select it
+			else                                         // case unselected before select it
+			{
+				FigList[i]->SetSelected(true);
+			}
 
 			int k = 0;
 			while (k != FigCount)                       // to validate multiply selection 
@@ -140,8 +157,19 @@ CFigure* ApplicationManager::GetFigure(int x, int y) const
 void ApplicationManager::UpdateInterface() const
 {
 	for (int i = 0; i < FigCount; i++)
-		FigList[i]->Draw(pOut);		//Call Draw function (virtual member fn)
+	
+		FigList[i]->Draw(pOut);	//Call Draw function (virtual member fn)
 }
+void  ApplicationManager::Change_Color(CFigure* F, color c)
+{
+	CFigure* f = F;
+	if (f != NULL)
+	{
+		f->ChngDrawClr(c);
+		pOut->SetDraColor(c);
+	}
+}
+
 ////////////////////////////////////////////////////////////////////////////////////
 //Return a pointer to the input
 Input* ApplicationManager::GetInput() const
@@ -173,4 +201,12 @@ ApplicationManager::~ApplicationManager()
 	delete pIn;
 	delete pOut;
 
+}
+void ApplicationManager::set_SelectedFig(CFigure* C)
+{
+	SelectedFig = C;
+}
+CFigure* ApplicationManager::get_SelectedFig()
+{
+	return SelectedFig;
 }

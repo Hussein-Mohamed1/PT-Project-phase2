@@ -17,6 +17,9 @@ private:
 
 	CFigure* SelectedFig; //Pointer to the selected figure
 
+	color Draw_color;
+
+
 	//Pointers to Input and Output classes
 	Input *pIn;
 	Output *pOut;
@@ -37,8 +40,11 @@ public:
 	// -- Interface Management Functions
 	Input *GetInput() const; //Return pointer to the input
 	Output *GetOutput() const; //Return pointer to the output
+	void Change_Color(CFigure * F , color c );
 	void UpdateInterface() const;	//Redraws all the drawing window	
 	void SaveAll(fstream &) const;
+	void set_SelectedFig(CFigure* C);
+	CFigure* get_SelectedFig();
 };
 
 #endif
