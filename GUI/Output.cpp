@@ -131,6 +131,30 @@ void Output::CreateDrawToolBar() const
 void Output::CreatePlayToolBar() const
 {
 	UI.InterfaceMode = MODE_PLAY;
+	color cColor = getCrntDrawColor(); // Saves the users current color 
+	int PenSize = getCrntPenWidth();	// and brush width
+	// Set the brush and pen white so we can clear the background
+	pWind->SetPen(WHITE, 0);
+	pWind->SetBrush(WHITE);
+
+	// Draw a rectangle that covers the old draw mode bar
+	pWind->DrawRectangle(0, 0, pWind->GetWidth(), UI.ToolBarHeight);
+
+	string MenuItemImages[PLAY_ITM_COUNT];
+
+	MenuItemImages[DRAW_MODE] = "images\\MenuItems\\drawingMode.jpg";
+	MenuItemImages[byColor] = "images\\MenuItems\\color.jpg";
+	MenuItemImages[byShape] = "images\\MenuItems\\shape.jpg";
+	MenuItemImages[byColorShape] = "images\\MenuItems\\shapeAndColor.jpg";
+	MenuItemImages[ITM_EXIT_playMode] = "images\\MenuItems\\exit.jpg";
+	for (int i = 0; i < PLAY_ITM_COUNT; i++)
+		pWind->DrawImage(MenuItemImages[i], i * UI.MenuItemWidth, 5, UI.MenuItemWidth - 5, UI.ToolBarHeight - 5);
+
+	//Draw a line under the toolbar
+	pWind->SetPen(BLACK, 3);
+	pWind->DrawLine(0, UI.ToolBarHeight, UI.width, UI.ToolBarHeight);
+	pWind->SetPen(cColor, PenSize);
+	pWind->SetBrush(cColor);
 	///TODO: write code to create Play mode menu
 }
 //////////////////////////////////////////////////////////////////////////////////////////

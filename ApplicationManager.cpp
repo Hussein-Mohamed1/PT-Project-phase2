@@ -9,6 +9,11 @@
 #include "Actions/PrepareImport.h"
 #include "fstream"
 #include "Figures/CCircle.h"
+#include "to_playmood.h"
+#include "figure_type.h"
+#include "figure_color.h"
+#include "figure_typeandcolor.h"
+#include "to_drawmood.h"
 using namespace std;
 
 //Constructor
@@ -66,6 +71,14 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 	case FUNC_LOAD:
 		pAct = new PrepareImport(this);
 		break;
+	case ENTER_PLAY_MODE:
+		pAct = new to_playmood(this);
+		break;
+	case BY_SHAPE :
+		pAct = new figure_type(this);
+		break;
+
+	case FUNC_EXIT_playMode:
 	case FUNC_EXIT:
 		///create ExitAction here
 
@@ -125,7 +138,7 @@ CFigure* ApplicationManager::GetFigure(int x, int y) const
 	
 	}
 
-	pOut->PrintMessage(" No Selected Figure , To Select Figure Click on select icon agian ");
+	pOut->PrintMessage(" No Selected Figure , you should select figure ");
 	//Add your code here to search for a figure given a point x,y	
 	//Remember that ApplicationManager only calls functions do NOT implement it.
 

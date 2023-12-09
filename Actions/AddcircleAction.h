@@ -10,6 +10,7 @@ class AddcircleAction : public Action
     Point P1, P2;
     GfxInfo RectGfxInfo;
 public:
+	static int numofcirc;
 	AddcircleAction(ApplicationManager* pApp);
 
 	//Reads rectangle parameters

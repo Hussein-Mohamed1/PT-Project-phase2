@@ -181,6 +181,21 @@
     <ClCompile Include="Actions\PrepareImport.cpp">
       <Filter>Action Classes</Filter>
     </ClCompile>
+    <ClCompile Include="to_playmood.cpp">
+      <Filter>Action Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="figure_type.cpp">
+      <Filter>Action Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="figure_color.cpp">
+      <Filter>Action Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="figure_typeandcolor.cpp">
+      <Filter>Action Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="to_drawmood.cpp">
+      <Filter>Action Classes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CMUgraphicsLib\auxil.h">
@@ -299,6 +314,21 @@
       <Filter>Action Classes</Filter>
     </ClInclude>
     <ClInclude Include="Actions\PrepareImport.h">
+      <Filter>Action Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="to_playmood.h">
+      <Filter>Action Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="figure_type.h">
+      <Filter>Action Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="figure_color.h">
+      <Filter>Action Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="figure_typeandcolor.h">
+      <Filter>Action Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="to_drawmood.h">
       <Filter>Action Classes</Filter>
     </ClInclude>
   </ItemGroup>

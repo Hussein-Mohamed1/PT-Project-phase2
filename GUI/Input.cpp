@@ -94,13 +94,29 @@ ActionType Input::GetUserAction() const
 		//[3] User clicks on the status bar
 		return STATUS;
 	}
-	else	//GUI is in PLAY mode
+	if (y >= 0 && y < UI.ToolBarHeight && UI.InterfaceMode)
 	{
-		///TODO:
-		//perform checks similar to Draw mode checks above
-		//and return the correspoding action
-		return ENTER_PLAY_MODE;	//just for now. This should be updated
-	}	
+		//Check whick Menu item was clicked
+		//==> This assumes that menu items are lined up horizontally <==
+		int ClickedItemOrder = (x / UI.MenuItemWidth);
+		//Divide x coord of the point clicked by the menu item width (int division)
+		//if division result is 0 ==> first item is clicked, if 1 ==> 2nd item and so on
+
+		switch (ClickedItemOrder)
+		{
+		case DRAW_MODE: return ENTER_DRAW_MODE;
+
+		case byColor: return BY_COLOR;
+
+		case byShape: return BY_SHAPE;
+
+		case byColorShape: return BY_COLOR_SHAPE;
+
+		case ITM_EXIT_playMode: return FUNC_EXIT_playMode;
+		}
+
+		//just for now. This should be updated
+	}
 
 }
 /////////////////////////////////

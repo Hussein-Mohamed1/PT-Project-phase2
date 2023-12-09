@@ -48,8 +48,29 @@ enum DrawMenuItem //The items of the Draw menu (you should add more items)
 
 };
 
+enum PlayMenuItem //The items of the Play menu (you should add more items)
+{
+	//Note: Items are **(ordered)** here as they appear in menu
+	//If you want to change the menu items order, change the order here
 
+	//TODO: Add more items names here
 
+	DRAW_MODE,
+	byColor,
+	byShape,
+	byColorShape,
+	ITM_EXIT_playMode,
+	PLAY_ITM_COUNT//no. of menu items ==> This should be the last line in this enum
+
+};
+enum figures
+{
+	squr,
+	rect,
+	circ,
+	tria,
+	hexa,
+};
 
 
 __declspec(selectany) //This line to prevent "redefinition error"

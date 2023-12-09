@@ -5,7 +5,7 @@
 
 #include "..\GUI\input.h"
 #include "..\GUI\Output.h"
-
+int AddSquareAction::numofsqar = 0;
  AddSquareAction ::AddSquareAction(ApplicationManager * pApp) :Action(pApp)
  {}
  void AddSquareAction::ReadActionParameters()
@@ -41,6 +41,7 @@
  }
  void AddSquareAction::Execute()
  {
+	 numofsqar++;
 	 ReadActionParameters();
 
 	 // Make a new square 
