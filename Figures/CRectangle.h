@@ -16,7 +16,7 @@ public:
 	void Save(fstream&)const;
 	void Load(string&);
 
-	bool checkselection(int x, int y);
+	virtual bool checkselection(int x, int y);
 	//void PrintInfo(Output* pOut);
 
 };

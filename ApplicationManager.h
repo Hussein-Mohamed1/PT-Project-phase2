@@ -15,9 +15,8 @@ private:
 	int FigCount;		//Actual number of figures
 	CFigure* FigList[MaxFigCount];	//List of all figures (Array of pointers)
 
-	CFigure* SelectedFig; //Pointer to the selected figure
+	 CFigure* Selected_Figure;
 
-	color Draw_color;
 
 
 	//Pointers to Input and Output classes
@@ -35,16 +34,16 @@ public:
 	
 	// -- Figures Management Functions
 	void AddFigure(CFigure* pFig);          //Adds a new figure to the FigList
-	CFigure *GetFigure(int x, int y) const; //Search for a figure given a point inside the figure
+	CFigure *GetFigure(int x, int y) ; //Search for a figure given a point inside the figure
 		
 	// -- Interface Management Functions
 	Input *GetInput() const; //Return pointer to the input
 	Output *GetOutput() const; //Return pointer to the output
-	void Change_Color(CFigure * F , color c );
 	void UpdateInterface() const;	//Redraws all the drawing window	
 	void SaveAll(fstream &) const;
-	void set_SelectedFig(CFigure* C);
-	CFigure* get_SelectedFig();
+	 CFigure* GetSelected_Figure();
+
 };
+
 
 #endif

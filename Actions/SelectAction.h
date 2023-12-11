@@ -6,10 +6,10 @@ class SelectAction :
 {
 private:
 	Point p;
-	static CFigure* Selected_Figure;
+	//static CFigure* Selected_Figure;
 public:
 	SelectAction(ApplicationManager* pApp);
-    static CFigure* GetSelected_Figure();
+   // static CFigure* GetSelected_Figure();
 	void ReadActionParameters();
 	void Execute();
 

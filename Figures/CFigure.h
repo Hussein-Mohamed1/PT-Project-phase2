@@ -22,9 +22,10 @@ public:
 	  bool IsSelected() const;	//check whether fig is selected
 	 virtual  bool checkselection(int x, int y) = 0;
 
-	virtual void Draw(Output* pOut) const = 0;		//Draw the figure
+	 virtual void Draw(Output* pOut) const = 0;		//Draw the figure
 
-	void ChngDrawClr(color Dclr);	//changes the figure's drawing color
+	//void ChngDrawClr(color Dclr);	//changes the figure's drawing color
+	 void ChngDrawClr(color Dclr);
 	void ChngFillClr(color Fclr);	//changes the figure's filling color
 
 	///The following functions should be supported by the figure class

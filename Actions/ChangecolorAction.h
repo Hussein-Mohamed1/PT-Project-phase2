@@ -1,21 +1,15 @@
 #pragma once
 #include "Action.h"
-#include"../Actions/SelectAction.h"
-#include"../Figures/CFigure.h"
-class ChangecolorAction :  public Action
+class ChangeColorAction :
+    public Action
 {
-private:
-    CFigure* Selected_Figure;
-    color F_COLOR;
+    color C;
 public:
-    ChangecolorAction(ApplicationManager* pApp, color C);
+    ChangeColorAction(ApplicationManager* pApp,color c);
 
-    void  ReadActionParameters();
+    virtual void ReadActionParameters();
 
-    void Execute();
-
-
-
+    virtual void Execute();
 
 };
 

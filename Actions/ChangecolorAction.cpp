@@ -1,32 +1,34 @@
-#include "ChangecolorAction.h"
-#include"../Actions/SelectAction.h"
-#include "..\ApplicationManager.h"
-
+#include "ChangeColorAction.h"
 #include "..\GUI\input.h"
 #include "..\GUI\Output.h"
+#include "..\ApplicationManager.h"
 
-ChangecolorAction::ChangecolorAction(ApplicationManager* pApp , color C) : Action(pApp)
+
+ChangeColorAction::ChangeColorAction(ApplicationManager* pApp, color c) :Action(pApp)
 {
-	Selected_Figure = NULL;
-	F_COLOR = C;
-
+	C = c;
 }
-void ChangecolorAction::ReadActionParameters()
+void ChangeColorAction::ReadActionParameters()
+{
+
+	Output* pOut = pManager->GetOutput();
+}
+void ChangeColorAction::Execute()
 {
 	Output* pOut = pManager->GetOutput();
-	Input* pIn = pManager->GetInput();
 
-	Selected_Figure = SelectAction::GetSelected_Figure();
-
-	if (Selected_Figure == NULL)
-		pOut->PrintMessage(" NO Selected Figure , Plese click on Select icon then choose figure then color");
-
-   
-}
-void ChangecolorAction::Execute()
-{
 	ReadActionParameters();
 
-		pManager->Change_Color(Selected_Figure, F_COLOR);
+	if (pManager->GetSelected_Figure() == NULL)
+		pOut->PrintMessage("NO SELECTED ");
+	else
+	{
+		//pManager->GetSelected_Figure()->ChngFillClr(BLACK);
+		pManager->GetSelected_Figure()->ChngDrawClr(C);
+		pOut->SetDraColor(C);
+	}
+
+
 
 }
+

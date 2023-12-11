@@ -4,7 +4,7 @@
 #include "..\ApplicationManager.h"
 
 
-CFigure* SelectAction::Selected_Figure = NULL;
+//CFigure* SelectAction::Selected_Figure = NULL;
 
 SelectAction::SelectAction(ApplicationManager* pApp) :Action(pApp)
 {}
@@ -26,10 +26,10 @@ void SelectAction::Execute()
 
 	  ReadActionParameters();
 
-	Selected_Figure =  pManager->GetFigure(p.x, p.y);
+	  pManager->GetFigure(p.x, p.y);
 
 }
-CFigure* SelectAction::GetSelected_Figure()
-{
-	return Selected_Figure;
-}
+//CFigure* SelectAction::GetSelected_Figure()
+//{
+//	return Selected_Figure;
+//}

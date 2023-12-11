@@ -14,9 +14,8 @@
 #include "figure_color.h"
 #include "figure_typeandcolor.h"
 #include "to_drawmood.h"
-#include"Actions/ChangecolorAction.h"
+#include"Actions/ChangeColorAction.h"
 #include"DEFS.h"
-
 
 
 using namespace std;
@@ -28,9 +27,8 @@ ApplicationManager::ApplicationManager()
 	pOut = new Output;
 	pIn = pOut->CreateInput();
 	FigCount = 0;
-	Draw_color = BLUE;
+	Selected_Figure = NULL;
 
-	SelectedFig = NULL;
 
 	//Create an array of figure pointers and set them to NULL		
 	for (int i = 0; i < MaxFigCount; i++)
@@ -84,12 +82,32 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 	case BY_SHAPE:
 		pAct = new figure_type(this);
 		break;
-	case COLOR_RED:
-		pAct = new ChangecolorAction(this, RED);
-		break;
 	case COLOR_BLACK:
-		pAct = new ChangecolorAction(this, BLACK);
+	pAct = new ChangeColorAction(this,BLACK);
 		break;
+	case COLOR_RED:
+	pAct = new ChangeColorAction(this,RED);
+		break;
+	case COLOR_GREEN :
+		pAct = new ChangeColorAction(this, GREEN);
+		break;
+	case COLOR_ORANGE:
+		pAct = new ChangeColorAction(this, ORANGE);
+		break;
+	case COLOR_YELLOW:
+		pAct = new ChangeColorAction(this, YELLOW);
+		break;
+	case COLOR_BLUE:
+		pAct = new ChangeColorAction(this, BLUE);
+		break;
+
+
+
+
+
+
+
+
 
 
 	case FUNC_EXIT_playMode:
@@ -117,50 +135,51 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 //Add a figure to the list of figures
 void ApplicationManager::AddFigure(CFigure* pFig)
 {
+
 	if (FigCount < MaxFigCount)
 		FigList[FigCount++] = pFig;
 
 }
 ////////////////////////////////////////////////////////////////////////////////////
-CFigure* ApplicationManager::GetFigure(int x, int y) const
+CFigure* ApplicationManager::GetFigure(int x, int y) 
 {
 	//If a figure is found return a pointer to it.
 	//if this point (x,y) does not belong to any figure return NULL
 	// 
 	for (int i = 0; i < FigCount; i++)
-	{
-		if (FigList[i]->checkselection(x, y))
-		{
-			if (FigList[i]->IsSelected())                 /// check any figure is selected
-			{
-				FigList[i]->SetSelected(false);          // case selected before  un select it
-				return NULL;
-			}
-			else                                         // case unselected before select it
-			{
-				FigList[i]->SetSelected(true);
-			}
-
-			int k = 0;
-			while (k != FigCount)                       // to validate multiply selection 
-			{
-				if (FigList[k] != FigList[i])
-				{
-					FigList[k]->SetSelected(false);
-				}
-				k++;
-			}
-
-			return FigList[i];
+{  
+	if (FigList[i]->checkselection(x, y))
+	{  
+     	if (Selected_Figure == NULL)
+     	{
+		Selected_Figure = FigList[i];
+		Selected_Figure->SetSelected(true);
+		return Selected_Figure;
+	     }
+      	else if (Selected_Figure == FigList[i])
+      	{
+		Selected_Figure->SetSelected(false);
+		Selected_Figure = NULL;
+		return NULL;
+	    }
+	       else            //if (Selected_Figure != FigList[i])
+	    {
+		Selected_Figure->SetSelected(false);
+		Selected_Figure = FigList[i];
+		Selected_Figure->SetSelected(true);
+		return Selected_Figure;
 		}
 
-	
-	}
 
-	pOut->PrintMessage(" No Selected Figure , you should select figure ");
+    } 
+
+
+	
+}
+
+	pOut->PrintMessage(" No selected figure ");
 	//Add your code here to search for a figure given a point x,y	
 	//Remember that ApplicationManager only calls functions do NOT implement it.
-
 
 	return NULL;
 }
@@ -172,16 +191,8 @@ CFigure* ApplicationManager::GetFigure(int x, int y) const
 void ApplicationManager::UpdateInterface() const
 {
 	for (int i = 0; i < FigCount; i++)
-	
-		FigList[i]->Draw(pOut);	//Call Draw function (virtual member fn)
-}
-void  ApplicationManager::Change_Color(CFigure* F, color c)
-{
-	CFigure* f = F;
-	if (f != NULL)
 	{
-		f->ChngDrawClr(c);
-		pOut->SetDraColor(c);
+		FigList[i]->Draw(pOut);	//Call Draw function (virtual member fn)
 	}
 }
 
@@ -217,11 +228,36 @@ ApplicationManager::~ApplicationManager()
 	delete pOut;
 
 }
-void ApplicationManager::set_SelectedFig(CFigure* C)
+  CFigure* ApplicationManager::GetSelected_Figure() 
 {
-	SelectedFig = C;
+	return Selected_Figure;
 }
-CFigure* ApplicationManager::get_SelectedFig()
-{
-	return SelectedFig;
-}
+
+
+
+
+
+
+
+
+			//if (FigList[i]->IsSelected())                 /// check any figure is selected
+			//{
+			//	FigList[i]->SetSelected(false);          // case selected before  un select it
+			//	return NULL;
+			//}
+			//else                                         // case unselected before select it
+			//{
+			//	FigList[i]->SetSelected(true);
+			//}
+
+			//int k = 0;
+			//while (k != FigCount)                       // to validate multiply selection 
+			//{
+			//	if (FigList[k] != FigList[i])
+			//	{
+			//		FigList[k]->SetSelected(false);
+			//	}
+			//	k++;
+			//}
+
+			//return FigList[i];
