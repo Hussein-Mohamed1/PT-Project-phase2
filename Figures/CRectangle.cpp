@@ -52,29 +52,29 @@ void CRectangle::move(const Point& newPos)
 	Corner2 = newPos + Corner2 - center;
 	Corner1 = newPos + Corner1 - center;
 }
-CFigure* CRectangle::checkselection(int x, int y)
+bool CRectangle::checkselection(int x, int y)
 {
 	if ((x >= Corner1.x && x <= Corner2.x) && (y >= Corner1.y && y <= Corner2.y))
 	{
-		return this;
+		return true;
 	}
 	if ((x <= Corner1.x && x >= Corner2.x) && (y >= Corner1.y && y <= Corner2.y))
 	{
-		return this;
+		return true;
 	}
 	if ((x >= Corner1.x && x <= Corner2.x) && (y <= Corner1.y && y >= Corner2.y))
 	{
-		return this;
+		return true;
 	}
 
 	if ((x <= Corner1.x && x >= Corner2.x) && (y <= Corner1.y && y >= Corner2.y))
 	{
-		return this;
+		return true;
 	}
 
 
 
-	return nullptr;
+	return false;
 
 }
 bool CRectangle::isInsideBoundaries(const Point& newPos) const

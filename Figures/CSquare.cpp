@@ -44,13 +44,13 @@ ostream& operator<<(ostream& op, const CSquare& Fig) {
 	op << Fig.ID << " " << Fig.P1 << " " << Fig.P2 << " " << Fig.FigGfxInfo << endl;
 	return op;
 };
-CFigure* CSquare::checkselection(int x, int y)
+bool CSquare::checkselection(int x, int y)
 {
 	if ((x >= P1.x && x <= P2.x) && (y >= P1.y && y <= P2.y))
 	{
-		return this;
+		return true;
 	}
-	return nullptr;
+	return false;
 
 }
 

@@ -62,15 +62,15 @@ void CCircle::Load(string& line)
 
 
 }
-CFigure* CCircle::checkselection(int x, int y)
+bool CCircle::checkselection(int x, int y)
 {
 	int Cicle_radius = sqrt((P1.x - P2.x) * (P1.x - P2.x) + (P1.y - P2.y) * (P1.y - P2.y));
 	int Given_radius = sqrt((P1.x - x) * (P1.x - x) + (P1.y - y) * (P1.y - y));
 	if (Cicle_radius >= Given_radius)
 	{
-		return this;
+		return true;
 	}
-	return nullptr;
+	return false;
 };
 void CCircle::move(const Point& p) {
 	P2 = P2 + p - P1;

@@ -14,7 +14,7 @@ void CTriangle::Draw(Output* pOut) const
 {
 	pOut->Drawrtriangle(P1.x, P1.y, P2.x, P2.y, P3.x, P3.y, FigGfxInfo, Selected);
 }
-CFigure* CTriangle::checkselection(int x, int y)
+bool CTriangle::checkselection(int x, int y)
 {
 	int x1 = P1.x;	int x2 = P2.x;	int x3 = P3.x;
 	int y1 = P1.y;	int y2 = P2.y;	int y3 = P3.y;
@@ -25,9 +25,9 @@ CFigure* CTriangle::checkselection(int x, int y)
 	int a3 = abs((x1 * (y - y3) + x * (y3 - y1) + x3 * (y1 - y)) / 2.0);
 	int a4 = abs((x1 * (y2 - y) + x2 * (y - y1) + x * (y1 - y2)) / 2.0);
 	if (a1 == a2 + a3 + a4)
-		return this;
+		return true;
 
-	return nullptr;
+	return false;
 
 
 }

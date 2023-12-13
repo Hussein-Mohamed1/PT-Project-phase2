@@ -25,7 +25,7 @@ using namespace std;
 //Constructor
 ApplicationManager::ApplicationManager()
 {	// Initializes the current selected figure pointer to null;
-	SelectedFig = nullptr;
+	Selected_Figure = nullptr;
 	//Create Input and output
 	pOut = new Output;
 	pIn = pOut->CreateInput();
@@ -228,13 +228,9 @@ void ApplicationManager::UpdateInterface() const
 	
 		for (int i = 0; i < FigCount; i++)
 		{
-			if (FigList[i] == Selected_Figure)
+			if (FigList[i] !=NULL)
 			{
-				Selected_Figure->SetSelected(false);
-				FigList[i] == NULL;
-				Selected_Figure = NULL;
-				break;
-
+				FigList[i]->Draw(pOut);
 			}
 		}
 	}

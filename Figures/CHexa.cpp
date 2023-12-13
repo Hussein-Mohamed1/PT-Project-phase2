@@ -6,7 +6,15 @@ CHexa::CHexa(Point c, GfxInfo FigureGfxInfo) : CFigure(FigureGfxInfo)
 	ID++;
 
 }
-
+bool CHexa::checkselection(int x, int y)
+{
+	int dis = sqrt((x - centre.x) * (x - centre.x) + (y - centre.y) * (y - centre.y));
+	if (dis <= 80)   // you must change it if you change lenght of Hexa to be finaly  l;
+	{
+		return true;
+	}
+	return false;
+}
 void CHexa::Draw(Output* pOut) const
 {
 	int xc = centre.x, yc = centre.y;
@@ -18,15 +26,6 @@ void CHexa::Draw(Output* pOut) const
 
 	pOut->Drawhexagon(xcoordiantes, ycoordinates, FigGfxInfo, Selected);
 
-}
-CFigure* CHexa::checkselection(int x, int y)
-{
-	int dis = sqrt((x - centre.x) * (x - centre.x) + (y - centre.y) * (y - centre.y));
-	if (dis <= 80)   // you must change it if you change lenght of Hexa to be finaly  l;
-	{
-		return this;
-	}
-	return nullptr;
 }
 
 bool CHexa::isInsideBoundaries(const Point& newPos) const {

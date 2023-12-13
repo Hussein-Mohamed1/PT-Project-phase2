@@ -11,7 +11,7 @@ moveFigure::moveFigure(ApplicationManager* pApp) :Action(pApp), newPos{ -1,-1 } 
 void moveFigure::ReadActionParameters() {
 	Output* pOut = pManager->GetOutput();
 	Input* pIn = pManager->GetInput();
-	if (pManager->returnSelectedFigure() != nullptr)
+	if (pManager->GetSelected_Figure() != nullptr)
 	{
 		pOut->PrintMessage("Click a point to move the figure to.");
 		pIn->GetPointClicked(newPos.x, newPos.y);
@@ -28,7 +28,7 @@ void moveFigure::Execute() {
 	ReadActionParameters();
 
 	if ((newPos.x <= UI.width - 5 && newPos.x > 0) && (newPos.y < UI.height - UI.StatusBarHeight - 5) && (newPos.y > UI.ToolBarHeight + 5)) {
-		CFigure* cFigure = pManager->returnSelectedFigure();
+		CFigure* cFigure = pManager->GetSelected_Figure();
 		{if (dynamic_cast<CCircle*>(cFigure) != nullptr) {
 			if (cFigure->isInsideBoundaries(newPos))
 				cFigure->move(newPos);
