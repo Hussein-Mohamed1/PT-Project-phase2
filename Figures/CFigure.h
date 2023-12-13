@@ -26,6 +26,7 @@ public:
 
 	//void ChngDrawClr(color Dclr);	//changes the figure's drawing color
 	 void ChngDrawClr(color Dclr);
+	 void SetFill(bool SF);
 	void ChngFillClr(color Fclr);	//changes the figure's filling color
 
 	///The following functions should be supported by the figure class

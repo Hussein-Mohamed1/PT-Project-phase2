@@ -4,14 +4,49 @@
 #include "..\ApplicationManager.h"
 
 
-ChangeColorAction::ChangeColorAction(ApplicationManager* pApp, color c) :Action(pApp)
+ChangeColorAction::ChangeColorAction(ApplicationManager* pApp, color c, bool CF):Action(pApp)
 {
-	C = c;
+	DrawColor= c;
+	ChangeFill = CF;
+	FillColor = GRAY;
+
 }
 void ChangeColorAction::ReadActionParameters()
 {
 
 	Output* pOut = pManager->GetOutput();
+	Input* pIn = pManager->GetInput();
+
+	if (ChangeFill)
+	{
+		pOut->PrintMessage("Choose Fill Color : ");
+		ActionType ActType;
+		ActType = pIn->GetUserAction();
+		switch (ActType)
+		{
+		case COLOR_BLACK:
+			FillColor = BLACK;
+			break;
+		case COLOR_RED:
+			FillColor = RED;
+			break;
+		case COLOR_BLUE:
+			FillColor = BLUE;
+			break;
+		case COLOR_GREEN:
+			FillColor = GREEN;
+			break;
+		case COLOR_YELLOW:
+			FillColor = YELLOW;
+			break;
+		case COLOR_ORANGE:
+			FillColor = ORANGE;
+			break;
+		default:
+			break;
+		}
+	}
+
 }
 void ChangeColorAction::Execute()
 {
@@ -23,9 +58,15 @@ void ChangeColorAction::Execute()
 		pOut->PrintMessage("NO SELECTED ");
 	else
 	{
+		if (ChangeFill)
+		{
+			if(FillColor!=GRAY)
+				pManager->GetSelected_Figure()->ChngFillClr(FillColor);
+ 		}
+		else 
 		//pManager->GetSelected_Figure()->ChngFillClr(BLACK);
-		pManager->GetSelected_Figure()->ChngDrawClr(C);
-		pOut->SetDraColor(C);
+		pManager->GetSelected_Figure()->ChngDrawClr(DrawColor);
+		pOut->SetDraColor(DrawColor);
 	}
 
 

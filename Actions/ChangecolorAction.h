@@ -3,9 +3,13 @@
 class ChangeColorAction :
     public Action
 {
-    color C;
+    color DrawColor;
+    color FillColor;
+    bool ChangeFill;
+       
 public:
-    ChangeColorAction(ApplicationManager* pApp,color c);
+
+    ChangeColorAction(ApplicationManager* pApp, color c,bool CF=0);
 
     virtual void ReadActionParameters();
 

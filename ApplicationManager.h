@@ -42,6 +42,10 @@ public:
 	void UpdateInterface() const;	//Redraws all the drawing window	
 	void SaveAll(fstream &) const;
 	 CFigure* GetSelected_Figure();
+	 void DeleteFunction();
+	// void DeleteFigure(CFigure* Del);
+	 //bool Select(CFigure* figure);
+	 //CFigure* GetFigureByPoint(int x, int y);
 
 };
 

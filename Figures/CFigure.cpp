@@ -13,15 +13,7 @@ CFigure::CFigure() {}
 void CFigure::SetSelected(bool s)
 {
 	Selected = s;
-	if (s)
-	{
-		ChngDrawClr(MAGENTA);
-	}
-	else
-	{
-		ChngDrawClr(BLUE);
-	}
-
+	
 }
 
 bool CFigure::IsSelected() const

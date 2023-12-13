@@ -16,6 +16,7 @@
 #include "to_drawmood.h"
 #include"Actions/ChangeColorAction.h"
 #include"DEFS.h"
+#include"Actions/DeleteAction.h"
 
 
 using namespace std;
@@ -100,12 +101,12 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 	case COLOR_BLUE:
 		pAct = new ChangeColorAction(this, BLUE);
 		break;
-
-
-
-
-
-
+	case FUNC_FILL:
+		pAct = new ChangeColorAction(this,BLUE,1);
+		break;
+	case FUNC_DELETE :
+		pAct = new DeleteAction(this);
+		break;
 
 
 
@@ -143,12 +144,9 @@ void ApplicationManager::AddFigure(CFigure* pFig)
 ////////////////////////////////////////////////////////////////////////////////////
 CFigure* ApplicationManager::GetFigure(int x, int y) 
 {
-	//If a figure is found return a pointer to it.
-	//if this point (x,y) does not belong to any figure return NULL
-	// 
 	for (int i = 0; i < FigCount; i++)
 {  
-	if (FigList[i]->checkselection(x, y))
+	if (FigList[i]->checkselection(x, y))    
 	{  
      	if (Selected_Figure == NULL)
      	{
@@ -183,6 +181,40 @@ CFigure* ApplicationManager::GetFigure(int x, int y)
 
 	return NULL;
 }
+
+//bool ApplicationManager :: Select(CFigure* figure)
+//{
+//	if (Selected_Figure==figure) {
+//		Selected_Figure->SetSelected(false);
+//		Selected_Figure = nullptr;
+//	}
+//	else if (Selected_Figure == nullptr)
+//	{
+//		Selected_Figure = figure;
+//		Selected_Figure->SetSelected(true);
+//	}
+//	else  //if (Selected_Figure != figure)
+//	{
+//		Selected_Figure->SetSelected(false);
+//		Selected_Figure = nullptr;
+//		Selected_Figure = figure;
+//		Selected_Figure->SetSelected(true);
+//
+//	}
+//
+//}
+//
+//CFigure* ApplicationManager:: GetFigureByPoint(int x, int y)
+//{
+//	for (int i = 0; i < FigCount; i++)
+//	{
+//		if (FigList[i]->checkselection(x, y))
+//		{
+//			return FigList[i];
+//		}
+//	}
+//}
+
 //==================================================================================//
 //							Interface Management Functions							//
 //==================================================================================//
@@ -192,10 +224,37 @@ void ApplicationManager::UpdateInterface() const
 {
 	for (int i = 0; i < FigCount; i++)
 	{
-		FigList[i]->Draw(pOut);	//Call Draw function (virtual member fn)
+		if (FigList[i] != NULL)
+		{
+			FigList[i]->Draw(pOut);	//Call Draw function (virtual member fn)
+		}
+	}
+}
+void ApplicationManager::DeleteFunction()
+{
+	for (int i = 0; i < FigCount; i++)
+	{
+		if (FigList[i] == Selected_Figure)
+		{
+			Selected_Figure->SetSelected(false);
+			FigList[i] == NULL;
+			Selected_Figure = NULL;
+			break;
+
+		}
 	}
 }
 
+//void ApplicationManager:: DeleteFigure(CFigure* Del)
+//{
+//	for (int i = 0; i < FigCount; i++)
+//	{
+//		if (FigList[i] == Del)
+//			FigList[i] = nullptr;
+//	}
+//	
+//
+//}
 ////////////////////////////////////////////////////////////////////////////////////
 //Return a pointer to the input
 Input* ApplicationManager::GetInput() const

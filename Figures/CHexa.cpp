@@ -16,7 +16,7 @@ void CHexa::Draw(Output* pOut) const
 	int xcoordiantes[6] = { xc + l , xc + small_lenght,xc - small_lenght , xc - l , xc - small_lenght , xc + small_lenght };
 	int ycoordinates[6] = { yc     , yc - small_height,yc - small_height , yc     , yc + small_height , yc + small_height };
 
-	pOut->Drawhexagon(xcoordiantes, ycoordinates, FigGfxInfo);
+	pOut->Drawhexagon(xcoordiantes, ycoordinates, FigGfxInfo, Selected);
 
 }
 bool CHexa::checkselection(int x, int y)
@@ -28,7 +28,8 @@ bool CHexa::checkselection(int x, int y)
 	}
 	return false;
 }
-CHexa::CHexa() {};
+CHexa::CHexa()
+{};
 void CHexa::Save(fstream& op) const
 {
 
