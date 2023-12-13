@@ -10,10 +10,12 @@ public:
 	CCircle(Point, Point, GfxInfo FigureGfxInfo);
 	CCircle();
 	virtual void Draw(Output* pOut) const;
-	bool checkselection(int x, int y);
+	CFigure* checkselection(int x, int y);
 	void Save(fstream&) const;
 	void Load(string&);
 	friend ostream& operator<<(ostream&, const CCircle&);
+	void move(const Point&);
+	bool isInsideBoundaries(const Point&) const;
 
 };
 

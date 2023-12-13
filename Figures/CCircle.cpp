@@ -62,15 +62,24 @@ void CCircle::Load(string& line)
 
 
 }
-bool CCircle::checkselection(int x, int y)
+CFigure* CCircle::checkselection(int x, int y)
 {
 	int Cicle_radius = sqrt((P1.x - P2.x) * (P1.x - P2.x) + (P1.y - P2.y) * (P1.y - P2.y));
 	int Given_radius = sqrt((P1.x - x) * (P1.x - x) + (P1.y - y) * (P1.y - y));
 	if (Cicle_radius >= Given_radius)
 	{
-		return true;
+		return this;
 	}
-	return false;
+	return nullptr;
+};
+void CCircle::move(const Point& p) {
+	P2 = P2 + p - P1;
+	P1 = p;
 }
-
-;
+bool CCircle::isInsideBoundaries(const Point& p) const
+{
+	Point tempP2 = P2 + p - P1;
+	Point tempP1 = p;
+	int r = sqrt((P1.x - tempP2.x) * (P1.x - tempP2.x) + (P1.y - tempP2.y) * (P1.y - tempP2.y));
+	return !(!((tempP1.y - r) > UI.ToolBarHeight + 5 && (tempP1.y + r) < UI.height - UI.StatusBarHeight) || (tempP1.x - r) < 5 || (tempP1.x + r) >= UI.width - 15);
+}

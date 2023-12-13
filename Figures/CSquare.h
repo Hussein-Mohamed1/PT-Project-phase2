@@ -12,7 +12,9 @@ public:
 	friend ostream& operator<<(ostream&, const CSquare&);
 	void Save(fstream&)const;
 	void Load(string&);
-	bool checkselection(int x, int y);
+	CFigure* checkselection(int x, int y);
+	void move(const Point &);
+	bool isInsideBoundaries(const Point&) const;
 	//  void PrintInfo(Output* pOut);
 
 

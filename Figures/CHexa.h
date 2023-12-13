@@ -13,8 +13,9 @@ public:
 	friend ostream& operator<<(ostream&, const CHexa&);
 	void Save(fstream&)const;
 	void Load(string&);
-	bool  checkselection(int x, int y);
-
+	CFigure* checkselection(int x, int y);
+	bool isInsideBoundaries(const Point&) const;
+	void move(const Point&);
 	//	void PrintInfo(Output* pOut);
 
 

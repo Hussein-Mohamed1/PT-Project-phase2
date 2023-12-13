@@ -9,9 +9,9 @@ CHexa::CHexa(Point c, GfxInfo FigureGfxInfo) : CFigure(FigureGfxInfo)
 
 void CHexa::Draw(Output* pOut) const
 {
-    int xc = centre.x, yc = centre.y;
+	int xc = centre.x, yc = centre.y;
 	int l = 80;
-	int small_height = l *0.87;         // cos(60)  (from geometry of shape)
+	int small_height = l * 0.87;         // cos(60)  (from geometry of shape)
 	int small_lenght = l * 0.5;       // sin(60) (from geometry of shape)
 	int xcoordiantes[6] = { xc + l , xc + small_lenght,xc - small_lenght , xc - l , xc - small_lenght , xc + small_lenght };
 	int ycoordinates[6] = { yc     , yc - small_height,yc - small_height , yc     , yc + small_height , yc + small_height };
@@ -19,15 +19,27 @@ void CHexa::Draw(Output* pOut) const
 	pOut->Drawhexagon(xcoordiantes, ycoordinates, FigGfxInfo);
 
 }
-bool CHexa::checkselection(int x, int y)
+CFigure* CHexa::checkselection(int x, int y)
 {
 	int dis = sqrt((x - centre.x) * (x - centre.x) + (y - centre.y) * (y - centre.y));
 	if (dis <= 80)   // you must change it if you change lenght of Hexa to be finaly  l;
 	{
-		return true;
+		return this;
 	}
-	return false;
+	return nullptr;
 }
+
+bool CHexa::isInsideBoundaries(const Point& newPos) const {
+	Point tCentre = newPos;
+	if ((newPos.y) - 80 < (UI.ToolBarHeight + 5) || (newPos.y) + 61 > (UI.height - UI.StatusBarHeight + 5)
+		|| ((newPos.x) + 80) > (UI.width - 5) || (newPos.x) - 80 < 0) return 0;
+	return 1;
+}
+void CHexa::move(const Point& newPos)
+{
+	centre = newPos;
+}
+
 CHexa::CHexa() {};
 void CHexa::Save(fstream& op) const
 {
