@@ -199,9 +199,13 @@
     <ClCompile Include="Actions\ChangeColorAction.cpp">
       <Filter>Action Classes</Filter>
     </ClCompile>
-    <ClCompile Include="Actions\DeleteAction.cpp">
+            <ClCompile Include="Actions\MoveFigure.cpp">
       <Filter>Action Classes</Filter>
     </ClCompile>
+        <ClCompile Include="Actions\DeleteAction.cpp">
+      <Filter>Action Classes</Filter>
+    </ClCompile>
+
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CMUgraphicsLib\auxil.h">

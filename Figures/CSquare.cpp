@@ -44,12 +44,29 @@ ostream& operator<<(ostream& op, const CSquare& Fig) {
 	op << Fig.ID << " " << Fig.P1 << " " << Fig.P2 << " " << Fig.FigGfxInfo << endl;
 	return op;
 };
-bool CSquare::checkselection(int x, int y)
+CFigure* CSquare::checkselection(int x, int y)
 {
 	if ((x >= P1.x && x <= P2.x) && (y >= P1.y && y <= P2.y))
 	{
-		return true;
+		return this;
 	}
-	return false;
+	return nullptr;
 
+}
+
+void CSquare::move(const Point& newPos)
+{
+	Point Center = (P2 + P1) / 2;
+	P2 = newPos + P2 - Center;
+	P1 = newPos + P1 - Center;
+}
+
+bool CSquare::isInsideBoundaries(const Point& newPos) const
+{
+
+	Point P2 = newPos + CSquare::P2 - (CSquare::P2 + CSquare::P1) / 2;
+	Point P1 = newPos + CSquare::P1 - (CSquare::P2 + CSquare::P1) / 2;
+	if ((!(P1.y > UI.ToolBarHeight + 5 && P1.y < UI.height - UI.StatusBarHeight - 5)) || (!(P2.y > UI.ToolBarHeight + 5 && P2.y < UI.height - UI.StatusBarHeight - 5)) || (P1.x < 5 || P2.x >= UI.width - 5))
+		return 0;
+	return 1;
 }

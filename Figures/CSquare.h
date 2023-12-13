@@ -6,13 +6,15 @@ class CSquare :
 private:
 	Point P1, P2;
 public:
-    CSquare(Point p1, Point p2, GfxInfo FigureGfxInfo);
+	CSquare(Point p1, Point p2, GfxInfo FigureGfxInfo);
 	CSquare();
 	virtual void Draw(Output* pOut) const;
 	friend ostream& operator<<(ostream&, const CSquare&);
 	void Save(fstream&)const;
 	void Load(string&);
-	virtual bool checkselection(int x, int y);
+	void move(const Point&);
+	bool isInsideBoundaries(const Point&) const;
+	bool checkselection(int x, int y);
 	//  void PrintInfo(Output* pOut);
 
 

@@ -7,6 +7,7 @@
 #include"Actions/SelectAction.h"
 #include "Actions/PrepareExport.h"
 #include "Actions/PrepareImport.h"
+#include "Actions/MoveFigure.h"
 #include "fstream"
 #include "Figures/CCircle.h"
 #include "to_playmood.h"
@@ -23,7 +24,8 @@ using namespace std;
 
 //Constructor
 ApplicationManager::ApplicationManager()
-{
+{	// Initializes the current selected figure pointer to null;
+	SelectedFig = nullptr;
 	//Create Input and output
 	pOut = new Output;
 	pIn = pOut->CreateInput();
@@ -222,14 +224,21 @@ CFigure* ApplicationManager::GetFigure(int x, int y)
 //Draw all figures on the user interface
 void ApplicationManager::UpdateInterface() const
 {
-	for (int i = 0; i < FigCount; i++)
-	{
-		if (FigList[i] != NULL)
+
+	
+		for (int i = 0; i < FigCount; i++)
 		{
-			FigList[i]->Draw(pOut);	//Call Draw function (virtual member fn)
+			if (FigList[i] == Selected_Figure)
+			{
+				Selected_Figure->SetSelected(false);
+				FigList[i] == NULL;
+				Selected_Figure = NULL;
+				break;
+
+			}
 		}
 	}
-}
+
 void ApplicationManager::DeleteFunction()
 {
 	for (int i = 0; i < FigCount; i++)
@@ -245,17 +254,7 @@ void ApplicationManager::DeleteFunction()
 	}
 }
 
-//void ApplicationManager:: DeleteFigure(CFigure* Del)
-//{
-//	for (int i = 0; i < FigCount; i++)
-//	{
-//		if (FigList[i] == Del)
-//			FigList[i] = nullptr;
-//	}
-//	
-//
-//}
-////////////////////////////////////////////////////////////////////////////////////
+	////////////////////////////////////////////////////////////////////////////////////
 //Return a pointer to the input
 Input* ApplicationManager::GetInput() const
 {

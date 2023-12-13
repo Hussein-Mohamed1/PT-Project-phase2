@@ -1,6 +1,6 @@
 #include "CFigure.h"
 
-int CFigure:: ID = 0;
+int CFigure::ID = 0;
 
 CFigure::CFigure(GfxInfo FigureGfxInfo)
 {
@@ -46,3 +46,12 @@ ostream& operator << (ostream& op, const GfxInfo& gfx) {
 	return op;
 };
 
+Point operator+(const Point& p1, const Point& p2) {
+	return { p1.x + p2.x,p1.y + p2.y };
+};
+Point operator-(const Point& p1, const Point& p2) {
+	return { p1.x - p2.x,p1.y - p2.y };
+};
+Point operator/(const Point& p, int n) {
+	return { p.x / 2, p.y / 2 };
+};

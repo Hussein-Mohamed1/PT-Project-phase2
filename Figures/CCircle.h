@@ -14,6 +14,8 @@ public:
 	void Save(fstream&) const;
 	void Load(string&);
 	friend ostream& operator<<(ostream&, const CCircle&);
+	void move(const Point&);
+	bool isInsideBoundaries(const Point&) const;
 
 };
 

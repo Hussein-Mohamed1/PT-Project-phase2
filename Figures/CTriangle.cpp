@@ -14,7 +14,7 @@ void CTriangle::Draw(Output* pOut) const
 {
 	pOut->Drawrtriangle(P1.x, P1.y, P2.x, P2.y, P3.x, P3.y, FigGfxInfo, Selected);
 }
-bool CTriangle::checkselection(int x, int y)
+CFigure* CTriangle::checkselection(int x, int y)
 {
 	int x1 = P1.x;	int x2 = P2.x;	int x3 = P3.x;
 	int y1 = P1.y;	int y2 = P2.y;	int y3 = P3.y;
@@ -25,9 +25,9 @@ bool CTriangle::checkselection(int x, int y)
 	int a3 = abs((x1 * (y - y3) + x * (y3 - y1) + x3 * (y1 - y)) / 2.0);
 	int a4 = abs((x1 * (y2 - y) + x2 * (y - y1) + x * (y1 - y2)) / 2.0);
 	if (a1 == a2 + a3 + a4)
-		return true;
+		return this;
 
-	return false;
+	return nullptr;
 
 
 }
@@ -58,6 +58,24 @@ void CTriangle::Load(string& line)
 	this->FigGfxInfo.FillClr = color(stoi(datum[11]), stoi(datum[12]), stoi(datum[13]));
 	this->FigGfxInfo.isFilled = (unsigned int)stoi(datum[14]);
 	this->FigGfxInfo.BorderWdth = (unsigned int)stoi(datum[15]);
+}
+
+void CTriangle::move(const Point& newPos)
+{
+	P2 = P2 + newPos - P1;
+	P3 = P3 + newPos - P1;
+	P1 = newPos;
+}
+
+bool CTriangle::isInsideBoundaries(const Point& newPos) const
+{
+	Point tP1, tP2, tP3;
+	tP2 = tP2 + newPos - tP1;
+	tP3 = tP3 + newPos - tP1;
+	tP1 = newPos;
+	if ((tP1.y) < (UI.ToolBarHeight + 5) || (tP2.y) < (UI.ToolBarHeight + 5) || (tP3.y) < (UI.ToolBarHeight + 5) || (tP1.y) > (UI.height - UI.StatusBarHeight + 5) || (tP2.y) > (UI.height - UI.StatusBarHeight + 5) || (tP3.y) > (UI.height - UI.StatusBarHeight + 5))
+		return false;
+	return true;
 }
 
 

@@ -44,8 +44,12 @@ enum ActionType //The actions supported (you can add more if needed)
 };
 
 struct Point	//To be used for figures points
-{ int x,y;
-friend ostream& operator <<(ostream&,const Point&);
+{
+	int x, y;
+	friend ostream& operator <<(ostream&, const Point&);
+	friend Point operator+(const Point&, const Point&);
+	friend Point operator-(const Point&, const Point&);
+	friend Point operator/(const Point&, int);
 };
 
 struct GfxInfo	//Graphical info of each figure (you may add more members)
