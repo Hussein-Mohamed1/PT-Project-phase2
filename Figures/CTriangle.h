@@ -11,7 +11,7 @@ public:
 	CTriangle(Point p1, Point p2, Point p3, GfxInfo FigureGfxInfo);
 	CTriangle();
 	virtual void Draw(Output* pOut) const;
-	CFigure* checkselection(int x, int y);
+	bool checkselection(int x, int y);
 	void Save(fstream&)const;
 	friend ostream& operator<<(ostream&, const CTriangle&);
 	void Load(string&);

@@ -132,6 +132,7 @@
     <ClCompile Include="Actions\AddHexaAction.cpp" />
     <ClCompile Include="Actions\AddSquareAction.cpp" />
     <ClCompile Include="Actions\AddTriangleAction.cpp" />
+    <ClCompile Include="Actions\ChangeColorAction.cpp" />
     <ClCompile Include="Actions\MoveFigure.cpp" />
     <ClCompile Include="Actions\PrepareExport.cpp" />
     <ClCompile Include="Actions\PrepareImport.cpp" />
@@ -194,6 +195,7 @@
     <ClInclude Include="Actions\AddHexaAction.h" />
     <ClInclude Include="Actions\AddSquareAction.h" />
     <ClInclude Include="Actions\AddTriangleAction.h" />
+    <ClInclude Include="Actions\ChangeColorAction.h" />
     <ClInclude Include="Actions\MoveFigure.h" />
     <ClInclude Include="Actions\PrepareExport.h" />
     <ClInclude Include="Actions\PrepareImport.h" />
