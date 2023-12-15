@@ -26,10 +26,10 @@ bool CTriangle::checkselection(int x, int y)
 	int y1 = P1.y;	int y2 = P2.y;	int y3 = P3.y;
 
 
-	int a1 = abs((x1 * (y2 - y3) + x2 * (y3 - y1) + x3 * (y1 - y2)) / 2.0);
-	int a2 = abs((x * (y2 - y3) + x2 * (y3 - y) + x3 * (y - y2)) / 2.0);
-	int a3 = abs((x1 * (y - y3) + x * (y3 - y1) + x3 * (y1 - y)) / 2.0);
-	int a4 = abs((x1 * (y2 - y) + x2 * (y - y1) + x * (y1 - y2)) / 2.0);
+	int a1 = abs((x1 * (y2 - y3) + x2 * (y3 - y1) + x3 * (y1 - y2)) / 2);
+	int a2 = abs((x * (y2 - y3) + x2 * (y3 - y) + x3 * (y - y2)) / 2);
+	int a3 = abs((x1 * (y - y3) + x * (y3 - y1) + x3 * (y1 - y)) / 2);
+	int a4 = abs((x1 * (y2 - y) + x2 * (y - y1) + x * (y1 - y2)) / 2);
 	if (a1 == a2 + a3 + a4)
 		return true;
 

@@ -4,7 +4,6 @@
 #include "..\ApplicationManager.h"
 
 
-//CFigure* SelectAction::Selected_Figure = NULL;
 
 SelectAction::SelectAction(ApplicationManager* pApp) :Action(pApp)
 {}

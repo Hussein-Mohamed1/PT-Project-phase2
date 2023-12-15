@@ -148,38 +148,52 @@ CFigure* ApplicationManager::GetFigure(int x, int y)
 {
 	for (int i = 0; i < FigCount; i++)
 {  
-	if (FigList[i]->checkselection(x, y))    
-	{  
-     	if (Selected_Figure == NULL)
-     	{
-		Selected_Figure = FigList[i];
-		Selected_Figure->SetSelected(true);
-		Selected_Figure->PrintInfo( pOut);
-		return Selected_Figure;
-	     }
-      	else if (Selected_Figure == FigList[i])
-      	{
-		Selected_Figure->SetSelected(false);
-		Selected_Figure = NULL;
-		return NULL;
-	    }
-	       else            //if (Selected_Figure != FigList[i])
-	    {
-		Selected_Figure->SetSelected(false);
-		Selected_Figure = FigList[i];
-		Selected_Figure->SetSelected(true);
-		Selected_Figure->PrintInfo(pOut);
-		return Selected_Figure;
+		if (FigList[i] != NULL)                  // Validation to prevent crash if Figure is deleted 
+		{
+			if (FigList[i]->checkselection(x, y))           /// to check whether point is in figure or not 
+			{
+				// case one if there is no selected figure before 
+
+				if (Selected_Figure == NULL)               
+				{
+					Selected_Figure = FigList[i];
+					Selected_Figure->SetSelected(true);
+					Selected_Figure->PrintInfo(pOut);
+					return Selected_Figure;
+				}
+
+				// case two if selected figure is seclected before make it unselected and return NUL
+
+				else if (Selected_Figure == FigList[i])          
+				{
+					Selected_Figure->SetSelected(false);
+					Selected_Figure = NULL;
+					return NULL;
+				}
+
+				  //  case 3 if the seleced figure isn't the selected before
+
+				else            //if (Selected_Figure != FigList[i])            
+				{
+					Selected_Figure->SetSelected(false);
+					Selected_Figure = FigList[i];
+					Selected_Figure->SetSelected(true);
+					Selected_Figure->PrintInfo(pOut);
+					return Selected_Figure;
+				}
+
+
+			}
+
 		}
-
-
-    } 
-
 
 	
 }
 
-	pOut->PrintMessage(" No selected figure ");
+	              // if the point dosen't belong to any figure
+
+	pOut->PrintMessage(" No selected figure ");           
+
 	//Add your code here to search for a figure given a point x,y	
 	//Remember that ApplicationManager only calls functions do NOT implement it.
 
@@ -224,30 +238,28 @@ CFigure* ApplicationManager::GetFigure(int x, int y)
 //==================================================================================//
 
 //Draw all figures on the user interface
-void ApplicationManager::UpdateInterface() const
+void ApplicationManager::UpdateInterface() 
 {
-
-	
 		for (int i = 0; i < FigCount; i++)
 		{
 			if (FigList[i] !=NULL)
-			{
 				FigList[i]->Draw(pOut);
-			}
 		}
-	}
+
+}
 
 void ApplicationManager::DeleteFunction()
 {
-	for (int i = 0; i < FigCount; i++)
+	for (int  i = 0; i < FigCount; i++)
 	{
 		if (FigList[i] == Selected_Figure)
 		{
-			Selected_Figure->SetSelected(false);
-			FigList[i] == NULL;
+			//Selected_Figure->SetSelected(false);             
+			pOut->ClearDrawArea();                 
+			pOut->ClearStatusBar();
+		    FigList[i] = NULL;
 			Selected_Figure = NULL;
 			break;
-
 		}
 	}
 }

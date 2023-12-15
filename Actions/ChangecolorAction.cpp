@@ -62,6 +62,7 @@ void ChangeColorAction::Execute()
 		{
 			if(FillColor!=GRAY)
 				pManager->GetSelected_Figure()->ChngFillClr(FillColor);
+			   pOut->SetFillColor(FillColor);
  		}
 		else 
 		//pManager->GetSelected_Figure()->ChngFillClr(BLACK);

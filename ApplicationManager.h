@@ -19,6 +19,7 @@ private:
 
 
 
+
 	//Pointers to Input and Output classes
 	Input *pIn;
 	Output *pOut;
@@ -38,7 +39,7 @@ public:
 	// -- Interface Management Functions
 	Input *GetInput() const; //Return pointer to the input
 	Output *GetOutput() const; //Return pointer to the output
-	void UpdateInterface() const;	//Redraws all the drawing window	
+	void UpdateInterface() ;	//Redraws all the drawing window	
 	void SaveAll(fstream &) const;
 	 CFigure* GetSelected_Figure();
 	 void DeleteFunction();
