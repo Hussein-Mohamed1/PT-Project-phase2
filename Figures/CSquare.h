@@ -5,6 +5,7 @@ class CSquare :
 {
 private:
 	Point P1, P2;
+	int id;
 public:
 	CSquare(Point p1, Point p2, GfxInfo FigureGfxInfo);
 	CSquare();
@@ -15,7 +16,9 @@ public:
 	void move(const Point&);
 	bool isInsideBoundaries(const Point&) const;
 	bool checkselection(int x, int y);
-	//  void PrintInfo(Output* pOut);
+	int Getid();
+
+	 void PrintInfo(Output* pOut);
 
 
 

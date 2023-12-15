@@ -1,12 +1,13 @@
 #include "CFigure.h"
 
-int CFigure::ID = 0;
+int CFigure::ID = 1;
 
 CFigure::CFigure(GfxInfo FigureGfxInfo)
 {
 	FigGfxInfo = FigureGfxInfo;	//Default status is non-filled.
 	Selected = false;
 }
+
 
 CFigure::CFigure() {}
 
@@ -21,10 +22,6 @@ bool CFigure::IsSelected() const
 	return Selected;
 }
 
-//void CFigure::ChngDrawClr(color Dclr)
-//{
-//	FigGfxInfo.DrawClr = Dclr;
-//}
 void CFigure::ChngDrawClr(color Dclr)
 {
 	FigGfxInfo.DrawClr = Dclr;

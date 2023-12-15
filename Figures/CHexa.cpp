@@ -1,15 +1,28 @@
 #include "CHexa.h"
 #include "sstream"
+#include <sstream>
+#include "cstring"
+#include<iostream>
+#include"string.h"
+using namespace std;
 CHexa::CHexa(Point c, GfxInfo FigureGfxInfo) : CFigure(FigureGfxInfo)
 {
 	centre = c;
+	id = ID;
 	ID++;
+	l = 80;                       //Here , if you want to change side lenght of Hexa 
 
 }
+
+int CHexa::Getid()
+{
+	return id;
+}
+
 bool CHexa::checkselection(int x, int y)
 {
 	int dis = sqrt((x - centre.x) * (x - centre.x) + (y - centre.y) * (y - centre.y));
-	if (dis <= 80)   // you must change it if you change lenght of Hexa to be finaly  l;
+	if (dis <=l-6)   // you must change it if you change lenght of Hexa to be finaly  l;
 	{
 		return true;
 	}
@@ -18,7 +31,6 @@ bool CHexa::checkselection(int x, int y)
 void CHexa::Draw(Output* pOut) const
 {
 	int xc = centre.x, yc = centre.y;
-	int l = 80;
 	int small_height = l * 0.87;         // cos(60)  (from geometry of shape)
 	int small_lenght = l * 0.5;       // sin(60) (from geometry of shape)
 	int xcoordiantes[6] = { xc + l , xc + small_lenght,xc - small_lenght , xc - l , xc - small_lenght , xc + small_lenght };
@@ -72,3 +84,12 @@ ostream& operator<<(ostream& op, const CHexa& Fig) {
 	op << Fig.ID << " " << Fig.centre << " " << Fig.FigGfxInfo << endl;
 	return op;
 };
+void CHexa::PrintInfo(Output* pOut)
+{
+	// concatination to print one sting contaion all data of figure
+
+	// to_string ()  is a function that cast int to strting
+	string printed = " Figure is Hexa         Figure id : " + to_string(id) + "        Side lenght : " + to_string(l)
+		+ "       Centre : ("+ to_string(centre.x) + "," + to_string(centre.y) + ")";
+	pOut->PrintMessage(printed);
+}

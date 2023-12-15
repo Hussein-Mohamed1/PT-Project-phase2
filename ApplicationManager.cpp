@@ -154,6 +154,7 @@ CFigure* ApplicationManager::GetFigure(int x, int y)
      	{
 		Selected_Figure = FigList[i];
 		Selected_Figure->SetSelected(true);
+		Selected_Figure->PrintInfo( pOut);
 		return Selected_Figure;
 	     }
       	else if (Selected_Figure == FigList[i])
@@ -167,6 +168,7 @@ CFigure* ApplicationManager::GetFigure(int x, int y)
 		Selected_Figure->SetSelected(false);
 		Selected_Figure = FigList[i];
 		Selected_Figure->SetSelected(true);
+		Selected_Figure->PrintInfo(pOut);
 		return Selected_Figure;
 		}
 

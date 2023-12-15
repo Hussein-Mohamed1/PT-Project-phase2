@@ -4,6 +4,8 @@ class CHexa : public CFigure
 {
 private:
 	Point centre;
+	int id;
+	int l;  //side lenght of Hexa
 public:
 
 	CHexa(Point c, GfxInfo FigureGfxInfo);
@@ -16,7 +18,9 @@ public:
 	bool  checkselection(int x, int y);
 	bool isInsideBoundaries(const Point&) const;
 	void move(const Point&);
-	//	void PrintInfo(Output* pOut);
+	int Getid();
+
+	void PrintInfo(Output* pOut);
 
 
 };

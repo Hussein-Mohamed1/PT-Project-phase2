@@ -8,6 +8,7 @@ class CRectangle : public CFigure
 private:
 	Point Corner1;
 	Point Corner2;
+	int id;
 public:
 	CRectangle(Point, Point, GfxInfo FigureGfxInfo);
 	CRectangle();
@@ -19,7 +20,9 @@ public:
 	void Load(string&);
 	bool isInsideBoundaries(const Point&) const;
 	bool checkselection(int x, int y);
-	//void PrintInfo(Output* pOut);
+	int Getid();
+
+	void PrintInfo(Output* pOut);
 
 };
 

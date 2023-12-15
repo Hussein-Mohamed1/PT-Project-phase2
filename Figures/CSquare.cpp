@@ -4,10 +4,17 @@ CSquare::CSquare(Point p1, Point p2, GfxInfo FigureGfxInfo) :CFigure(FigureGfxIn
 {
 	P1 = p1;
 	P2 = p2;
+	id = ID;
 	ID++;
 
 }
 CSquare::CSquare() {};
+
+int CSquare::Getid()
+{
+	return id;
+}
+
 void CSquare::Draw(Output* pOut) const
 {
 	pOut->DrawRect(P1, P2, FigGfxInfo, Selected);
@@ -70,3 +77,20 @@ bool CSquare::isInsideBoundaries(const Point& newPos) const
 		return 0;
 	return 1;
 }
+void CSquare::PrintInfo(Output* pOut)
+{
+	int hieght = abs(P1.y - P2.y);
+
+	// concatination to print one sting contaion all data of figure
+
+	// to_string ()  is a function that cast int to strting
+
+	string printed="Fiure is Square      Figure id : "+ to_string(id)+
+		"        Fisrt Corner :(" + to_string(P1.x) + "," + to_string(P1.y) + ")"
+		+ "        Second Corner :(" + to_string(P2.x) + "," + to_string(P2.y) + ")"
+		+ "        height " + to_string(hieght) + "        width " + to_string(hieght);   // hieght = widght becuase it's a square
+
+	pOut->PrintMessage(printed);
+
+}
+

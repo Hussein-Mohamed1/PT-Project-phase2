@@ -3,6 +3,10 @@
 #include <sstream>
 #include "cstring"
 #include<iostream>
+#include"string.h"
+#include "..\GUI\Output.h"
+#include "..\GUI\input.h"
+
 using namespace std;
 
 ostream& operator<<(ostream& op, const color& c) {
@@ -13,8 +17,16 @@ CCircle::CCircle(Point p1, Point p2, GfxInfo FigureGfxInfo) : CFigure(FigureGfxI
 {
 	P1 = p1;
 	P2 = p2;
+	id = ID;
+	ID++;
 
 }
+
+int CCircle::Getid()
+{
+	return id;
+}
+
 
 void CCircle::Draw(Output* pOut) const
 {
@@ -82,4 +94,20 @@ bool CCircle::isInsideBoundaries(const Point& p) const
 	Point tempP1 = p;
 	int r = sqrt((P1.x - tempP2.x) * (P1.x - tempP2.x) + (P1.y - tempP2.y) * (P1.y - tempP2.y));
 	return !(!((tempP1.y - r) > UI.ToolBarHeight + 5 && (tempP1.y + r) < UI.height - UI.StatusBarHeight) || (tempP1.x - r) < 5 || (tempP1.x + r) >= UI.width - 15);
+}
+void CCircle::PrintInfo(Output* pOut)
+{
+	// raduis of circle 
+	int Cicle_radius = sqrt((P1.x - P2.x) * (P1.x - P2.x) + (P1.y - P2.y) * (P1.y - P2.y)); 
+	Point centre;
+	centre.x = (P1.x - P2.x);   centre.y = (P1.y - P2.y);
+
+	// concatination to print one sting contaion all data of figure
+		// to_string ()  is a function that cast int to strting
+
+	string printed = " Figure is Circle         Figure id :" + to_string(id) + "         Radius : " + to_string(Cicle_radius)
+		+ "       Centre : (" + to_string(centre.x) + "," + to_string(centre.y) + ")";
+	pOut->PrintMessage(printed);
+	
+
 }

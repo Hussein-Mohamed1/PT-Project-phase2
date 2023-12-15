@@ -6,6 +6,7 @@ class CTriangle :
 {
 private:
 	Point P1, P2, P3;
+	int id;
 public:
 
 	CTriangle(Point p1, Point p2, Point p3, GfxInfo FigureGfxInfo);
@@ -17,5 +18,8 @@ public:
 	void Load(string&);
 	void move(const Point&);
 	bool isInsideBoundaries(const Point&) const;
+	int Getid();
+	void PrintInfo(Output* pOut);
+
 
 };

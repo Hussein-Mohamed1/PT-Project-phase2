@@ -5,6 +5,7 @@ class CCircle : public CFigure
 {
 private:
 	Point P1, P2;
+	int id;
 
 public:
 	CCircle(Point, Point, GfxInfo FigureGfxInfo);
@@ -16,7 +17,8 @@ public:
 	friend ostream& operator<<(ostream&, const CCircle&);
 	void move(const Point&);
 	bool isInsideBoundaries(const Point&) const;
-
+	int Getid();
+	void PrintInfo(Output* pOut);
 };
 
 

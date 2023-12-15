@@ -5,10 +5,16 @@ CTriangle::CTriangle(Point p1, Point p2, Point p3, GfxInfo FigureGfxInfo) : CFig
 	P1 = p1;
 	P2 = p2;
 	P3 = p3;
+	id = ID;
 	ID++;
 
 }
 CTriangle::CTriangle() {};
+
+int CTriangle::Getid()
+{
+	return id;
+}
 
 void CTriangle::Draw(Output* pOut) const
 {
@@ -82,6 +88,20 @@ bool CTriangle::isInsideBoundaries(const Point& newPos) const
 ostream& operator<<(ostream& op, const CTriangle& Fig) {
 	op << Fig.ID << " " << Fig.P1 << " " << Fig.P2 << " " << Fig.P3 << " " << " " << Fig.FigGfxInfo << endl;
 	return op;
-};
+}
+void CTriangle::PrintInfo(Output* pOut)
+{
+
+	// concatination to print one sting contaion all data of figure
+
+	// to_string ()  is a function that cast int to strting
+
+	string printed = "Fiure is Triangle      Figure id : " + to_string(id) +
+		"        Fisrt Corner :(" + to_string(P1.x) + "," + to_string(P1.y) + ")"
+		+ "        Second Corner :(" + to_string(P2.x) + "," + to_string(P2.y) + ")"
+		+ "        Third Corner :(" + to_string(P3.x) + "," + to_string(P3.y) + ")";
+	pOut->PrintMessage(printed);
+
+}
 
 

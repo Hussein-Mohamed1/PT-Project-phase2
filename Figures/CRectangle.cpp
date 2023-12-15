@@ -4,10 +4,17 @@ CRectangle::CRectangle(Point P1, Point P2, GfxInfo FigureGfxInfo) :CFigure(Figur
 {
 	Corner1 = P1;
 	Corner2 = P2;
+	id = ID;
 	ID++;
 }
 
 CRectangle::CRectangle() {};
+
+int CRectangle::Getid()
+{
+	return id;
+}
+
 void CRectangle::Draw(Output* pOut) const
 {
 	//Call Output::DrawRect to draw a rectangle on the screen	
@@ -86,7 +93,24 @@ bool CRectangle::isInsideBoundaries(const Point& newPos) const
 		return 1;
 	return 0;
 }
-;
+void CRectangle::PrintInfo(Output* pOut)
+{
+	/// calcuate  data of figure 
+	int hieght = abs(Corner1.y - Corner2.y);
+	int widght = abs(Corner1.x - Corner2.x);
+
+	// concatination to print one sting contaion all data of figure
+
+		// to_string ()  is a function that cast int to strting
+
+	string printed = "Figure is Rectangle          Figure id : " + to_string(id) +
+		"        Fisrt Corner :(" + to_string(Corner1.x) + "," + to_string(Corner1.y) + ")"
+		+ "        Second Corner :(" + to_string(Corner2.x) + "," + to_string(Corner2.y) + ")"
+		+ "        height " + to_string(hieght) + "        width "+to_string(widght);
+	pOut->PrintMessage(printed);
+
+}
+
 
 
 
