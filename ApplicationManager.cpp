@@ -147,48 +147,20 @@ void ApplicationManager::AddFigure(CFigure* pFig)
 CFigure* ApplicationManager::GetFigure(int x, int y) 
 {
 	for (int i = 0; i < FigCount; i++)
-{  
+    {  
 		if (FigList[i] != NULL)                  // Validation to prevent crash if Figure is deleted 
 		{
 			if (FigList[i]->checkselection(x, y))           /// to check whether point is in figure or not 
 			{
-				// case one if there is no selected figure before 
-
-				if (Selected_Figure == NULL)               
-				{
-					Selected_Figure = FigList[i];
-					Selected_Figure->SetSelected(true);
-					Selected_Figure->PrintInfo(pOut);
-					return Selected_Figure;
-				}
-
-				// case two if selected figure is seclected before make it unselected and return NUL
-
-				else if (Selected_Figure == FigList[i])          
-				{
-					Selected_Figure->SetSelected(false);
-					Selected_Figure = NULL;
-					return NULL;
-				}
-
-				  //  case 3 if the seleced figure isn't the selected before
-
-				else            //if (Selected_Figure != FigList[i])            
-				{
-					Selected_Figure->SetSelected(false);
-					Selected_Figure = FigList[i];
-					Selected_Figure->SetSelected(true);
-					Selected_Figure->PrintInfo(pOut);
-					return Selected_Figure;
-				}
-
+				SetSelectedFig(FigList[i]);
+				return FigList[i];
 
 			}
 
 		}
 
 	
-}
+    }
 
 	              // if the point dosen't belong to any figure
 
@@ -240,6 +212,8 @@ CFigure* ApplicationManager::GetFigure(int x, int y)
 //Draw all figures on the user interface
 void ApplicationManager::UpdateInterface() 
 {
+		pOut->ClearDrawArea();                 
+
 		for (int i = 0; i < FigCount; i++)
 		{
 			if (FigList[i] !=NULL)
@@ -255,7 +229,7 @@ void ApplicationManager::DeleteFunction()
 		if (FigList[i] == Selected_Figure)
 		{
 			//Selected_Figure->SetSelected(false);             
-			pOut->ClearDrawArea();                 
+	       //		pOut->ClearDrawArea();                 
 			pOut->ClearStatusBar();
 		    FigList[i] = NULL;
 			Selected_Figure = NULL;
@@ -300,8 +274,97 @@ ApplicationManager::~ApplicationManager()
 {
 	return Selected_Figure;
 }
+  void  ApplicationManager::SetSelectedFig(CFigure* S)
+  {
+	  // case one if there is no selected figure before 
+
+	  if (Selected_Figure == NULL)
+	  {
+		  Selected_Figure = S;
+		  Selected_Figure->SetSelected(true);
+		  Selected_Figure->PrintInfo(pOut);
+	  }
+
+	  // case two if selected figure is seclected before make it unselected and return NUL
+
+	  else if (Selected_Figure == S)
+	  {
+		  Selected_Figure->SetSelected(false);
+		  Selected_Figure = NULL;
+	  }
+
+	  //  case 3 if the seleced figure isn't the selected before
+
+	  else            //if (Selected_Figure != FigList[i])            
+	  {
+		  Selected_Figure->SetSelected(false);
+		  Selected_Figure = S;
+		  Selected_Figure->SetSelected(true);
+		  Selected_Figure->PrintInfo(pOut);
+	  }
 
 
+  }
+
+
+
+
+
+//  CFigure* ApplicationManager::GetFigure(int x, int y)
+	  //{
+	  //	for (int i = 0; i < FigCount; i++)
+	  //{  
+	  //		if (FigList[i] != NULL)                  // Validation to prevent crash if Figure is deleted 
+	  //		{
+	  //			if (FigList[i]->checkselection(x, y))           /// to check whether point is in figure or not 
+	  //			{
+	  //				// case one if there is no selected figure before 
+	  //
+	  //				if (Selected_Figure == NULL)               
+	  //				{
+	  //					Selected_Figure = FigList[i];
+	  //					Selected_Figure->SetSelected(true);
+	  //					Selected_Figure->PrintInfo(pOut);
+	  //					return Selected_Figure;
+	  //				}
+	  //
+	  //				// case two if selected figure is seclected before make it unselected and return NUL
+	  //
+	  //				else if (Selected_Figure == FigList[i])          
+	  //				{
+	  //					Selected_Figure->SetSelected(false);
+	  //					Selected_Figure = NULL;
+	  //					return NULL;
+	  //				}
+	  //
+	  //				  //  case 3 if the seleced figure isn't the selected before
+	  //
+	  //				else            //if (Selected_Figure != FigList[i])            
+	  //				{
+	  //					Selected_Figure->SetSelected(false);
+	  //					Selected_Figure = FigList[i];
+	  //					Selected_Figure->SetSelected(true);
+	  //					Selected_Figure->PrintInfo(pOut);
+	  //					return Selected_Figure;
+	  //				}
+	  //
+	  //
+	  //			}
+	  //
+	  //		}
+	  //
+	  //	
+	  //}
+	  //
+	  //	              // if the point dosen't belong to any figure
+	  //
+	  //	pOut->PrintMessage(" No selected figure ");           
+	  //
+	  //	//Add your code here to search for a figure given a point x,y	
+	  //	//Remember that ApplicationManager only calls functions do NOT implement it.
+	  //
+	  //	return NULL;
+	  //}
 
 
 
@@ -329,3 +392,8 @@ ApplicationManager::~ApplicationManager()
 			//}
 
 			//return FigList[i];
+
+
+
+
+

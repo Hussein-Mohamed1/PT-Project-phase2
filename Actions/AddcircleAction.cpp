@@ -8,7 +8,10 @@
 
 
 AddcircleAction::AddcircleAction(ApplicationManager* pApp) :Action(pApp)
-{ }
+{
+
+
+}
 
   void AddcircleAction::ReadActionParameters()
 {

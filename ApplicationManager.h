@@ -43,6 +43,7 @@ public:
 	void SaveAll(fstream &) const;
 	 CFigure* GetSelected_Figure();
 	 void DeleteFunction();
+	 void SetSelectedFig(CFigure* S);
 	// void DeleteFigure(CFigure* Del);
 	 //bool Select(CFigure* figure);
 	 //CFigure* GetFigureByPoint(int x, int y);
