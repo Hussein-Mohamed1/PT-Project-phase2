@@ -8,7 +8,6 @@ private :
     GfxInfo RectGfxInfo;
     
 public :
-    static int numoftria;
     AddTriangleAction(ApplicationManager* pApp);
 
     virtual void ReadActionParameters();

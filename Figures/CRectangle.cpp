@@ -1,13 +1,16 @@
 #include "CRectangle.h"
 #include <sstream>
+int CRectangle::numofrect = 0;
+int CRectangle::get_numofshape() { return numofrect; }
 CRectangle::CRectangle(Point P1, Point P2, GfxInfo FigureGfxInfo) :CFigure(FigureGfxInfo)
 {
+	numofrect++;
 	Corner1 = P1;
 	Corner2 = P2;
 	ID++;
 }
 
-CRectangle::CRectangle() {};
+CRectangle::CRectangle() { numofrect++; };
 void CRectangle::Draw(Output* pOut) const
 {
 	//Call Output::DrawRect to draw a rectangle on the screen	

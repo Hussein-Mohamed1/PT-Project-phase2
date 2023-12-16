@@ -1,14 +1,17 @@
 #include "CTriangle.h"
 #include <sstream>
+int CTriangle::numoftria = 0;
+int CTriangle::get_numofshape() { return numoftria; }
 CTriangle::CTriangle(Point p1, Point p2, Point p3, GfxInfo FigureGfxInfo) : CFigure(FigureGfxInfo)
 {
+	numoftria++;
 	P1 = p1;
 	P2 = p2;
 	P3 = p3;
 	ID++;
 
 }
-CTriangle::CTriangle() {};
+CTriangle::CTriangle() { numoftria++; };
 
 void CTriangle::Draw(Output* pOut) const
 {

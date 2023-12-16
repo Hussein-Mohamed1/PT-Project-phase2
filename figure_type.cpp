@@ -1,11 +1,11 @@
 #include "figure_type.h"
 #include "GUI/Output.h"
 #include "GUI/Input.h"
-#include "Actions/AddcircleAction.h"
-#include "Actions/AddHexaAction.h"
-#include "Actions/AddRectAction.h"
-#include "Actions/AddSquareAction.h"
-#include "Actions/AddTriangleAction.h"
+#include "Figures/CCircle.h"
+#include "Figures/CHexa.h"
+#include "Figures/CRectangle.h"
+#include "Figures/CSquare.h"
+#include "Figures/CTriangle.h"
 #include <cstdlib> 
 figure_type::figure_type(ApplicationManager* pApp) :Action(pApp)
 {
@@ -25,27 +25,27 @@ void figure_type::Execute()
 	switch (by_fig)
 	{
 	case squr:
-		n = AddSquareAction::numofsqar;
+		n = CSquare::get_numofshape();
 		if (n != 0)
 			pManager->GetOutput()->PrintMessage("pick all of squares click to start");
 		break;
 	case rect:
-		n = AddRectAction::numofrect;
+		n = CRectangle::get_numofshape();
 		if (n != 0)
 			pManager->GetOutput()->PrintMessage("pick all of rectangles click to start");
 		break;
 	case circ:
-		n = AddcircleAction::numofcirc;
+		n = CCircle::get_numofshape();
 		if (n != 0)
 			pManager->GetOutput()->PrintMessage("pick all of circles click to start");
 		break;
 	case tria:
-		n = AddTriangleAction::numoftria;
+		n = CTriangle::get_numofshape();
 		if (n != 0)
 			pManager->GetOutput()->PrintMessage("pick all of triangles click to start");
 		break;
 	case hexa:
-		n = AddHexaAction::numofhexa;
+		n = CHexa::get_numofshape();
 		if (n != 0)
 			pManager->GetOutput()->PrintMessage("pick all of hexagines click to start");
 		break;
@@ -55,7 +55,7 @@ void figure_type::Execute()
 	if (n == 0)
 		Execute();
 	pManager->GetInput()->GetPointClicked(p.x, p.y);
-	string s = "correct picks="+ to_string(correct)+"\tincorrect picks= "+to_string(incorrect);
+	string s = "correct picks="+ to_string(correct)+ "    incorrect picks= "+to_string(incorrect);
 	pManager->GetOutput()->PrintMessage(s);
 	while (n)
 	{
@@ -150,7 +150,8 @@ void figure_type::Execute()
 				break;
 			}
 		}
-		
+		else
+			incorrect++;
 	}
 	s = "Bravo final record is :  correct picks=  " + to_string(correct) + "    incorrect picks=  " + to_string(incorrect);
 	pManager->GetOutput()->PrintMessage(s);

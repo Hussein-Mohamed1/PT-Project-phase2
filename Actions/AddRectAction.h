@@ -11,7 +11,6 @@ private:
 	GfxInfo RectGfxInfo;
 	
 public:
-	static int numofrect;
 	AddRectAction(ApplicationManager *pApp);
 
 	//Reads rectangle parameters

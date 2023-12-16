@@ -6,6 +6,7 @@ class CTriangle :
 {
 private:
     Point P1, P2, P3;
+    static int numoftria;
 public:
 
     CTriangle(Point p1, Point p2, Point p3, GfxInfo FigureGfxInfo);
@@ -15,6 +16,6 @@ public:
     void Save(fstream&)const;
     friend ostream& operator<<(ostream&, const CTriangle&);
     void Load(string&);
-
+    static int get_numofshape();
 
 };

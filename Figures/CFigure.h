@@ -1,9 +1,9 @@
 #ifndef CFIGURE_H
 #define CFIGURE_H
-
 #include "..\defs.h"
 #include "..\GUI\Output.h"
 #include "fstream"
+#include "..\GUI\UI_Info.h"
 //Base class for all figures
 class CFigure
 {
@@ -26,12 +26,11 @@ public:
 
 	void ChngDrawClr(color Dclr);	//changes the figure's drawing color
 	void ChngFillClr(color Fclr);	//changes the figure's filling color
-
 	///The following functions should be supported by the figure class
 	///It should be overridden by each inherited figure
-
-	///Decide the parameters that you should pass to each function	
 	
+	///Decide the parameters that you should pass to each function	
+   
 
 	virtual void Save(fstream& OutFile) const =0;	//Save the figure parameters to the file
 	virtual void Load(string &) = 0;	//Load the figure parameters to the file

@@ -8,7 +8,6 @@ private:
     GfxInfo RectGfxInfo;
 
 public :
-    static int numofhexa;
     AddHexaAction(ApplicationManager* pApp);
     void  ReadActionParameters();
     void Execute();

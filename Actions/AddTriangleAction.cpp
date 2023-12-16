@@ -4,7 +4,6 @@
 #include "..\ApplicationManager.h"
 #include"..\Figures\CTriangle.h"
 
-int AddTriangleAction::numoftria = 0;
  
 AddTriangleAction::AddTriangleAction(ApplicationManager* pApp):Action(pApp)
 {}
@@ -44,7 +43,7 @@ void AddTriangleAction::ReadActionParameters()
 }
 void AddTriangleAction::Execute()  
 {
-	numoftria++;
+	
 	// Read Parametes first 
 	ReadActionParameters();
 

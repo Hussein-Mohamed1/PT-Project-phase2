@@ -5,7 +5,6 @@
 
 #include "..\GUI\input.h"
 #include "..\GUI\Output.h"
-int AddRectAction::numofrect = 0;
 AddRectAction::AddRectAction(ApplicationManager * pApp):Action(pApp)
 {}
 
@@ -44,7 +43,7 @@ void AddRectAction::ReadActionParameters()
 //Execute the action
 void AddRectAction::Execute() 
 {
-	numofrect++;
+	
 	//This action needs to read some parameters first
 	ReadActionParameters();
 	

@@ -5,6 +5,7 @@ class CSquare :
 {
 private:
 	Point P1, P2;
+	static int numofsquare;
 public:
     CSquare(Point p1, Point p2, GfxInfo FigureGfxInfo);
 	CSquare();
@@ -14,7 +15,7 @@ public:
 	void Load(string&);
 	bool checkselection(int x, int y);
 	//  void PrintInfo(Output* pOut);
-
+	static int get_numofshape();
 
 
 

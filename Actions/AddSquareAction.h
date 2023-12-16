@@ -8,7 +8,6 @@ private:
 	GfxInfo RectGfxInfo;
 	
 public :
-	static int numofsqar;
 	AddSquareAction(ApplicationManager* pApp);
 
 	virtual void ReadActionParameters();

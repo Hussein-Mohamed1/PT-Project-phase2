@@ -4,6 +4,7 @@ class CHexa : public CFigure
 {
 private:
 	Point centre;
+	static int numofhexa;
 public:
 
 	CHexa(Point c, GfxInfo FigureGfxInfo);
@@ -14,7 +15,7 @@ public:
 	void Save(fstream&)const;
 	void Load(string&);
 	bool  checkselection(int x, int y);
-
+	static int get_numofshape();
 	//	void PrintInfo(Output* pOut);
 
 

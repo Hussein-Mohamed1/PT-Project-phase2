@@ -71,6 +71,15 @@ enum figures
 	tria,
 	hexa,
 };
+enum colors
+{
+	black,
+	red,
+	blue,
+	green,
+	yellow,
+	orange,
+};
 
 
 __declspec(selectany) //This line to prevent "redefinition error"

@@ -1,7 +1,10 @@
 #include "CHexa.h"
 #include "sstream"
+int CHexa::numofhexa = 0;
+int CHexa::get_numofshape() { return numofhexa; }
 CHexa::CHexa(Point c, GfxInfo FigureGfxInfo) : CFigure(FigureGfxInfo)
 {
+	numofhexa++;
 	centre = c;
 	ID++;
 
@@ -28,7 +31,7 @@ bool CHexa::checkselection(int x, int y)
 	}
 	return false;
 }
-CHexa::CHexa() {};
+CHexa::CHexa() { numofhexa++; };
 void CHexa::Save(fstream& op) const
 {
 
