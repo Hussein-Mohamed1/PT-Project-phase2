@@ -32,7 +32,6 @@ ApplicationManager::ApplicationManager()
 	pOut = new Output;
 	pIn = pOut->CreateInput();
 	FigCount = 0;
-	DeletedFigCount = 0;
 	Selected_Figure = NULL;
 
 
@@ -40,7 +39,6 @@ ApplicationManager::ApplicationManager()
 	for (int i = 0; i < MaxFigCount; i++)
 	{
 		FigList[i] = NULL;
-		DeletedFigureFromPlayMood[i] = NULL;
 	}
 }
 
@@ -115,11 +113,10 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 	case FUNC_DELETE :
 		pAct = new DeleteAction(this);
 		break;
-
-
-
-
 	case FUNC_EXIT_playMode:
+		pAct = new AddSquareAction(this);
+		break;
+
 
 	case FUNC_EXIT:
 		///create ExitAction here
@@ -147,12 +144,6 @@ void ApplicationManager::AddFigure(CFigure* pFig)
 
 	if (FigCount < MaxFigCount)
 		FigList[FigCount++] = pFig;
-
-}
-void ApplicationManager::AddDeletedFig(CFigure* pFig)
-{
-	if (DeletedFigCount < MaxFigCount)
-		DeletedFigureFromPlayMood[DeletedFigCount++] = pFig;
 
 }
 
@@ -257,7 +248,6 @@ void ApplicationManager::DeleteFunctionForPlayMood(CFigure* Del)
 		if (FigList[i] == Del)
 		{
 			FigList[i] = NULL;
-			AddDeletedFig(Del);
 			break;
 		}
 	}
