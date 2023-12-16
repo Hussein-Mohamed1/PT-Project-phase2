@@ -15,16 +15,18 @@ private:
 	int FigCount;		//Actual number of figures
 	CFigure* FigList[MaxFigCount];	//List of all figures (Array of pointers)
 
-	CFigure* SelectedFig; //Pointer to the selected figure
+	 CFigure* Selected_Figure;
+
+
+
 
 	//Pointers to Input and Output classes
 	Input *pIn;
 	Output *pOut;
-
 public:	
 	ApplicationManager(); 
 	~ApplicationManager();
-	
+
 	// -- Action-Related Functions
 	//Reads the input command from the user and returns the corresponding action type
 	ActionType GetUserAction() const;
@@ -32,13 +34,20 @@ public:
 	
 	// -- Figures Management Functions
 	void AddFigure(CFigure* pFig);          //Adds a new figure to the FigList
-	CFigure *GetFigure(int x, int y) const; //Search for a figure given a point inside the figure
+	CFigure *GetFigure(int x, int y) ; //Search for a figure given a point inside the figure
 		
 	// -- Interface Management Functions
 	Input *GetInput() const; //Return pointer to the input
 	Output *GetOutput() const; //Return pointer to the output
-	void UpdateInterface() const;	//Redraws all the drawing window	
+	void UpdateInterface() ;	//Redraws all the drawing window	
 	void SaveAll(fstream &) const;
+	 CFigure* GetSelected_Figure();
+	 void DeleteFunction();
+	// void DeleteFigure(CFigure* Del);
+	 //bool Select(CFigure* figure);
+	 //CFigure* GetFigureByPoint(int x, int y);
+
 };
+
 
 #endif

@@ -32,7 +32,7 @@ void AddTriangleAction::ReadActionParameters()
 	} while (invalid);
 
 
-	RectGfxInfo.isFilled = false;	//default is not filled
+	//RectGfxInfo.isFilled = false;	//default is not filled
 	//get drawing, filling colors and pen width from the interface
 	RectGfxInfo.DrawClr = pOut->getCrntDrawColor();
 	RectGfxInfo.FillClr = pOut->getCrntFillColor();

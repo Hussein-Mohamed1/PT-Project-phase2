@@ -1,4 +1,5 @@
 #pragma once
+#include"../Figures/CFigure.h"
 #include "Action.h"
 class SelectAction :
     public Action

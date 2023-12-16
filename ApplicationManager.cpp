@@ -7,6 +7,7 @@
 #include"Actions/SelectAction.h"
 #include "Actions/PrepareExport.h"
 #include "Actions/PrepareImport.h"
+#include "Actions/MoveFigure.h"
 #include "fstream"
 #include "Figures/CCircle.h"
 #include "to_playmood.h"
@@ -14,16 +15,23 @@
 #include "figure_color.h"
 #include "figure_typeandcolor.h"
 #include "to_drawmood.h"
+#include"Actions/ChangeColorAction.h"
+#include"DEFS.h"
+#include"Actions/DeleteAction.h"
+
+
 using namespace std;
 
 //Constructor
 ApplicationManager::ApplicationManager()
-{
+{	// Initializes the current selected figure pointer to null;
+	Selected_Figure = nullptr;
 	//Create Input and output
 	pOut = new Output;
 	pIn = pOut->CreateInput();
-
 	FigCount = 0;
+	Selected_Figure = NULL;
+
 
 	//Create an array of figure pointers and set them to NULL		
 	for (int i = 0; i < MaxFigCount; i++)
@@ -74,14 +82,41 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 	case ENTER_PLAY_MODE:
 		pAct = new to_playmood(this);
 		break;
-	case BY_SHAPE :
+	case BY_SHAPE:
 		pAct = new figure_type(this);
 		break;
+	case COLOR_BLACK:
+	pAct = new ChangeColorAction(this,BLACK);
+		break;
+	case COLOR_RED:
+	pAct = new ChangeColorAction(this,RED);
+		break;
+	case COLOR_GREEN :
+		pAct = new ChangeColorAction(this, GREEN);
+		break;
+	case COLOR_ORANGE:
+		pAct = new ChangeColorAction(this, ORANGE);
+		break;
+	case COLOR_YELLOW:
+		pAct = new ChangeColorAction(this, YELLOW);
+		break;
+	case COLOR_BLUE:
+		pAct = new ChangeColorAction(this, BLUE);
+		break;
+	case FUNC_FILL:
+		pAct = new ChangeColorAction(this,BLUE,1);
+		break;
+	case FUNC_DELETE :
+		pAct = new DeleteAction(this);
+		break;
+
+
+
 
 	case FUNC_EXIT_playMode:
+
 	case FUNC_EXIT:
 		///create ExitAction here
-
 		break;
 
 	case STATUS:	//a click on the status bar ==> no action
@@ -103,59 +138,133 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 //Add a figure to the list of figures
 void ApplicationManager::AddFigure(CFigure* pFig)
 {
+
 	if (FigCount < MaxFigCount)
 		FigList[FigCount++] = pFig;
+
 }
 ////////////////////////////////////////////////////////////////////////////////////
-CFigure* ApplicationManager::GetFigure(int x, int y) const
+CFigure* ApplicationManager::GetFigure(int x, int y) 
 {
-	//If a figure is found return a pointer to it.
-	//if this point (x,y) does not belong to any figure return NULL
-	// 
 	for (int i = 0; i < FigCount; i++)
-	{
-		if (FigList[i]->checkselection(x, y))
+{  
+		if (FigList[i] != NULL)                  // Validation to prevent crash if Figure is deleted 
 		{
-			if (FigList[i]->IsSelected())                 /// check any figure is selected
+			if (FigList[i]->checkselection(x, y))           /// to check whether point is in figure or not 
 			{
-				FigList[i]->SetSelected(false);          // case selected before  un select it
-			}
-		    else FigList[i]->SetSelected(true);          // case unselected before select it
+				// case one if there is no selected figure before 
 
-			int k = 0;
-			while (k != FigCount)                       // to validate multiply selection 
-			{
-				if (FigList[k] != FigList[i])
+				if (Selected_Figure == NULL)               
 				{
-					FigList[k]->SetSelected(false);
+					Selected_Figure = FigList[i];
+					Selected_Figure->SetSelected(true);
+					Selected_Figure->PrintInfo(pOut);
+					return Selected_Figure;
 				}
-				k++;
+
+				// case two if selected figure is seclected before make it unselected and return NUL
+
+				else if (Selected_Figure == FigList[i])          
+				{
+					Selected_Figure->SetSelected(false);
+					Selected_Figure = NULL;
+					return NULL;
+				}
+
+				  //  case 3 if the seleced figure isn't the selected before
+
+				else            //if (Selected_Figure != FigList[i])            
+				{
+					Selected_Figure->SetSelected(false);
+					Selected_Figure = FigList[i];
+					Selected_Figure->SetSelected(true);
+					Selected_Figure->PrintInfo(pOut);
+					return Selected_Figure;
+				}
+
+
 			}
 
-			return FigList[i];
 		}
 
 	
-	}
+}
 
-	pOut->PrintMessage(" No Selected Figure , you should select figure ");
+	              // if the point dosen't belong to any figure
+
+	pOut->PrintMessage(" No selected figure ");           
+
 	//Add your code here to search for a figure given a point x,y	
 	//Remember that ApplicationManager only calls functions do NOT implement it.
 
-
 	return NULL;
 }
+
+//bool ApplicationManager :: Select(CFigure* figure)
+//{
+//	if (Selected_Figure==figure) {
+//		Selected_Figure->SetSelected(false);
+//		Selected_Figure = nullptr;
+//	}
+//	else if (Selected_Figure == nullptr)
+//	{
+//		Selected_Figure = figure;
+//		Selected_Figure->SetSelected(true);
+//	}
+//	else  //if (Selected_Figure != figure)
+//	{
+//		Selected_Figure->SetSelected(false);
+//		Selected_Figure = nullptr;
+//		Selected_Figure = figure;
+//		Selected_Figure->SetSelected(true);
+//
+//	}
+//
+//}
+//
+//CFigure* ApplicationManager:: GetFigureByPoint(int x, int y)
+//{
+//	for (int i = 0; i < FigCount; i++)
+//	{
+//		if (FigList[i]->checkselection(x, y))
+//		{
+//			return FigList[i];
+//		}
+//	}
+//}
+
 //==================================================================================//
 //							Interface Management Functions							//
 //==================================================================================//
 
 //Draw all figures on the user interface
-void ApplicationManager::UpdateInterface() const
+void ApplicationManager::UpdateInterface() 
 {
-	for (int i = 0; i < FigCount; i++)
-		FigList[i]->Draw(pOut);		//Call Draw function (virtual member fn)
+		for (int i = 0; i < FigCount; i++)
+		{
+			if (FigList[i] !=NULL)
+				FigList[i]->Draw(pOut);
+		}
+
 }
-////////////////////////////////////////////////////////////////////////////////////
+
+void ApplicationManager::DeleteFunction()
+{
+	for (int  i = 0; i < FigCount; i++)
+	{
+		if (FigList[i] == Selected_Figure)
+		{
+			//Selected_Figure->SetSelected(false);             
+			pOut->ClearDrawArea();                 
+			pOut->ClearStatusBar();
+		    FigList[i] = NULL;
+			Selected_Figure = NULL;
+			break;
+		}
+	}
+}
+
+	////////////////////////////////////////////////////////////////////////////////////
 //Return a pointer to the input
 Input* ApplicationManager::GetInput() const
 {
@@ -187,3 +296,36 @@ ApplicationManager::~ApplicationManager()
 	delete pOut;
 
 }
+  CFigure* ApplicationManager::GetSelected_Figure() 
+{
+	return Selected_Figure;
+}
+
+
+
+
+
+
+
+
+			//if (FigList[i]->IsSelected())                 /// check any figure is selected
+			//{
+			//	FigList[i]->SetSelected(false);          // case selected before  un select it
+			//	return NULL;
+			//}
+			//else                                         // case unselected before select it
+			//{
+			//	FigList[i]->SetSelected(true);
+			//}
+
+			//int k = 0;
+			//while (k != FigCount)                       // to validate multiply selection 
+			//{
+			//	if (FigList[k] != FigList[i])
+			//	{
+			//		FigList[k]->SetSelected(false);
+			//	}
+			//	k++;
+			//}
+
+			//return FigList[i];

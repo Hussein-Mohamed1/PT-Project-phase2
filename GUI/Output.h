@@ -21,7 +21,7 @@ public:
 	// -- Figures Drawing functions
 	void DrawRect(Point P1, Point P2, GfxInfo RectGfxInfo, bool selected=false) const;  //Draw a rectangle
 	void DrawCirc(Point P1, Point P2, GfxInfo RectGfxInfo, bool selected = false) const;  //Draw a Circle
-	void Drawrtriangle(int x1, int y1, int x2, int y2, int x3, int y3, GfxInfo RectGfxInfo, bool selected) const;
+	void Drawrtriangle(int x1, int y1, int x2, int y2, int x3, int y3, GfxInfo RectGfxInfo, bool selected=false) const;
 	void Drawhexagon(const int* xcoordinates, const int* ycoordinates, GfxInfo RectGfxInfo, bool selected=false) const;
 	///TODO:Make similar functions for drawing all other figure types.
 	
@@ -30,6 +30,10 @@ public:
 	color getCrntDrawColor() const;	//get current drwawing color
 	color getCrntFillColor() const;	//get current filling color
 	int getCrntPenWidth() const;		//get current pen width
+
+	void SetDraColor(color c);
+	void SetFillColor(color c);
+
 
 	
 	~Output();
