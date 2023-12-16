@@ -5,9 +5,30 @@
 
 #include "..\GUI\input.h"
 #include "..\GUI\Output.h"
+
+#include <windows.h>
+#include <mmsystem.h>
+#pragma comment(lib, "winmm.lib") 
+
+
+
 int AddRectAction::numofrect = 0;
 AddRectAction::AddRectAction(ApplicationManager * pApp):Action(pApp)
-{}
+{
+	//pManager->GetOutput()->PrintMessage(" PLEASE , Wait until sound finished ");
+
+	// Open the .mp3 file
+	mciSendString(TEXT("open \"D:\\TEST1.mp3\" type mpegvideo alias mp3"), NULL, 0, NULL);
+
+	// Play the .mp3 file
+	mciSendString(TEXT("play mp3"), NULL, 0, NULL);
+
+	// Wait for the sound to finish playing
+	Sleep(100);
+
+
+
+}
 
 void AddRectAction::ReadActionParameters() 
 {	
