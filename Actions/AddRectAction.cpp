@@ -18,7 +18,8 @@ AddRectAction::AddRectAction(ApplicationManager * pApp):Action(pApp)
 	//pManager->GetOutput()->PrintMessage(" PLEASE , Wait until sound finished ");
 
 	//// Open the .mp3 file
-	mciSendString(TEXT("open \"D:\\draw-rect.mp3\" type mpegvideo alias mp3"), NULL, 0, NULL);
+	//mciSendString(TEXT("open \"D:\\draw-rect2.mp3\" type mpegvideo alias mp3"), NULL, 0, NULL);
+	mciSendString(TEXT("open \"draw-rect2.mp3\" type mpegvideo alias mp3"), NULL, 0, NULL);
 
 	// Play the .mp3 file
 	mciSendString(TEXT("play mp3"), NULL, 0, NULL);

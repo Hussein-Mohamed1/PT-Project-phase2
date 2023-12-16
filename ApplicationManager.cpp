@@ -24,7 +24,8 @@ using namespace std;
 
 //Constructor
 ApplicationManager::ApplicationManager()
-{
+{	
+
 	// Initializes the current selected figure pointer to null;
 	Selected_Figure = nullptr;
 	//Create Input and output
