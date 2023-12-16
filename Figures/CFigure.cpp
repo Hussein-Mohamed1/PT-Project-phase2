@@ -52,3 +52,7 @@ Point operator-(const Point& p1, const Point& p2) {
 Point operator/(const Point& p, int n) {
 	return { p.x / 2, p.y / 2 };
 };
+color CFigure::get_fillcolor()
+{
+	return FigGfxInfo.FillClr;
+}

@@ -11,7 +11,7 @@ CSquare::CSquare(Point p1, Point p2, GfxInfo FigureGfxInfo) :CFigure(FigureGfxIn
 	ID++;
 
 }
-CSquare::CSquare() {};
+
 
 int CSquare::Getid()
 {
@@ -97,4 +97,7 @@ void CSquare::PrintInfo(Output* pOut)
 	pOut->PrintMessage(printed);
 
 }
-
+color CSquare::get_fillcolor()
+{
+	return FigGfxInfo.FillClr;
+}

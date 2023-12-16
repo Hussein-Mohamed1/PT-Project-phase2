@@ -38,10 +38,10 @@ public:
 	virtual void Save(fstream& OutFile) const = 0;	//Save the figure parameters to the file
 	virtual void Load(string&) = 0;	//Load the figure parameters to the file
 	virtual void PrintInfo(Output* pOut) =0;
-   
-
-	virtual void Save(fstream& OutFile) const =0;	//Save the figure parameters to the file
-	virtual void Load(string &) = 0;	//Load the figure parameters to the file
+	virtual color get_fillcolor();
+	
+		//Save the figure parameters to the file
+		//Load the figure parameters to the file
 
 };
 

@@ -15,7 +15,7 @@ class figure_type : public Action
 	int correct=0;
 public:
 	figure_type(ApplicationManager* pApp);
-	virtual void ReadActionParameters();
-	virtual void Execute();
+	 void ReadActionParameters();
+	 void Execute();
 };
 

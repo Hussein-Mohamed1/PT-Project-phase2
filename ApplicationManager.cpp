@@ -18,8 +18,8 @@
 #include"Actions/ChangeColorAction.h"
 #include"DEFS.h"
 #include"Actions/DeleteAction.h"
-
-
+#include "figure_color.h"
+#include "figure_typeandcolor.h"
 using namespace std;
 
 //Constructor
@@ -85,6 +85,12 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 	case BY_SHAPE:
 		pAct = new figure_type(this);
 		break;
+	case BY_COLOR:
+		pAct = new figure_color(this);
+		break;
+	case BY_COLOR_SHAPE:
+		pAct = new figure_typeandcolor(this);
+		break;
 	case COLOR_BLACK:
 	pAct = new ChangeColorAction(this,BLACK);
 		break;
@@ -144,13 +150,14 @@ void ApplicationManager::AddFigure(CFigure* pFig)
 
 }
 ////////////////////////////////////////////////////////////////////////////////////
-CFigure* ApplicationManager::GetFigure(int x, int y) 
+
+CFigure* ApplicationManager::GetFigure(int x, int y)
 {
 	for (int i = 0; i < FigCount; i++)
-    {  
-		if (FigList[i] != NULL)                  // Validation to prevent crash if Figure is deleted 
+	{
+		if (FigList[i] != NULL)                  // Validation to prevent crash if Figure is deleted
 		{
-			if (FigList[i]->checkselection(x, y))           /// to check whether point is in figure or not 
+			if (FigList[i]->checkselection(x, y))           /// to check whether point is in figure or not
 			{
 				SetSelectedFig(FigList[i]);
 				return FigList[i];
@@ -159,18 +166,20 @@ CFigure* ApplicationManager::GetFigure(int x, int y)
 
 		}
 
-	
-    }
 
-	              // if the point dosen't belong to any figure
+	}
 
-	pOut->PrintMessage(" No selected figure ");           
+				  // if the point dosen't belong to any figure
 
-	//Add your code here to search for a figure given a point x,y	
+	pOut->PrintMessage(" No selected figure ");
+
+	//Add your code here to search for a figure given a point x,y
 	//Remember that ApplicationManager only calls functions do NOT implement it.
 
 	return NULL;
 }
+
+
 
 //bool ApplicationManager :: Select(CFigure* figure)
 //{
@@ -306,65 +315,71 @@ ApplicationManager::~ApplicationManager()
 
   }
 
+  
+  void ApplicationManager::set_figure(CFigure* fig)
+  {
+	  Selected_Figure = fig;
+  }
 
-
-
-
-//  CFigure* ApplicationManager::GetFigure(int x, int y)
-	  //{
-	  //	for (int i = 0; i < FigCount; i++)
-	  //{  
-	  //		if (FigList[i] != NULL)                  // Validation to prevent crash if Figure is deleted 
-	  //		{
-	  //			if (FigList[i]->checkselection(x, y))           /// to check whether point is in figure or not 
-	  //			{
-	  //				// case one if there is no selected figure before 
-	  //
-	  //				if (Selected_Figure == NULL)               
-	  //				{
-	  //					Selected_Figure = FigList[i];
-	  //					Selected_Figure->SetSelected(true);
-	  //					Selected_Figure->PrintInfo(pOut);
-	  //					return Selected_Figure;
-	  //				}
-	  //
-	  //				// case two if selected figure is seclected before make it unselected and return NUL
-	  //
-	  //				else if (Selected_Figure == FigList[i])          
-	  //				{
-	  //					Selected_Figure->SetSelected(false);
-	  //					Selected_Figure = NULL;
-	  //					return NULL;
-	  //				}
-	  //
-	  //				  //  case 3 if the seleced figure isn't the selected before
-	  //
-	  //				else            //if (Selected_Figure != FigList[i])            
-	  //				{
-	  //					Selected_Figure->SetSelected(false);
-	  //					Selected_Figure = FigList[i];
-	  //					Selected_Figure->SetSelected(true);
-	  //					Selected_Figure->PrintInfo(pOut);
-	  //					return Selected_Figure;
-	  //				}
-	  //
-	  //
-	  //			}
-	  //
-	  //		}
-	  //
-	  //	
-	  //}
-	  //
-	  //	              // if the point dosen't belong to any figure
-	  //
-	  //	pOut->PrintMessage(" No selected figure ");           
-	  //
-	  //	//Add your code here to search for a figure given a point x,y	
+  /*
+  * 
+  *   CFigure* ApplicationManager::GetFigure(int x, int y)
+	  {
+	  	for (int i = 0; i < FigCount; i++)
+	  {  
+	  		if (FigList[i] != NULL)                  // Validation to prevent crash if Figure is deleted 
+	 	{
+	  			if (FigList[i]->checkselection(x, y))           /// to check whether point is in figure or not 
+	  			{
+	  				// case one if there is no selected figure before 
+	  
+	  				if (Selected_Figure == NULL)               
+	 				{
+	  					Selected_Figure = FigList[i];
+	  					Selected_Figure->SetSelected(true);
+	  					Selected_Figure->PrintInfo(pOut);
+	  					return Selected_Figure;
+	 				}
+	  
+	  				// case two if selected figure is seclected before make it unselected and return NUL
+	  
+	  				else if (Selected_Figure == FigList[i])          
+	  				{
+	  					Selected_Figure->SetSelected(false);
+	  					Selected_Figure = NULL;
+	  					return NULL;
+	  				}
+	  
+	  				  //  case 3 if the seleced figure isn't the selected before
+	  
+	  				else            //if (Selected_Figure != FigList[i])            
+	  				{
+	  					Selected_Figure->SetSelected(false);
+	  					Selected_Figure = FigList[i];
+	  					Selected_Figure->SetSelected(true);
+	  					Selected_Figure->PrintInfo(pOut);
+	  					return Selected_Figure;
+	  				}
+	  
+	  
+	  			}
+	  
+	  		}
+	  
+	  	
+	  }
+	  
+	  	              // if the point dosen't belong to any figure
+	  
+	  	pOut->PrintMessage(" No selected figure ");           
+	  
+	  	//Add your code here to search for a figure given a point x,y	
 	  //	//Remember that ApplicationManager only calls functions do NOT implement it.
 	  //
-	  //	return NULL;
-	  //}
+	  	return NULL;
+	  }
+  */
+
 
 
 
@@ -392,6 +407,125 @@ ApplicationManager::~ApplicationManager()
 			//}
 
 			//return FigList[i];
+  int ApplicationManager::get_numofcolor(color c)
+  {
+	  int num = 0;
+	  for (int i = 0; i < FigCount; i++)
+	  {
+		  if (FigList[i]->get_fillcolor() == c)
+			  num++;
+	  }
+	  return num;
+  }
+  int ApplicationManager::numof_figurewithcolor(figures fig, colors c)
+  {
+	  CFigure* check_fig;
+	  int n = 0;
+	  switch (fig)
+	  {
+	  case squr:
+		  for (int i = 0; i < FigCount; i++)
+		  {
+			  if (dynamic_cast<CSquare*>(FigList[i]))
+				  if (FigList[i]->get_fillcolor() == get_fillcolor(c))
+					  n++;
+		  }
+		  break;
+	  case rect:
+		  for (int i = 0; i < FigCount; i++)
+		  {
+			  if (dynamic_cast<CRectangle*>(FigList[i]))
+				  if (FigList[i]->get_fillcolor() == get_fillcolor(c))
+					  n++;
+		  }
+		  break;
+	  case circ:
+		  for (int i = 0; i < FigCount; i++)
+		  {
+			  if (dynamic_cast<CCircle*>(FigList[i]))
+				  if (FigList[i]->get_fillcolor() == get_fillcolor(c))
+					  n++;
+		  }
+		  break;
+	  case tria:
+		  for (int i = 0; i < FigCount; i++)
+		  {
+			  if (dynamic_cast<CTriangle*>(FigList[i]))
+				  if (FigList[i]->get_fillcolor() == get_fillcolor(c))
+					  n++;
+		  }
+		  break;
+	  case hexa:
+		  for (int i = 0; i < FigCount; i++)
+		  {
+			  if (dynamic_cast<CHexa*>(FigList[i]))
+				  if (FigList[i]->get_fillcolor() == get_fillcolor(c))
+					  n++;
+		  }
+		  break;
+	  default:
+		  break;
+	  }
+	  return n;
+  }
+  color ApplicationManager::get_fillcolor(colors c)
+  {
+	  switch (c)
+	  {
+	  case black:
+		  return BLACK;
+	  case red:
+		  return RED;
+	  case blue:
+		  return BLUE;
+	  case green:
+		  return GREEN;
+	  case yellow:
+		  return YELLOW;
+	  case orange:
+		  return ORANGE;
+	  default:
+		  break;
+	  }
+  }
+  string ApplicationManager::color_TO_String(colors c)
+  {
+	  switch (c)
+	  {
+	  case black:
+		  return "black";
+	  case red:
+		  return "red";
+	  case blue:
+		  return "blue";
+	  case green:
+		  return "green";
+	  case yellow:
+		  return "yellow";
+	  case orange:
+		  return "orang";
+	  default:
+		  break;
+	  }
+  }
+  string ApplicationManager::figur_TO_String(figures fig)
+  {
+	  switch (fig)
+	  {
+	  case squr:
+		  return "square";
+	  case rect:
+		  return "rectangle";
+	  case circ:
+		  return "circle";
+	  case tria:
+		  return "triangle";
+	  case hexa:
+		  return "hexagine";
+	  default:
+		  break;
+	  }
+  }
 
 
 

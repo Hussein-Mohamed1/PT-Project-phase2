@@ -106,5 +106,8 @@ void CTriangle::PrintInfo(Output* pOut)
 	pOut->PrintMessage(printed);
 
 }
-
+color CTriangle::get_fillcolor()
+{
+	return FigGfxInfo.FillClr;
+}
 

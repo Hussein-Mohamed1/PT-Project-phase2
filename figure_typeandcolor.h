@@ -3,5 +3,15 @@
 #include "ApplicationManager.h"
 class figure_typeandcolor:public Action
 {
+	figures by_fig;
+	colors by_color;
+	Point p;
+	CFigure* selected_fig;
+	int incorrect = 0;
+	int correct = 0;
+public:
+	figure_typeandcolor(ApplicationManager* pApp);
+	 void ReadActionParameters();
+	 void Execute();
 };
 

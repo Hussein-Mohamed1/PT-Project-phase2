@@ -24,7 +24,7 @@ public:
 	void PrintInfo(Output* pOut);
 	static int get_numofshape();
 	//	void PrintInfo(Output* pOut);
-
+	color get_fillcolor();
 
 };
 

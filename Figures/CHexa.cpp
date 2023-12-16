@@ -96,3 +96,7 @@ void CHexa::PrintInfo(Output* pOut)
 		+ "       Centre : ("+ to_string(centre.x) + "," + to_string(centre.y) + ")";
 	pOut->PrintMessage(printed);
 }
+color CHexa::get_fillcolor()
+{
+	return FigGfxInfo.FillClr;
+}

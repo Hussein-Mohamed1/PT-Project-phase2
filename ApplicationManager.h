@@ -35,7 +35,7 @@ public:
 	// -- Figures Management Functions
 	void AddFigure(CFigure* pFig);          //Adds a new figure to the FigList
 	CFigure *GetFigure(int x, int y) ; //Search for a figure given a point inside the figure
-		
+	void set_figure(CFigure*);
 	// -- Interface Management Functions
 	Input *GetInput() const; //Return pointer to the input
 	Output *GetOutput() const; //Return pointer to the output
@@ -47,7 +47,11 @@ public:
 	// void DeleteFigure(CFigure* Del);
 	 //bool Select(CFigure* figure);
 	 //CFigure* GetFigureByPoint(int x, int y);
-
+	 int get_numofcolor(color );
+	 int numof_figurewithcolor(figures, colors);
+	 color get_fillcolor(colors);
+	 string color_TO_String(colors c);
+	 string figur_TO_String(figures);
 };
 
 

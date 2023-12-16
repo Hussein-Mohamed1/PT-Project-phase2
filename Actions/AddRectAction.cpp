@@ -12,7 +12,7 @@
 
 
 
-int AddRectAction::numofrect = 0;
+
 AddRectAction::AddRectAction(ApplicationManager * pApp):Action(pApp)
 {
 	//pManager->GetOutput()->PrintMessage(" PLEASE , Wait until sound finished ");

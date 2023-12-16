@@ -25,7 +25,7 @@ public:
 
 	void PrintInfo(Output* pOut);
 	static int get_numofshape();
-	bool checkselection(int x, int y);
+	color get_fillcolor();
 	//void PrintInfo(Output* pOut);
 
 };

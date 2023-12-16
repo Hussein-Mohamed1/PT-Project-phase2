@@ -113,3 +113,7 @@ void CCircle::PrintInfo(Output* pOut)
 	
 
 }
+color CCircle::get_fillcolor()
+{
+	return FigGfxInfo.FillClr;
+}

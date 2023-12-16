@@ -7,6 +7,7 @@
 #include "Figures/CSquare.h"
 #include "Figures/CTriangle.h"
 #include <cstdlib> 
+#include "Actions/DeleteAction.h"
 figure_type::figure_type(ApplicationManager* pApp) :Action(pApp)
 {
 	
@@ -20,7 +21,7 @@ void figure_type::ReadActionParameters()
 void figure_type::Execute()
 {
 	
-	figures by_fig =figures(rand()%5);
+	 by_fig =figures(rand()%5);
 	int n;//num of figure should selected
 	switch (by_fig)
 	{
@@ -68,16 +69,16 @@ void figure_type::Execute()
 				selected_fig = dynamic_cast<CSquare*>(pManager->GetFigure(p.x, p.y));
 				if (selected_fig)
 				{
-					//delete figure todo
+					//delete figure todo	
 					correct++;
-					s = "correct picks= " + to_string(correct) + "    incorrect picks= " + to_string(incorrect);
+					s = "nice pick----> correct picks= " + to_string(correct) + "    incorrect picks= " + to_string(incorrect);
 					pManager->GetOutput()->PrintMessage(s);
 					n--;
 				}
 				else
 				{
 					incorrect++;
-					s = "correct picks= " + to_string(correct) + "    incorrect picks= " + to_string(incorrect);
+					s = "wrong pick----> correct picks= " + to_string(correct) + "    incorrect picks= " + to_string(incorrect);
 					pManager->GetOutput()->PrintMessage(s);
 
 				}
@@ -87,14 +88,14 @@ void figure_type::Execute()
 				if (selected_fig)
 				{
 					correct++;
-					s = "correct picks=" + to_string(correct) + "    incorrect picks= " + to_string(incorrect);
+					s = "nice pick----> correct picks=" + to_string(correct) + "    incorrect picks= " + to_string(incorrect);
 					pManager->GetOutput()->PrintMessage(s);
 					n--;
 				}
 				else
 				{
 					incorrect++;
-					s = "correct picks= " + to_string(correct) + "    incorrect picks= " + to_string(incorrect);
+					s = "wrong pick----> correct picks= " + to_string(correct) + "    incorrect picks= " + to_string(incorrect);
 					pManager->GetOutput()->PrintMessage(s);
 				}
 				break;
@@ -103,14 +104,14 @@ void figure_type::Execute()
 				if (selected_fig)
 				{
 					correct++;
-					s = "correct picks= " + to_string(correct) + "    incorrect picks= " + to_string(incorrect);
+					s = "nice pick----> correct picks= " + to_string(correct) + "    incorrect picks= " + to_string(incorrect);
 					pManager->GetOutput()->PrintMessage(s);
 					n--;
 				}
 				else
 				{
 					incorrect++;
-					s = "correct picks= " + to_string(correct) + "    incorrect picks= " + to_string(incorrect);
+					s = "wrong pick----> correct picks= " + to_string(correct) + "    incorrect picks= " + to_string(incorrect);
 					pManager->GetOutput()->PrintMessage(s);
 				}
 				break;
@@ -119,14 +120,14 @@ void figure_type::Execute()
 				if (selected_fig)
 				{
 					correct++;
-					s = "correct picks= " + to_string(correct) + "    incorrect picks= " + to_string(incorrect);
+					s = "nice pick----> correct picks= " + to_string(correct) + "    incorrect picks= " + to_string(incorrect);
 					pManager->GetOutput()->PrintMessage(s);
 					n--;
 				}
 				else
 				{
 					incorrect++;
-					s = "correct picks=" + to_string(correct) + "    incorrect picks = " + to_string(incorrect);
+					s = "wrong pick----> correct picks=" + to_string(correct) + "    incorrect picks = " + to_string(incorrect);
 					pManager->GetOutput()->PrintMessage(s);
 				}
 				break;
@@ -135,14 +136,14 @@ void figure_type::Execute()
 				if (selected_fig)
 				{
 					correct++;
-					s = "correct picks=  " + to_string(correct) + "    incorrect picks=  " + to_string(incorrect);
+					s = "nice pick----> correct picks=  " + to_string(correct) + "    incorrect picks=  " + to_string(incorrect);
 					pManager->GetOutput()->PrintMessage(s);
 					n--;
 				}
 				else
 				{
 					incorrect++;
-					s = "correct picks=  " + to_string(correct) + "    incorrect picks=  " + to_string(incorrect);
+					s = "wrong pick----> correct picks=  " + to_string(correct) + "    incorrect picks=  " + to_string(incorrect);
 					pManager->GetOutput()->PrintMessage(s);
 				}
 				break;
@@ -151,8 +152,25 @@ void figure_type::Execute()
 			}
 		}
 		else
+		{
 			incorrect++;
+			s = "wrong pick----> correct picks=  " + to_string(correct) + "    incorrect picks=  " + to_string(incorrect);
+			pManager->GetOutput()->PrintMessage(s);
+		}
 	}
-	s = "Bravo final record is :  correct picks=  " + to_string(correct) + "    incorrect picks=  " + to_string(incorrect);
-	pManager->GetOutput()->PrintMessage(s);
+	if (correct > incorrect)
+	{
+		s = "final record is---->  correct picks=  " + to_string(correct) + "    incorrect picks=  " + to_string(incorrect)+"  BRAVOOO";
+		pManager->GetOutput()->PrintMessage(s);
+	}
+	else if (incorrect > correct)
+	{
+		s = "final record is---->  correct picks=  " + to_string(correct) + "    incorrect picks=  " + to_string(incorrect)+"  not good, try again";
+		pManager->GetOutput()->PrintMessage(s);
+	}
+	else
+	{
+		s = "final record is---->  correct picks=  " + to_string(correct) + "    incorrect picks=  " + to_string(incorrect) + "  not bad";
+		pManager->GetOutput()->PrintMessage(s);
+	}
 }
