@@ -32,12 +32,16 @@ ApplicationManager::ApplicationManager()
 	pOut = new Output;
 	pIn = pOut->CreateInput();
 	FigCount = 0;
+	DeletedFigCount = 0;
 	Selected_Figure = NULL;
 
 
 	//Create an array of figure pointers and set them to NULL		
 	for (int i = 0; i < MaxFigCount; i++)
+	{
 		FigList[i] = NULL;
+		DeletedFigureFromPlayMood[i] = NULL;
+	}
 }
 
 //==================================================================================//
@@ -145,6 +149,13 @@ void ApplicationManager::AddFigure(CFigure* pFig)
 		FigList[FigCount++] = pFig;
 
 }
+void ApplicationManager::AddDeletedFig(CFigure* pFig)
+{
+	if (DeletedFigCount < MaxFigCount)
+		DeletedFigureFromPlayMood[DeletedFigCount++] = pFig;
+
+}
+
 ////////////////////////////////////////////////////////////////////////////////////
 CFigure* ApplicationManager::GetFigure(int x, int y) 
 {
@@ -239,6 +250,19 @@ void ApplicationManager::DeleteFunction()
 		}
 	}
 }
+void ApplicationManager::DeleteFunctionForPlayMood(CFigure* Del)
+{
+	for (int i = 0; i < FigCount; i++)
+	{
+		if (FigList[i] == Del)
+		{
+			FigList[i] = NULL;
+			AddDeletedFig(Del);
+			break;
+		}
+	}
+}
+
 
 	////////////////////////////////////////////////////////////////////////////////////
 //Return a pointer to the input
