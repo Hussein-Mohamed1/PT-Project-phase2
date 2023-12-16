@@ -39,7 +39,7 @@ AddcircleAction::AddcircleAction(ApplicationManager* pApp) :Action(pApp)
 
 	  }
 
-	  RectGfxInfo.isFilled = false;	//default is not filled
+	 // RectGfxInfo.isFilled = false;	//default is not filled
 	  //get drawing, filling colors and pen width from the interface
 	  RectGfxInfo.DrawClr = pOut->getCrntDrawColor();
 	  RectGfxInfo.FillClr = pOut->getCrntFillColor();
@@ -60,7 +60,5 @@ AddcircleAction::AddcircleAction(ApplicationManager* pApp) :Action(pApp)
 
 	  //Add the rectangle to the list of figures
 	  pManager->AddFigure(c);
-
-
 
   }

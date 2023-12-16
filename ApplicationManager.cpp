@@ -24,7 +24,8 @@ using namespace std;
 
 //Constructor
 ApplicationManager::ApplicationManager()
-{	// Initializes the current selected figure pointer to null;
+{
+	// Initializes the current selected figure pointer to null;
 	Selected_Figure = nullptr;
 	//Create Input and output
 	pOut = new Output;
@@ -152,7 +153,7 @@ CFigure* ApplicationManager::GetFigure(int x, int y)
 		{
 			if (FigList[i]->checkselection(x, y))           /// to check whether point is in figure or not 
 			{
-				SetSelectedFig(FigList[i]);
+				//SetSelectedFig(FigList[i]);
 				return FigList[i];
 
 			}

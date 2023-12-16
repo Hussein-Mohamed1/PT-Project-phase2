@@ -4,6 +4,7 @@
 class SelectAction :
     public Action
 {
+	CFigure* ClickedFigure;
 private:
 	Point p;
 public:

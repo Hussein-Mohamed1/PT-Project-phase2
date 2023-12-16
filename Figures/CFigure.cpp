@@ -29,7 +29,7 @@ void CFigure::ChngDrawClr(color Dclr)
 
 void CFigure::ChngFillClr(color Fclr)
 {
-	FigGfxInfo.isFilled = true;
+	//FigGfxInfo.isFilled = true;
 	FigGfxInfo.FillClr = Fclr;
 }
 ostream& operator<<(ostream& op, const Point& p) {
