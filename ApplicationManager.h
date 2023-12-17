@@ -13,12 +13,10 @@ class ApplicationManager
 
 private:
 	int FigCount;		//Actual number of figures
-	int DeletedFigCount;
 	CFigure* FigList[MaxFigCount];	//List of all figures (Array of pointers)
 
 	 CFigure* Selected_Figure;
 	   
-	 CFigure* DeletedFigureFromPlayMood[MaxFigCount];
 
 
 
@@ -37,7 +35,6 @@ public:
 	
 	// -- Figures Management Functions
 	void AddFigure(CFigure* pFig);  //Adds a new figure to the FigList
-	void AddDeletedFig(CFigure* pFig);
 	CFigure *GetFigure(int x, int y) ; //Search for a figure given a point inside the figure
 	void set_figure(CFigure*);
 	// -- Interface Management Functions
