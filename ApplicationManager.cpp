@@ -24,18 +24,24 @@ using namespace std;
 
 //Constructor
 ApplicationManager::ApplicationManager()
-{	// Initializes the current selected figure pointer to null;
+{	
+
+	// Initializes the current selected figure pointer to null;
 	Selected_Figure = nullptr;
 	//Create Input and output
 	pOut = new Output;
 	pIn = pOut->CreateInput();
 	FigCount = 0;
+	DeletedFigCount = 0;
 	Selected_Figure = NULL;
 
 
 	//Create an array of figure pointers and set them to NULL		
 	for (int i = 0; i < MaxFigCount; i++)
+	{
 		FigList[i] = NULL;
+		DeletedFigureFromPlayMood[i] = NULL;
+	}
 }
 
 //==================================================================================//
@@ -149,6 +155,13 @@ void ApplicationManager::AddFigure(CFigure* pFig)
 		FigList[FigCount++] = pFig;
 
 }
+void ApplicationManager::AddDeletedFig(CFigure* pFig)
+{
+	if (DeletedFigCount < MaxFigCount)
+		DeletedFigureFromPlayMood[DeletedFigCount++] = pFig;
+
+}
+
 ////////////////////////////////////////////////////////////////////////////////////
 
 CFigure* ApplicationManager::GetFigure(int x, int y)
@@ -159,7 +172,7 @@ CFigure* ApplicationManager::GetFigure(int x, int y)
 		{
 			if (FigList[i]->checkselection(x, y))           /// to check whether point is in figure or not
 			{
-				SetSelectedFig(FigList[i]);
+				//SetSelectedFig(FigList[i]);
 				return FigList[i];
 
 			}
@@ -246,6 +259,19 @@ void ApplicationManager::DeleteFunction()
 		}
 	}
 }
+void ApplicationManager::DeleteFunctionForPlayMood(CFigure* Del)
+{
+	for (int i = 0; i < FigCount; i++)
+	{
+		if (FigList[i] == Del)
+		{
+			FigList[i] = NULL;
+			AddDeletedFig(Del);
+			break;
+		}
+	}
+}
+
 
 	////////////////////////////////////////////////////////////////////////////////////
 //Return a pointer to the input
