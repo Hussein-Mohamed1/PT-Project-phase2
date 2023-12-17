@@ -267,6 +267,7 @@ void ApplicationManager::DeleteFunctionForPlayMood(CFigure* Del)
 		{
 			FigList[i] = NULL;
 			AddDeletedFig(Del);
+			UpdateInterface();
 			break;
 		}
 	}

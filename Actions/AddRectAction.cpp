@@ -72,7 +72,7 @@ void AddRectAction::ReadActionParameters()
 void AddRectAction::Execute() 
 {
 
-	numofrect++;
+	
 	
 	//This action needs to read some parameters first
 	ReadActionParameters();

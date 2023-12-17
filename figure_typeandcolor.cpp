@@ -39,6 +39,7 @@ void figure_typeandcolor::Execute()
 				{
 					if (selected_fig->get_fillcolor() == pManager->get_fillcolor(by_color))
 					{
+						pManager->DeleteFunctionForPlayMood(selected_fig);
 						correct++;
 						s = "nice pick----> correct picks= " + to_string(correct) + "    incorrect picks= " + to_string(incorrect);
 						pManager->GetOutput()->PrintMessage(s);
@@ -64,6 +65,7 @@ void figure_typeandcolor::Execute()
 				{
 					if (selected_fig->get_fillcolor() == pManager->get_fillcolor(by_color))
 					{
+						pManager->DeleteFunctionForPlayMood(selected_fig);
 						correct++;
 						s = "nice pick----> correct picks= " + to_string(correct) + "    incorrect picks= " + to_string(incorrect);
 						pManager->GetOutput()->PrintMessage(s);
@@ -89,6 +91,7 @@ void figure_typeandcolor::Execute()
 				{
 					if (selected_fig->get_fillcolor() == pManager->get_fillcolor(by_color))
 					{
+						pManager->DeleteFunctionForPlayMood(selected_fig);
 						correct++;
 						s = "nice pick----> correct picks= " + to_string(correct) + "    incorrect picks= " + to_string(incorrect);
 						pManager->GetOutput()->PrintMessage(s);
@@ -114,6 +117,7 @@ void figure_typeandcolor::Execute()
 				{
 					if (selected_fig->get_fillcolor() == pManager->get_fillcolor(by_color))
 					{
+						pManager->DeleteFunctionForPlayMood(selected_fig);
 						correct++;
 						s = "nice pick----> correct picks= " + to_string(correct) + "    incorrect picks= " + to_string(incorrect);
 						pManager->GetOutput()->PrintMessage(s);
@@ -139,6 +143,7 @@ void figure_typeandcolor::Execute()
 				{
 					if (selected_fig->get_fillcolor() == pManager->get_fillcolor(by_color))
 					{
+						pManager->DeleteFunctionForPlayMood(selected_fig);
 						correct++;
 						s = "nice pick----> correct picks= " + to_string(correct) + "    incorrect picks= " + to_string(incorrect);
 						pManager->GetOutput()->PrintMessage(s);

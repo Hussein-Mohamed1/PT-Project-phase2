@@ -69,7 +69,7 @@ void figure_type::Execute()
 				selected_fig = dynamic_cast<CSquare*>(pManager->GetFigure(p.x, p.y));
 				if (selected_fig)
 				{
-					//delete figure todo	
+					pManager->DeleteFunctionForPlayMood(selected_fig);
 					correct++;
 					s = "nice pick----> correct picks= " + to_string(correct) + "    incorrect picks= " + to_string(incorrect);
 					pManager->GetOutput()->PrintMessage(s);
@@ -87,6 +87,7 @@ void figure_type::Execute()
 				selected_fig = dynamic_cast<CRectangle*>(pManager->GetFigure(p.x, p.y));
 				if (selected_fig)
 				{
+					pManager->DeleteFunctionForPlayMood(selected_fig);
 					correct++;
 					s = "nice pick----> correct picks=" + to_string(correct) + "    incorrect picks= " + to_string(incorrect);
 					pManager->GetOutput()->PrintMessage(s);
@@ -103,6 +104,7 @@ void figure_type::Execute()
 				selected_fig = dynamic_cast<CCircle*>(pManager->GetFigure(p.x, p.y));
 				if (selected_fig)
 				{
+					pManager->DeleteFunctionForPlayMood(selected_fig);
 					correct++;
 					s = "nice pick----> correct picks= " + to_string(correct) + "    incorrect picks= " + to_string(incorrect);
 					pManager->GetOutput()->PrintMessage(s);
@@ -119,6 +121,7 @@ void figure_type::Execute()
 				selected_fig = dynamic_cast<CTriangle*>(pManager->GetFigure(p.x, p.y));
 				if (selected_fig)
 				{
+					pManager->DeleteFunctionForPlayMood(selected_fig);
 					correct++;
 					s = "nice pick----> correct picks= " + to_string(correct) + "    incorrect picks= " + to_string(incorrect);
 					pManager->GetOutput()->PrintMessage(s);
@@ -135,6 +138,7 @@ void figure_type::Execute()
 				selected_fig = dynamic_cast<CHexa*>(pManager->GetFigure(p.x, p.y));
 				if (selected_fig)
 				{
+					pManager->DeleteFunctionForPlayMood(selected_fig);
 					correct++;
 					s = "nice pick----> correct picks=  " + to_string(correct) + "    incorrect picks=  " + to_string(incorrect);
 					pManager->GetOutput()->PrintMessage(s);

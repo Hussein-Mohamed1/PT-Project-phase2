@@ -23,6 +23,7 @@ void figure_color::manage_by_color(color c , int n)
 		{
 			if (selected_fig->get_fillcolor() == c)
 			{
+				pManager->DeleteFunctionForPlayMood(selected_fig);
 				correct++;
 				s = "nice pick----> correct picks= " + to_string(correct) + "    incorrect picks= " + to_string(incorrect);
 				pManager->GetOutput()->PrintMessage(s);
