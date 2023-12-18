@@ -20,6 +20,7 @@
 #include"Actions/DeleteAction.h"
 #include "figure_color.h"
 #include "figure_typeandcolor.h"
+#include"to_playmood.h"
 using namespace std;
 
 //Constructor
@@ -32,6 +33,7 @@ ApplicationManager::ApplicationManager()
 	pOut = new Output;
 	pIn = pOut->CreateInput();
 	FigCount = 0;
+	DeletedFigCount = 0;
 	Selected_Figure = NULL;
 
 
@@ -39,6 +41,7 @@ ApplicationManager::ApplicationManager()
 	for (int i = 0; i < MaxFigCount; i++)
 	{
 		FigList[i] = NULL;
+		DeletedFigList[i] = NULL;
 	}
 }
 
@@ -120,7 +123,7 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		pAct = new DeleteAction(this);
 		break;
 	case FUNC_EXIT_playMode:
-		pAct = new AddSquareAction(this);
+		pAct = new to_drawmood(this);
 		break;
 
 
@@ -150,6 +153,12 @@ void ApplicationManager::AddFigure(CFigure* pFig)
 
 	if (FigCount < MaxFigCount)
 		FigList[FigCount++] = pFig;
+
+}
+void ApplicationManager::AddDeletedFig(CFigure* del)
+{
+	if (DeletedFigCount < MaxFigCount)
+		DeletedFigList[DeletedFigCount++] =del;
 
 }
 
@@ -256,10 +265,30 @@ void ApplicationManager::DeleteFunctionForPlayMood(CFigure* Del)
 	{
 		if (FigList[i] == Del)
 		{
+			AddDeletedFig(FigList[i]);
 			FigList[i] = NULL;
-			AddDeletedFig(Del);
 			UpdateInterface();
 			break;
+		}
+	}
+}
+void  ApplicationManager::CopyDeletedFigToFiglist()
+{
+	for (int i = 0; i < DeletedFigCount; i++)
+	{
+		if (DeletedFigList[i] != NULL)
+		{
+			for (int j = 0; j <FigCount; j++)
+			{
+				if (FigList[j] == NULL)
+				{
+					FigList[j] = DeletedFigList[i];
+					DeletedFigList[i] = NULL;
+					break;
+				}
+
+			}
+
 		}
 	}
 }
@@ -292,7 +321,10 @@ void ApplicationManager::SaveAll(fstream& OutputFile) const {
 ApplicationManager::~ApplicationManager()
 {
 	for (int i = 0; i < FigCount; i++)
+	{
 		delete FigList[i];
+		delete DeletedFigList[i];
+	}
 	delete pIn;
 	delete pOut;
 

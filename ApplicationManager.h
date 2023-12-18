@@ -13,10 +13,17 @@ class ApplicationManager
 
 private:
 	int FigCount;		//Actual number of figures
+	int DeletedFigCount;
+
 	CFigure* FigList[MaxFigCount];	//List of all figures (Array of pointers)
 
-	 CFigure* Selected_Figure;
-	   
+	CFigure* Selected_Figure;
+
+	CFigure* DeletedFigList[MaxFigCount];
+
+
+
+	
 
 
 
@@ -46,6 +53,8 @@ public:
 	 void DeleteFunction();
 	 void SetSelectedFig(CFigure* S);
 	 void DeleteFunctionForPlayMood(CFigure* Del);
+	 void CopyDeletedFigToFiglist();
+	 void AddDeletedFig(CFigure* del);
 	// void DeleteFigure(CFigure* Del);
 	 //bool Select(CFigure* figure);
 	 //CFigure* GetFigureByPoint(int x, int y);
