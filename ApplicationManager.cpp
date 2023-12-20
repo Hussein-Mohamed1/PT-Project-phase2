@@ -80,12 +80,12 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 	case FUNC_SELECT:
 		pAct = new SelectAction(this);
 		break;
-	case FUNC_SAVE:
-		pAct = new PrepareExport(this);
-		break;
-	case FUNC_LOAD:
-		pAct = new PrepareImport(this);
-		break;
+	//case FUNC_SAVE:
+	//	pAct = new PrepareExport(this);
+	//	break;
+	//case FUNC_LOAD:
+	//	pAct = new PrepareImport(this);
+	//	break;
 	case ENTER_PLAY_MODE:
 		pAct = new to_playmood(this);
 		break;
@@ -98,23 +98,23 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 	case BY_COLOR_SHAPE:
 		pAct = new figure_typeandcolor(this);
 		break;
-	case COLOR_BLACK:
-	pAct = new ChangeColorAction(this,BLACK);
-		break;
-	case COLOR_RED:
-	pAct = new ChangeColorAction(this,RED);
-		break;
-	case COLOR_GREEN :
-		pAct = new ChangeColorAction(this, GREEN);
-		break;
-	case COLOR_ORANGE:
-		pAct = new ChangeColorAction(this, ORANGE);
-		break;
-	case COLOR_YELLOW:
-		pAct = new ChangeColorAction(this, YELLOW);
-		break;
-	case COLOR_BLUE:
-		pAct = new ChangeColorAction(this, BLUE);
+	//case COLOR_BLACK:
+	//pAct = new ChangeColorAction(this,BLACK);
+	//	break;
+	//case COLOR_RED:
+	//pAct = new ChangeColorAction(this,RED);
+	//	break;
+	//case COLOR_GREEN :
+	//	pAct = new ChangeColorAction(this, GREEN);
+	//	break;
+	//case COLOR_ORANGE:
+	//	pAct = new ChangeColorAction(this, ORANGE);
+	//	break;
+	//case COLOR_YELLOW:
+	//	pAct = new ChangeColorAction(this, YELLOW);
+	//	break;
+	//case COLOR_BLUE:
+	//	pAct = new ChangeColorAction(this, BLUE);
 		break;
 	case FUNC_FILL:
 		pAct = new ChangeColorAction(this,BLUE,1);
@@ -125,6 +125,65 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 	case FUNC_EXIT_playMode:
 		pAct = new to_drawmood(this);
 		break;
+	case FUNC_BRUSH:
+		pOut->PrintMessage("BRUSH");
+		break;
+	case COLOR_BLACK:
+		pOut->PrintMessage("BLACK");
+		break;
+	case COLOR_RED:
+		pOut->PrintMessage("RED");
+		break;
+	case COLOR_BLUE:
+		pOut->PrintMessage("BLUE");
+		break;
+	case COLOR_GREEN:
+		pOut->PrintMessage("GREEN");
+		break;
+	case COLOR_YELLOW:
+		pOut->PrintMessage("YELLOW");
+		break;
+	case COLOR_ORANGE:
+		pOut->PrintMessage("ORANGE");
+		break;
+	case FUNC_REDO:
+		pOut->PrintMessage("REDO");
+		break;
+	case FUNC_UNDO:
+		pOut->PrintMessage("UNDO");
+		break;
+	case FUNC_SAVE:
+		pOut->PrintMessage("SAVE");
+		break;
+	case FUNC_LOAD:
+		pOut->PrintMessage("LOAD");
+		break;
+	case FUNC_START_REC:
+		pOut->PrintMessage("START");
+		break;
+	case FUNC_PLAY_REC:
+		pOut->PrintMessage("PLAY");
+		break;
+	case FUNC_STOP_REC:
+		pOut->PrintMessage("stop");
+		break;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 	case FUNC_EXIT:

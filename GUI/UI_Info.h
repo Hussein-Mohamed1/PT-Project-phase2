@@ -24,6 +24,7 @@ enum DrawMenuItem //The items of the Draw menu (you should add more items)
 	ITM_SELECT,
 	ITM_MOVE,
 	ITM_FILL,
+	ITM_BRUSH,
 	ITM_DELETE,
 	ITM_BLACK,
 	ITM_RED,
@@ -91,7 +92,9 @@ struct UI_Info	//User Interface Info.
 	int	width, height,	    //Window width and height
 		wx , wy,			//Window starting coordinates
 		StatusBarHeight,	//Status Bar Height
-		ToolBarHeight,		//Tool Bar Height (distance from top of window to bottom line of toolbar)
+		ToolBarHeight,	//Tool Bar Height (distance from top of window to bottom line of toolbar)
+		MiniColorWidth,
+		MiniColorHeight,
 		MenuItemWidth;		//Width of each item in toolbar menu
 	
 

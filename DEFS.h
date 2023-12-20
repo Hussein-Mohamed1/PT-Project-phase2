@@ -14,6 +14,7 @@ enum ActionType //The actions supported (you can add more if needed)
 	FUNC_ADD_IMAGE,
 	FUNC_SELECT,
 	FUNC_DELETE,
+	FUNC_BRUSH,
 	COLOR_BLACK,
 	COLOR_RED,
 	COLOR_BLUE,

@@ -16,6 +16,8 @@ Output::Output()
 	UI.StatusBarHeight = 50;
 	UI.ToolBarHeight = 50;
 	UI.MenuItemWidth = 45;
+	UI.MiniColorWidth = UI.MenuItemWidth - 30;
+	UI.MiniColorHeight = UI.ToolBarHeight - 30;
 
 	UI.DrawColor = BLUE;	//Drawing color
 	UI.FillColor = GRAY;	//Filling color
@@ -94,6 +96,7 @@ void Output::CreateDrawToolBar() const
 	MenuItemImages[ITM_HEXA] = "images\\MenuItems\\hexagon.jpg";
 	MenuItemImages[ITM_SELECT] = "images\\MenuItems\\select.jpg";
 	MenuItemImages[ITM_DELETE] = "images\\MenuItems\\deleteObject.jpg";
+	MenuItemImages[ITM_BRUSH] = "images\\MenuItems\\Brush.jpg";
 	MenuItemImages[ITM_BLACK] = "images\\MenuItems\\black.jpg";
 	MenuItemImages[ITM_RED] = "images\\MenuItems\\red.jpg";
 	MenuItemImages[ITM_BLUE] = "images\\MenuItems\\blue.jpg";
@@ -118,8 +121,36 @@ void Output::CreateDrawToolBar() const
 
 	//Draw menu item one image at a time
 	for (int i = 0; i < DRAW_ITM_COUNT; i++)
-		pWind->DrawImage(MenuItemImages[i], i * UI.MenuItemWidth, 5, UI.MenuItemWidth - 5, UI.ToolBarHeight - 5);
+	{
+		//pWind->DrawImage(MenuItemImages[i], i * UI.MenuItemWidth, 5, UI.MenuItemWidth - 5, UI.ToolBarHeight - 5);
 
+		if (i == 11)
+		{
+			int k = 0;
+			for (int j = 11; j < 14; j++)
+			{
+				pWind->DrawImage(MenuItemImages[j], ((j)*UI.MenuItemWidth - k * 22), 1, UI.MenuItemWidth - 30, UI.ToolBarHeight - 30);
+				k++;
+				i = j;
+			}
+			k = 0;
+			for (int j = 14; j < 17; j++)
+			{
+				pWind->DrawImage(MenuItemImages[j], ((j-3) * UI.MenuItemWidth - k * 22), 25, UI.MiniColorWidth, UI.MiniColorHeight);
+				k++;
+				i = j;
+			}
+
+
+
+	    }
+		else 
+			if(i>16)                         /// condition to shift back 
+			  pWind->DrawImage(MenuItemImages[i], (i-4) * UI.MenuItemWidth, 5, UI.MenuItemWidth - 5, UI.ToolBarHeight - 5);
+			else 
+			pWind->DrawImage(MenuItemImages[i], i * UI.MenuItemWidth, 5, UI.MenuItemWidth - 5, UI.ToolBarHeight - 5);
+
+	}
 
 	//Draw a line under the toolbar
 	pWind->SetPen(BLACK, 3);
