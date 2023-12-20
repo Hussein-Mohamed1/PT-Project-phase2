@@ -87,13 +87,22 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		pAct = new to_playmood(this);
 		break;
 	case BY_SHAPE:
+		if(FigCount)
 		pAct = new figure_type(this);
+		else
+			pOut->PrintMessage("no figures to pick it");
 		break;
 	case BY_COLOR:
+		if(ChangeColorAction::if_exist_file())
 		pAct = new figure_color(this);
+		else
+			pOut->PrintMessage("no figures to pick it");
 		break;
 	case BY_COLOR_SHAPE:
-		pAct = new figure_typeandcolor(this);
+		if (ChangeColorAction::if_exist_file())
+			pAct = new figure_typeandcolor(this);
+		else
+			pOut->PrintMessage("no figures to pick it");
 		break;
 	case COLOR_BLACK:
 	pAct = new ChangeColorAction(this,BLACK);
@@ -257,7 +266,7 @@ void ApplicationManager::DeleteFunctionForPlayMood(CFigure* Del)
 		if (FigList[i] == Del)
 		{
 			FigList[i] = NULL;
-			AddDeletedFig(Del);
+			
 			UpdateInterface();
 			break;
 		}

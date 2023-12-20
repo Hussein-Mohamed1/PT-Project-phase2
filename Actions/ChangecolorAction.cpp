@@ -11,6 +11,11 @@ ChangeColorAction::ChangeColorAction(ApplicationManager* pApp, color c, bool CF)
 	FillColor = GRAY;
 
 }
+int ChangeColorAction::num_of_fill = 0;
+int ChangeColorAction::if_exist_file()
+{
+	return num_of_fill;
+}
 void ChangeColorAction::ReadActionParameters()
 {
 
@@ -19,6 +24,7 @@ void ChangeColorAction::ReadActionParameters()
 
 	if (ChangeFill)
 	{
+		num_of_fill++;
 		pOut->PrintMessage("Choose Fill Color : ");
 		ActionType ActType;
 		ActType = pIn->GetUserAction();
