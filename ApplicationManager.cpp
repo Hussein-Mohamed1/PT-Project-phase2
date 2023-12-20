@@ -117,35 +117,35 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 	//	pAct = new ChangeColorAction(this, BLUE);
 		break;
 	case FUNC_FILL:
-		pAct = new ChangeColorAction(this,BLUE,1);
+		pAct = new ChangeColorAction(this,true);
+		break;
+	case FUNC_BRUSH:
+		pAct = new ChangeColorAction(this);
 		break;
 	case FUNC_DELETE :
 		pAct = new DeleteAction(this);
 		break;
-	case FUNC_EXIT_playMode:
+	case ENTER_DRAW_MODE:
 		pAct = new to_drawmood(this);
 		break;
-	case FUNC_BRUSH:
-		pOut->PrintMessage("BRUSH");
-		break;
-	case COLOR_BLACK:
-		pOut->PrintMessage("BLACK");
-		break;
-	case COLOR_RED:
-		pOut->PrintMessage("RED");
-		break;
-	case COLOR_BLUE:
-		pOut->PrintMessage("BLUE");
-		break;
-	case COLOR_GREEN:
-		pOut->PrintMessage("GREEN");
-		break;
-	case COLOR_YELLOW:
-		pOut->PrintMessage("YELLOW");
-		break;
-	case COLOR_ORANGE:
-		pOut->PrintMessage("ORANGE");
-		break;
+	//case COLOR_BLACK:
+	//	pOut->PrintMessage("BLACK");
+	//	break;
+	//case COLOR_RED:
+	//	pOut->PrintMessage("RED");
+	//	break;
+	//case COLOR_BLUE:
+	//	pOut->PrintMessage("BLUE");
+	//	break;
+	//case COLOR_GREEN:
+	//	pOut->PrintMessage("GREEN");
+	//	break;
+	//case COLOR_YELLOW:
+	//	pOut->PrintMessage("YELLOW");
+	//	break;
+	//case COLOR_ORANGE:
+	//	pOut->PrintMessage("ORANGE");
+	//	break;
 	case FUNC_REDO:
 		pOut->PrintMessage("REDO");
 		break;
@@ -185,6 +185,8 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 
 
 
+	case FUNC_EXIT_playMode:
+		break;
 
 	case FUNC_EXIT:
 		///create ExitAction here

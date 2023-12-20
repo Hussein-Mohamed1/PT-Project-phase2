@@ -4,11 +4,10 @@
 #include "..\ApplicationManager.h"
 
 
-ChangeColorAction::ChangeColorAction(ApplicationManager* pApp, color c, bool CF):Action(pApp)
+ChangeColorAction::ChangeColorAction(ApplicationManager* pApp,  bool CF):Action(pApp)
 {
-	DrawColor= c;
 	ChangeFill = CF;
-	FillColor = GRAY;
+	ChoosenColor = WHITE;
 
 }
 void ChangeColorAction::ReadActionParameters()
@@ -17,35 +16,33 @@ void ChangeColorAction::ReadActionParameters()
 	Output* pOut = pManager->GetOutput();
 	Input* pIn = pManager->GetInput();
 
-	if (ChangeFill)
-	{
-		pOut->PrintMessage("Choose Fill Color : ");
+		pOut->PrintMessage("Choose  Color : ");
 		ActionType ActType;
 		ActType = pIn->GetUserAction();
 		switch (ActType)
 		{
 		case COLOR_BLACK:
-			FillColor = BLACK;
+			ChoosenColor = BLACK;
 			break;
 		case COLOR_RED:
-			FillColor = RED;
+			ChoosenColor = RED;
 			break;
 		case COLOR_BLUE:
-			FillColor = BLUE;
+			ChoosenColor = BLUE;
 			break;
 		case COLOR_GREEN:
-			FillColor = GREEN;
+			ChoosenColor = GREEN;
 			break;
 		case COLOR_YELLOW:
-			FillColor = YELLOW;
+			ChoosenColor = YELLOW;
 			break;
 		case COLOR_ORANGE:
-			FillColor = ORANGE;
+			ChoosenColor = ORANGE;
 			break;
 		default:
 			break;
 		}
-	}
+	
 
 }
 void ChangeColorAction::Execute()
@@ -56,18 +53,24 @@ void ChangeColorAction::Execute()
 
 	if (pManager->GetSelected_Figure() == NULL)
 		pOut->PrintMessage("NO SELECTED ");
-	else
+	 else if(ChoosenColor==WHITE)
+		pOut->PrintMessage("NO SELECTED COLOR  ");
+
+
+	 else
 	{
 		if (ChangeFill)
 		{
-			if(FillColor!=GRAY)
-				pManager->GetSelected_Figure()->ChngFillClr(FillColor);
-			   pOut->SetFillColor(FillColor);
- 		}
-		else 
-		//pManager->GetSelected_Figure()->ChngFillClr(BLACK);
-		pManager->GetSelected_Figure()->ChngDrawClr(DrawColor);
-		pOut->SetDraColor(DrawColor);
+				pManager->GetSelected_Figure()->ChngFillClr(ChoosenColor);
+			pOut->SetFillColor(ChoosenColor);
+		}
+
+		else
+		{
+			//pManager->GetSelected_Figure()->ChngFillClr(BLACK);
+			pManager->GetSelected_Figure()->ChngDrawClr(ChoosenColor);
+			pOut->SetDraColor(ChoosenColor);
+		}
 	}
 
 
