@@ -1,4 +1,8 @@
 #include "Output.h"
+#include <windows.h>
+#include <mmsystem.h>
+#pragma comment(lib, "winmm.lib") 
+
 
 
 Output::Output()
@@ -342,10 +346,14 @@ void Output::DrawRect(Point P1, Point P2, GfxInfo RectGfxInfo, bool selected) co
 	 string IntroImage = "images\\MenuItems\\painting-ideas-featured-1.jpg";
 	 pWind->DrawImage(IntroImage, 0, UI.ToolBarHeight, UI.width, UI.height-100);
 
+
+	 mciSendString(TEXT("open \"Welcome Sound.mp3\" type mpegvideo alias mp3"), NULL, 0, NULL);
+
+	 // Play the .mp3 file
+	 mciSendString(TEXT("play mp3"), NULL, 0, NULL);
+
+	 // Wait for the sound to finish playing
 	 Sleep(3000);
-
-
-
 
  }
 
