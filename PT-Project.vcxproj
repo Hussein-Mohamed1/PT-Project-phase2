@@ -135,6 +135,8 @@
     <ClCompile Include="Actions\PrepareExport.cpp" />
     <ClCompile Include="Actions\PrepareImport.cpp" />
     <ClCompile Include="Actions\SelectAction.cpp" />
+    <ClCompile Include="Actions\RedoAction.cpp" />
+    <ClCompile Include="Actions\UndoAction.cpp" />
     <ClCompile Include="CMUgraphicsLib\auxil.cpp" />
     <ClCompile Include="CMUgraphicsLib\CMUgraphics.cpp" />
     <ClCompile Include="CMUgraphicsLib\colors.cpp" />
@@ -188,6 +190,8 @@
     <ClInclude Include="Actions\AddHexaAction.h" />
     <ClInclude Include="Actions\AddSquareAction.h" />
     <ClInclude Include="Actions\AddTriangleAction.h" />
+    <ClInclude Include="Actions\RedoAction.h" />
+    <ClInclude Include="Actions\UndoAction.h" />
     <ClInclude Include="Actions\PrepareExport.h" />
     <ClInclude Include="Actions\PrepareImport.h" />
     <ClInclude Include="Actions\SelectAction.h" />

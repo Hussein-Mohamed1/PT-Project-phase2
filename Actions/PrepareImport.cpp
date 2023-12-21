@@ -74,4 +74,11 @@ void PrepareImport::Execute() {
 		}
 		}
 	}
-};
+}
+void PrepareImport::undo()
+{
+}
+void PrepareImport::redo()
+{
+}
+;

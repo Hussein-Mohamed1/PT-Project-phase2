@@ -26,3 +26,11 @@ void SelectAction::Execute()
 	pManager->GetFigure(p.x, p.y);
 
 }
+
+void SelectAction::undo()
+{
+}
+
+void SelectAction::redo()
+{
+}

@@ -56,3 +56,14 @@ void AddTriangleAction::Execute()
 
 }
 
+void AddTriangleAction::undo()
+{
+	DeletedFig = pManager->DeleteFigure();
+}
+
+void AddTriangleAction::redo()
+{
+	pManager->AddFigure(DeletedFig);
+}
+
+

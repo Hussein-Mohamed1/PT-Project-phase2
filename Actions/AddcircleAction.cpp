@@ -57,6 +57,15 @@ AddcircleAction::AddcircleAction(ApplicationManager* pApp) :Action(pApp)
 	  //Add the rectangle to the list of figures
 	  pManager->AddFigure(c);
 
+  }
 
 
+  void AddcircleAction::undo()
+  {
+	  DeletedFig = pManager->DeleteFigure();
+  }
+
+  void AddcircleAction::redo()
+  {
+	  pManager->AddFigure(DeletedFig);
   }
