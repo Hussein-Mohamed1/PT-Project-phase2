@@ -30,8 +30,14 @@ Output::Output()
 
 	//Create the output window
 	pWind = CreateWind(UI.width, UI.height, UI.wx, UI.wy);
-	//Change the title
+
 	pWind->ChangeTitle("Paint for Kids - Programming Techniques Project");
+
+	IntroInterface();
+
+	ClearDrawArea();
+	//Change the title
+	//pWind->ChangeTitle("Paint for Kids - Programming Techniques Project");
 
 	CreateDrawToolBar();
 	CreateStatusBar();
@@ -330,6 +336,19 @@ void Output::DrawRect(Point P1, Point P2, GfxInfo RectGfxInfo, bool selected) co
 	 pWind->DrawPolygon(xcoordinates, ycoordinates, 6, style);
 
  }
+
+ void  Output::IntroInterface()
+ {
+	 string IntroImage = "images\\MenuItems\\painting-ideas-featured-1.jpg";
+	 pWind->DrawImage(IntroImage, 0, UI.ToolBarHeight, UI.width, UI.height-100);
+
+	 Sleep(3000);
+
+
+
+
+ }
+
 
 
 
