@@ -125,10 +125,13 @@ void Output::CreateDrawToolBar() const
 	MenuItemImages[CLEAR_CANVAS] = "images\\MenuItems\\clearCanvas.jpg";
 	MenuItemImages[ITM_FILL] = "images\\MenuItems\\fill.jpg";
 	MenuItemImages[ITM_MOVE] = "images\\MenuItems\\move.jpg";
-
-
-	//TODO: Prepare images for each menu item and add it to the list
-
+	color cColor = getCrntDrawColor(); // Saves the users current color 
+	int PenSize = getCrntPenWidth();	// and brush width
+	pWind->SetPen(BLACK, 0);
+	pWind->SetBrush(BLACK);
+	pWind->DrawRectangle(0, 0, pWind->GetWidth(), UI.ToolBarHeight);
+	pWind->SetPen(cColor, PenSize);
+	pWind->SetBrush(cColor);
 	//Draw menu item one image at a time
 	for (int i = 0; i < DRAW_ITM_COUNT; i++)
 	{
@@ -354,6 +357,9 @@ void Output::DrawRect(Point P1, Point P2, GfxInfo RectGfxInfo, bool selected) co
 
 	 // Wait for the sound to finish playing
 	 Sleep(3000);
+
+
+	 mciSendString(TEXT("close mp3"), NULL, 0, NULL);
 
  }
 

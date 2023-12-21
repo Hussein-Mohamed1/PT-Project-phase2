@@ -94,7 +94,7 @@ bool CCircle::isInsideBoundaries(const Point& p) const
 {
 	Point tempP2 = P2 + p - P1;
 	Point tempP1 = p;
-	int r = sqrt((P1.x - tempP2.x) * (P1.x - tempP2.x) + (P1.y - tempP2.y) * (P1.y - tempP2.y));
+	int r = sqrt((tempP1.x - tempP2.x) * (tempP1.x - tempP2.x) + (tempP1.y - tempP2.y) * (tempP1.y - tempP2.y));
 	return !(!((tempP1.y - r) > UI.ToolBarHeight + 5 && (tempP1.y + r) < UI.height - UI.StatusBarHeight) || (tempP1.x - r) < 5 || (tempP1.x + r) >= UI.width - 15);
 }
 void CCircle::PrintInfo(Output* pOut)

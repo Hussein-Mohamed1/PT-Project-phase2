@@ -16,8 +16,7 @@
 PrepareImport::PrepareImport(ApplicationManager* pApp) :Action(pApp) {};
 void PrepareImport::ReadActionParameters() {
 	pManager->GetOutput()->PrintMessage("Enter The file name or press ESC to cancel.");
-	name = pManager->GetInput()->GetSrting(pManager->GetOutput());
-
+	name = pManager->GetInput()->GetString(pManager->GetOutput());
 
 }
 void PrepareImport::Execute() {
