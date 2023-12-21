@@ -1,19 +1,30 @@
 #include "CRectangle.h"
 #include <sstream>
+int CRectangle::numofrect = 0;
+int CRectangle::get_numofshape() { return numofrect; }
 CRectangle::CRectangle(Point P1, Point P2, GfxInfo FigureGfxInfo) :CFigure(FigureGfxInfo)
 {
+	numofrect++;
 	Corner1 = P1;
 	Corner2 = P2;
+	id = ID;
 	ID++;
 }
 
-CRectangle::CRectangle() {};
+
+
+int CRectangle::Getid()
+{
+	return id;
+}
+
+CRectangle::CRectangle() { numofrect++; };
 void CRectangle::Draw(Output* pOut) const
 {
 	//Call Output::DrawRect to draw a rectangle on the screen	
 	pOut->DrawRect(Corner1, Corner2, FigGfxInfo, Selected);
 }
-ostream& operator<<(ostream& op, const CRectangle& Fig) 
+ostream& operator<<(ostream& op, const CRectangle& Fig)
 {
 	op << Fig.ID << " " << Fig.Corner1 << " " << Fig.Corner2 << " " << Fig.FigGfxInfo << endl;
 	return op;
@@ -46,6 +57,12 @@ void CRectangle::Load(string& line)
 	this->FigGfxInfo.isFilled = stoi(datum[12]);
 	this->FigGfxInfo.BorderWdth = stoi(datum[13]);
 }
+void CRectangle::move(const Point& newPos)
+{
+	Point center = (Corner1 + Corner2) / 2;
+	Corner2 = newPos + Corner2 - center;
+	Corner1 = newPos + Corner1 - center;
+}
 bool CRectangle::checkselection(int x, int y)
 {
 	if ((x >= Corner1.x && x <= Corner2.x) && (y >= Corner1.y && y <= Corner2.y))
@@ -70,7 +87,37 @@ bool CRectangle::checkselection(int x, int y)
 
 	return false;
 
-};
+}
+bool CRectangle::isInsideBoundaries(const Point& newPos) const
+{
+
+	Point tCorner2 = newPos + Corner2 - (Corner1 + Corner2) / 2;
+	Point tCorner1 = newPos + Corner1 - (Corner1 + Corner2) / 2;
+	if ((tCorner1.y > UI.ToolBarHeight + 5 && tCorner1.y < UI.height - UI.StatusBarHeight - 5) && (tCorner2.y > UI.ToolBarHeight + 5 && tCorner2.y < UI.height - UI.StatusBarHeight - 5)) //check if the second corner will be valid
+		return 1;
+	return 0;
+}
+void CRectangle::PrintInfo(Output* pOut)
+{
+	/// calcuate  data of figure 
+	int hieght = abs(Corner1.y - Corner2.y);
+	int widght = abs(Corner1.x - Corner2.x);
+
+	// concatination to print one sting contaion all data of figure
+
+		// to_string ()  is a function that cast int to strting
+
+	string printed = "Figure is Rectangle          Figure id : " + to_string(id) +
+		"        Fisrt Corner :(" + to_string(Corner1.x) + "," + to_string(Corner1.y) + ")"
+		+ "        Second Corner :(" + to_string(Corner2.x) + "," + to_string(Corner2.y) + ")"
+		+ "        height " + to_string(hieght) + "        width "+to_string(widght);
+	pOut->PrintMessage(printed);
+
+}
+color CRectangle::get_fillcolor()
+{
+	return FigGfxInfo.FillClr;
+}
 
 
 

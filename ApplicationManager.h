@@ -20,34 +20,49 @@ private:
 	int ActionCountun=0;   
 	int ActionCountre=0;
 	int FigCount;		//Actual number of figures
+	int DeletedFigCount;
+
 	CFigure* FigList[MaxFigCount];	//List of all figures (Array of pointers)
 	Action* pLastAct;
-	CFigure* SelectedFig; //Pointer to the selected figure
+	
 	CFigure* DeletedFig;
+
+	CFigure* Selected_Figure;
+
+	CFigure* DeletedFigList[MaxFigCount];
+
+
+
+	
+
+
+
 
 	//Pointers to Input and Output classes
 	Input *pIn;
 	Output *pOut;
-
 public:	
 	ApplicationManager(); 
 	~ApplicationManager();
-	
+
 	// -- Action-Related Functions
 	//Reads the input command from the user and returns the corresponding action type
 	ActionType GetUserAction() const;
 	void ExecuteAction(ActionType) ; //Creates an action and executes it
 	
 	// -- Figures Management Functions
-	void AddFigure(CFigure* pFig);          //Adds a new figure to the FigList
+	
 	void RemoveFigure(CFigure* pFig);          //Adds a new figure to the FigList
 	CFigure* DeleteFigure();          //Adds a new figure to the FigList
 	CFigure *GetFigure(int x, int y) const; //Search for a figure given a point inside the figure
 		
+	void AddFigure(CFigure* pFig);  //Adds a new figure to the FigList
+	CFigure *GetFigure(int x, int y) ; //Search for a figure given a point inside the figure
+	void set_figure(CFigure*);
 	// -- Interface Management Functions
 	Input *GetInput() const; //Return pointer to the input
 	Output *GetOutput() const; //Return pointer to the output
-	void UpdateInterface() const;	//Redraws all the drawing window	
+	void UpdateInterface() ;	//Redraws all the drawing window	
 	void SaveAll(fstream &) const;
 	void addToUndo(Action* pAct);
 	void addToRedo();
@@ -56,6 +71,21 @@ public:
 
 	Action* GetLastRedo();
 
+	 CFigure* GetSelected_Figure();
+	 void DeleteFunction();
+	 void SetSelectedFig(CFigure* S);
+	 void DeleteFunctionForPlayMood(CFigure* Del);
+	 void CopyDeletedFigToFiglist();
+	 void AddDeletedFig(CFigure* del);
+	// void DeleteFigure(CFigure* Del);
+	 //bool Select(CFigure* figure);
+	 //CFigure* GetFigureByPoint(int x, int y);
+	 int get_numofcolor(color );
+	 int numof_figurewithcolor(figures, colors);
+	 color get_fillcolor(colors);
+	 string color_TO_String(colors c);
+	 string figur_TO_String(figures);
 };
+
 
 #endif

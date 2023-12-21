@@ -4,7 +4,6 @@
 #include "..\ApplicationManager.h"
 #include"..\Figures\CTriangle.h"
 
-
  
 AddTriangleAction::AddTriangleAction(ApplicationManager* pApp):Action(pApp)
 {}
@@ -33,7 +32,7 @@ void AddTriangleAction::ReadActionParameters()
 	} while (invalid);
 
 
-	RectGfxInfo.isFilled = false;	//default is not filled
+	//RectGfxInfo.isFilled = false;	//default is not filled
 	//get drawing, filling colors and pen width from the interface
 	RectGfxInfo.DrawClr = pOut->getCrntDrawColor();
 	RectGfxInfo.FillClr = pOut->getCrntFillColor();
@@ -44,6 +43,7 @@ void AddTriangleAction::ReadActionParameters()
 }
 void AddTriangleAction::Execute()  
 {
+	
 	// Read Parametes first 
 	ReadActionParameters();
 

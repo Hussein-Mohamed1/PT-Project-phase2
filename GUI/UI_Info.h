@@ -23,6 +23,9 @@ enum DrawMenuItem //The items of the Draw menu (you should add more items)
 
 	ADD_IMAGE,
 	ITM_SELECT,
+	ITM_MOVE,
+	ITM_FILL,
+	ITM_BRUSH,
 	ITM_DELETE,
 	
 	
@@ -55,8 +58,38 @@ enum DrawMenuItem //The items of the Draw menu (you should add more items)
 
 };
 
+enum PlayMenuItem //The items of the Play menu (you should add more items)
+{
+	//Note: Items are **(ordered)** here as they appear in menu
+	//If you want to change the menu items order, change the order here
 
+	//TODO: Add more items names here
 
+	DRAW_MODE,
+	byColor,
+	byShape,
+	byColorShape,
+	ITM_EXIT_playMode,
+	PLAY_ITM_COUNT//no. of menu items ==> This should be the last line in this enum
+
+};
+enum figures
+{
+	squr,
+	rect,
+	circ,
+	tria,
+	hexa,
+};
+enum colors
+{
+	black,
+	red,
+	blue,
+	green,
+	yellow,
+	orange,
+};
 
 
 __declspec(selectany) //This line to prevent "redefinition error"
@@ -68,7 +101,9 @@ struct UI_Info	//User Interface Info.
 	int	width, height,	    //Window width and height
 		wx , wy,			//Window starting coordinates
 		StatusBarHeight,	//Status Bar Height
-		ToolBarHeight,		//Tool Bar Height (distance from top of window to bottom line of toolbar)
+		ToolBarHeight,	//Tool Bar Height (distance from top of window to bottom line of toolbar)
+		MiniColorWidth,
+		MiniColorHeight,
 		MenuItemWidth;		//Width of each item in toolbar menu
 	
 

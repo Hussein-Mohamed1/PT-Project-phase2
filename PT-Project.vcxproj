@@ -132,6 +132,9 @@
     <ClCompile Include="Actions\AddHexaAction.cpp" />
     <ClCompile Include="Actions\AddSquareAction.cpp" />
     <ClCompile Include="Actions\AddTriangleAction.cpp" />
+    <ClCompile Include="Actions\ChangeColorAction.cpp" />
+    <ClCompile Include="Actions\DeleteAction.cpp" />
+    <ClCompile Include="Actions\MoveFigure.cpp" />
     <ClCompile Include="Actions\PrepareExport.cpp" />
     <ClCompile Include="Actions\PrepareImport.cpp" />
     <ClCompile Include="Actions\SelectAction.cpp" />
@@ -180,16 +183,24 @@
     <ClCompile Include="Actions\AddRectAction.cpp" />
     <ClCompile Include="Figures\CSquare.cpp" />
     <ClCompile Include="Figures\CTriangle.cpp" />
+    <ClCompile Include="figure_color.cpp" />
+    <ClCompile Include="figure_type.cpp" />
+    <ClCompile Include="figure_typeandcolor.cpp" />
     <ClCompile Include="GUI\Input.cpp" />
     <ClCompile Include="GUI\Output.cpp" />
     <ClCompile Include="ApplicationManager.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="to_drawmood.cpp" />
+    <ClCompile Include="to_playmood.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Actions\AddcircleAction.h" />
     <ClInclude Include="Actions\AddHexaAction.h" />
     <ClInclude Include="Actions\AddSquareAction.h" />
     <ClInclude Include="Actions\AddTriangleAction.h" />
+    <ClInclude Include="Actions\ChangeColorAction.h" />
+    <ClInclude Include="Actions\MoveFigure.h" />
+    <ClInclude Include="Actions\DeleteAction.h" />
     <ClInclude Include="Actions\RedoAction.h" />
     <ClInclude Include="Actions\UndoAction.h" />
     <ClInclude Include="Actions\PrepareExport.h" />
@@ -223,11 +234,16 @@
     <ClInclude Include="Actions\AddRectAction.h" />
     <ClInclude Include="Figures\CSquare.h" />
     <ClInclude Include="Figures\CTriangle.h" />
+    <ClInclude Include="figure_color.h" />
+    <ClInclude Include="figure_type.h" />
+    <ClInclude Include="figure_typeandcolor.h" />
     <ClInclude Include="GUI\Input.h" />
     <ClInclude Include="GUI\Output.h" />
     <ClInclude Include="GUI\UI_Info.h" />
     <ClInclude Include="ApplicationManager.h" />
     <ClInclude Include="DEFS.h" />
+    <ClInclude Include="to_drawmood.h" />
+    <ClInclude Include="to_playmood.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />

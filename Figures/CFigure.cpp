@@ -1,6 +1,6 @@
 #include "CFigure.h"
 
-int CFigure:: ID = 0;
+int CFigure::ID = 1;
 
 CFigure::CFigure(GfxInfo FigureGfxInfo)
 {
@@ -8,20 +8,13 @@ CFigure::CFigure(GfxInfo FigureGfxInfo)
 	Selected = false;
 }
 
+
 CFigure::CFigure() {}
 
 void CFigure::SetSelected(bool s)
 {
 	Selected = s;
-	if (s)
-	{
-		ChngDrawClr(MAGENTA);
-	}
-	else
-	{
-		ChngDrawClr(BLUE);
-	}
-
+	
 }
 
 bool CFigure::IsSelected() const
@@ -36,7 +29,7 @@ void CFigure::ChngDrawClr(color Dclr)
 
 void CFigure::ChngFillClr(color Fclr)
 {
-	FigGfxInfo.isFilled = true;
+	//FigGfxInfo.isFilled = true;
 	FigGfxInfo.FillClr = Fclr;
 }
 ostream& operator<<(ostream& op, const Point& p) {
@@ -50,3 +43,16 @@ ostream& operator << (ostream& op, const GfxInfo& gfx) {
 	return op;
 };
 
+Point operator+(const Point& p1, const Point& p2) {
+	return { p1.x + p2.x,p1.y + p2.y };
+};
+Point operator-(const Point& p1, const Point& p2) {
+	return { p1.x - p2.x,p1.y - p2.y };
+};
+Point operator/(const Point& p, int n) {
+	return { p.x / 2, p.y / 2 };
+};
+color CFigure::get_fillcolor()
+{
+	return FigGfxInfo.FillClr;
+}

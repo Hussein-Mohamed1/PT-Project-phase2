@@ -1,34 +1,59 @@
 #include "CHexa.h"
 #include "sstream"
+#include <sstream>
+#include "cstring"
+#include<iostream>
+#include"string.h"
+using namespace std;
+int CHexa::numofhexa = 0;
+int CHexa::get_numofshape() { return numofhexa; }
 CHexa::CHexa(Point c, GfxInfo FigureGfxInfo) : CFigure(FigureGfxInfo)
 {
+	numofhexa++;
 	centre = c;
+	id = ID;
 	ID++;
+	l = 80;                       //Here , if you want to change side lenght of Hexa 
 
 }
 
-void CHexa::Draw(Output* pOut) const
+int CHexa::Getid()
 {
-    int xc = centre.x, yc = centre.y;
-	int l = 80;
-	int small_height = l *0.87;         // cos(60)  (from geometry of shape)
-	int small_lenght = l * 0.5;       // sin(60) (from geometry of shape)
-	int xcoordiantes[6] = { xc + l , xc + small_lenght,xc - small_lenght , xc - l , xc - small_lenght , xc + small_lenght };
-	int ycoordinates[6] = { yc     , yc - small_height,yc - small_height , yc     , yc + small_height , yc + small_height };
-
-	pOut->Drawhexagon(xcoordiantes, ycoordinates, FigGfxInfo);
-
+	return id;
 }
+
 bool CHexa::checkselection(int x, int y)
 {
 	int dis = sqrt((x - centre.x) * (x - centre.x) + (y - centre.y) * (y - centre.y));
-	if (dis <= 80)   // you must change it if you change lenght of Hexa to be finaly  l;
+	if (dis <=l-6)   // you must change it if you change lenght of Hexa to be finaly  l;
 	{
 		return true;
 	}
 	return false;
 }
-CHexa::CHexa() {};
+void CHexa::Draw(Output* pOut) const
+{
+	int xc = centre.x, yc = centre.y;
+	int small_height = l * 0.87;         // cos(60)  (from geometry of shape)
+	int small_lenght = l * 0.5;       // sin(60) (from geometry of shape)
+	int xcoordiantes[6] = { xc + l , xc + small_lenght,xc - small_lenght , xc - l , xc - small_lenght , xc + small_lenght };
+	int ycoordinates[6] = { yc     , yc - small_height,yc - small_height , yc     , yc + small_height , yc + small_height };
+
+	pOut->Drawhexagon(xcoordiantes, ycoordinates, FigGfxInfo, Selected);
+
+}
+
+bool CHexa::isInsideBoundaries(const Point& newPos) const {
+	Point tCentre = newPos;
+	if ((newPos.y) - 80 < (UI.ToolBarHeight + 5) || (newPos.y) + 61 > (UI.height - UI.StatusBarHeight + 5)
+		|| ((newPos.x) + 80) > (UI.width - 5) || (newPos.x) - 80 < 0) return 0;
+	return 1;
+}
+void CHexa::move(const Point& newPos)
+{
+	centre = newPos;
+}
+CHexa::CHexa() { numofhexa++; };
 void CHexa::Save(fstream& op) const
 {
 
@@ -62,3 +87,16 @@ ostream& operator<<(ostream& op, const CHexa& Fig) {
 	op << Fig.ID << " " << Fig.centre << " " << Fig.FigGfxInfo << endl;
 	return op;
 };
+void CHexa::PrintInfo(Output* pOut)
+{
+	// concatination to print one sting contaion all data of figure
+
+	// to_string ()  is a function that cast int to strting
+	string printed = " Figure is Hexa         Figure id : " + to_string(id) + "        Side lenght : " + to_string(l)
+		+ "       Centre : ("+ to_string(centre.x) + "," + to_string(centre.y) + ")";
+	pOut->PrintMessage(printed);
+}
+color CHexa::get_fillcolor()
+{
+	return FigGfxInfo.FillClr;
+}

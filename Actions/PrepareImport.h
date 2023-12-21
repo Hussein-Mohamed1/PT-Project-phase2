@@ -4,6 +4,7 @@
 class PrepareImport :
     public Action
 {
+    string name;
 public:
     PrepareImport(ApplicationManager* pApp);
     void ReadActionParameters();

@@ -5,7 +5,6 @@
 
 #include "..\GUI\input.h"
 #include "..\GUI\Output.h"
-
  AddSquareAction ::AddSquareAction(ApplicationManager * pApp) :Action(pApp)
  {}
  void AddSquareAction::ReadActionParameters()
@@ -31,7 +30,7 @@
 		 P1.y -= 60;
 	 }
 
-	 RectGfxInfo.isFilled = false;	//default is not filled
+	// RectGfxInfo.isFilled = false;	//default is not filled
 	 //get drawing, filling colors and pen width from the interface
 	 RectGfxInfo.DrawClr = pOut->getCrntDrawColor();
 	 RectGfxInfo.FillClr = pOut->getCrntFillColor();

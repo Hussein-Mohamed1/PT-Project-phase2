@@ -6,8 +6,35 @@
 #include "..\GUI\input.h"
 #include "..\GUI\Output.h"
 
+#include <windows.h>
+#include <mmsystem.h>
+#pragma comment(lib, "winmm.lib") 
+
+
+
+
 AddRectAction::AddRectAction(ApplicationManager * pApp):Action(pApp)
-{}
+{
+	//pManager->GetOutput()->PrintMessage(" PLEASE , Wait until sound finished ");
+
+	//// Open the .mp3 file
+	//mciSendString(TEXT("open \"D:\\draw-rect2.mp3\" type mpegvideo alias mp3"), NULL, 0, NULL);
+	mciSendString(TEXT("open \"draw-rect2.mp3\" type mpegvideo alias mp3"), NULL, 0, NULL);
+
+	// Play the .mp3 file
+	mciSendString(TEXT("play mp3"), NULL, 0, NULL);
+
+	// Wait for the sound to finish playing
+	Sleep(500);
+
+
+	//// Close the .mp3 file
+
+	// Close the .mp3 file
+
+
+
+}
 
 void AddRectAction::ReadActionParameters() 
 {	
@@ -32,7 +59,7 @@ void AddRectAction::ReadActionParameters()
 		pIn->GetPointClicked(P2.x, P2.y);
 	}
 
-	RectGfxInfo.isFilled = false;	//default is not filled
+	//RectGfxInfo.isFilled = false;	//default is not filled
 	//get drawing, filling colors and pen width from the interface
 	RectGfxInfo.DrawClr = pOut->getCrntDrawColor();
 	RectGfxInfo.FillClr = pOut->getCrntFillColor();
@@ -44,6 +71,9 @@ void AddRectAction::ReadActionParameters()
 //Execute the action
 void AddRectAction::Execute() 
 {
+
+	
+	
 	//This action needs to read some parameters first
 	ReadActionParameters();
 	
@@ -52,6 +82,11 @@ void AddRectAction::Execute()
 
 	//Add the rectangle to the list of figures
 	pManager->AddFigure(R);
+
+	// close mp3 file
+	mciSendString(TEXT("close mp3"), NULL, 0, NULL);
+
+	
 }
 
 void AddRectAction::undo()

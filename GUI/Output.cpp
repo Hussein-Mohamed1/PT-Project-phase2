@@ -1,4 +1,8 @@
 #include "Output.h"
+#include <windows.h>
+#include <mmsystem.h>
+#pragma comment(lib, "winmm.lib") 
+
 
 
 Output::Output()
@@ -16,9 +20,11 @@ Output::Output()
 	UI.StatusBarHeight = 50;
 	UI.ToolBarHeight = 50;
 	UI.MenuItemWidth = 45;
+	UI.MiniColorWidth = UI.MenuItemWidth - 30;
+	UI.MiniColorHeight = UI.ToolBarHeight - 30;
 
 	UI.DrawColor = BLUE;	//Drawing color
-	UI.FillColor = GREEN;	//Filling color
+	UI.FillColor = GRAY;	//Filling color
 	UI.MsgColor = RED;		//Messages color
 	UI.BkGrndColor = GREY;	//Background color
 	UI.HighlightColor = MAGENTA;	//This color should NOT be used to draw figures. use if for highlight only
@@ -28,8 +34,14 @@ Output::Output()
 
 	//Create the output window
 	pWind = CreateWind(UI.width, UI.height, UI.wx, UI.wy);
-	//Change the title
+
 	pWind->ChangeTitle("Paint for Kids - Programming Techniques Project");
+
+	IntroInterface();
+
+	ClearDrawArea();
+	//Change the title
+	//pWind->ChangeTitle("Paint for Kids - Programming Techniques Project");
 
 	CreateDrawToolBar();
 	CreateStatusBar();
@@ -94,6 +106,7 @@ void Output::CreateDrawToolBar() const
 	MenuItemImages[ITM_HEXA] = "images\\MenuItems\\hexagon.jpg";
 	MenuItemImages[ITM_SELECT] = "images\\MenuItems\\select.jpg";
 	MenuItemImages[ITM_DELETE] = "images\\MenuItems\\deleteObject.jpg";
+	MenuItemImages[ITM_BRUSH] = "images\\MenuItems\\Brush.jpg";
 	MenuItemImages[ITM_BLACK] = "images\\MenuItems\\black.jpg";
 	MenuItemImages[ITM_RED] = "images\\MenuItems\\red.jpg";
 	MenuItemImages[ITM_BLUE] = "images\\MenuItems\\blue.jpg";
@@ -118,8 +131,36 @@ void Output::CreateDrawToolBar() const
 
 	//Draw menu item one image at a time
 	for (int i = 0; i < DRAW_ITM_COUNT; i++)
-		pWind->DrawImage(MenuItemImages[i], i * UI.MenuItemWidth, 5, UI.MenuItemWidth - 5, UI.ToolBarHeight - 5);
+	{
+		//pWind->DrawImage(MenuItemImages[i], i * UI.MenuItemWidth, 5, UI.MenuItemWidth - 5, UI.ToolBarHeight - 5);
 
+		if (i == 11)
+		{
+			int k = 0;
+			for (int j = 11; j < 14; j++)
+			{
+				pWind->DrawImage(MenuItemImages[j], ((j)*UI.MenuItemWidth - k * 22), 1, UI.MenuItemWidth - 30, UI.ToolBarHeight - 30);
+				k++;
+				i = j;
+			}
+			k = 0;
+			for (int j = 14; j < 17; j++)
+			{
+				pWind->DrawImage(MenuItemImages[j], ((j-3) * UI.MenuItemWidth - k * 22), 25, UI.MiniColorWidth, UI.MiniColorHeight);
+				k++;
+				i = j;
+			}
+
+
+
+	    }
+		else 
+			if(i>16)                         /// condition to shift back 
+			  pWind->DrawImage(MenuItemImages[i], (i-4) * UI.MenuItemWidth, 5, UI.MenuItemWidth - 5, UI.ToolBarHeight - 5);
+			else 
+			pWind->DrawImage(MenuItemImages[i], i * UI.MenuItemWidth, 5, UI.MenuItemWidth - 5, UI.ToolBarHeight - 5);
+
+	}
 
 	//Draw a line under the toolbar
 	pWind->SetPen(BLACK, 3);
@@ -131,6 +172,30 @@ void Output::CreateDrawToolBar() const
 void Output::CreatePlayToolBar() const
 {
 	UI.InterfaceMode = MODE_PLAY;
+	color cColor = getCrntDrawColor(); // Saves the users current color 
+	int PenSize = getCrntPenWidth();	// and brush width
+	// Set the brush and pen white so we can clear the background
+	pWind->SetPen(WHITE, 0);
+	pWind->SetBrush(WHITE);
+
+	// Draw a rectangle that covers the old draw mode bar
+	pWind->DrawRectangle(0, 0, pWind->GetWidth(), UI.ToolBarHeight);
+
+	string MenuItemImages[PLAY_ITM_COUNT];
+
+	MenuItemImages[DRAW_MODE] = "images\\MenuItems\\drawingMode.jpg";
+	MenuItemImages[byColor] = "images\\MenuItems\\color.jpg";
+	MenuItemImages[byShape] = "images\\MenuItems\\shape.jpg";
+	MenuItemImages[byColorShape] = "images\\MenuItems\\shapeAndColor.jpg";
+	MenuItemImages[ITM_EXIT_playMode] = "images\\MenuItems\\exit.jpg";
+	for (int i = 0; i < PLAY_ITM_COUNT; i++)
+		pWind->DrawImage(MenuItemImages[i], i * UI.MenuItemWidth, 5, UI.MenuItemWidth - 5, UI.ToolBarHeight - 5);
+
+	//Draw a line under the toolbar
+	pWind->SetPen(BLACK, 3);
+	pWind->DrawLine(0, UI.ToolBarHeight, UI.width, UI.ToolBarHeight);
+	pWind->SetPen(cColor, PenSize);
+	pWind->SetBrush(cColor);
 	///TODO: write code to create Play mode menu
 }
 //////////////////////////////////////////////////////////////////////////////////////////
@@ -168,6 +233,21 @@ color Output::getCrntFillColor() const	//get current filling color
 	
 int Output::getCrntPenWidth() const		//get current pen width
 {	return UI.PenWidth;	}
+
+void Output::SetDraColor( color c )
+{
+	UI.DrawColor = c;
+}
+void Output::SetFillColor(color c)
+{
+	UI.FillColor = c;
+}
+
+
+
+
+
+
 
 //======================================================================================//
 //								Figures Drawing Functions								//
@@ -260,6 +340,26 @@ void Output::DrawRect(Point P1, Point P2, GfxInfo RectGfxInfo, bool selected) co
 	 pWind->DrawPolygon(xcoordinates, ycoordinates, 6, style);
 
  }
+
+ void  Output::IntroInterface()
+ {
+	 string IntroImage = "images\\MenuItems\\painting-ideas-featured-1.jpg";
+	 pWind->DrawImage(IntroImage, 0, UI.ToolBarHeight, UI.width, UI.height-100);
+
+
+	 mciSendString(TEXT("open \"Welcome Sound.mp3\" type mpegvideo alias mp3"), NULL, 0, NULL);
+
+	 // Play the .mp3 file
+	 mciSendString(TEXT("play mp3"), NULL, 0, NULL);
+
+	 // Wait for the sound to finish playing
+	 Sleep(3000);
+
+
+	 mciSendString(TEXT("close mp3"), NULL, 0, NULL);
+
+ }
+
 
 
 

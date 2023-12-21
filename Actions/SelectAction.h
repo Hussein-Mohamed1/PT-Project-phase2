@@ -1,8 +1,10 @@
 #pragma once
+#include"../Figures/CFigure.h"
 #include "Action.h"
 class SelectAction :
     public Action
 {
+	CFigure* ClickedFigure;
 private:
 	Point p;
 public:

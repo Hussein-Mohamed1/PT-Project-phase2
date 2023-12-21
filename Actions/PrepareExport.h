@@ -4,6 +4,7 @@
 class PrepareExport :
     public Action
 {
+    string name;
 public:
     PrepareExport(ApplicationManager* pApp);
     void ReadActionParameters();
