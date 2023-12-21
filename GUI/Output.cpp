@@ -355,6 +355,9 @@ void Output::DrawRect(Point P1, Point P2, GfxInfo RectGfxInfo, bool selected) co
 	 // Wait for the sound to finish playing
 	 Sleep(3000);
 
+
+	 mciSendString(TEXT("close mp3"), NULL, 0, NULL);
+
  }
 
 
