@@ -27,25 +27,36 @@ void SelectAction::Execute()
 {
 
 	ReadActionParameters();
-
+	Output* pOut = pManager->GetOutput();
 	ClickedFigure = pManager->GetFigure(p.x, p.y);
-
-}
-
-void SelectAction::undo()
-{
-}
-
-void SelectAction::redo()
-{
-
-	if (ClickedFigure)
+	CFigure* oldSelected_Figure = pManager->GetSelected_Figure();
+	if (oldSelected_Figure == nullptr)
 	{
-		pManager->SetSelectedFig(ClickedFigure);
-		ClickedFigure = NULL;
+		ClickedFigure->SetSelected(true);
+		ClickedFigure->PrintInfo(pOut);
+		pManager->setSelectedFigure(ClickedFigure);
 	}
+
+	// case two if selected figure is seclected before make it unselected and return NUL
+
+	else if (oldSelected_Figure == ClickedFigure)
+	{
+		ClickedFigure->SetSelected(false);
+		pManager->setSelectedFigure(nullptr);
+
+	}
+
+	//  case 3 if the seleced figure isn't the selected before
+
+	else
+	{
+		oldSelected_Figure->SetSelected(false);
+		ClickedFigure->SetSelected(true);
+		ClickedFigure->PrintInfo(pOut);
+		pManager->setSelectedFigure(ClickedFigure);
+	}
+
+
+
 }
-//CFigure* SelectAction::GetSelected_Figure()
-//{
-//	return Selected_Figure;
-//}
+

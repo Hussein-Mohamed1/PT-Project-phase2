@@ -9,22 +9,22 @@ class Action;
 //Main class that manages everything in the application.
 class ApplicationManager
 {
-	
-	enum { MaxFigCount = 200,maxActionCount=5 };	//Max no of figures
-	
+
+	enum { MaxFigCount = 200, maxActionCount = 5 };	//Max no of figures
+
 
 private:
 
 	Action* ActListun[maxActionCount];       //actual array of actions
 	Action* ActListre[maxActionCount];
-	int ActionCountun=0;   
-	int ActionCountre=0;
+	int ActionCountun = 0;
+	int ActionCountre = 0;
 	int FigCount;		//Actual number of figures
 	int DeletedFigCount;
 
 	CFigure* FigList[MaxFigCount];	//List of all figures (Array of pointers)
 	Action* pLastAct;
-	
+
 	CFigure* DeletedFig;
 
 	CFigure* Selected_Figure;
@@ -33,36 +33,31 @@ private:
 
 
 
-	
-
-
-
-
 	//Pointers to Input and Output classes
-	Input *pIn;
-	Output *pOut;
-public:	
-	ApplicationManager(); 
+	Input* pIn;
+	Output* pOut;
+public:
+	ApplicationManager();
 	~ApplicationManager();
 
 	// -- Action-Related Functions
 	//Reads the input command from the user and returns the corresponding action type
 	ActionType GetUserAction() const;
-	void ExecuteAction(ActionType) ; //Creates an action and executes it
-	
+	void ExecuteAction(ActionType); //Creates an action and executes it
+
 	// -- Figures Management Functions
-	
+
 	void RemoveFigure(CFigure* pFig);          //Adds a new figure to the FigList
 	CFigure* DeleteFigure();          //Adds a new figure to the FigList
-	CFigure *GetFigure(int x, int y) const; //Search for a figure given a point inside the figure
-		
+	CFigure* GetFigure(int x, int y); //Search for a figure given a point inside the figure
+	void setSelectedFigure(CFigure* const);
 	void AddFigure(CFigure* pFig);  //Adds a new figure to the FigList
 	void set_figure(CFigure*);
 	// -- Interface Management Functions
-	Input *GetInput() const; //Return pointer to the input
-	Output *GetOutput() const; //Return pointer to the output
-	void UpdateInterface() ;	//Redraws all the drawing window	
-	void SaveAll(fstream &) const;
+	Input* GetInput() const; //Return pointer to the input
+	Output* GetOutput() const; //Return pointer to the output
+	void UpdateInterface();	//Redraws all the drawing window	
+	void SaveAll(fstream&) const;
 	void addToUndo(Action* pAct);
 	void addToRedo();
 
@@ -70,20 +65,19 @@ public:
 
 	Action* GetLastRedo();
 
-	 CFigure* GetSelected_Figure();
-	 void DeleteFunction();
-	 void SetSelectedFig(CFigure* S);
-	 void DeleteFunctionForPlayMood(CFigure* Del);
-	 void CopyDeletedFigToFiglist();
-	 void AddDeletedFig(CFigure* del);
+	CFigure* GetSelected_Figure();
+	void DeleteFunction();
+	void DeleteFunctionForPlayMood(CFigure* Del);
+	void CopyDeletedFigToFiglist();
+	void AddDeletedFig(CFigure* del);
 	// void DeleteFigure(CFigure* Del);
 	 //bool Select(CFigure* figure);
 	 //CFigure* GetFigureByPoint(int x, int y);
-	 int get_numofcolor(color );
-	 int numof_figurewithcolor(figures, colors);
-	 color get_fillcolor(colors);
-	 string color_TO_String(colors c);
-	 string figur_TO_String(figures);
+	int get_numofcolor(color);
+	int numof_figurewithcolor(figures, colors);
+	color get_fillcolor(colors);
+	string color_TO_String(colors c);
+	string figur_TO_String(figures);
 };
 
 

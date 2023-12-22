@@ -1,6 +1,8 @@
 #include "Output.h"
 #include <windows.h>
 #include <mmsystem.h>
+#include "../Actions/playSound.h"
+#include "../DEFS.h"
 #pragma comment(lib, "winmm.lib") 
 
 
@@ -9,7 +11,7 @@ Output::Output()
 {
 	//Initialize user interface parameters
 	UI.InterfaceMode = MODE_DRAW;
-	
+
 
 	UI.width = 1250;
 	UI.height = 650;
@@ -36,8 +38,7 @@ Output::Output()
 	pWind = CreateWind(UI.width, UI.height, UI.wx, UI.wy);
 
 	pWind->ChangeTitle("Paint for Kids - Programming Techniques Project");
-
-	IntroInterface();
+	createIntro();
 
 	ClearDrawArea();
 	//Change the title
@@ -60,11 +61,11 @@ Input* Output::CreateInput() const
 //======================================================================================//
 
 window* Output::CreateWind(int w, int h, int x, int y) const
-{ 
+{
 	window* pW = new window(w, h, x, y);
 	pW->SetBrush(UI.BkGrndColor);
 	pW->SetPen(UI.BkGrndColor, 1);
-	pW->DrawRectangle(0, UI.ToolBarHeight, w, h);	
+	pW->DrawRectangle(0, UI.ToolBarHeight, w, h);
 	return pW;
 }
 //////////////////////////////////////////////////////////////////////////////////////////
@@ -73,6 +74,10 @@ void Output::CreateStatusBar() const
 	pWind->SetPen(UI.StatusBarColor, 1);
 	pWind->SetBrush(UI.StatusBarColor);
 	pWind->DrawRectangle(0, UI.height - UI.StatusBarHeight, UI.width, UI.height);
+}
+void Output::DrawImage(const string path, int x, int y, int Iwidth, int Iheight) const
+{
+	pWind->DrawImage(path, x, y, Iwidth, Iheight);
 }
 //////////////////////////////////////////////////////////////////////////////////////////
 void Output::ClearStatusBar() const
@@ -87,6 +92,16 @@ void Output::ClearStatusBar() const
 //////////////////////////////////////////////////////////////////////////////////////////
 void Output::CreateDrawToolBar() const
 {
+	color cColor = getCrntDrawColor(); // Saves the users current color 
+	int PenSize = getCrntPenWidth();	// and brush width
+	// Set the brush and pen white so we can clear the background
+	pWind->SetPen(WHITE, 0);
+	pWind->SetBrush(WHITE);
+
+	// Draw a rectangle that covers the old draw mode bar
+	pWind->DrawRectangle(0, 0, pWind->GetWidth(), UI.ToolBarHeight);
+	pWind->SetPen(cColor, PenSize);
+	pWind->SetBrush(cColor);
 	UI.InterfaceMode = MODE_DRAW;
 
 	//You can draw the tool bar icons in any way you want.
@@ -96,10 +111,8 @@ void Output::CreateDrawToolBar() const
 	//To control the order of these images in the menu, 
 	//reoder them in UI_Info.h ==> enum DrawMenuItem
 	string MenuItemImages[DRAW_ITM_COUNT];
-
 	MenuItemImages[ITM_RECT] = "images\\MenuItems\\rectangle.jpg";
 	MenuItemImages[ITM_EXIT] = "images\\MenuItems\\exit.jpg";
-
 	MenuItemImages[ITM_CIRC] = "images\\MenuItems\\circle.jpg";
 	MenuItemImages[ITM_TRIA] = "images\\MenuItems\\triangle.jpg";
 	MenuItemImages[ITM_SQUA] = "images\\MenuItems\\square.jpg";
@@ -125,13 +138,7 @@ void Output::CreateDrawToolBar() const
 	MenuItemImages[CLEAR_CANVAS] = "images\\MenuItems\\clearCanvas.jpg";
 	MenuItemImages[ITM_FILL] = "images\\MenuItems\\fill.jpg";
 	MenuItemImages[ITM_MOVE] = "images\\MenuItems\\move.jpg";
-	color cColor = getCrntDrawColor(); // Saves the users current color 
-	int PenSize = getCrntPenWidth();	// and brush width
-	pWind->SetPen(BLACK, 0);
-	pWind->SetBrush(BLACK);
-	pWind->DrawRectangle(0, 0, pWind->GetWidth(), UI.ToolBarHeight);
-	pWind->SetPen(cColor, PenSize);
-	pWind->SetBrush(cColor);
+
 	//Draw menu item one image at a time
 	for (int i = 0; i < DRAW_ITM_COUNT; i++)
 	{
@@ -149,19 +156,19 @@ void Output::CreateDrawToolBar() const
 			k = 0;
 			for (int j = 14; j < 17; j++)
 			{
-				pWind->DrawImage(MenuItemImages[j], ((j-3) * UI.MenuItemWidth - k * 22), 25, UI.MiniColorWidth, UI.MiniColorHeight);
+				pWind->DrawImage(MenuItemImages[j], ((j - 3) * UI.MenuItemWidth - k * 22), 25, UI.MiniColorWidth, UI.MiniColorHeight);
 				k++;
 				i = j;
 			}
 
 
 
-	    }
-		else 
-			if(i>16)                         /// condition to shift back 
-			  pWind->DrawImage(MenuItemImages[i], (i-4) * UI.MenuItemWidth, 5, UI.MenuItemWidth - 5, UI.ToolBarHeight - 5);
-			else 
-			pWind->DrawImage(MenuItemImages[i], i * UI.MenuItemWidth, 5, UI.MenuItemWidth - 5, UI.ToolBarHeight - 5);
+		}
+		else
+			if (i > 16)                         /// condition to shift back 
+				pWind->DrawImage(MenuItemImages[i], (i - 4) * UI.MenuItemWidth, 5, UI.MenuItemWidth - 5, UI.ToolBarHeight - 5);
+			else
+				pWind->DrawImage(MenuItemImages[i], i * UI.MenuItemWidth, 5, UI.MenuItemWidth - 5, UI.ToolBarHeight - 5);
 
 	}
 
@@ -212,32 +219,44 @@ void Output::ClearDrawArea() const
 	//Draw a line under the toolbar
 	pWind->SetPen(BLACK, 3);
 	pWind->DrawLine(0, UI.ToolBarHeight, UI.width, UI.ToolBarHeight);
-	
+
+}
+void Output::createIntro()
+{
+	pWind->DrawImage("images\\MenuItems\\PaintLogo.jpg", 0, 0, UI.width, UI.height);
+	PlaySound(".\\sounds\\Welcome Sound.wav", NULL, SND_SYNC | SND_FILENAME);
+
 }
 //////////////////////////////////////////////////////////////////////////////////////////
 
 void Output::PrintMessage(string msg) const	//Prints a message on status bar
 {
 	ClearStatusBar();	//First clear the status bar
-	
+
 	pWind->SetPen(UI.MsgColor, 50);
-	pWind->SetFont(20, BOLD , BY_NAME, "Arial");   
-	pWind->DrawString(10, UI.height - (int)(UI.StatusBarHeight/1.5), msg);
+	pWind->SetFont(20, BOLD, BY_NAME, "Arial");
+	pWind->DrawString(10, UI.height - (int)(UI.StatusBarHeight / 1.5), msg);
 }
 //////////////////////////////////////////////////////////////////////////////////////////
 
 color Output::getCrntDrawColor() const	//get current drawing color
-{	return UI.DrawColor;	}
+{
+	return UI.DrawColor;
+}
 //////////////////////////////////////////////////////////////////////////////////////////
 
 color Output::getCrntFillColor() const	//get current filling color
-{	return UI.FillColor;	}
+{
+	return UI.FillColor;
+}
 //////////////////////////////////////////////////////////////////////////////////////////
-	
-int Output::getCrntPenWidth() const		//get current pen width
-{	return UI.PenWidth;	}
 
-void Output::SetDraColor( color c )
+int Output::getCrntPenWidth() const		//get current pen width
+{
+	return UI.PenWidth;
+}
+
+void Output::SetDraColor(color c)
 {
 	UI.DrawColor = c;
 }
@@ -259,109 +278,90 @@ void Output::SetFillColor(color c)
 void Output::DrawRect(Point P1, Point P2, GfxInfo RectGfxInfo, bool selected) const
 {
 	color DrawingClr;
-	if(selected)	
+	if (selected)
 		DrawingClr = UI.HighlightColor; //Figure should be drawn highlighted
-	else			
+	else
 		DrawingClr = RectGfxInfo.DrawClr;
-	
-	pWind->SetPen(DrawingClr,1);
+
+	pWind->SetPen(DrawingClr, 1);
 	drawstyle style;
-	if (RectGfxInfo.isFilled)	
+	if (RectGfxInfo.isFilled)
 	{
-		style = FILLED;		
+		style = FILLED;
 		pWind->SetBrush(RectGfxInfo.FillClr);
 	}
-	else	
+	else
 		style = FRAME;
 
-	
+
 	pWind->DrawRectangle(P1.x, P1.y, P2.x, P2.y, style);
-	
+
 }
- void Output ::DrawCirc(Point P1, Point P2, GfxInfo RectGfxInfo, bool selected ) const  //Draw a Circle
+void Output::DrawCirc(Point P1, Point P2, GfxInfo RectGfxInfo, bool selected) const  //Draw a Circle
 {
-		color DrawingClr;
-		if (selected)
-			DrawingClr = UI.HighlightColor; //Figure should be drawn highlighted
-		else
-			DrawingClr = RectGfxInfo.DrawClr;
+	color DrawingClr;
+	if (selected)
+		DrawingClr = UI.HighlightColor; //Figure should be drawn highlighted
+	else
+		DrawingClr = RectGfxInfo.DrawClr;
 
-		pWind->SetPen(DrawingClr, 1);
-		drawstyle style;
-		if (RectGfxInfo.isFilled)
-		{
-			style = FILLED;
-			pWind->SetBrush(RectGfxInfo.FillClr);
-		}
-		else
-			style = FRAME;
+	pWind->SetPen(DrawingClr, 1);
+	drawstyle style;
+	if (RectGfxInfo.isFilled)
+	{
+		style = FILLED;
+		pWind->SetBrush(RectGfxInfo.FillClr);
+	}
+	else
+		style = FRAME;
 
 
-		pWind->DrawCircle(P1.x, P1.y, sqrt((P1.x - P2.x) * (P1.x - P2.x) + (P1.y - P2.y) * (P1.y - P2.y)), style);
+	pWind->DrawCircle(P1.x, P1.y, sqrt((P1.x - P2.x) * (P1.x - P2.x) + (P1.y - P2.y) * (P1.y - P2.y)), style);
 }
- void Output::Drawrtriangle(int x1, int y1, int x2, int y2, int x3, int y3, GfxInfo RectGfxInfo, bool selected) const
- {
-	 color DrawingClr;
-	 if (selected)
-		 DrawingClr = UI.HighlightColor; //Figure should be drawn highlighted
-	 else
-		 DrawingClr = RectGfxInfo.DrawClr;
+void Output::Drawrtriangle(int x1, int y1, int x2, int y2, int x3, int y3, GfxInfo RectGfxInfo, bool selected) const
+{
+	color DrawingClr;
+	if (selected)
+		DrawingClr = UI.HighlightColor; //Figure should be drawn highlighted
+	else
+		DrawingClr = RectGfxInfo.DrawClr;
 
-	 pWind->SetPen(DrawingClr, 1);
-	 drawstyle style;
-	 if (RectGfxInfo.isFilled)
-	 {
-		 style = FILLED;
-		 pWind->SetBrush(RectGfxInfo.FillClr);
-	 }
-	 else
-		 style = FRAME;
-
-
-	 pWind->DrawTriangle(x1, y1, x2, y2, x3, y3, style);
-
- }
- void Output::Drawhexagon(const int* xcoordinates, const int* ycoordinates, GfxInfo RectGfxInfo, bool selected) const
- {
-	 color DrawingClr;
-	 if (selected)
-		 DrawingClr = UI.HighlightColor; //Figure should be drawn highlighted
-	 else
-		 DrawingClr = RectGfxInfo.DrawClr;
-
-	 pWind->SetPen(DrawingClr, 1);
-	 drawstyle style;
-	 if (RectGfxInfo.isFilled)
-	 {
-		 style = FILLED;
-		 pWind->SetBrush(RectGfxInfo.FillClr);
-	 }
-	 else
-		 style = FRAME;
+	pWind->SetPen(DrawingClr, 1);
+	drawstyle style;
+	if (RectGfxInfo.isFilled)
+	{
+		style = FILLED;
+		pWind->SetBrush(RectGfxInfo.FillClr);
+	}
+	else
+		style = FRAME;
 
 
-	 pWind->DrawPolygon(xcoordinates, ycoordinates, 6, style);
+	pWind->DrawTriangle(x1, y1, x2, y2, x3, y3, style);
 
- }
+}
+void Output::Drawhexagon(const int* xcoordinates, const int* ycoordinates, GfxInfo RectGfxInfo, bool selected) const
+{
+	color DrawingClr;
+	if (selected)
+		DrawingClr = UI.HighlightColor; //Figure should be drawn highlighted
+	else
+		DrawingClr = RectGfxInfo.DrawClr;
 
- void  Output::IntroInterface()
- {
-	 string IntroImage = "images\\MenuItems\\painting-ideas-featured-1.jpg";
-	 pWind->DrawImage(IntroImage, 0, UI.ToolBarHeight, UI.width, UI.height-100);
+	pWind->SetPen(DrawingClr, 1);
+	drawstyle style;
+	if (RectGfxInfo.isFilled)
+	{
+		style = FILLED;
+		pWind->SetBrush(RectGfxInfo.FillClr);
+	}
+	else
+		style = FRAME;
 
 
-	 mciSendString(TEXT("open \"Welcome Sound.mp3\" type mpegvideo alias mp3"), NULL, 0, NULL);
+	pWind->DrawPolygon(xcoordinates, ycoordinates, 6, style);
 
-	 // Play the .mp3 file
-	 mciSendString(TEXT("play mp3"), NULL, 0, NULL);
-
-	 // Wait for the sound to finish playing
-	 Sleep(3000);
-
-
-	 mciSendString(TEXT("close mp3"), NULL, 0, NULL);
-
- }
+}
 
 
 
