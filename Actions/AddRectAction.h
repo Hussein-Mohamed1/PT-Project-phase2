@@ -9,7 +9,7 @@ class AddRectAction: public Action
 private:
 	Point P1, P2; //Rectangle Corners
 	GfxInfo RectGfxInfo;
-	
+	CFigure* DeletedFig;
 public:
 	AddRectAction(ApplicationManager *pApp);
 
@@ -18,6 +18,9 @@ public:
 	
 	//Add rectangle to the ApplicationManager
 	virtual void Execute() ;
+	virtual void undo();
+	virtual void redo();
+
 	
 };
 

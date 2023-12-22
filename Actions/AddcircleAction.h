@@ -9,6 +9,7 @@ class AddcircleAction : public Action
   private : 
     Point P1, P2;
     GfxInfo RectGfxInfo;
+	CFigure* DeletedFig;
 public:
 	AddcircleAction(ApplicationManager* pApp);
 
@@ -17,7 +18,8 @@ public:
 
 	//Add rectangle to the ApplicationManager
 	virtual void Execute();
-
+	virtual void undo();
+	virtual void redo();
 };
 
 

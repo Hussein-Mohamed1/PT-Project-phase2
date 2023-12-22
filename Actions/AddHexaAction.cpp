@@ -41,12 +41,20 @@ void AddHexaAction::Execute()
 {
 	
 	ReadActionParameters();
-
 	/// create New Hexa
 
 	CHexa* H = new CHexa(P1, RectGfxInfo);
-
 	// Add Hexa to Fig List
 
 	pManager->AddFigure(H);
+}
+
+void AddHexaAction::undo()
+{
+	DeletedFig = pManager->DeleteFigure();
+}
+
+void AddHexaAction::redo()
+{
+	pManager->AddFigure(DeletedFig);
 }
