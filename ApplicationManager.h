@@ -33,11 +33,6 @@ private:
 
 
 
-	
-
-
-
-
 	//Pointers to Input and Output classes
 	Input *pIn;
 	Output *pOut;
@@ -54,7 +49,7 @@ public:
 	
 	void RemoveFigure(CFigure* pFig);          //Adds a new figure to the FigList
 	CFigure* DeleteFigure();          //Adds a new figure to the FigList
-	CFigure *GetFigure(int x, int y) const; //Search for a figure given a point inside the figure
+	CFigure *GetFigure(int x, int y) ; //Search for a figure given a point inside the figure
 		
 	void AddFigure(CFigure* pFig);  //Adds a new figure to the FigList
 	void set_figure(CFigure*);
@@ -72,7 +67,6 @@ public:
 
 	 CFigure* GetSelected_Figure();
 	 void DeleteFunction();
-	 void SetSelectedFig(CFigure* S);
 	 void DeleteFunctionForPlayMood(CFigure* Del);
 	 void CopyDeletedFigToFiglist();
 	 void AddDeletedFig(CFigure* del);
