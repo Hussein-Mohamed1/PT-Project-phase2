@@ -181,6 +181,12 @@
     <ClCompile Include="Actions\PrepareImport.cpp">
       <Filter>Action Classes</Filter>
     </ClCompile>
+    <ClCompile Include="Actions\UndoAction.cpp">
+      <Filter>Action Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="Actions\RedoAction.cpp">
+      <Filter>Action Classes</Filter>
+    </ClCompile>
     <ClCompile Include="to_playmood.cpp">
       <Filter>Action Classes</Filter>
     </ClCompile>
@@ -323,6 +329,12 @@
       <Filter>Action Classes</Filter>
     </ClInclude>
     <ClInclude Include="Actions\PrepareImport.h">
+      <Filter>Action Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="Actions\UndoAction.h">
+      <Filter>Action Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="Actions\RedoAction.h">
       <Filter>Action Classes</Filter>
     </ClInclude>
     <ClInclude Include="to_playmood.h">

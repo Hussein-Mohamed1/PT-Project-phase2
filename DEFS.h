@@ -11,6 +11,7 @@ enum ActionType //The actions supported (you can add more if needed)
 	DRAW_TRIA,
 	DRAW_SQUA,
 	DRAW_HEXA,
+
 	FUNC_ADD_IMAGE,
 	FUNC_SELECT,
 	FUNC_DELETE,
@@ -21,9 +22,12 @@ enum ActionType //The actions supported (you can add more if needed)
 	COLOR_GREEN,
 	COLOR_YELLOW,
 	COLOR_ORANGE,
+
 	FUNC_UNDO,
 	FUNC_REDO,
+	
 	FUNC_START_REC,
+	
 	FUNC_PLAY_REC,
 	FUNC_STOP_REC,
 	FUNC_SAVE,

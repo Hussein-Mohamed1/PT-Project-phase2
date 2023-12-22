@@ -22,4 +22,11 @@ void PrepareExport::Execute() {
 		pManager->SaveAll(*OutputFile); // 		Now Each Figures' data will be written after its name and id
 
 	}
-};
+}
+void PrepareExport::undo()
+{
+}
+void PrepareExport::redo()
+{
+}
+;

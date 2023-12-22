@@ -30,6 +30,15 @@ void SelectAction::Execute()
 
 	 ClickedFigure= pManager->GetFigure(p.x, p.y);
 
+}
+
+void SelectAction::undo()
+{
+}
+
+void SelectAction::redo()
+{
+}
 	 if (ClickedFigure)
 	 {
 		 pManager->SetSelectedFig(ClickedFigure);

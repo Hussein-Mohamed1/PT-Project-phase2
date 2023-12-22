@@ -9,6 +9,7 @@ public:
     PrepareExport(ApplicationManager* pApp);
     void ReadActionParameters();
     void Execute();
-
+    virtual void undo();
+    virtual void redo();
 };
 

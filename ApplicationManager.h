@@ -5,17 +5,27 @@
 #include "Figures\CFigure.h"
 #include "GUI\input.h"
 #include "GUI\output.h"
-
+class Action;
 //Main class that manages everything in the application.
 class ApplicationManager
 {
-	enum { MaxFigCount = 200 };	//Max no of figures
+	
+	enum { MaxFigCount = 200,maxActionCount=5 };	//Max no of figures
+	
 
 private:
+
+	Action* ActListun[maxActionCount];       //actual array of actions
+	Action* ActListre[maxActionCount];
+	int ActionCountun=0;   
+	int ActionCountre=0;
 	int FigCount;		//Actual number of figures
 	int DeletedFigCount;
 
 	CFigure* FigList[MaxFigCount];	//List of all figures (Array of pointers)
+	Action* pLastAct;
+	
+	CFigure* DeletedFig;
 
 	CFigure* Selected_Figure;
 
@@ -41,6 +51,11 @@ public:
 	void ExecuteAction(ActionType) ; //Creates an action and executes it
 	
 	// -- Figures Management Functions
+	
+	void RemoveFigure(CFigure* pFig);          //Adds a new figure to the FigList
+	CFigure* DeleteFigure();          //Adds a new figure to the FigList
+	CFigure *GetFigure(int x, int y) const; //Search for a figure given a point inside the figure
+		
 	void AddFigure(CFigure* pFig);  //Adds a new figure to the FigList
 	CFigure *GetFigure(int x, int y) ; //Search for a figure given a point inside the figure
 	void set_figure(CFigure*);
@@ -49,6 +64,13 @@ public:
 	Output *GetOutput() const; //Return pointer to the output
 	void UpdateInterface() ;	//Redraws all the drawing window	
 	void SaveAll(fstream &) const;
+	void addToUndo(Action* pAct);
+	void addToRedo();
+
+	Action* GetLastUndo();
+
+	Action* GetLastRedo();
+
 	 CFigure* GetSelected_Figure();
 	 void DeleteFunction();
 	 void SetSelectedFig(CFigure* S);

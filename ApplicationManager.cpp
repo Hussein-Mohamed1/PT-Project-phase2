@@ -7,6 +7,7 @@
 #include"Actions/SelectAction.h"
 #include "Actions/PrepareExport.h"
 #include "Actions/PrepareImport.h"
+#include "Actions/UndoAction.h"
 #include "Actions/MoveFigure.h"
 #include "fstream"
 #include "Figures/CCircle.h"
@@ -21,14 +22,14 @@
 #include "figure_color.h"
 #include "figure_typeandcolor.h"
 #include"to_playmood.h"
+#include "Actions/Action.h"
+#include "Actions/RedoAction.h"
 using namespace std;
-
+//class Action ;
 //Constructor
 ApplicationManager::ApplicationManager()
 {
 
-	// Initializes the current selected figure pointer to null;
-	Selected_Figure = nullptr;
 	//Create Input and output
 	pOut = new Output;
 	pIn = pOut->CreateInput();
@@ -36,12 +37,20 @@ ApplicationManager::ApplicationManager()
 	DeletedFigCount = 0;
 	Selected_Figure = NULL;
 
+	 ActionCountun = 0;
+	 ActionCountre = 0;
+	 pLastAct = nullptr;
 
 	//Create an array of figure pointers and set them to NULL		
 	for (int i = 0; i < MaxFigCount; i++)
 	{
 		FigList[i] = NULL;
-		DeletedFigList[i] = NULL;
+}
+	for (int i = 0; i < maxActionCount; i++)
+		ActListun[i] = NULL;
+	for (int i = 0; i < maxActionCount; i++)
+		ActListre[i] = NULL;
+}
 	}
 }
 
@@ -55,6 +64,7 @@ ActionType ApplicationManager::GetUserAction() const
 }
 ////////////////////////////////////////////////////////////////////////////////////
 //Creates an action and executes it
+
 void ApplicationManager::ExecuteAction(ActionType ActType)
 {
 	Action* pAct = NULL;
@@ -63,19 +73,41 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 	switch (ActType)
 	{
 	case DRAW_RECT:
-		pAct = new AddRectAction(this);
-		break;
+	{pAct = new AddRectAction(this);
+	addToUndo(pAct);
+
+}
+	break;
+
 	case DRAW_CIRC:
+	{
 		pAct = new AddcircleAction(this);
+		addToUndo(pAct);
+		
+	}
 		break;
+
 	case DRAW_TRIA:
-		pAct = new AddTriangleAction(this);
+	{pAct = new AddTriangleAction(this);
+	addToUndo(pAct);
+	
+	}
 		break;
+
 	case DRAW_SQUA:
-		pAct = new AddSquareAction(this);
+	{	pAct = new AddSquareAction(this);
+	addToUndo(pAct);
+	
+	}
+	
 		break;
+
 	case DRAW_HEXA:
+	{
 		pAct = new AddHexaAction(this);
+		addToUndo(pAct);
+		
+	}
 		break;
 	case FUNC_SELECT:
 		pAct = new SelectAction(this);
@@ -158,7 +190,14 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 	case FUNC_LOAD:
 		pAct = new PrepareImport(this);
 		break;
-	case FUNC_START_REC:
+	case FUNC_EXIT:
+	case FUNC_UNDO:
+		pAct = new UndoAction(this);
+			break;
+
+	case FUNC_REDO:
+		pAct = new RedoAction (this);
+		break;
 		pOut->PrintMessage("START");
 		break;
 	case FUNC_PLAY_REC:
@@ -176,8 +215,9 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 
 	case FUNC_EXIT:
 		///create ExitAction here
+		///create ExitAction 
 		break;
-
+		
 	case STATUS:	//a click on the status bar ==> no action
 		return;
 	}
@@ -185,11 +225,16 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 	//Execute the created action
 	if (pAct != NULL)
 	{
-		pAct->Execute();//Execute
-		delete pAct;	//You may need to change this line depending to your implementation
+		//addToUndo(pAct);
+		//addToRedo();
+		pAct->Execute(); //Execute
+		//ActList[ActionCount++] = pAct;
+	//	delete pAct;	//You may need to change this line depending to your implementation
 		pAct = NULL;
 	}
 }
+
+
 //==================================================================================//
 //						Figures Management Functions								//
 //==================================================================================//
@@ -210,9 +255,30 @@ void ApplicationManager::AddDeletedFig(CFigure* del)
 }
 
 ////////////////////////////////////////////////////////////////////////////////////
-
-CFigure* ApplicationManager::GetFigure(int x, int y)
+CFigure* ApplicationManager::GetFigure(int x, int y) const
+//Remove a figure from the list of figures
+void ApplicationManager::RemoveFigure(CFigure* pFig)
 {
+	if (FigCount >0)
+		FigList[FigCount--] = nullptr;
+}
+
+CFigure* ApplicationManager::DeleteFigure()
+{
+	CFigure* deletedfigure;
+	if (FigCount >= 1)
+	{
+		deletedfigure = FigList[FigCount-1];
+		FigList [FigCount-1] = nullptr;
+		delete FigList[FigCount-1];
+		FigCount--;
+		return deletedfigure;
+	}
+	else 
+	return nullptr;
+}
+////////////////////////////////////////////////////////////////////////////////////
+CFigure* ApplicationManager::GetFigure(int x, int y) const
 	for (int i = 0; i < FigCount; i++)
 	{
 		if (FigList[i] != NULL)                  // Validation to prevent crash if Figure is deleted
@@ -282,12 +348,11 @@ CFigure* ApplicationManager::GetFigure(int x, int y)
 void ApplicationManager::UpdateInterface()
 {
 	pOut->ClearDrawArea();
-
 	for (int i = 0; i < FigCount; i++)
-	{
 		if (FigList[i] != NULL)
+		{
 			FigList[i]->Draw(pOut);
-	}
+		}          //Call Draw function (virtual member fn)
 
 }
 
@@ -365,6 +430,58 @@ void ApplicationManager::SaveAll(fstream& OutputFile) const {
 	}
 }
 
+void ApplicationManager::addToUndo(Action* pAct)
+{
+	if (ActionCountun < 5&& ActionCountun>=0)
+	{
+		ActListun[ActionCountun] = pAct;
+
+		//if (ActionCountun < 4)
+		ActionCountun++;
+		
+	}else
+	{
+		ActionCountun = 5;
+
+		for (int i = 0;i < ActionCountun;i++) {//Shifting Actions
+			Action* temp1 = ActListun[i];
+			ActListun[i] = pAct;
+			pAct = temp1;
+		}
+	}
+}
+
+void ApplicationManager::addToRedo()
+{
+	ActListre[ActionCountre] = pLastAct;
+	ActionCountun--;
+	ActionCountre++;
+
+}
+
+Action* ApplicationManager::GetLastUndo()
+{
+	if (ActionCountun >= 1)
+	{
+		pLastAct = ActListun[ActionCountun-1];
+		ActListun[ActionCountun-1] = NULL;
+		delete ActListun[ActionCountun-1 ];
+		return pLastAct;
+	}
+	return NULL;
+}
+Action* ApplicationManager::GetLastRedo()
+{
+	if (ActionCountre >= 1)
+	{
+		pLastAct = ActListre[ActionCountre - 1];
+		ActListre[ActionCountre-1] = NULL;
+		delete ActListre[ActionCountre - 1];
+		ActionCountre--;
+		return pLastAct;
+	}
+	return NULL;
+}
 //Destructor
 ApplicationManager::~ApplicationManager()
 {

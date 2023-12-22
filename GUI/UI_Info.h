@@ -20,20 +20,29 @@ enum DrawMenuItem //The items of the Draw menu (you should add more items)
 	ITM_TRIA,
 	ITM_SQUA,
 	ITM_HEXA,
+
 	ADD_IMAGE,
 	ITM_SELECT,
 	ITM_MOVE,
 	ITM_FILL,
 	ITM_BRUSH,
 	ITM_DELETE,
+	
+	
 	ITM_BLACK,
 	ITM_RED,
 	ITM_BLUE,
 	ITM_GREEN,
 	ITM_YELLOW,
 	ITM_ORANGE,
-	ITM_UNDO,
+
+
+
+    ITM_UNDO,
 	ITM_REDO,
+		ITM_MOVE,
+	ITM_FILL,
+	
 	ITM_START_REC,
 	ITM_PLAY_REC,
 	ITM_STOP_REC,
