@@ -10,7 +10,7 @@ SelectAction::SelectAction(ApplicationManager* pApp) :Action(pApp)
 	ClickedFigure = NULL;
 
 }
- 
+
 void SelectAction::ReadActionParameters()
 {
 
@@ -26,9 +26,9 @@ void SelectAction::ReadActionParameters()
 void SelectAction::Execute()
 {
 
-	  ReadActionParameters();
+	ReadActionParameters();
 
-	 ClickedFigure= pManager->GetFigure(p.x, p.y);
+	ClickedFigure = pManager->GetFigure(p.x, p.y);
 
 }
 
@@ -38,12 +38,12 @@ void SelectAction::undo()
 
 void SelectAction::redo()
 {
-}
-	 if (ClickedFigure)
-	 {
-		 pManager->SetSelectedFig(ClickedFigure);
-		 ClickedFigure = NULL;
-	 }
+
+	if (ClickedFigure)
+	{
+		pManager->SetSelectedFig(ClickedFigure);
+		ClickedFigure = NULL;
+	}
 }
 //CFigure* SelectAction::GetSelected_Figure()
 //{

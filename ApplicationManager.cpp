@@ -66,57 +66,39 @@ ActionType ApplicationManager::GetUserAction() const
 
 void ApplicationManager::ExecuteAction(ActionType ActType)
 {
-	Action* pAct = NULL;
+	Action* pAct = nullptr;
 
 	//According to Action Type, create the corresponding action object
 	switch (ActType)
 	{
 	case DRAW_RECT:
-	{pAct = new AddRectAction(this);
-	addToUndo(pAct);
-
-	}
-	break;
+		pAct = new AddRectAction(this);
+		addToUndo(pAct);
+		break;
 
 	case DRAW_CIRC:
-	{
+
 		pAct = new AddcircleAction(this);
 		addToUndo(pAct);
-
-	}
-	break;
+		break;
 
 	case DRAW_TRIA:
-	{pAct = new AddTriangleAction(this);
-	addToUndo(pAct);
-
-	}
-	break;
+		pAct = new AddTriangleAction(this);
+		addToUndo(pAct);
+		break;
 
 	case DRAW_SQUA:
-	{	pAct = new AddSquareAction(this);
-	addToUndo(pAct);
-
-	}
-
-	break;
+		pAct = new AddSquareAction(this);
+		addToUndo(pAct);
+		break;
 
 	case DRAW_HEXA:
-	{
 		pAct = new AddHexaAction(this);
 		addToUndo(pAct);
-
-	}
-	break;
+		break;
 	case FUNC_SELECT:
 		pAct = new SelectAction(this);
 		break;
-		//case FUNC_SAVE:
-		//	pAct = new PrepareExport(this);
-		//	break;
-		//case FUNC_LOAD:
-		//	pAct = new PrepareImport(this);
-		//	break;
 	case ENTER_PLAY_MODE:
 		pAct = new to_playmood(this);
 		break;
@@ -128,24 +110,6 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		break;
 	case BY_COLOR_SHAPE:
 		pAct = new figure_typeandcolor(this);
-		break;
-		//case COLOR_BLACK:
-		//pAct = new ChangeColorAction(this,BLACK);
-		//	break;
-		//case COLOR_RED:
-		//pAct = new ChangeColorAction(this,RED);
-		//	break;
-		//case COLOR_GREEN :
-		//	pAct = new ChangeColorAction(this, GREEN);
-		//	break;
-		//case COLOR_ORANGE:
-		//	pAct = new ChangeColorAction(this, ORANGE);
-		//	break;
-		//case COLOR_YELLOW:
-		//	pAct = new ChangeColorAction(this, YELLOW);
-		//	break;
-		//case COLOR_BLUE:
-		//	pAct = new ChangeColorAction(this, BLUE);
 		break;
 	case FUNC_FILL:
 		pAct = new ChangeColorAction(this, true);
@@ -159,24 +123,6 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 	case ENTER_DRAW_MODE:
 		pAct = new to_drawmood(this);
 		break;
-		//case COLOR_BLACK:
-		//	pOut->PrintMessage("BLACK");
-		//	break;
-		//case COLOR_RED:
-		//	pOut->PrintMessage("RED");
-		//	break;
-		//case COLOR_BLUE:
-		//	pOut->PrintMessage("BLUE");
-		//	break;
-		//case COLOR_GREEN:
-		//	pOut->PrintMessage("GREEN");
-		//	break;
-		//case COLOR_YELLOW:
-		//	pOut->PrintMessage("YELLOW");
-		//	break;
-		//case COLOR_ORANGE:
-		//	pOut->PrintMessage("ORANGE");
-		//	break;
 	case FUNC_SAVE:
 		pAct = new PrepareExport(this);
 		break;
@@ -221,7 +167,7 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		//addToRedo();
 		pAct->Execute(); //Execute
 		//ActList[ActionCount++] = pAct;
-	//	delete pAct;	//You may need to change this line depending to your implementation
+
 		pAct = NULL;
 	}
 }
@@ -296,40 +242,6 @@ CFigure* ApplicationManager::GetFigure(int x, int y) const {
 	return NULL;
 }
 
-
-
-//bool ApplicationManager :: Select(CFigure* figure)
-//{
-//	if (Selected_Figure==figure) {
-//		Selected_Figure->SetSelected(false);
-//		Selected_Figure = nullptr;
-//	}
-//	else if (Selected_Figure == nullptr)
-//	{
-//		Selected_Figure = figure;
-//		Selected_Figure->SetSelected(true);
-//	}
-//	else  //if (Selected_Figure != figure)
-//	{
-//		Selected_Figure->SetSelected(false);
-//		Selected_Figure = nullptr;
-//		Selected_Figure = figure;
-//		Selected_Figure->SetSelected(true);
-//
-//	}
-//
-//}
-//
-//CFigure* ApplicationManager:: GetFigureByPoint(int x, int y)
-//{
-//	for (int i = 0; i < FigCount; i++)
-//	{
-//		if (FigList[i]->checkselection(x, y))
-//		{
-//			return FigList[i];
-//		}
-//	}
-//}
 
 //==================================================================================//
 //							Interface Management Functions							//
