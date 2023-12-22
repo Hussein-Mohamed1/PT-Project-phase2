@@ -55,5 +55,5 @@ void playSound::Execute()
 	case FUNC_MOVE:
 		PlaySound(".\\sounds\\move.wav", NULL, SND_ASYNC | SND_FILENAME);
 		break;
-	}
+	}Pause(100);
 }

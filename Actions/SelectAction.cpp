@@ -30,7 +30,7 @@ void SelectAction::Execute()
 	Output* pOut = pManager->GetOutput();
 	ClickedFigure = pManager->GetFigure(p.x, p.y);
 	CFigure* oldSelected_Figure = pManager->GetSelected_Figure();
-	if (oldSelected_Figure == nullptr)
+	if (oldSelected_Figure == nullptr && ClickedFigure != nullptr)
 	{
 		ClickedFigure->SetSelected(true);
 		ClickedFigure->PrintInfo(pOut);
@@ -39,7 +39,7 @@ void SelectAction::Execute()
 
 	// case two if selected figure is seclected before make it unselected and return NUL
 
-	else if (oldSelected_Figure == ClickedFigure)
+	else if (oldSelected_Figure == ClickedFigure && ClickedFigure != nullptr)
 	{
 		ClickedFigure->SetSelected(false);
 		pManager->setSelectedFigure(nullptr);
@@ -48,7 +48,7 @@ void SelectAction::Execute()
 
 	//  case 3 if the seleced figure isn't the selected before
 
-	else
+	else if (ClickedFigure != nullptr)
 	{
 		oldSelected_Figure->SetSelected(false);
 		ClickedFigure->SetSelected(true);

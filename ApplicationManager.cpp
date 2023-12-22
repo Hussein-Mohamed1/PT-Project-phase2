@@ -25,6 +25,7 @@
 #include "Actions/playSound.h"
 #include "Actions/Action.h"
 #include "Actions/RedoAction.h"
+#include "CMUgraphicsLib/auxil.h"
 using namespace std;
 //class Action ;
 //Constructor
@@ -67,8 +68,8 @@ ActionType ApplicationManager::GetUserAction() const
 
 void ApplicationManager::ExecuteAction(ActionType ActType)
 {
+	pIn->FlushMouseQueue();
 	Action* pAct = nullptr;
-
 	//According to Action Type, create the corresponding action object
 	switch (ActType)
 	{
