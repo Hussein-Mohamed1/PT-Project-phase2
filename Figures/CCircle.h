@@ -6,10 +6,10 @@ class CCircle : public CFigure
 private:
 	Point P1, P2;
 	int id;
-
-	static int numofcirc;
 public:
 	CCircle(Point, Point, GfxInfo FigureGfxInfo);
+	Point&  GetP1();
+	
 	CCircle();
 	virtual void Draw(Output* pOut) const;
 	virtual bool checkselection(int x, int y);
@@ -20,7 +20,6 @@ public:
 	bool isInsideWindowBoundaries(const Point&) const;
 	int Getid();
 	void PrintInfo(Output* pOut);
-	static int get_numofshape();
 	color get_fillcolor();
 };
 

@@ -6,7 +6,9 @@
 
  
 AddTriangleAction::AddTriangleAction(ApplicationManager* pApp):Action(pApp)
-{}
+{
+	numofshapes++;
+}
 void AddTriangleAction::ReadActionParameters()
 {
 	Output* pOut = pManager->GetOutput();
@@ -67,3 +69,8 @@ void AddTriangleAction::redo()
 }
 
 
+int AddTriangleAction::numofshapes = 0;
+int AddTriangleAction::getnumofshapes()
+{
+	return numofshapes;
+}

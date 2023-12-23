@@ -5,6 +5,7 @@
 #include "Figures\CFigure.h"
 #include "GUI\input.h"
 #include "GUI\output.h"
+#include "Actions/Action.h"
 class Action;
 //Main class that manages everything in the application.
 class ApplicationManager
@@ -24,25 +25,35 @@ private:
 
 	CFigure* FigList[MaxFigCount];	//List of all figures (Array of pointers)
 	Action* pLastAct;
-
+	color fill[5];
+	color brush[5];
+	Point Pos[5];
 	CFigure* DeletedFig;
 
 	CFigure* Selected_Figure;
 
 	CFigure* DeletedFigList[MaxFigCount];
 
-
-
 	//Pointers to Input and Output classes
-	Input* pIn;
-	Output* pOut;
-public:
-	ApplicationManager();
+	Input *pIn;
+	Output *pOut;
+public:	
+	static int countpos;
+	static int countrepos;
+	static int countfill;
+	static int countbrush;
+	ApplicationManager(); 
 	~ApplicationManager();
-
+	void ClearAll();
 	// -- Action-Related Functions
 	//Reads the input command from the user and returns the corresponding action type
 	ActionType GetUserAction() const;
+	void ExecuteAction(ActionType , Action* Rec_action=nullptr) ; //Creates an action and executes it
+	
+	void ExecuteAction(ActionType) ; //Creates an action and executes it
+	void addfillcolor(color c);
+	void addbrushcolor(color c);
+
 	void ExecuteAction(ActionType); //Creates an action and executes it
 
 	// -- Figures Management Functions
@@ -64,20 +75,28 @@ public:
 	Action* GetLastUndo();
 
 	Action* GetLastRedo();
+	void addPoint(Point p);
+	
+	Point getpoint(int index);
 
-	CFigure* GetSelected_Figure();
-	void DeleteFunction();
-	void DeleteFunctionForPlayMood(CFigure* Del);
-	void CopyDeletedFigToFiglist();
-	void AddDeletedFig(CFigure* del);
+	void addColor(color c);
+	void getColor();
+	 CFigure* GetSelected_Figure();
+	 void DeleteFunction();
+	 void SetSelectedFig(CFigure* S);
+	 void DeleteFunctionForPlayMood(CFigure* Del);
+	 void CopyDeletedFigToFiglist();
+	 void AddDeletedFig(CFigure* del);
 	// void DeleteFigure(CFigure* Del);
 	 //bool Select(CFigure* figure);
 	 //CFigure* GetFigureByPoint(int x, int y);
-	int get_numofcolor(color);
-	int numof_figurewithcolor(figures, colors);
-	color get_fillcolor(colors);
-	string color_TO_String(colors c);
-	string figur_TO_String(figures);
+	 int get_numofcolor(color );
+	 int numof_figurewithcolor(figures, colors);
+	 color get_fillcolor(colors);
+	 string color_TO_String(colors c);
+	 string figur_TO_String(figures);
+	 color get_indx_fillcolor(int indx);
+	 color get_indx_brushcolor(int indx);
 };
 
 

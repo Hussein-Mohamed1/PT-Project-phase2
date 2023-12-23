@@ -10,6 +10,7 @@ private:
 	Point P1, P2; //Rectangle Corners
 	GfxInfo RectGfxInfo;
 	CFigure* DeletedFig;
+	static int numofshapes;
 public:
 	AddRectAction(ApplicationManager *pApp);
 
@@ -22,6 +23,7 @@ public:
 	virtual void redo();
 
 	
+	static int getnumofshapes();
 };
 
 #endif

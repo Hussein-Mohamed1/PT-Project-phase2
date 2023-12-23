@@ -2,13 +2,21 @@
 #include "..\GUI\input.h"
 #include "..\GUI\Output.h"
 #include "..\ApplicationManager.h"
+#include "..\Figures\CFigure.h"
 
 
 ChangeColorAction::ChangeColorAction(ApplicationManager* pApp,  bool CF):Action(pApp)
 {
 	ChangeFill = CF;
 	ChoosenColor = WHITE;
+	
+	 
 
+}
+int ChangeColorAction::num_of_fill = 0;
+int ChangeColorAction::if_exist_file()
+{
+	return num_of_fill;
 }
 void ChangeColorAction::ReadActionParameters()
 {
@@ -48,21 +56,30 @@ void ChangeColorAction::ReadActionParameters()
 void ChangeColorAction::Execute()
 {
 	Output* pOut = pManager->GetOutput();
-
+		
+		
 	ReadActionParameters();
 
+//	pManager->AddDeletedFig(pManager->GetSelected_Figure());
+
+//	pManager->CopyDeletedFigToFiglist();
+
 	if (pManager->GetSelected_Figure() == NULL)
+
 		pOut->PrintMessage("NO SELECTED ");
 	 else if(ChoosenColor==WHITE)
 		pOut->PrintMessage("NO SELECTED COLOR  ");
 
-
 	 else
 	{
+	
+		
 		if (ChangeFill)
 		{
-				pManager->GetSelected_Figure()->ChngFillClr(ChoosenColor);
+			pManager->GetSelected_Figure()->ChngFillClr(ChoosenColor);
 			pOut->SetFillColor(ChoosenColor);
+			pManager->addfillcolor(ChoosenColor);
+			
 		}
 
 		else
@@ -70,10 +87,54 @@ void ChangeColorAction::Execute()
 			//pManager->GetSelected_Figure()->ChngFillClr(BLACK);
 			pManager->GetSelected_Figure()->ChngDrawClr(ChoosenColor);
 			pOut->SetDraColor(ChoosenColor);
+			pManager->addbrushcolor(ChoosenColor);
 		}
+	
+		
+
 	}
+}
+
+void ChangeColorAction::undo()
+
+{
+	if (ApplicationManager::countfill <= 1)
+		{
+
+		
+		pManager->GetSelected_Figure()->ChngFillClr(UI.BkGrndColor);
+		}
+
+	else
+
+	if (ChangeFill)
+	{
+		
+		ApplicationManager::countfill--;
+
+		pManager->GetSelected_Figure()->ChngFillClr(pManager->get_indx_fillcolor(ApplicationManager::countfill-1 ));
+	}
+	else
+	{
+		ApplicationManager::countbrush--;
+		pManager->GetSelected_Figure()->ChngDrawClr(pManager->get_indx_brushcolor(ApplicationManager::countbrush ));
+	}
+}
 
 
+void ChangeColorAction::redo()
+{
+	if (ChangeFill)
+	{
+		
+		ApplicationManager::countfill++;
+		pManager->GetSelected_Figure()->ChngFillClr(pManager->get_indx_fillcolor(ApplicationManager::countfill-1 ));
+	}
+	else {
+		ApplicationManager::countbrush++;
+		pManager->GetSelected_Figure()->ChngDrawClr(pManager->get_indx_brushcolor(ApplicationManager::countbrush ));
 
+
+	}
 }
 

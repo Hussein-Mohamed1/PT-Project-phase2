@@ -56,7 +56,11 @@ void SelectAction::Execute()
 		pManager->setSelectedFigure(ClickedFigure);
 	}
 
-
-
+void SelectAction::redo(){
+	
 }
 
+//CFigure* SelectAction::GetSelected_Figure()
+//{
+//	return Selected_Figure;
+//}

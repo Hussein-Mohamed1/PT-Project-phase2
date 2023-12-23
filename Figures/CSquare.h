@@ -6,7 +6,6 @@ class CSquare :
 private:
 	Point P1, P2;
 	int id;
-	static int numofsquare;
 public:
 	CSquare(Point p1, Point p2, GfxInfo FigureGfxInfo);
 	CSquare();
@@ -18,11 +17,11 @@ public:
 	bool isInsideWindowBoundaries(const Point&) const;
 	bool checkselection(int x, int y);
 	int Getid();
-
+	Point & GetP1();
+	
 	 void PrintInfo(Output* pOut);
 
 	//  void PrintInfo(Output* pOut);
-	static int get_numofshape();
 	color get_fillcolor();
 
 
