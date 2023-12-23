@@ -81,7 +81,7 @@ ActionType ApplicationManager::GetUserAction() const
 ////////////////////////////////////////////////////////////////////////////////////
 //Creates an action and executes it
 
-void ApplicationManager::ExecuteAction(ActionType ActType)
+
 void ApplicationManager::ExecuteAction(ActionType ActType , Action* Rec_action)
 {
 	pIn->FlushMouseQueue();
@@ -91,22 +91,17 @@ void ApplicationManager::ExecuteAction(ActionType ActType , Action* Rec_action)
 	{
 	case DRAW_RECT:
 		pAct = new AddRectAction(this);
-		playSound(this, DRAW_RECT);
 		addToUndo(pAct);
 		break;
 
 	case DRAW_CIRC:
 
 		pAct = new AddcircleAction(this);
-		playSound(this, DRAW_CIRC);
 		addToUndo(pAct);
-
-	}
 	break;
 
 	case DRAW_TRIA:
 		pAct = new AddTriangleAction(this);
-		playSound(this, DRAW_TRIA);
 		addToUndo(pAct);
 		break;
 
@@ -119,19 +114,16 @@ void ApplicationManager::ExecuteAction(ActionType ActType , Action* Rec_action)
 	break;
 	case DRAW_SQUA:
 		pAct = new AddSquareAction(this);
-		playSound(this, DRAW_SQUA);
 		addToUndo(pAct);
 		break;
 
 	case DRAW_HEXA:
 		pAct = new AddHexaAction(this);
-		playSound(this, DRAW_HEXA);
 		addToUndo(pAct);
 
-	}break;
+	break;
 	case FUNC_SELECT:
 		pAct = new SelectAction(this);
-		playSound(this, FUNC_SELECT);
 		break;
 	//case FUNC_SAVE:
 	//	pAct = new PrepareExport(this);
@@ -142,7 +134,6 @@ void ApplicationManager::ExecuteAction(ActionType ActType , Action* Rec_action)
 
 	case ENTER_PLAY_MODE:
 		pAct = new to_playmood(this);
-		playSound(this, ENTER_PLAY_MODE);
 		break;
 	case BY_SHAPE:
 		if(FigCount)
@@ -246,25 +237,14 @@ break;
 		pAct = new to_drawmood(this);
 		break;
 
-	case FUNC_START_REC:
-		pOut->PrintMessage("START");
-		break;
 
-	case ENTER_DRAW_MODE:
-		pAct = new to_drawmood(this);
-		break;
+
 	case FUNC_PLAY_REC:
 		pOut->PrintMessage("PLAY");
 		break;
 
 	case FUNC_STOP_REC:
 		pOut->PrintMessage("stop");
-		break;
-	case FUNC_MOVE:
-		pAct = new moveFigure(this);
-		playSound(this, FUNC_MOVE);
-		break;
-	case FUNC_EXIT_playMode:
 		break;
 
 	case FUNC_EXIT:
@@ -551,21 +531,23 @@ void ApplicationManager::ClearAll()
 
 void ApplicationManager::addToUndo(Action* pAct)
 {
-	if (ActionCountun < 5&& ActionCountun>=0)
+	if (ActionCountun < 5 && ActionCountun >= 0)
 	{
 		ActListun[ActionCountun] = pAct;
 
 
-	if (ActionCountun > 4)
-	{
-
-		for (int j = 0; j < 4; j++)   //Overwriting Undoarr to make it always have the last five actions 
+		if (ActionCountun > 4)
 		{
-			ActListun[j] = ActListun[j + 1];
+
+			for (int j = 0; j < 4; j++)   //Overwriting Undoarr to make it always have the last five actions 
+			{
+				ActListun[j] = ActListun[j + 1];
+			}
+			ActionCountun = 4;
 		}
-		ActionCountun = 4;
+		ActListun[ActionCountun++] = pAct;
+
 	}
-	ActListun[ActionCountun++] = pAct;
 }
 void ApplicationManager::addToRedo()
 {

@@ -55,7 +55,7 @@ void SelectAction::Execute()
 		ClickedFigure->PrintInfo(pOut);
 		pManager->setSelectedFigure(ClickedFigure);
 	}
-
+}
 void SelectAction::redo(){
 	
 }
