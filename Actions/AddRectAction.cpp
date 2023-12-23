@@ -92,3 +92,13 @@ void AddRectAction::Execute()
 
 	
 }
+
+void AddRectAction::undo()
+{
+	DeletedFig = pManager->DeleteFigure();
+}
+
+void AddRectAction::redo()
+{
+	pManager->AddFigure(DeletedFig);
+}

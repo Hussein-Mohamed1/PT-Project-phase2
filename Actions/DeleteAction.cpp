@@ -22,8 +22,19 @@ void DeleteAction::Execute()
 		pOut->PrintMessage("NO SELECTED ");
 	else
 	{
+		deletedFigure = pManager->DeleteFigure();
 		pManager->DeleteFunction();
 	}
 
 
+}
+
+void DeleteAction::undo()
+{
+	pManager->AddFigure(deletedFigure);
+	
+}
+
+void DeleteAction::redo()
+{ deletedFigure = pManager->DeleteFigure();
 }

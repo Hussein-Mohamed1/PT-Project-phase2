@@ -6,6 +6,7 @@ class AddTriangleAction :
 private :
     Point P1, P2, P3;
     GfxInfo RectGfxInfo;
+    CFigure* DeletedFig;
     static int numofshapes;
 public :
     AddTriangleAction(ApplicationManager* pApp);
@@ -13,6 +14,8 @@ public :
     virtual void ReadActionParameters();
 
     virtual void Execute() ;
+    virtual void undo();
+    virtual void redo();
     static int getnumofshapes();
 
 };

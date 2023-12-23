@@ -16,7 +16,13 @@ int CSquare::Getid()
 	return id;
 }
 
-CSquare::CSquare() { };
+Point& CSquare::GetP1()
+{
+	return (P1+P2)/2;
+}
+
+
+CSquare::CSquare() { numofsquare++; };
 void CSquare::Draw(Output* pOut) const
 {
 	pOut->DrawRect(P1, P2, FigGfxInfo, Selected);

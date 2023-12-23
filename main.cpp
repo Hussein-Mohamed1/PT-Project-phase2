@@ -4,6 +4,11 @@
 #pragma comment(lib, "winmm.lib") 
 
 
+
+
+
+
+
 int main()
 {
 

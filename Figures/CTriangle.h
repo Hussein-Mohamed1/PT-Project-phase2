@@ -19,6 +19,9 @@ public:
 	void move(const Point&);
 	bool isInsideBoundaries(const Point&) const;
 	int Getid();
+	Point&  GetP1();
+	
+	
 	void PrintInfo(Output* pOut);
 	color get_fillcolor();
 };

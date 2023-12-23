@@ -25,7 +25,8 @@ public:
 	void PrintInfo(Output* pOut);
 	color get_fillcolor();
 	//void PrintInfo(Output* pOut);
-
+	Point&  GetP1();
+	
 };
 
 #endif

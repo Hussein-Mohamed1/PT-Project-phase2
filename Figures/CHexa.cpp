@@ -19,6 +19,13 @@ int CHexa::Getid()
 	return id;
 }
 
+Point& CHexa::GetP1()
+{
+	return centre;
+}
+
+
+
 bool CHexa::checkselection(int x, int y)
 {
 	int dis = sqrt((x - centre.x) * (x - centre.x) + (y - centre.y) * (y - centre.y));

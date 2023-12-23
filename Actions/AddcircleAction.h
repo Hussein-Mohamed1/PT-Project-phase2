@@ -10,6 +10,7 @@ class AddcircleAction : public Action
     Point P1, P2;
     GfxInfo RectGfxInfo;
 	static int numofshapes;
+	CFigure* DeletedFig;
 public:
 	AddcircleAction(ApplicationManager* pApp);
 
@@ -18,7 +19,8 @@ public:
 	static int getnumofshapes();
 	//Add rectangle to the ApplicationManager
 	virtual void Execute();
-
+	virtual void undo();
+	virtual void redo();
 };
 
 

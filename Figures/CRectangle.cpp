@@ -106,7 +106,7 @@ void CRectangle::PrintInfo(Output* pOut)
 	string printed = "Figure is Rectangle          Figure id : " + to_string(id) +
 		"        Fisrt Corner :(" + to_string(Corner1.x) + "," + to_string(Corner1.y) + ")"
 		+ "        Second Corner :(" + to_string(Corner2.x) + "," + to_string(Corner2.y) + ")"
-		+ "        height " + to_string(hieght) + "        width "+to_string(widght);
+		+ "        height " + to_string(hieght) + "        width " + to_string(widght);
 	pOut->PrintMessage(printed);
 
 }
@@ -114,6 +114,17 @@ color CRectangle::get_fillcolor()
 {
 	return FigGfxInfo.FillClr;
 }
+
+Point& CRectangle::GetP1()
+{
+	Point* p = new Point{ (Corner1.x + Corner2.x),
+		(Corner1.y + Corner2.y) };
+
+
+	return *p;
+}
+
+
 
 
 

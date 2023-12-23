@@ -57,6 +57,18 @@ void AddTriangleAction::Execute()
 	pManager->AddFigure(T);
 
 }
+
+void AddTriangleAction::undo()
+{
+	DeletedFig = pManager->DeleteFigure();
+}
+
+void AddTriangleAction::redo()
+{
+	pManager->AddFigure(DeletedFig);
+}
+
+
 int AddTriangleAction::numofshapes = 0;
 int AddTriangleAction::getnumofshapes()
 {

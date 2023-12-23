@@ -54,6 +54,29 @@
 
  }
 
+ void AddSquareAction::undo()
+ {
+	 DeletedFig = pManager->DeleteFigure();
+ }
+
+ void AddSquareAction::redo()
+ {
+	 pManager->AddFigure(DeletedFig);
+	
+
+ }
+
+ Point AddSquareAction::GetP1()
+ {
+	 return P1;
+ }
+
+ Point AddSquareAction::Getp2()
+ {
+	 return P2;
+ }
+
+
  int AddSquareAction::numofshapes = 0;
  int AddSquareAction::getnumofshapes()
  {

@@ -66,3 +66,14 @@ int AddcircleAction::getnumofshapes()
 	  pManager->AddFigure(c);
 
   }
+
+
+  void AddcircleAction::undo()
+  {
+	  DeletedFig = pManager->DeleteFigure();
+  }
+
+  void AddcircleAction::redo()
+  {
+	  pManager->AddFigure(DeletedFig);
+  }

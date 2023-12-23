@@ -8,6 +8,8 @@ private:
 	int id;
 public:
 	CCircle(Point, Point, GfxInfo FigureGfxInfo);
+	Point&  GetP1();
+	
 	CCircle();
 	virtual void Draw(Output* pOut) const;
 	virtual bool checkselection(int x, int y);

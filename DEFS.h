@@ -11,17 +11,24 @@ enum ActionType //The actions supported (you can add more if needed)
 	DRAW_TRIA,
 	DRAW_SQUA,
 	DRAW_HEXA,
+
 	FUNC_ADD_IMAGE,
 	FUNC_SELECT,
 	FUNC_DELETE,
+	FUNC_BRUSH,
 	COLOR_BLACK,
 	COLOR_RED,
 	COLOR_BLUE,
 	COLOR_GREEN,
 	COLOR_YELLOW,
 	COLOR_ORANGE,
+
 	FUNC_UNDO,
 	FUNC_REDO,
+	
+	FUNC_START_REC,
+	
+	FUNC_PLAY_REC,
 	FUNC_FILL,
 	FUNC_MOVE,
 	DRAWING_AREA,
@@ -49,7 +56,18 @@ struct Point	//To be used for figures points
 	friend ostream& operator <<(ostream&, const Point&);
 	friend Point operator+(const Point&, const Point&);
 	friend Point operator-(const Point&, const Point&);
+
 	friend Point operator/(const Point&, int);
+public:
+
+
+Point operator =(const Point& p2)
+ {
+	 x = p2.x;
+	 y = p2.y;
+	 return *this;
+
+ }
 };
 
 struct GfxInfo	//Graphical info of each figure (you may add more members)
