@@ -81,7 +81,6 @@ ActionType ApplicationManager::GetUserAction() const
 ////////////////////////////////////////////////////////////////////////////////////
 //Creates an action and executes it
 
-void ApplicationManager::ExecuteAction(ActionType ActType)
 void ApplicationManager::ExecuteAction(ActionType ActType , Action* Rec_action)
 {
 	pIn->FlushMouseQueue();
@@ -229,23 +228,20 @@ break;
 
 	case FUNC_REDO:
 		pAct = new RedoAction(this);
+
 	case FUNC_START_REC:
 		if (FigCount == 0)
 			pAct = new StartandStopRec(this);
 		else
 			pOut->PrintMessage("can't recording you should delete all");
 		break;
+
 	case FUNC_EXIT_playMode:
 		pAct = new to_drawmood(this);
 		break;
 
-	case FUNC_START_REC:
-		pOut->PrintMessage("START");
-		break;
+	
 
-	case ENTER_DRAW_MODE:
-		pAct = new to_drawmood(this);
-		break;
 	case FUNC_PLAY_REC:
 		pOut->PrintMessage("PLAY");
 		break;
@@ -258,9 +254,10 @@ break;
 		pAct = new moveFigure(this);
 		addToUndo(pAct);
 		playSound(this, FUNC_MOVE);}
+
 		break;
-	case FUNC_EXIT_playMode:
-		break;
+
+
 
 	case FUNC_EXIT:
 		break;
@@ -546,9 +543,7 @@ void ApplicationManager::ClearAll()
 
 void ApplicationManager::addToUndo(Action* pAct)
 {
-	if (ActionCountun < 5 && ActionCountun >= 0)
-	{
-		ActListun[ActionCountun] = pAct;
+	
 
 
 		if (ActionCountun > 4)
@@ -562,7 +557,6 @@ void ApplicationManager::addToUndo(Action* pAct)
 		}
 		ActListun[ActionCountun++] = pAct;
 	}
-}
 	void ApplicationManager::addToRedo()
 	{
 		ActListre[ActionCountre] = pLastAct;

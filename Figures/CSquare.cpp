@@ -22,7 +22,8 @@ Point& CSquare::GetP1()
 }
 
 
-CSquare::CSquare() { numofsquare++; };
+CSquare::CSquare() {  }
+
 void CSquare::Draw(Output* pOut) const
 {
 	pOut->DrawRect(P1, P2, FigGfxInfo, Selected);

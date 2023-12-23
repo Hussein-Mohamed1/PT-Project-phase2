@@ -50,7 +50,7 @@ public:
 	ActionType GetUserAction() const;
 	void ExecuteAction(ActionType , Action* Rec_action=nullptr) ; //Creates an action and executes it
 	
-	void ExecuteAction(ActionType) ; //Creates an action and executes it
+	
 	void addfillcolor(color c);
 	void addbrushcolor(color c);
 
