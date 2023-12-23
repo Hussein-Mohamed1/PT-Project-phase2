@@ -13,6 +13,11 @@ ChangeColorAction::ChangeColorAction(ApplicationManager* pApp,  bool CF):Action(
 	 
 
 }
+int ChangeColorAction::num_of_fill = 0;
+int ChangeColorAction::if_exist_file()
+{
+	return num_of_fill;
+}
 void ChangeColorAction::ReadActionParameters()
 {
 

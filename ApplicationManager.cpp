@@ -23,7 +23,6 @@
 #include"Actions/DeleteAction.h"
 #include "figure_color.h"
 #include "figure_typeandcolor.h"
-#include"to_playmood.h"
 #include "Actions/playSound.h"
 #include "Actions/Action.h"
 #include "Actions/RedoAction.h"
@@ -32,6 +31,8 @@ int ApplicationManager::countpos = 0;
 int ApplicationManager::countfill = 0;
 int ApplicationManager::countbrush = 0;
 #include "CMUgraphicsLib/auxil.h"
+#include "to_drawmood.h"
+#include "StartandStopRec.h"
 using namespace std;
 //class Action ;
 //Constructor
@@ -81,6 +82,7 @@ ActionType ApplicationManager::GetUserAction() const
 //Creates an action and executes it
 
 void ApplicationManager::ExecuteAction(ActionType ActType)
+void ApplicationManager::ExecuteAction(ActionType ActType , Action* Rec_action)
 {
 	pIn->FlushMouseQueue();
 	Action* pAct = nullptr;
@@ -136,13 +138,22 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		playSound(this, ENTER_PLAY_MODE);}
 		break;
 	case BY_SHAPE:
+		if(FigCount)
 		pAct = new figure_type(this);
+		else
+			pOut->PrintMessage("no figures to pick it");
 		break;
 	case BY_COLOR:
+		if(ChangeColorAction::if_exist_file())
 		pAct = new figure_color(this);
+		else
+			pOut->PrintMessage("no figures to pick it");
 		break;
 	case BY_COLOR_SHAPE:
-		pAct = new figure_typeandcolor(this);
+		if (ChangeColorAction::if_exist_file())
+			pAct = new figure_typeandcolor(this);
+		else
+			pOut->PrintMessage("no figures to pick it");
 		break;
 		//case COLOR_BLACK:
 		//pAct = new ChangeColorAction(this,BLACK);
@@ -218,12 +229,23 @@ break;
 
 	case FUNC_REDO:
 		pAct = new RedoAction(this);
+	case FUNC_START_REC:
+		if (FigCount == 0)
+			pAct = new StartandStopRec(this);
+		else
+			pOut->PrintMessage("can't recording you should delete all");
+		break;
+	case FUNC_EXIT_playMode:
+		pAct = new to_drawmood(this);
 		break;
 
 	case FUNC_START_REC:
 		pOut->PrintMessage("START");
 		break;
 
+	case ENTER_DRAW_MODE:
+		pAct = new to_drawmood(this);
+		break;
 	case FUNC_PLAY_REC:
 		pOut->PrintMessage("PLAY");
 		break;
@@ -246,9 +268,14 @@ break;
 	case STATUS:	//a click on the status bar ==> no action
 		return;
 	}
-
 	//Execute the created action
-	if (pAct != NULL)
+	if (Rec_action && pAct)
+	{
+		Rec_action = pAct;
+		pAct->Execute();
+		pAct = NULL;
+	}
+	else if (pAct != NULL)
 	{
 		//addToUndo(pAct);
 		//addToRedo();

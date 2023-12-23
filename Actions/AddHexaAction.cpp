@@ -6,7 +6,9 @@
 #include "..\GUI\Output.h"
 
 AddHexaAction::AddHexaAction( ApplicationManager * pApp):Action(pApp)
-{}
+{
+	numofshapes++;
+}
 void AddHexaAction::ReadActionParameters()
 {
 
@@ -57,4 +59,9 @@ void AddHexaAction::undo()
 void AddHexaAction::redo()
 {
 	pManager->AddFigure(DeletedFig);
+}
+int AddHexaAction::numofshapes = 0;
+int AddHexaAction::getnumofshapes()
+{
+	return numofshapes;
 }

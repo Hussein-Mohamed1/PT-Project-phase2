@@ -5,6 +5,7 @@
 #include "Figures\CFigure.h"
 #include "GUI\input.h"
 #include "GUI\output.h"
+#include "Actions/Action.h"
 class Action;
 //Main class that manages everything in the application.
 class ApplicationManager
@@ -47,6 +48,8 @@ public:
 	// -- Action-Related Functions
 	//Reads the input command from the user and returns the corresponding action type
 	ActionType GetUserAction() const;
+	void ExecuteAction(ActionType , Action* Rec_action=nullptr) ; //Creates an action and executes it
+	
 	void ExecuteAction(ActionType) ; //Creates an action and executes it
 	void addfillcolor(color c);
 	void addbrushcolor(color c);

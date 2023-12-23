@@ -9,10 +9,14 @@
 
 AddcircleAction::AddcircleAction(ApplicationManager* pApp) :Action(pApp)
 {
-
+	numofshapes++;
 
 }
-
+int AddcircleAction::numofshapes = 0;
+int AddcircleAction::getnumofshapes()
+{
+	return numofshapes;
+}
   void AddcircleAction::ReadActionParameters()
 {
 	  //Get a Pointer to the Input / Output Interfaces

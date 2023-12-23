@@ -6,7 +6,7 @@ private:
 	Point centre;
 	int id;
 	int l;  //side lenght of Hexa
-	static int numofhexa;
+
 public:
 
 	CHexa(Point c, GfxInfo FigureGfxInfo);
@@ -23,7 +23,6 @@ public:
 	Point&  GetP1();
 	
 	void PrintInfo(Output* pOut);
-	static int get_numofshape();
 	//	void PrintInfo(Output* pOut);
 	color get_fillcolor();
 

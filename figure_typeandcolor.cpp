@@ -6,7 +6,10 @@
 #include "Figures/CTriangle.h"
 figure_typeandcolor::figure_typeandcolor(ApplicationManager* pApp) :Action(pApp)
 {
-
+	pManager->GetOutput()->ClearStatusBar();
+	pManager->GetOutput()->CreatePlayToolBar();
+	pManager->CopyDeletedFigToFiglist();
+	pManager->UpdateInterface();
 }
 void figure_typeandcolor::ReadActionParameters()
 {
@@ -26,18 +29,18 @@ void figure_typeandcolor::Execute()
 		s = "pick all of " + pManager->color_TO_String(by_color) + " " + pManager->figur_TO_String(by_fig) + " ---->click to start";
 		pManager->GetOutput()->PrintMessage(s);
 		ReadActionParameters();
-		while (n)
+		s = "correct picks= " + to_string(correct) + "    incorrect picks= " + to_string(incorrect);
+		while (n && (p.y>50))
 		{
-			s = "correct picks= " + to_string(correct) + "    incorrect picks= " + to_string(incorrect);
 			pManager->GetOutput()->PrintMessage(s);
 			ReadActionParameters();
 			switch (by_fig)
 			{
 			case squr:
-				selected_fig = dynamic_cast<CSquare*>(pManager->GetFigure(p.x, p.y));
-				if (selected_fig)
+				if (pManager->GetFigure(p.x , p.y))
 				{
-					if (selected_fig->get_fillcolor() == pManager->get_fillcolor(by_color))
+					selected_fig = dynamic_cast<CSquare*>(pManager->GetFigure(p.x, p.y));
+					if ( selected_fig &&selected_fig->get_fillcolor() == pManager->get_fillcolor(by_color))
 					{
 						pManager->DeleteFunctionForPlayMood(selected_fig);
 						correct++;
@@ -47,23 +50,18 @@ void figure_typeandcolor::Execute()
 					}
 					else
 					{
+						pManager->DeleteFunctionForPlayMood(pManager->GetFigure(p.x, p.y));
 						incorrect++;
 						s = "wrong pick----> correct picks= " + to_string(correct) + "    incorrect picks= " + to_string(incorrect);
 						pManager->GetOutput()->PrintMessage(s);
 					}
-				}
-				else
-				{
-					incorrect++;
-					s = "wrong pick----> correct picks= " + to_string(correct) + "    incorrect picks= " + to_string(incorrect);
-					pManager->GetOutput()->PrintMessage(s);
 				}
 				break;
 			case rect:
-				selected_fig = dynamic_cast<CRectangle*>(pManager->GetFigure(p.x, p.y));
-				if (selected_fig)
+				if (pManager->GetFigure(p.x, p.y))
 				{
-					if (selected_fig->get_fillcolor() == pManager->get_fillcolor(by_color))
+					selected_fig = dynamic_cast<CRectangle*>(pManager->GetFigure(p.x, p.y));
+					if (selected_fig && selected_fig->get_fillcolor() == pManager->get_fillcolor(by_color))
 					{
 						pManager->DeleteFunctionForPlayMood(selected_fig);
 						correct++;
@@ -73,23 +71,18 @@ void figure_typeandcolor::Execute()
 					}
 					else
 					{
+						pManager->DeleteFunctionForPlayMood(pManager->GetFigure(p.x, p.y));
 						incorrect++;
 						s = "wrong pick----> correct picks= " + to_string(correct) + "    incorrect picks= " + to_string(incorrect);
 						pManager->GetOutput()->PrintMessage(s);
 					}
-				}
-				else
-				{
-					incorrect++;
-					s = "wrong pick----> correct picks= " + to_string(correct) + "    incorrect picks= " + to_string(incorrect);
-					pManager->GetOutput()->PrintMessage(s);
 				}
 				break;
 			case circ:
-				selected_fig = dynamic_cast<CCircle*>(pManager->GetFigure(p.x, p.y));
-				if (selected_fig)
+				if (pManager->GetFigure(p.x, p.y))
 				{
-					if (selected_fig->get_fillcolor() == pManager->get_fillcolor(by_color))
+					selected_fig = dynamic_cast<CCircle*>(pManager->GetFigure(p.x, p.y));
+					if (selected_fig && selected_fig->get_fillcolor() == pManager->get_fillcolor(by_color))
 					{
 						pManager->DeleteFunctionForPlayMood(selected_fig);
 						correct++;
@@ -99,23 +92,18 @@ void figure_typeandcolor::Execute()
 					}
 					else
 					{
+						pManager->DeleteFunctionForPlayMood(pManager->GetFigure(p.x, p.y));
 						incorrect++;
 						s = "wrong pick----> correct picks= " + to_string(correct) + "    incorrect picks= " + to_string(incorrect);
 						pManager->GetOutput()->PrintMessage(s);
 					}
-				}
-				else
-				{
-					incorrect++;
-					s = "wrong pick----> correct picks= " + to_string(correct) + "    incorrect picks= " + to_string(incorrect);
-					pManager->GetOutput()->PrintMessage(s);
 				}
 				break;
 			case tria:
-				selected_fig = dynamic_cast<CTriangle*>(pManager->GetFigure(p.x, p.y));
-				if (selected_fig)
+				if (pManager->GetFigure(p.x, p.y))
 				{
-					if (selected_fig->get_fillcolor() == pManager->get_fillcolor(by_color))
+					selected_fig = dynamic_cast<CTriangle*>(pManager->GetFigure(p.x, p.y));
+					if (selected_fig && selected_fig->get_fillcolor() == pManager->get_fillcolor(by_color))
 					{
 						pManager->DeleteFunctionForPlayMood(selected_fig);
 						correct++;
@@ -125,23 +113,18 @@ void figure_typeandcolor::Execute()
 					}
 					else
 					{
+						pManager->DeleteFunctionForPlayMood(pManager->GetFigure(p.x, p.y));
 						incorrect++;
 						s = "wrong pick----> correct picks= " + to_string(correct) + "    incorrect picks= " + to_string(incorrect);
 						pManager->GetOutput()->PrintMessage(s);
 					}
-				}
-				else
-				{
-					incorrect++;
-					s = "wrong pick----> correct picks= " + to_string(correct) + "    incorrect picks= " + to_string(incorrect);
-					pManager->GetOutput()->PrintMessage(s);
 				}
 				break;
 			case hexa:
-				selected_fig = dynamic_cast<CHexa*>(pManager->GetFigure(p.x, p.y));
-				if (selected_fig)
+				if (pManager->GetFigure(p.x, p.y))
 				{
-					if (selected_fig->get_fillcolor() == pManager->get_fillcolor(by_color))
+					selected_fig = dynamic_cast<CHexa*>(pManager->GetFigure(p.x, p.y));
+					if (selected_fig && selected_fig->get_fillcolor() == pManager->get_fillcolor(by_color))
 					{
 						pManager->DeleteFunctionForPlayMood(selected_fig);
 						correct++;
@@ -151,16 +134,11 @@ void figure_typeandcolor::Execute()
 					}
 					else
 					{
+						pManager->DeleteFunctionForPlayMood(pManager->GetFigure(p.x, p.y));
 						incorrect++;
 						s = "wrong pick----> correct picks= " + to_string(correct) + "    incorrect picks= " + to_string(incorrect);
 						pManager->GetOutput()->PrintMessage(s);
 					}
-				}
-				else
-				{
-					incorrect++;
-					s = "wrong pick----> correct picks= " + to_string(correct) + "    incorrect picks= " + to_string(incorrect);
-					pManager->GetOutput()->PrintMessage(s);
 				}
 				break;
 			default:

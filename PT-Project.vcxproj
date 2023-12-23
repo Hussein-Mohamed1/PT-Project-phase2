@@ -193,6 +193,7 @@
     <ClCompile Include="GUI\Output.cpp" />
     <ClCompile Include="ApplicationManager.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="StartandStopRec.cpp" />
     <ClCompile Include="to_drawmood.cpp" />
     <ClCompile Include="to_playmood.cpp" />
   </ItemGroup>
@@ -247,6 +248,7 @@
     <ClInclude Include="GUI\UI_Info.h" />
     <ClInclude Include="ApplicationManager.h" />
     <ClInclude Include="DEFS.h" />
+    <ClInclude Include="StartandStopRec.h" />
     <ClInclude Include="to_drawmood.h" />
     <ClInclude Include="to_playmood.h" />
   </ItemGroup>

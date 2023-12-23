@@ -16,7 +16,7 @@ public:
     ChangeColorAction(ApplicationManager* pApp,bool CF=0);
 
     virtual void ReadActionParameters();
-
+  static  int if_exist_file();
     virtual void Execute();
 
     virtual void undo();

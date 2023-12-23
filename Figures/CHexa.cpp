@@ -5,11 +5,8 @@
 #include<iostream>
 #include"string.h"
 using namespace std;
-int CHexa::numofhexa = 0;
-int CHexa::get_numofshape() { return numofhexa; }
 CHexa::CHexa(Point c, GfxInfo FigureGfxInfo) : CFigure(FigureGfxInfo)
 {
-	numofhexa++;
 	centre = c;
 	id = ID;
 	ID++;
@@ -60,7 +57,7 @@ void CHexa::move(const Point& newPos)
 {
 	centre = newPos;
 }
-CHexa::CHexa() { numofhexa++; };
+CHexa::CHexa() {  };
 void CHexa::Save(fstream& op) const
 {
 

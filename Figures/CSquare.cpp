@@ -1,10 +1,8 @@
 #include "CSquare.h"
 #include "sstream"
-int CSquare::numofsquare = 0;
-int CSquare::get_numofshape() { return numofsquare; }
 CSquare::CSquare(Point p1, Point p2, GfxInfo FigureGfxInfo) :CFigure(FigureGfxInfo)
 {
-	numofsquare++;
+
 	P1 = p1;
 	P2 = p2;
 	id = ID;

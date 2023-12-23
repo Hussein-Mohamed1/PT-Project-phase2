@@ -7,7 +7,6 @@ class CTriangle :
 private:
 	Point P1, P2, P3;
 	int id;
-    static int numoftria;
 public:
 
 	CTriangle(Point p1, Point p2, Point p3, GfxInfo FigureGfxInfo);
@@ -24,6 +23,5 @@ public:
 	
 	
 	void PrintInfo(Output* pOut);
-    static int get_numofshape();
 	color get_fillcolor();
 };

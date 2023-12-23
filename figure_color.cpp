@@ -3,7 +3,10 @@
 #include "GUI/Input.h"
 figure_color::figure_color(ApplicationManager* pApp):Action(pApp)
 {
-
+	pManager->GetOutput()->ClearStatusBar();
+	pManager->GetOutput()->CreatePlayToolBar();
+	pManager->CopyDeletedFigToFiglist();
+	pManager->UpdateInterface();
 }
 void figure_color::ReadActionParameters()
 {
@@ -15,7 +18,7 @@ void figure_color::manage_by_color(color c , int n)
 	string s;
 	s = "correct picks= " + to_string(correct) + "    incorrect picks= " + to_string(incorrect);
 	pManager->GetOutput()->PrintMessage(s);
-	while (n)
+	while (n && (p.y>50))
 	{
 		ReadActionParameters();
 		selected_fig = pManager->GetFigure(p.x, p.y);
@@ -31,16 +34,11 @@ void figure_color::manage_by_color(color c , int n)
 			}
 			else
 			{
+				pManager->DeleteFunctionForPlayMood(selected_fig);
 				incorrect++;
 				s = "wrong pick----> correct picks= " + to_string(correct) + "    incorrect picks= " + to_string(incorrect);
 				pManager->GetOutput()->PrintMessage(s);
 			}
-		}
-		else
-		{
-			incorrect++;
-			s = "wrong pick----> correct picks= " + to_string(correct) + "    incorrect picks= " + to_string(incorrect);
-			pManager->GetOutput()->PrintMessage(s);
 		}
 	}
 }
