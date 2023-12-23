@@ -7,14 +7,8 @@
 #include "../Figures/CHexa.h"
 #include "../Figures/CSquare.h"
 #include "../Figures/CRectangle.h"
-#include "..\ApplicationManager.h"
-//int ApplicationManager:: countrepos=0;
-//int ApplicationManager:: countpos=0;
-moveFigure::moveFigure(ApplicationManager* pApp) :Action(pApp), newPos{ -1,-1 }// countpos{ 0 }, countrepos{ 0 }
-{
-	
 
-};
+moveFigure::moveFigure(ApplicationManager* pApp, bool byDragging) :Action(pApp), newPos{ -1,-1 }, byDragging(byDragging) {};
 void moveFigure::ReadActionParameters() {
 	Output* pOut = pManager->GetOutput();
 	Input* pIn = pManager->GetInput();	
@@ -38,7 +32,15 @@ void moveFigure::ReadActionParameters() {
 	}
 }
 void moveFigure::Execute() {
-	ReadActionParameters();
+
+	if (!byDragging)
+	{
+		ReadActionParameters();
+		move();
+	}
+	else moveByDragging();
+}
+bool moveFigure::move() {
 	CFigure* c = pManager->GetSelected_Figure();
 	bool f = true;
 
@@ -49,50 +51,93 @@ void moveFigure::Execute() {
 	if ((newPos.x <= UI.width - 5 && newPos.x > 0) && (newPos.y < UI.height - UI.StatusBarHeight - 5) && (newPos.y > UI.ToolBarHeight + 5)) {
 		cFigure = pManager->GetSelected_Figure();
 		{if (dynamic_cast<CCircle*>(cFigure) != nullptr) {
-			if (cFigure->isInsideBoundaries(newPos))
-
+			if (cFigure->isInsideWindowBoundaries(newPos))
+			{
 				cFigure->move(newPos);
+				return 1;
+			}
 			else {
 				pManager->GetOutput()->PrintMessage("Invalid Position! Please try again.....");
 				Pause(1000);
 				pManager->GetOutput()->ClearStatusBar();
+				return 0;
 			}
 		}
 		if (dynamic_cast<CHexa*>(cFigure) != nullptr) {
-			if (cFigure->isInsideBoundaries(newPos))
+			if (cFigure->isInsideWindowBoundaries(newPos))
+			{
 				cFigure->move(newPos);
+				return 1;
+			}
 			else {
 				pManager->GetOutput()->PrintMessage("Invalid Position! Please try again.....");
 				Pause(1000);
 				pManager->GetOutput()->ClearStatusBar();
+				return 0;
 			}
 		}
 		if (dynamic_cast<CRectangle*>(cFigure) != nullptr) {
-			if (cFigure->isInsideBoundaries(newPos))
+			if (cFigure->isInsideWindowBoundaries(newPos))
+			{
 				cFigure->move(newPos);
+				return 1;
+			}
 			else {
 				pManager->GetOutput()->PrintMessage("Invalid Position! Please try again.....");
 				Pause(1000);
 				pManager->GetOutput()->ClearStatusBar();
+				return 0;
 			}
 		}
 		if (dynamic_cast<CSquare*>(cFigure) != nullptr) {
-			if (cFigure->isInsideBoundaries(newPos))
+			if (cFigure->isInsideWindowBoundaries(newPos))
+			{
 				cFigure->move(newPos);
-			//cFigure->
+				return 1;
+			}
 			else {
 				pManager->GetOutput()->PrintMessage("Invalid Position! Please try again.....");
 				Pause(1000);
 				pManager->GetOutput()->ClearStatusBar();
+				return 0;
 			}
 		}
 		if (dynamic_cast<CTriangle*>(cFigure) != nullptr) {
-			if (cFigure->isInsideBoundaries(newPos))
-				cFigure->move(newPos); 
+			if (cFigure->isInsideWindowBoundaries(newPos))
+			{
+				cFigure->move(newPos);
+				return 1;
+			}
+
 			else {
 				pManager->GetOutput()->PrintMessage("Invalid Position! Please try again.....");
 				Pause(1000);
 				pManager->GetOutput()->ClearStatusBar();
+				return 0;
+			}
+		}
+		}
+
+		pManager->UpdateInterface();
+	}
+}
+
+void moveFigure::moveByDragging() {
+	int iX = 0, iY = 0;
+	Input* pIn = pManager->GetInput();
+	CFigure* Selected_Figure = pManager->GetSelected_Figure();
+	buttonstate btnstate = pIn->GetButtonState(LEFT_BUTTON, iX, iY); // just puts the current coords to iX and iY, nothing else
+	if (Selected_Figure->checkselection(iX, iY))
+	{
+		Sleep(200);// necessary delay to capture the users double tap on a shape
+		btnstate = pIn->GetButtonState(LEFT_BUTTON, iX, iY);
+		while (pIn->GetButtonState(LEFT_BUTTON, iX, iY) != BUTTON_UP) {
+			newPos = Point{ iX,iY };
+			if (!move())
+				break;
+			Sleep(80); // necessary delay to avoid breaking the gui
+			pManager->UpdateInterface();
+		}
 			}
 		}
 		}
@@ -133,7 +178,8 @@ void moveFigure::redo()
 
 }
 
-moveFigure::~moveFigure()
-{
+		//pIn->setBuffering(false);
+	}
 
+}
 }

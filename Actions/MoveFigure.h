@@ -9,12 +9,13 @@ class moveFigure : public Action
 	
 	CFigure* cFigure;
 	CFigure* f;
+	bool byDragging;
 public:
-	moveFigure(ApplicationManager* pApp);
+	moveFigure(ApplicationManager* pApp,bool byDragging =0);
 	void ReadActionParameters();
+	bool move();
+	void moveByDragging();
 	void Execute();
 	virtual void undo();
 	virtual void redo();
-
-	~moveFigure();
 };

@@ -12,6 +12,15 @@ void Input::GetPointClicked(int& x, int& y) const
 	pWind->WaitMouseClick(x, y);	//Wait for mouse click
 }
 
+
+
+buttonstate Input::GetButtonState(const button btMouse, int& iX, int& iY)
+{
+	return pWind->GetButtonState(btMouse, iX, iY);
+}
+
+
+
 string Input::GetString(Output* pO) const
 {
 	string Label;
@@ -183,26 +192,6 @@ ActionType Input::GetUserAction() const
 				return FUNC_EXIT;
 			k++;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 			return EMPTY;
 
 		}
@@ -216,7 +205,7 @@ ActionType Input::GetUserAction() const
 		//[3] User clicks on the status bar
 		return STATUS;
 	}
-	if (y >= 0 && y < UI.ToolBarHeight && UI.InterfaceMode)
+	if (y >= 0 && y < UI.ToolBarHeight && UI.InterfaceMode == MODE_PLAY)
 	{
 		//Check whick Menu item was clicked
 		//==> This assumes that menu items are lined up horizontally <==

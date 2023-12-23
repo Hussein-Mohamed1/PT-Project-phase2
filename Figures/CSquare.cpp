@@ -77,7 +77,7 @@ void CSquare::move(const Point& newPos)
 	P1 = newPos + P1 - Center;
 }
 
-bool CSquare::isInsideBoundaries(const Point& newPos) const
+bool CSquare::isInsideWindowBoundaries(const Point& newPos) const
 {
 
 	Point P2 = newPos + CSquare::P2 - (CSquare::P2 + CSquare::P1) / 2;

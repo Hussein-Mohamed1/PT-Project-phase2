@@ -17,7 +17,7 @@ public:
 	void Save(fstream&)const;
 	void Load(string&);
 	bool  checkselection(int x, int y);
-	bool isInsideBoundaries(const Point&) const;
+	bool isInsideWindowBoundaries(const Point&) const;
 	void move(const Point&);
 	int Getid();
 	Point&  GetP1();

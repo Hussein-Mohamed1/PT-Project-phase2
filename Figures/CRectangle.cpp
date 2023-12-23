@@ -84,7 +84,7 @@ bool CRectangle::checkselection(int x, int y)
 	return false;
 
 }
-bool CRectangle::isInsideBoundaries(const Point& newPos) const
+bool CRectangle::isInsideWindowBoundaries(const Point& newPos) const
 {
 
 	Point tCorner2 = newPos + Corner2 - (Corner1 + Corner2) / 2;

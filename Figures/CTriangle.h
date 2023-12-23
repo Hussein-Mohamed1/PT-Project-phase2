@@ -17,7 +17,7 @@ public:
 	friend ostream& operator<<(ostream&, const CTriangle&);
 	void Load(string&);
 	void move(const Point&);
-	bool isInsideBoundaries(const Point&) const;
+	bool isInsideWindowBoundaries(const Point&) const;
 	int Getid();
 	Point&  GetP1();
 	
