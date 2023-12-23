@@ -7,6 +7,7 @@ class SelectAction :
 	CFigure* ClickedFigure;
 private:
 	Point p;
+
 public:
 	SelectAction(ApplicationManager* pApp);
 	void ReadActionParameters();

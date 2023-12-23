@@ -57,3 +57,11 @@ void playSound::Execute()
 		break;
 	}Pause(100);
 }
+
+void playSound::undo()
+{
+}
+
+void playSound::redo()
+{
+}
