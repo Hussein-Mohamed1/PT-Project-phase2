@@ -9,14 +9,18 @@
 #include <windows.h>
 #include <mmsystem.h>
 #pragma comment(lib, "winmm.lib") 
-
+int AddRectAction::numofshapes = 0;
+int AddRectAction::getnumofshapes()
+{
+	return numofshapes;
+}
 
 
 
 AddRectAction::AddRectAction(ApplicationManager * pApp):Action(pApp)
 {
 	//pManager->GetOutput()->PrintMessage(" PLEASE , Wait until sound finished ");
-
+	numofshapes++;
 	//// Open the .mp3 file
 	//mciSendString(TEXT("open \"D:\\draw-rect2.mp3\" type mpegvideo alias mp3"), NULL, 0, NULL);
 	mciSendString(TEXT("open \"draw-rect2.mp3\" type mpegvideo alias mp3"), NULL, 0, NULL);

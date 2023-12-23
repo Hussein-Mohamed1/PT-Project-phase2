@@ -6,8 +6,6 @@ class CCircle : public CFigure
 private:
 	Point P1, P2;
 	int id;
-
-	static int numofcirc;
 public:
 	CCircle(Point, Point, GfxInfo FigureGfxInfo);
 	CCircle();
@@ -20,7 +18,6 @@ public:
 	bool isInsideBoundaries(const Point&) const;
 	int Getid();
 	void PrintInfo(Output* pOut);
-	static int get_numofshape();
 	color get_fillcolor();
 };
 

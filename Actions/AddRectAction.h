@@ -9,7 +9,7 @@ class AddRectAction: public Action
 private:
 	Point P1, P2; //Rectangle Corners
 	GfxInfo RectGfxInfo;
-	
+	static int numofshapes;
 public:
 	AddRectAction(ApplicationManager *pApp);
 
@@ -18,7 +18,7 @@ public:
 	
 	//Add rectangle to the ApplicationManager
 	virtual void Execute() ;
-	
+	static int getnumofshapes();
 };
 
 #endif

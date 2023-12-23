@@ -6,7 +6,9 @@
 #include "..\GUI\Output.h"
 
 AddHexaAction::AddHexaAction( ApplicationManager * pApp):Action(pApp)
-{}
+{
+	numofshapes++;
+}
 void AddHexaAction::ReadActionParameters()
 {
 
@@ -49,4 +51,9 @@ void AddHexaAction::Execute()
 	// Add Hexa to Fig List
 
 	pManager->AddFigure(H);
+}
+int AddHexaAction::numofshapes = 0;
+int AddHexaAction::getnumofshapes()
+{
+	return numofshapes;
 }

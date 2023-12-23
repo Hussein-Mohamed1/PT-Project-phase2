@@ -6,7 +6,6 @@ class CSquare :
 private:
 	Point P1, P2;
 	int id;
-	static int numofsquare;
 public:
 	CSquare(Point p1, Point p2, GfxInfo FigureGfxInfo);
 	CSquare();
@@ -22,7 +21,6 @@ public:
 	 void PrintInfo(Output* pOut);
 
 	//  void PrintInfo(Output* pOut);
-	static int get_numofshape();
 	color get_fillcolor();
 
 

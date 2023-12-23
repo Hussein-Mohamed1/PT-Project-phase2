@@ -6,14 +6,14 @@ class AddTriangleAction :
 private :
     Point P1, P2, P3;
     GfxInfo RectGfxInfo;
-    
+    static int numofshapes;
 public :
     AddTriangleAction(ApplicationManager* pApp);
 
     virtual void ReadActionParameters();
 
     virtual void Execute() ;
-
+    static int getnumofshapes();
 
 };
 

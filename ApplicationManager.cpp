@@ -21,6 +21,8 @@
 #include "figure_color.h"
 #include "figure_typeandcolor.h"
 #include"to_playmood.h"
+#include "to_drawmood.h"
+#include "StartandStopRec.h"
 using namespace std;
 
 //Constructor
@@ -55,7 +57,7 @@ ActionType ApplicationManager::GetUserAction() const
 }
 ////////////////////////////////////////////////////////////////////////////////////
 //Creates an action and executes it
-void ApplicationManager::ExecuteAction(ActionType ActType)
+void ApplicationManager::ExecuteAction(ActionType ActType , Action* Rec_action)
 {
 	Action* pAct = NULL;
 
@@ -131,11 +133,19 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 	case FUNC_DELETE :
 		pAct = new DeleteAction(this);
 		break;
+	case FUNC_START_REC:
+		if (FigCount == 0)
+			pAct = new StartandStopRec(this);
+		else
+			pOut->PrintMessage("can't recording you should delete all");
+		break;
 	case FUNC_EXIT_playMode:
 		pAct = new to_drawmood(this);
 		break;
 
-
+	case ENTER_DRAW_MODE:
+		pAct = new to_drawmood(this);
+		break;
 	case FUNC_EXIT:
 		///create ExitAction here
 		break;
@@ -143,9 +153,14 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 	case STATUS:	//a click on the status bar ==> no action
 		return;
 	}
-
 	//Execute the created action
-	if (pAct != NULL)
+	if (Rec_action && pAct)
+	{
+		Rec_action = pAct;
+		pAct->Execute();
+		pAct = NULL;
+	}
+	else if (pAct != NULL)
 	{
 		pAct->Execute();//Execute
 		delete pAct;	//You may need to change this line depending to your implementation

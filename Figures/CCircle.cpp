@@ -8,15 +8,12 @@
 #include "..\GUI\input.h"
 
 using namespace std;
-int CCircle::numofcirc = 0;
-int CCircle::get_numofshape() { return numofcirc; }
 ostream& operator<<(ostream& op, const color& c) {
 	op << int(c.ucRed) << " " << int(c.ucGreen) << " " << int(c.ucBlue);
 	return op;
 }
 CCircle::CCircle(Point p1, Point p2, GfxInfo FigureGfxInfo) : CFigure(FigureGfxInfo)
 {
-	numofcirc++;
 	P1 = p1;
 	P2 = p2;
 	id = ID;
@@ -36,7 +33,7 @@ void CCircle::Draw(Output* pOut) const
 	pOut->DrawCirc(P1, P2, FigGfxInfo, Selected);
 
 }
-CCircle::CCircle() { numofcirc++; };
+CCircle::CCircle() {  };
 
 ostream& operator<<(ostream& op, const CCircle& c)
 {
