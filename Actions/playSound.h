@@ -7,4 +7,6 @@ public:
 	playSound(ApplicationManager * pApp, ActionType act);
 	void ReadActionParameters();
 	void Execute();
+	virtual void undo();
+	virtual void redo();
 };

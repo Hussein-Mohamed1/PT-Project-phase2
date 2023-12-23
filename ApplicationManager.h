@@ -51,7 +51,7 @@ public:
 	void addfillcolor(color c);
 	void addbrushcolor(color c);
 
-	void ExecuteAction(ActionType); //Creates an action and executes it
+	
 
 	// -- Figures Management Functions
 
