@@ -9,6 +9,7 @@
 #include "../Figures/CRectangle.h"
 
 moveFigure::moveFigure(ApplicationManager* pApp, bool byDragging) :Action(pApp), newPos{ -1,-1 }, byDragging(byDragging) {};
+
 void moveFigure::ReadActionParameters() {
 	Output* pOut = pManager->GetOutput();
 	Input* pIn = pManager->GetInput();
@@ -19,7 +20,7 @@ void moveFigure::ReadActionParameters() {
 
 		pOut->PrintMessage("Click a point to move the figure to.");
 		pIn->GetPointClicked(newPos.x, newPos.y);
-		pManager->GetFigure(newPos.x, newPos.y);
+		//pManager->GetFigure(newPos.x, newPos.y);
 
 		pOut->ClearStatusBar();
 	}
@@ -41,12 +42,12 @@ void moveFigure::Execute() {
 	else moveByDragging();
 }
 bool moveFigure::move() {
-	CFigure* c = pManager->GetSelected_Figure();
-	bool f = true;
+	//CFigure* c = pManager->GetSelected_Figure();
+	//bool f = true;
 
-	if (f && c != nullptr) {
-		pManager->addPoint(c->GetP1()); f = false;
-	}
+	//if (f && c != nullptr) {
+	//	pManager->addPoint(c->GetP1()); f = false;
+	//}
 
 	if ((newPos.x <= UI.width - 5 && newPos.x > 0) && (newPos.y < UI.height - UI.StatusBarHeight - 5) && (newPos.y > UI.ToolBarHeight + 5)) {
 		cFigure = pManager->GetSelected_Figure();

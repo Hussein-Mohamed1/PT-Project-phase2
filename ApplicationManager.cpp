@@ -89,19 +89,17 @@ void ApplicationManager::ExecuteAction(ActionType ActType, Action* Rec_action)
 	//According to Action Type, create the corresponding action object
 	switch (ActType)
 	{
-	case DRAW_RECT: {
+	case DRAW_RECT:
 		pAct = new AddRectAction(this);
 		playSound(this, DRAW_RECT);
-		addToUndo(pAct); }
-				  break;
+		addToUndo(pAct);
+		break;
 
 	case DRAW_CIRC:
-	{
+
 		pAct = new AddcircleAction(this);
 		playSound(this, DRAW_CIRC);
 		addToUndo(pAct);
-
-
 		break;
 
 	case DRAW_TRIA:
@@ -116,18 +114,19 @@ void ApplicationManager::ExecuteAction(ActionType ActType, Action* Rec_action)
 		addToUndo(pAct);
 		break;
 
-	case DRAW_HEXA: {
+	case DRAW_HEXA:
 		pAct = new AddHexaAction(this);
 		playSound(this, DRAW_HEXA);
 		addToUndo(pAct);
 		break;
 	case FUNC_SELECT:
 		pAct = new SelectAction(this);
-		playSound(this, FUNC_SELECT); }
+		playSound(this, FUNC_SELECT);
+		break;
 	case ENTER_PLAY_MODE:
 		pAct = new to_playmood(this);
-		playSound(this, ENTER_PLAY_MODE); }
-	break;
+		playSound(this, ENTER_PLAY_MODE);
+		break;
 	case BY_SHAPE:
 		if (FigCount)
 			pAct = new figure_type(this);
@@ -146,62 +145,21 @@ void ApplicationManager::ExecuteAction(ActionType ActType, Action* Rec_action)
 		else
 			pOut->PrintMessage("no figures to pick it");
 		break;
-		//case COLOR_BLACK:
-		//pAct = new ChangeColorAction(this,BLACK);
-		//	break;
-		//case COLOR_RED:
-		//pAct = new ChangeColorAction(this,RED);
-		//	break;
-		//case COLOR_GREEN :
-		//	pAct = new ChangeColorAction(this, GREEN);
-		//	break;
-		//case COLOR_ORANGE:
-		//	pAct = new ChangeColorAction(this, ORANGE);
-		//	break;
-		//case COLOR_YELLOW:
-		//	pAct = new ChangeColorAction(this, YELLOW);
-		//	break;
-		//case COLOR_BLUE:
-		//	pAct = new ChangeColorAction(this, BLUE);
-	//	break;
 	case FUNC_FILL:
-	{
 		playSound(this, FUNC_FILL);
-
-		pAct = new ChangeColorAction(this, true); addToUndo(pAct); }
-	break;
-	case FUNC_BRUSH: {
-
+		pAct = new ChangeColorAction(this, true); addToUndo(pAct);
+		break;
+	case FUNC_BRUSH:
 		playSound(this, FUNC_BRUSH);
 		pAct = new ChangeColorAction(this); addToUndo(pAct);
-	}
-				   break;
+		break;
 	case FUNC_DELETE:
-	{pAct = new DeleteAction(this);
-	addToUndo(pAct); }
-	break;
+		pAct = new DeleteAction(this);
+		addToUndo(pAct);
+		break;
 	case ENTER_DRAW_MODE:
 		pAct = new to_drawmood(this);
 		break;
-		//case COLOR_BLACK:
-		//	pOut->PrintMessage("BLACK");
-		//	break;
-		//case COLOR_RED:
-		//	pOut->PrintMessage("RED");
-		//	break;
-		//case COLOR_BLUE:
-		//	pOut->PrintMessage("BLUE");
-		//	break;
-		//case COLOR_GREEN:
-		//	pOut->PrintMessage("GREEN");
-		//	break;
-		//case COLOR_YELLOW:
-		//	pOut->PrintMessage("YELLOW");
-		//	break;
-		//case COLOR_ORANGE:
-		//	pOut->PrintMessage("ORANGE");
-		//	break;
-
 	case FUNC_SAVE:
 		pAct = new PrepareExport(this);
 		break;
@@ -237,12 +195,11 @@ void ApplicationManager::ExecuteAction(ActionType ActType, Action* Rec_action)
 		pOut->PrintMessage("stop");
 		break;
 	case FUNC_MOVE:
-	{
+
 		pAct = new moveFigure(this);
 		addToUndo(pAct);
-		playSound(this, FUNC_MOVE); }
-
-	break;
+		playSound(this, FUNC_MOVE);
+		break;
 
 
 
@@ -375,38 +332,6 @@ void ApplicationManager::setSelectedFigure(CFigure* const sf)
 }
 
 
-//bool ApplicationManager :: Select(CFigure* figure)
-//{
-//	if (Selected_Figure==figure) {
-//		Selected_Figure->SetSelected(false);
-//		Selected_Figure = nullptr;
-//	}
-//	else if (Selected_Figure == nullptr)
-//	{
-//		Selected_Figure = figure;
-//		Selected_Figure->SetSelected(true);
-//	}
-//	else  //if (Selected_Figure != figure)
-//	{
-//		Selected_Figure->SetSelected(false);
-//		Selected_Figure = nullptr;
-//		Selected_Figure = figure;
-//		Selected_Figure->SetSelected(true);
-//
-//	}
-//
-//}
-//
-//CFigure* ApplicationManager:: GetFigureByPoint(int x, int y)
-//{
-//	for (int i = 0; i < FigCount; i++)
-//	{
-//		if (FigList[i]->checkselection(x, y))
-//		{
-//			return FigList[i];
-//		}
-//	}
-//}
 
 //==================================================================================//
 //							Interface Management Functions							//
