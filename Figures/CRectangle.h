@@ -19,7 +19,7 @@ public:
 	friend ostream& operator<<(ostream&, const CRectangle&);
 	void Save(fstream&)const;
 	void Load(string&);
-	bool isInsideBoundaries(const Point&) const;
+	bool isInsideWindowBoundaries(const Point&) const;
 	bool checkselection(int x, int y);
 	int Getid();
 

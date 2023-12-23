@@ -33,7 +33,7 @@ public:
 	///It should be overridden by each inherited figure
 	
 	///Decide the parameters that you should pass to each function	
-	virtual bool isInsideBoundaries(const Point&) const = 0;
+	virtual bool isInsideWindowBoundaries(const Point&) const = 0;
 	virtual void move(const Point&) = 0;
 	virtual void Save(fstream& OutFile) const = 0;	//Save the figure parameters to the file
 	virtual void Load(string&) = 0;	//Load the figure parameters to the file

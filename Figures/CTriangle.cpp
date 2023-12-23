@@ -88,7 +88,7 @@ void CTriangle::move(const Point& newPos)
 	P1 = newPos;
 }
 
-bool CTriangle::isInsideBoundaries(const Point& newPos) const
+bool CTriangle::isInsideWindowBoundaries(const Point& newPos) const
 {
 	Point tP1, tP2, tP3;
 	tP2 = tP2 + newPos - tP1;

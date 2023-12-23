@@ -17,7 +17,7 @@ public:
 	void Load(string&);
 	friend ostream& operator<<(ostream&, const CCircle&);
 	void move(const Point&);
-	bool isInsideBoundaries(const Point&) const;
+	bool isInsideWindowBoundaries(const Point&) const;
 	int Getid();
 	void PrintInfo(Output* pOut);
 	static int get_numofshape();

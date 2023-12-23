@@ -60,15 +60,16 @@ ApplicationManager::ApplicationManager()
 //==================================================================================//
 ActionType ApplicationManager::GetUserAction() const
 {
+
 	//Ask the input to get the action from the user.
 	return pIn->GetUserAction();
 }
+
 ////////////////////////////////////////////////////////////////////////////////////
 //Creates an action and executes it
 
 void ApplicationManager::ExecuteAction(ActionType ActType)
 {
-	pIn->FlushMouseQueue();
 	Action* pAct = nullptr;
 	//According to Action Type, create the corresponding action object
 	switch (ActType)
@@ -166,11 +167,16 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		break;
 	case STATUS:	//a click on the status bar ==> no action
 		return;
+	case DRAWING_AREA:
+		if (Selected_Figure != nullptr) //a figure must be selected to call a "move by dragging" activity
+			pAct = new moveFigure(this, 1);
+		break;
 	}
 
 	//Execute the created action
 	if (pAct != NULL)
 	{
+		pIn->FlushMouseQueue();
 		//addToUndo(pAct);
 		//addToRedo();
 		pAct->Execute(); //Execute

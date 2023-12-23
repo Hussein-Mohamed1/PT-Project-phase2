@@ -43,10 +43,10 @@ void CHexa::Draw(Output* pOut) const
 
 }
 
-bool CHexa::isInsideBoundaries(const Point& newPos) const {
+bool CHexa::isInsideWindowBoundaries(const Point& newPos) const {
 	Point tCentre = newPos;
-	if ((newPos.y) - 80 < (UI.ToolBarHeight + 5) || (newPos.y) + 61 > (UI.height - UI.StatusBarHeight + 5)
-		|| ((newPos.x) + 80) > (UI.width - 5) || (newPos.x) - 80 < 0) return 0;
+	if ((newPos.y) - 80 < (UI.ToolBarHeight + UI.wx) || (newPos.y) + 61 > (UI.height - (UI.StatusBarHeight + UI.wx))
+		|| ((newPos.x) + 80) > (UI.width - UI.wx) || (newPos.x) - 80 < 0) return 0;
 	return 1;
 }
 void CHexa::move(const Point& newPos)
