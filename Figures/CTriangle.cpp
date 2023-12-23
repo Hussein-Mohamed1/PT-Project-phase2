@@ -19,6 +19,18 @@ int CTriangle::Getid()
 	return id;
 }
 
+Point& CTriangle::GetP1()
+{
+
+	Point* p = new Point;
+	*p = { (P1.x + P2.x + P3.x) / 3, (P1.y + P2.y + P3.y) / 3 };
+	return *p;
+
+
+}
+
+
+
 void CTriangle::Draw(Output* pOut) const
 {
 	pOut->Drawrtriangle(P1.x, P1.y, P2.x, P2.y, P3.x, P3.y, FigGfxInfo, Selected);
@@ -37,19 +49,19 @@ bool CTriangle::checkselection(int x, int y)
 
 	//return false;
 
-		int x1 = P1.x;	int x2 = P2.x;	int x3 = P3.x;
-		int y1 = P1.y;	int y2 = P2.y;	int y3 = P3.y;
+	int x1 = P1.x;	int x2 = P2.x;	int x3 = P3.x;
+	int y1 = P1.y;	int y2 = P2.y;	int y3 = P3.y;
 
-		double denominator = ((y2 - y3) * (x1 - x3) + (x3 - x2) * (y1 - y3));
-		double a = ((y2 - y3) * (x - x3) + (x3 - x2) * (y - y3)) / denominator;
-		double b = ((y3 - y1) * (x - x3) + (x1 - x3) * (y - y3)) / denominator;
-		double c = 1 - a - b;
+	double denominator = ((y2 - y3) * (x1 - x3) + (x3 - x2) * (y1 - y3));
+	double a = ((y2 - y3) * (x - x3) + (x3 - x2) * (y - y3)) / denominator;
+	double b = ((y3 - y1) * (x - x3) + (x1 - x3) * (y - y3)) / denominator;
+	double c = 1 - a - b;
 
-		if (a >= 0 && b >= 0 && c >= 0)
-			return true;
+	if (a >= 0 && b >= 0 && c >= 0)
+		return true;
 
-		return false;
-	
+	return false;
+
 
 }
 void CTriangle::Save(fstream& op) const

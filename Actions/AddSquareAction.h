@@ -15,6 +15,7 @@ public :
 
 	virtual void undo();
 	virtual void redo();
-
+	Point  GetP1();
+	Point Getp2();
 };
 

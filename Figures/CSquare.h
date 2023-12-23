@@ -18,7 +18,8 @@ public:
 	bool isInsideBoundaries(const Point&) const;
 	bool checkselection(int x, int y);
 	int Getid();
-
+	Point & GetP1();
+	
 	 void PrintInfo(Output* pOut);
 
 	//  void PrintInfo(Output* pOut);

@@ -64,5 +64,15 @@
 
  }
 
+ Point AddSquareAction::GetP1()
+ {
+	 return P1;
+ }
+
+ Point AddSquareAction::Getp2()
+ {
+	 return P2;
+ }
+
 
 

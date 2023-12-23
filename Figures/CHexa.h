@@ -20,7 +20,8 @@ public:
 	bool isInsideBoundaries(const Point&) const;
 	void move(const Point&);
 	int Getid();
-
+	Point&  GetP1();
+	
 	void PrintInfo(Output* pOut);
 	static int get_numofshape();
 	//	void PrintInfo(Output* pOut);

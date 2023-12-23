@@ -134,7 +134,7 @@ ActionType Input::GetUserAction() const
 			//case ITM_SAVE: return FUNC_SAVE;
 			//case ITM_LOAD: return FUNC_LOAD;
 			//case PLAY_MODE: return ENTER_PLAY_MODE;
-			//case CLEAR_CANVAS: return FUNC_CLEAR_CANVAS;
+			case CLEAR_CANVAS: return FUNC_CLEAR_CANVAS;
 			//case ITM_EXIT: return FUNC_EXIT;
 			case ITM_FILL: return FUNC_FILL;
 			case ITM_MOVE: return FUNC_MOVE;

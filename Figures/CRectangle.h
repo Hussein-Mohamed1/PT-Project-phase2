@@ -27,7 +27,8 @@ public:
 	static int get_numofshape();
 	color get_fillcolor();
 	//void PrintInfo(Output* pOut);
-
+	Point&  GetP1();
+	
 };
 
 #endif

@@ -54,7 +54,18 @@ struct Point	//To be used for figures points
 	friend ostream& operator <<(ostream&, const Point&);
 	friend Point operator+(const Point&, const Point&);
 	friend Point operator-(const Point&, const Point&);
+
 	friend Point operator/(const Point&, int);
+public:
+
+
+Point operator =(const Point& p2)
+ {
+	 x = p2.x;
+	 y = p2.y;
+	 return *this;
+
+ }
 };
 
 struct GfxInfo	//Graphical info of each figure (you may add more members)
