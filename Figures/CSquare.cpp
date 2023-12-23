@@ -1,10 +1,8 @@
 #include "CSquare.h"
 #include "sstream"
-int CSquare::numofsquare = 0;
-int CSquare::get_numofshape() { return numofsquare; }
 CSquare::CSquare(Point p1, Point p2, GfxInfo FigureGfxInfo) :CFigure(FigureGfxInfo)
 {
-	numofsquare++;
+
 	P1 = p1;
 	P2 = p2;
 	id = ID;
@@ -18,7 +16,12 @@ int CSquare::Getid()
 	return id;
 }
 
-CSquare::CSquare() { numofsquare++; };
+Point& CSquare::GetP1()
+{
+	return (P1 + P2) / 2;
+}
+
+CSquare::CSquare() { };
 void CSquare::Draw(Output* pOut) const
 {
 	pOut->DrawRect(P1, P2, FigGfxInfo, Selected);
@@ -89,7 +92,7 @@ void CSquare::PrintInfo(Output* pOut)
 
 	// to_string ()  is a function that cast int to strting
 
-	string printed="Fiure is Square      Figure id : "+ to_string(id)+
+	string printed = "Fiure is Square      Figure id : " + to_string(id) +
 		"        Fisrt Corner :(" + to_string(P1.x) + "," + to_string(P1.y) + ")"
 		+ "        Second Corner :(" + to_string(P2.x) + "," + to_string(P2.y) + ")"
 		+ "        height " + to_string(hieght) + "        width " + to_string(hieght);   // hieght = widght becuase it's a square

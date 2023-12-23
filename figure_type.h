@@ -8,6 +8,7 @@
 #include "Figures/CTriangle.h"
 class figure_type : public Action
 {
+	int numoffigure;
 	figures by_fig;
 	Point p;
 	CFigure* selected_fig;
@@ -17,5 +18,8 @@ public:
 	figure_type(ApplicationManager* pApp);
 	 void ReadActionParameters();
 	 void Execute();
+	 void manage_byfigure();
+	 void redo() {};
+	 void undo() {};
 };
 

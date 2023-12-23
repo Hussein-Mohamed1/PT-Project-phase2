@@ -9,7 +9,6 @@ private:
 	Point Corner1;
 	Point Corner2;
 	int id;
-	static int numofrect;
 public:
 	CRectangle(Point, Point, GfxInfo FigureGfxInfo);
 	CRectangle();
@@ -24,10 +23,10 @@ public:
 	int Getid();
 
 	void PrintInfo(Output* pOut);
-	static int get_numofshape();
 	color get_fillcolor();
 	//void PrintInfo(Output* pOut);
-
+	Point&  GetP1();
+	
 };
 
 #endif

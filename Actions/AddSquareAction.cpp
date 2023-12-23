@@ -6,7 +6,9 @@
 #include "..\GUI\input.h"
 #include "..\GUI\Output.h"
  AddSquareAction ::AddSquareAction(ApplicationManager * pApp) :Action(pApp)
- {}
+ {
+	 numofshapes++;
+ }
  void AddSquareAction::ReadActionParameters()
  {
 
@@ -64,5 +66,20 @@
 
  }
 
+ Point AddSquareAction::GetP1()
+ {
+	 return P1;
+ }
 
+ Point AddSquareAction::Getp2()
+ {
+	 return P2;
+ }
+
+
+ int AddSquareAction::numofshapes = 0;
+ int AddSquareAction::getnumofshapes()
+ {
+	 return numofshapes;
+ }
 

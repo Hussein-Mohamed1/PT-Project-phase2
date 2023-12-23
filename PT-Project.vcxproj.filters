@@ -211,8 +211,7 @@
     <ClCompile Include="Actions\DeleteAction.cpp">
       <Filter>Action Classes</Filter>
     </ClCompile>
-    <ClCompile Include="Actions\Action.cpp" />
-    <ClCompile Include="Actions\playSound.cpp">
+    <ClCompile Include="StartandStopRec.cpp">
       <Filter>Action Classes</Filter>
     </ClCompile>
   </ItemGroup>
@@ -365,7 +364,7 @@
     <ClInclude Include="Actions\MoveFigure.h">
       <Filter>Action Classes</Filter>
     </ClInclude>
-    <ClInclude Include="Actions\playSound.h">
+    <ClInclude Include="StartandStopRec.h">
       <Filter>Action Classes</Filter>
     </ClInclude>
   </ItemGroup>

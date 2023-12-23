@@ -4,6 +4,11 @@
 class moveFigure : public Action
 {
 	Point newPos;
+	CFigure* DeletedFig;
+	Point lastPoint;
+	
+	CFigure* cFigure;
+	CFigure* f;
 	bool byDragging;
 public:
 	moveFigure(ApplicationManager* pApp,bool byDragging =0);
@@ -11,5 +16,6 @@ public:
 	bool move();
 	void moveByDragging();
 	void Execute();
-
+	virtual void undo();
+	virtual void redo();
 };

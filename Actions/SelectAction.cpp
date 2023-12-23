@@ -55,8 +55,10 @@ void SelectAction::Execute()
 		ClickedFigure->PrintInfo(pOut);
 		pManager->setSelectedFigure(ClickedFigure);
 	}
-
-
-
 }
 
+
+//CFigure* SelectAction::GetSelected_Figure()
+//{
+//	return Selected_Figure;
+//}

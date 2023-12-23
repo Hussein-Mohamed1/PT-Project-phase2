@@ -26,9 +26,9 @@ public:
 	Action(ActionType act) {};
 
 
-	virtual void undo();
-	virtual void redo();
-	int CheckAction() { return 0; };
+	 virtual void undo()=0 ;
+	 virtual void redo()=0;
+	 int CheckAction() { return 0; };
 
 
 

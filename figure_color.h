@@ -10,8 +10,10 @@ class figure_color :public Action
 	int correct = 0;
 public:
 	figure_color(ApplicationManager* pApp);
-	 void ReadActionParameters();
-	 void Execute();
-	void manage_by_color(color , int n );
+	void ReadActionParameters();
+	void Execute();
+	void manage_by_color(color, int n);
+	void redo() {};
+	void undo() {};
 };
 

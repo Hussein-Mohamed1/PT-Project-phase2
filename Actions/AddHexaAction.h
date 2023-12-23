@@ -7,6 +7,7 @@ private:
     Point P1;
     GfxInfo RectGfxInfo;
     CFigure* DeletedFig;
+    static int numofshapes;
 public :
     AddHexaAction(ApplicationManager* pApp);
     void  ReadActionParameters();
@@ -14,5 +15,7 @@ public :
 
     virtual void undo();
     virtual void redo();
+    static int getnumofshapes();
+
 };
 
