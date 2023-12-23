@@ -2,29 +2,29 @@
 #include "Output.h"
 
 
-Input::Input(window* pW) 
+Input::Input(window* pW)
 {
 	pWind = pW; //point to the passed window
 }
 
-void Input::GetPointClicked(int &x, int &y) const
+void Input::GetPointClicked(int& x, int& y) const
 {
 	pWind->WaitMouseClick(x, y);	//Wait for mouse click
 }
 
-string Input::GetSrting(Output *pO) const 
+string Input::GetString(Output* pO) const
 {
 	string Label;
 	char Key;
-	while(1)
+	while (1)
 	{
 		pWind->WaitKeyPress(Key);
-		if(Key == 27 )	//ESCAPE key is pressed
+		if (Key == 27)	//ESCAPE key is pressed
 			return "-1";	//returns -1 as user has cancelled label
-		if(Key == 13 )	//ENTER key is pressed
+		if (Key == 13)	//ENTER key is pressed
 			return Label;
-		if((Key == 8) && (Label.size() >= 1))	//BackSpace is pressed
-			Label.resize(Label.size() -1 );			
+		if ((Key == 8) && (Label.size() >= 1))	//BackSpace is pressed
+			Label.resize(Label.size() - 1);
 		else
 			Label += Key;
 		if (pO)
@@ -32,46 +32,51 @@ string Input::GetSrting(Output *pO) const
 	}
 }
 
+void Input::FlushMouseQueue()
+{
+	pWind->FlushMouseQueue();
+}
+
 //This function reads the position where the user clicks to determine the desired action
 ActionType Input::GetUserAction() const
-{	
-	int x,y;
+{
+	int x, y;
 	pWind->WaitMouseClick(x, y);	//Get the coordinates of the user click
 
-	if(UI.InterfaceMode == MODE_DRAW)	//GUI in the DRAW mode
+	if (UI.InterfaceMode == MODE_DRAW)	//GUI in the DRAW mode
 	{
 		//[0] Clicked in Mini Color Bar  
 
-              /// Color Black      /// Color Red         // Color Blue 
+			  /// Color Black      /// Color Red         // Color Blue 
 		int start = 11 * UI.MenuItemWidth;
-		int  k = 1;    
+		int  k = 1;
 		int space = 10;
 		if (y <= 1 + UI.MiniColorHeight)
 		{
 			// Black 
-			if (x >= start && x <= start+ UI.MiniColorWidth)
+			if (x >= start && x <= start + UI.MiniColorWidth)
 			{
 				return COLOR_BLACK;
 			}
 			//k++;
 
 		  // Red 
-			if (x >= start+UI.MiniColorWidth*k+k*space  && x <= start+UI.MiniColorWidth*(k+1)+space*k)
+			if (x >= start + UI.MiniColorWidth * k + k * space && x <= start + UI.MiniColorWidth * (k + 1) + space * k)
 			{
 				return COLOR_RED;
 			}
 			k++;
 			if (x >= start + UI.MiniColorWidth * k + k * space && x <= start + UI.MiniColorWidth * (k + 1) + space * k)
 			{
-				return COLOR_BLUE ;
+				return COLOR_BLUE;
 			}
 
 		}
-		   
+
 		k = 1;
 		//// Color yellow        Green                  Orange
 
-		if (y <= 25 + UI.MiniColorHeight && y >=  UI.MiniColorHeight)
+		if (y <= 25 + UI.MiniColorHeight && y >= UI.MiniColorHeight)
 		{
 			// Black 
 			if (x >= start && x <= start + UI.MiniColorWidth)
@@ -93,15 +98,15 @@ ActionType Input::GetUserAction() const
 
 		}
 
-		  
+
 
 
 
 		///////Icons Before Colors
 
 		//[1] If user clicks on the Toolbar
-		if ( y >= 0 && y < UI.ToolBarHeight)
-		{	
+		if (y >= 0 && y < UI.ToolBarHeight)
+		{
 
 			//Check whick Menu item was clicked
 			//==> This assumes that menu items are lined up horizontally <==
@@ -144,10 +149,10 @@ ActionType Input::GetUserAction() const
 			}
 
 			//  Icons After Colors
-			start = UI.MenuItemWidth * 13 +5 ;
-			  space = 1;
+			start = UI.MenuItemWidth * 13 + 5;
+			space = 1;
 			k = 1;
-			
+
 			if (x >= start && x <= start + UI.MenuItemWidth)
 				return FUNC_UNDO;
 			if (x >= start + UI.MenuItemWidth * k + k * space && x <= start + UI.MenuItemWidth * (k + 1) + space * k)
@@ -203,11 +208,11 @@ ActionType Input::GetUserAction() const
 		}
 
 
-		if ( y >= UI.ToolBarHeight && y < UI.height - UI.StatusBarHeight)
+		if (y >= UI.ToolBarHeight && y < UI.height - UI.StatusBarHeight)
 		{
-			return DRAWING_AREA;	
+			return DRAWING_AREA;
 		}
-		
+
 		//[3] User clicks on the status bar
 		return STATUS;
 	}
@@ -237,7 +242,7 @@ ActionType Input::GetUserAction() const
 
 }
 /////////////////////////////////
-	
+
 Input::~Input()
 {
 }

@@ -24,12 +24,17 @@
 #include "figure_color.h"
 #include "figure_typeandcolor.h"
 #include"to_playmood.h"
+#include "Actions/playSound.h"
 #include "Actions/Action.h"
 #include "Actions/RedoAction.h"
 int ApplicationManager::countrepos = 0;
 int ApplicationManager::countpos = 0;
 int ApplicationManager::countfill = 0;
 int ApplicationManager::countbrush = 0;
+#include "CMUgraphicsLib/auxil.h"
+using namespace std;
+//class Action ;
+//Constructor
 ApplicationManager::ApplicationManager()
 {
 
@@ -48,6 +53,7 @@ ApplicationManager::ApplicationManager()
 	for (int i = 0; i < MaxFigCount; i++)
 	{
 		FigList[i] = NULL;
+		DeletedFigList[i] = nullptr;
 	}
 	for (int i = 0; i < maxActionCount; i++)
 		ActListun[i] = NULL;
@@ -76,33 +82,31 @@ ActionType ApplicationManager::GetUserAction() const
 
 void ApplicationManager::ExecuteAction(ActionType ActType)
 {
-	Action* pAct = NULL;
-
+	pIn->FlushMouseQueue();
+	Action* pAct = nullptr;
 	//According to Action Type, create the corresponding action object
 	switch (ActType)
 	{
 	case DRAW_RECT:
-	{pAct = new AddRectAction(this);
-	addToUndo(pAct);
-
-	}
-	break;
+		pAct = new AddRectAction(this);
+		playSound(this, DRAW_RECT);
+		addToUndo(pAct);
+		break;
 
 	case DRAW_CIRC:
-	{
+
 		pAct = new AddcircleAction(this);
+		playSound(this, DRAW_CIRC);
 		addToUndo(pAct);
 
 	}
 	break;
 
 	case DRAW_TRIA:
-	{pAct = new AddTriangleAction(this);
-	addToUndo(pAct);
-
-	}
-
-	break;
+		pAct = new AddTriangleAction(this);
+		playSound(this, DRAW_TRIA);
+		addToUndo(pAct);
+		break;
 
 	case 	FUNC_MOVE:
 	{pAct = new moveFigure(this);
@@ -112,23 +116,21 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 
 	break;
 	case DRAW_SQUA:
-	{	pAct = new AddSquareAction(this);
-	addToUndo(pAct);
-
-	}
-
-	break;
+		pAct = new AddSquareAction(this);
+		playSound(this, DRAW_SQUA);
+		addToUndo(pAct);
+		break;
 
 	case DRAW_HEXA:
-	{
 		pAct = new AddHexaAction(this);
+		playSound(this, DRAW_HEXA);
 		addToUndo(pAct);
 
 	}break;
 	case FUNC_SELECT:
-	{	pAct = new SelectAction(this);
-
-	}break;
+		pAct = new SelectAction(this);
+		playSound(this, FUNC_SELECT);
+		break;
 	//case FUNC_SAVE:
 	//	pAct = new PrepareExport(this);
 	//	break;
@@ -138,6 +140,7 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 
 	case ENTER_PLAY_MODE:
 		pAct = new to_playmood(this);
+		playSound(this, ENTER_PLAY_MODE);
 		break;
 	case BY_SHAPE:
 		pAct = new figure_type(this);
@@ -167,10 +170,15 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		//	pAct = new ChangeColorAction(this, BLUE);
 	//	break;
 	case FUNC_FILL:
-	{pAct = new ChangeColorAction(this, true);addToUndo(pAct);}
-	break;
-	case FUNC_BRUSH:
-	{	pAct = new ChangeColorAction(this);addToUndo(pAct);
+	{
+		playSound(this, FUNC_FILL);
+		
+	pAct = new ChangeColorAction(this, true);addToUndo(pAct);}
+break;
+	case FUNC_BRUSH:{
+		
+		playSound(this, FUNC_BRUSH);
+		pAct = new ChangeColorAction(this);addToUndo(pAct);
 	}
 		break;
 	case FUNC_DELETE:
@@ -200,11 +208,11 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		//	break;
 
 	case FUNC_SAVE:
-		pOut->PrintMessage("SAVE");
+		pAct = new PrepareExport(this);
 		break;
 
 	case FUNC_LOAD:
-		pOut->PrintMessage("LOAD");
+		pAct = new PrepareImport(this);
 		break;
 
 	case FUNC_CLEAR_CANVAS:
@@ -230,17 +238,16 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 	case FUNC_STOP_REC:
 		pOut->PrintMessage("stop");
 		break;
-
-
-
+	case FUNC_MOVE:
+		pAct = new moveFigure(this);
+		playSound(this, FUNC_MOVE);
+		break;
 	case FUNC_EXIT_playMode:
 		break;
 
 	case FUNC_EXIT:
-		///create ExitAction here
-		///create ExitAction 
 		break;
-
+		
 	case STATUS:	//a click on the status bar ==> no action
 		return;
 	}
@@ -252,7 +259,7 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		//addToRedo();
 		pAct->Execute(); //Execute
 		//ActList[ActionCount++] = pAct;
-	//	delete pAct;	//You may need to change this line depending to your implementation
+
 		pAct = NULL;
 	}
 }
@@ -323,30 +330,37 @@ CFigure* ApplicationManager::DeleteFigure()
 		return nullptr;
 }
 ////////////////////////////////////////////////////////////////////////////////////
-CFigure* ApplicationManager::GetFigure(int x, int y) //const
-{
+CFigure* ApplicationManager::GetFigure(int x, int y) {
 	for (int i = 0; i < FigCount; i++)
 	{
 		if (FigList[i] != NULL)                  // Validation to prevent crash if Figure is deleted
 		{
 			if (FigList[i]->checkselection(x, y))           /// to check whether point is in figure or not
 			{
-				//SetSelectedFig(FigList[i]);
 				return FigList[i];
 
 			}
 
-		}
-		// if the point dosen't belong to any figure
-		
-		//Add your code here to search for a figure given a point x,y
-		//Remember that ApplicationManager only calls functions do NOT implement it.
+
+	}
+
+	// if the point dosen't belong to any figure
+
+	pOut->PrintMessage(" No selected figure ");
+
+	//Add your code here to search for a figure given a point x,y
+	//Remember that ApplicationManager only calls functions do NOT implement it.
 
 		
 	}pOut->PrintMessage(" No selected figure ");
 
 return NULL;
 	
+}
+
+void ApplicationManager::setSelectedFigure(CFigure* const sf)
+{
+	Selected_Figure = sf;
 }
 
 
@@ -390,17 +404,12 @@ return NULL;
 //Draw all figures on the user interface
 void ApplicationManager::UpdateInterface()
 {
-//	for (int i = 0; i < FigCount; i++)
-
-		pOut->ClearDrawArea();
-
-
+	pOut->ClearDrawArea();
 	for (int i = 0; i < FigCount; i++)
 		if (FigList[i] != NULL)
 		{
 			FigList[i]->Draw(pOut);
 		}          //Call Draw function (virtual member fn)
-
 
 }
 
@@ -413,6 +422,7 @@ void ApplicationManager::DeleteFunction()
 			//Selected_Figure->SetSelected(false);             
 		   //		pOut->ClearDrawArea();                 
 			pOut->ClearStatusBar();
+			delete FigList[i];
 			FigList[i] = NULL;
 			Selected_Figure = NULL;
 			break;
@@ -514,6 +524,9 @@ void ApplicationManager::ClearAll()
 
 void ApplicationManager::addToUndo(Action* pAct)
 {
+	if (ActionCountun < 5&& ActionCountun>=0)
+	{
+		ActListun[ActionCountun] = pAct;
 
 
 	if (ActionCountun > 4)
@@ -583,8 +596,9 @@ ApplicationManager::~ApplicationManager()
 {
 	for (int i = 0; i < FigCount; i++)
 	{
-		delete FigList[i];
-		delete DeletedFigList[i];
+		if (FigList[i] != nullptr) { delete FigList[i]; FigList[i] = nullptr; }
+		if (DeletedFigList[i] != nullptr) { delete DeletedFigList[i]; }
+
 	}
 	delete pIn;
 	delete pOut;

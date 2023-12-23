@@ -10,7 +10,7 @@ SelectAction::SelectAction(ApplicationManager* pApp) :Action(pApp)
 	ClickedFigure = NULL;
 
 }
- 
+
 void SelectAction::ReadActionParameters()
 {
 
@@ -26,20 +26,35 @@ void SelectAction::ReadActionParameters()
 void SelectAction::Execute()
 {
 
-	  ReadActionParameters();
+	ReadActionParameters();
+	Output* pOut = pManager->GetOutput();
+	ClickedFigure = pManager->GetFigure(p.x, p.y);
+	CFigure* oldSelected_Figure = pManager->GetSelected_Figure();
+	if (oldSelected_Figure == nullptr && ClickedFigure != nullptr)
+	{
+		ClickedFigure->SetSelected(true);
+		ClickedFigure->PrintInfo(pOut);
+		pManager->setSelectedFigure(ClickedFigure);
+	}
 
-	 ClickedFigure= pManager->GetFigure(p.x, p.y);
+	// case two if selected figure is seclected before make it unselected and return NUL
 
- if (ClickedFigure)
-	 {
-		 pManager->SetSelectedFig(ClickedFigure);
-		 ClickedFigure = NULL;
-	 }
-}
+	else if (oldSelected_Figure == ClickedFigure && ClickedFigure != nullptr)
+	{
+		ClickedFigure->SetSelected(false);
+		pManager->setSelectedFigure(nullptr);
 
-void SelectAction::undo()
-{
-}
+	}
+
+	//  case 3 if the seleced figure isn't the selected before
+
+	else if (ClickedFigure != nullptr)
+	{
+		oldSelected_Figure->SetSelected(false);
+		ClickedFigure->SetSelected(true);
+		ClickedFigure->PrintInfo(pOut);
+		pManager->setSelectedFigure(ClickedFigure);
+	}
 
 void SelectAction::redo(){
 	

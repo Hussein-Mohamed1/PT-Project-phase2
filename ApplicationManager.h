@@ -9,16 +9,16 @@ class Action;
 //Main class that manages everything in the application.
 class ApplicationManager
 {
-	
-	enum { MaxFigCount = 200,maxActionCount=5 };	//Max no of figures
-	
+
+	enum { MaxFigCount = 200, maxActionCount = 5 };	//Max no of figures
+
 
 private:
 
 	Action* ActListun[maxActionCount];       //actual array of actions
 	Action* ActListre[maxActionCount];
-	int ActionCountun=0;   
-	int ActionCountre=0;
+	int ActionCountun = 0;
+	int ActionCountre = 0;
 	int FigCount;		//Actual number of figures
 	int DeletedFigCount;
 
@@ -51,20 +51,21 @@ public:
 	void addfillcolor(color c);
 	void addbrushcolor(color c);
 
+	void ExecuteAction(ActionType); //Creates an action and executes it
+
 	// -- Figures Management Functions
-	
+
 	void RemoveFigure(CFigure* pFig);          //Adds a new figure to the FigList
 	CFigure* DeleteFigure();          //Adds a new figure to the FigList
-	CFigure *GetFigure(int x, int y) const; //Search for a figure given a point inside the figure
-		
+	CFigure* GetFigure(int x, int y); //Search for a figure given a point inside the figure
+	void setSelectedFigure(CFigure* const);
 	void AddFigure(CFigure* pFig);  //Adds a new figure to the FigList
-	CFigure *GetFigure(int x, int y) ; //Search for a figure given a point inside the figure
 	void set_figure(CFigure*);
 	// -- Interface Management Functions
-	Input *GetInput() const; //Return pointer to the input
-	Output *GetOutput() const; //Return pointer to the output
-	void UpdateInterface() ;	//Redraws all the drawing window	
-	void SaveAll(fstream &) const;
+	Input* GetInput() const; //Return pointer to the input
+	Output* GetOutput() const; //Return pointer to the output
+	void UpdateInterface();	//Redraws all the drawing window	
+	void SaveAll(fstream&) const;
 	void addToUndo(Action* pAct);
 	void addToRedo();
 

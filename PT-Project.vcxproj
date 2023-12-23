@@ -137,6 +137,7 @@
     <ClCompile Include="Actions\clearAll.cpp" />
     <ClCompile Include="Actions\DeleteAction.cpp" />
     <ClCompile Include="Actions\MoveFigure.cpp" />
+    <ClCompile Include="Actions\playSound.cpp" />
     <ClCompile Include="Actions\PrepareExport.cpp" />
     <ClCompile Include="Actions\PrepareImport.cpp" />
     <ClCompile Include="Actions\SelectAction.cpp" />
@@ -204,6 +205,7 @@
     <ClInclude Include="Actions\clearAll.h" />
     <ClInclude Include="Actions\MoveFigure.h" />
     <ClInclude Include="Actions\DeleteAction.h" />
+    <ClInclude Include="Actions\playSound.h" />
     <ClInclude Include="Actions\RedoAction.h" />
     <ClInclude Include="Actions\UndoAction.h" />
     <ClInclude Include="Actions\PrepareExport.h" />

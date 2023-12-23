@@ -2,7 +2,7 @@
 #include"../Figures/CFigure.h"
 #include "Action.h"
 class SelectAction :
-    public Action
+	public Action
 {
 	CFigure* ClickedFigure;
 private:
@@ -11,8 +11,6 @@ public:
 	SelectAction(ApplicationManager* pApp);
 	void ReadActionParameters();
 	void Execute();
-	virtual void undo();
-	virtual void redo();
 
 
 };

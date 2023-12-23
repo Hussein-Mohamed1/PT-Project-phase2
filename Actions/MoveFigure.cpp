@@ -31,7 +31,9 @@ void moveFigure::ReadActionParameters() {
 	}
 	else {
 		pOut->PrintMessage("Choose a figure first then try again!");
-		Pause(2000);
+		Pause(1000);
+		pManager->GetInput()->FlushMouseQueue(); /*written to stop the user from spamming
+		 the move button when there is no figure as the pause functionality doesnt clear the mouse queue by default*/
 		pOut->ClearStatusBar();
 	}
 }

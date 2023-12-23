@@ -212,6 +212,10 @@
       <Filter>Action Classes</Filter>
     </ClCompile>
     <ClCompile Include="Actions\Action.cpp" />
+    <ClCompile Include="Actions\playSound.cpp">
+      <Filter>Action Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="Actions\Action.cpp" />
     <ClCompile Include="Actions\clearAll.cpp">
       <Filter>Action Classes</Filter>
     </ClCompile>
@@ -363,6 +367,9 @@
       <Filter>Action Classes</Filter>
     </ClInclude>
     <ClInclude Include="Actions\MoveFigure.h">
+      <Filter>Action Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="Actions\playSound.h">
       <Filter>Action Classes</Filter>
     </ClInclude>
     <ClInclude Include="Actions\clearAll.h">

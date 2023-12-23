@@ -5,7 +5,7 @@
 PrepareExport::PrepareExport(ApplicationManager* pApp) :Action(pApp) {};
 void PrepareExport::ReadActionParameters() {
 	pManager->GetOutput()->PrintMessage("Enter The file name without .txt or press ESC to cancel.");
-	name = pManager->GetInput()->GetSrting(pManager->GetOutput());
+	name = pManager->GetInput()->GetString(pManager->GetOutput());
 }
 void PrepareExport::Execute() {
 	ReadActionParameters();
