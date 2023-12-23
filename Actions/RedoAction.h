@@ -22,12 +22,11 @@ public:
 
 	RedoAction(ApplicationManager* pApp);
 	void AddToActions(Action* Act);
-	
-	
+
+
 	void Execute();
 	void ReadActionParameters();
-	virtual void undo();
-	virtual void redo();
+
 
 
 

@@ -89,14 +89,14 @@ void ApplicationManager::ExecuteAction(ActionType ActType, Action* Rec_action)
 	//According to Action Type, create the corresponding action object
 	switch (ActType)
 	{
-	case DRAW_RECT:
+	case DRAW_RECT: {
 		pAct = new AddRectAction(this);
 		playSound(this, DRAW_RECT);
-		addToUndo(pAct);
-		break;
+		addToUndo(pAct); }
+				  break;
 
 	case DRAW_CIRC:
-
+	{
 		pAct = new AddcircleAction(this);
 		playSound(this, DRAW_CIRC);
 		addToUndo(pAct);
@@ -116,20 +116,18 @@ void ApplicationManager::ExecuteAction(ActionType ActType, Action* Rec_action)
 		addToUndo(pAct);
 		break;
 
-	case DRAW_HEXA:
+	case DRAW_HEXA: {
 		pAct = new AddHexaAction(this);
 		playSound(this, DRAW_HEXA);
 		addToUndo(pAct);
-
 		break;
 	case FUNC_SELECT:
 		pAct = new SelectAction(this);
-		playSound(this, FUNC_SELECT);
-		break;
+		playSound(this, FUNC_SELECT); }
 	case ENTER_PLAY_MODE:
 		pAct = new to_playmood(this);
-		playSound(this, ENTER_PLAY_MODE);
-		break;
+		playSound(this, ENTER_PLAY_MODE); }
+	break;
 	case BY_SHAPE:
 		if (FigCount)
 			pAct = new figure_type(this);
@@ -222,11 +220,13 @@ void ApplicationManager::ExecuteAction(ActionType ActType, Action* Rec_action)
 
 	case FUNC_REDO:
 		pAct = new RedoAction(this);
+
 	case FUNC_START_REC:
 		if (FigCount == 0)
 			pAct = new StartandStopRec(this);
 		else
 			pOut->PrintMessage("can't recording you should delete all");
+		pOut->PrintMessage("START");
 		break;
 
 	case FUNC_PLAY_REC:
@@ -237,11 +237,14 @@ void ApplicationManager::ExecuteAction(ActionType ActType, Action* Rec_action)
 		pOut->PrintMessage("stop");
 		break;
 	case FUNC_MOVE:
+	{
 		pAct = new moveFigure(this);
-		playSound(this, FUNC_MOVE);
-		break;
-	case FUNC_EXIT_playMode:
-		break;
+		addToUndo(pAct);
+		playSound(this, FUNC_MOVE); }
+
+	break;
+
+
 
 	case FUNC_EXIT:
 		break;
@@ -494,6 +497,8 @@ void ApplicationManager::SaveAll(fstream& OutputFile) const {
 		OutputFile.close();
 	}
 }
+
+
 void ApplicationManager::ClearAll()
 {
 
@@ -528,22 +533,20 @@ void ApplicationManager::ClearAll()
 	ActionCountre = 0;
 	pOut->ClearDrawArea();
 }
-
-
 void ApplicationManager::addToUndo(Action* pAct)
 {
 	if (ActionCountun < 5 && ActionCountun >= 0)
 	{
 		ActListun[ActionCountun] = pAct;
-
-
-		if (ActionCountun > 4)
 		{
+			ActListun[ActionCountun] = pAct;
 
-			for (int j = 0; j < 4; j++)   //Overwriting Undoarr to make it always have the last five actions 
-			{
-				ActListun[j] = ActListun[j + 1];
-			}
+
+			if (ActionCountun > 4)
+				for (int j = 0; j < 4; j++)   //Overwriting Undoarr to make it always have the last five actions 
+				{
+					ActListun[j] = ActListun[j + 1];
+				}
 			ActionCountun = 4;
 		}
 		ActListun[ActionCountun++] = pAct;
@@ -556,6 +559,8 @@ void ApplicationManager::addToRedo()
 	ActionCountre++;
 
 }
+
+
 
 Action* ApplicationManager::GetLastUndo()
 {
@@ -603,6 +608,8 @@ void ApplicationManager::getColor()
 //Destructor
 ApplicationManager::~ApplicationManager()
 {
+
+
 	for (int i = 0; i < FigCount; i++)
 	{
 		if (FigList[i] != nullptr) { delete FigList[i]; FigList[i] = nullptr; }
@@ -753,6 +760,7 @@ int ApplicationManager::get_numofcolor(color c)
 }
 int ApplicationManager::numof_figurewithcolor(figures fig, colors c)
 {
+
 	CFigure* check_fig;
 	int n = 0;
 	switch (fig)
