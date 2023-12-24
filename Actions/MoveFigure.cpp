@@ -38,6 +38,7 @@ void moveFigure::Execute(bool b) {
 
 	if (!byDragging)
 	{
+		if (b)
 		ReadActionParameters();
 		move();
 	}

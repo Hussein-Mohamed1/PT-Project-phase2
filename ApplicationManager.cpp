@@ -85,7 +85,7 @@ ActionType ApplicationManager::GetUserAction() const
 void ApplicationManager::ExecuteAction(ActionType ActType, int numofrec)
 {
 	Action* pAct = nullptr;
-	playSound(this, ActType);
+	//playSound(this, ActType);
 	//According to Action Type, create the corresponding action object
 	switch (ActType)
 	{
@@ -140,11 +140,11 @@ void ApplicationManager::ExecuteAction(ActionType ActType, int numofrec)
 			pOut->PrintMessage("no figures to pick it");
 		break;
 	case FUNC_FILL:
-		playSound(this, FUNC_FILL);
+		//playSound(this, FUNC_FILL);
 		pAct = new ChangeColorAction(this, true); addToUndo(pAct);
 		break;
 	case FUNC_BRUSH:
-		playSound(this, FUNC_BRUSH);
+		//playSound(this, FUNC_BRUSH);
 		pAct = new ChangeColorAction(this); addToUndo(pAct);
 		break;
 	case FUNC_DELETE:
@@ -463,16 +463,7 @@ void ApplicationManager::ClearAll()
 		delete FigList[i];
 		FigList[i] = nullptr;
 	}
-	for (int i = 0; i < ActionCountun; i++)
-	{
-		delete ActListun[i];
-		ActListun[i] = nullptr;
-	}
-	for (int i = 0; i < ActionCountre; i++)
-	{
-		delete ActListre[i];
-		ActListre[i] = nullptr;
-	}
+
 	for (int i = 0; i < FigCount; i++)
 	{
 		delete DeletedFigList[i];
@@ -484,13 +475,26 @@ void ApplicationManager::ClearAll()
 		arr_recActions[i] = NULL;
 		delete arr_recActions[i];
 	}*/
-
 	UpdateInterface();
 	FigCount = 0;
 	ActionCountun = 0;
 	ActionCountre = 0;
 	pOut->ClearDrawArea();
 	//cFigure->id = 0;
+}
+void ApplicationManager::clear()
+{
+
+	for (int i = 0; i < ActionCountun; i++)
+	{
+		delete ActListun[i];
+		ActListun[i] = nullptr;
+	}
+	for (int i = 0; i < ActionCountre; i++)
+	{
+		delete ActListre[i];
+		ActListre[i] = nullptr;
+	}
 }
 void ApplicationManager::addToUndo(Action* pAct)
 {
