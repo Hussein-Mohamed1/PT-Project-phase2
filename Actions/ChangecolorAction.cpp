@@ -77,6 +77,7 @@ void ChangeColorAction::Execute()
 		
 		if (ChangeFill)
 		{
+			num_of_fill++;
 			pManager->GetSelected_Figure()->ChngFillClr(ChoosenColor);
 			CFigure::IsAllNewFilled(true);
 			pOut->SetFillColor(ChoosenColor);

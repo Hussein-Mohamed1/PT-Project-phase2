@@ -1,8 +1,6 @@
 #include "StartandStopRec.h"
 StartandStopRec::StartandStopRec(ApplicationManager* pApp) :Action(pApp)
 {
-	arr_Actions = new Action*[20];
-
 }
 void StartandStopRec::ReadActionParameters()
 {
@@ -16,7 +14,7 @@ void StartandStopRec::Execute()
 	{
 		ReadActionParameters();
 		pManager->GetOutput()->PrintMessage("recording is working...");
-		if (current_action > 22)
+		if (current_action > 23)
 			pManager->GetOutput()->PrintMessage("can't recording this action choose anothor action");
 		else if (current_action == DRAWING_AREA || current_action == STATUS || current_action == EMPTY)
 			continue;
@@ -27,7 +25,7 @@ void StartandStopRec::Execute()
 		}
 		else
 		{
-			pManager->ExecuteAction(current_action , arr_Actions[numofaction++]);
+			pManager->ExecuteAction(current_action , numofaction++);
 			pManager->UpdateInterface();
 		}
 	}

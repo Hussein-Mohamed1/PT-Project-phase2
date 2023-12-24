@@ -8,11 +8,10 @@ class ChangeColorAction :
     color  ChoosenColor;
     int counter;
     CFigure* f;
-    static int num_of_fill;
+ 
  
 
 public:
- //  int static num_of_fill;
     ChangeColorAction(ApplicationManager* pApp,bool CF=0);
 
     virtual void ReadActionParameters();

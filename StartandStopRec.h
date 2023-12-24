@@ -5,7 +5,6 @@ class StartandStopRec : public Action
 {
 	ActionType current_action;
 	bool stop_rec = false;
-	Action** arr_Actions;
 public:
 	StartandStopRec(ApplicationManager* pApp);
 	void ReadActionParameters();

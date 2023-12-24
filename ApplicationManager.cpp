@@ -38,7 +38,7 @@ using namespace std;
 //Constructor
 ApplicationManager::ApplicationManager()
 {
-
+	arr_recActions = new Action * [20];
 	//Create Input and output
 	pOut = new Output;
 	pIn = pOut->CreateInput();
@@ -83,7 +83,7 @@ ActionType ApplicationManager::GetUserAction() const
 ////////////////////////////////////////////////////////////////////////////////////
 //Creates an action and executes it
 
-void ApplicationManager::ExecuteAction(ActionType ActType, Action* Rec_action)
+void ApplicationManager::ExecuteAction(ActionType ActType, int numofrec )
 {
 	Action* pAct = nullptr;
 	//According to Action Type, create the corresponding action object
@@ -154,41 +154,39 @@ void ApplicationManager::ExecuteAction(ActionType ActType, Action* Rec_action)
 		pAct = new to_drawmood(this);
 		break;
 	case FUNC_SAVE:
-	//	pAct = new PrepareExport(this);
+		pAct = new PrepareExport(this);
 		pOut->PrintMessage("SAVE");
 
 		break;
 
 	case FUNC_LOAD:
-	//	pAct = new PrepareImport(this);
+		pAct = new PrepareImport(this);
 		pOut->PrintMessage("LOAD");
 
 		break;
 
 	case FUNC_CLEAR_CANVAS:
-	//	pAct = new clearAll(this);
+		pAct = new clearAll(this);
 		pOut->PrintMessage("CLEAR ALL");
 
 		break;
 
 	case FUNC_UNDO:
-//		pAct = new UndoAction(this);
+	pAct = new UndoAction(this);
 		pOut->PrintMessage("UNDO");
 		break;
 
 	case FUNC_REDO:
-	//	pAct = new RedoAction(this);
+		pAct = new RedoAction(this);
 		pOut->PrintMessage("REDO");
 		break;
 
 
 	case FUNC_START_REC:
-		//if (FigCount == 0)
-		//	pAct = new StartandStopRec(this);
-		//else
-		//	pOut->PrintMessage("can't recording you should delete all");
-		//pOut->PrintMessage("START");
-		pOut->PrintMessage("START REC");
+		if (FigCount == 0)
+			pAct = new StartandStopRec(this);
+		else
+			pOut->PrintMessage("can't recording you should delete all");
 		break;
 
 	case FUNC_PLAY_REC:
@@ -219,9 +217,9 @@ void ApplicationManager::ExecuteAction(ActionType ActType, Action* Rec_action)
 		break;
 	}
 	//Execute the created action
-	if (Rec_action && pAct)
+	if (numofrec != -1)
 	{
-		Rec_action = pAct;
+		arr_recActions[numofrec] = pAct;
 		pAct->Execute();
 		pAct = NULL;
 	}
@@ -279,6 +277,13 @@ void ApplicationManager::AddDeletedFig(CFigure* del)
 }
 
 ////////////////////////////////////////////////////////////////////////////////////
+
+
+void ApplicationManager::playrecord()
+{
+	
+
+	}
 
 
 //Remove a figure from the list of figures
