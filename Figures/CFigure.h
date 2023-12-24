@@ -11,6 +11,7 @@ protected:
 	static int ID;		//Each figure has an ID
 	bool Selected;	//true if the figure is selected.
 	GfxInfo FigGfxInfo;	//Figure graphis info
+	 static bool NewIsFilled;
 	
 	/// Add more parameters if needed.
 
@@ -41,7 +42,8 @@ public:
 	virtual void Load(string&) = 0;	//Load the figure parameters to the file
 	virtual void PrintInfo(Output* pOut) =0;
 	virtual color get_fillcolor();
-	
+	 static void IsAllNewFilled(bool s=false);
+
 	
 		//Save the figure parameters to the file
 		//Load the figure parameters to the file
