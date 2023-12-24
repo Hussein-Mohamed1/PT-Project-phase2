@@ -15,7 +15,7 @@ class ApplicationManager
 
 
 private:
-
+	Action** arr_recActions;
 	Action* ActListun[maxActionCount];       //actual array of actions
 	Action* ActListre[maxActionCount];
 	int ActionCountun = 0;
@@ -48,7 +48,7 @@ public:
 	// -- Action-Related Functions
 	//Reads the input command from the user and returns the corresponding action type
 	ActionType GetUserAction() const;
-	void ExecuteAction(ActionType , Action* Rec_action=nullptr) ; //Creates an action and executes it
+	void ExecuteAction(ActionType , int numofrec=-1 ) ; //Creates an action and executes it
 	
 	void addfillcolor(color c);
 	void addbrushcolor(color c);

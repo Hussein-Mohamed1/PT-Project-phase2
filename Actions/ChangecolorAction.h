@@ -12,7 +12,6 @@ class ChangeColorAction :
  
 
 public:
- //  int static num_of_fill;
     ChangeColorAction(ApplicationManager* pApp,bool CF=0);
 
     virtual void ReadActionParameters();
