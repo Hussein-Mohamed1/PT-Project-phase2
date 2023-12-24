@@ -15,6 +15,7 @@ public:
 	void ReadActionParameters();
 	bool move();
 	void moveByDragging();
+
 	void Execute(bool b);
 	 void undo();
 	 void redo();

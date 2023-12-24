@@ -286,8 +286,9 @@ void ApplicationManager::Playrecord()
 	{
 		ClearAll();
 		Sleep(1000);
-		for (int i = 0; i < 2; i++)
+		for (int i = 0; i < 20; i++)
 		{
+			if (arr_recActions[i] == nullptr) break;
 			addToUndo(arr_recActions[i]);
 			
 			arr_recActions[i]->Execute(0);

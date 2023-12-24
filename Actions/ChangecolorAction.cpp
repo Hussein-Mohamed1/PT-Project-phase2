@@ -27,6 +27,7 @@ void ChangeColorAction::ReadActionParameters()
 
 		pOut->PrintMessage("Choose  Color : ");
 		ActionType ActType;
+		
 		ActType = pIn->GetUserAction();
 		switch (ActType)
 		{
@@ -58,7 +59,7 @@ void ChangeColorAction::Execute(bool b)
 {
 	Output* pOut = pManager->GetOutput();
 		
-		
+		if (b)
 	ReadActionParameters();
 
 //	pManager->AddDeletedFig(pManager->GetSelected_Figure());
