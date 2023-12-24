@@ -41,7 +41,7 @@ void figure_type::manage_byfigure()
 	}
 
 }
-void figure_type::Execute()
+void figure_type::Execute(bool b)
 {
 
 	by_fig = figures(rand() % 5);
@@ -77,7 +77,7 @@ void figure_type::Execute()
 	}
 	
 	if (numoffigure == 0)
-		Execute();
+		Execute( b);
 	else
 	{
 		pManager->GetInput()->GetPointClicked(p.x, p.y);

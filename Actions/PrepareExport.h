@@ -8,8 +8,8 @@ class PrepareExport :
 public:
     PrepareExport(ApplicationManager* pApp);
     void ReadActionParameters();
-    void Execute();
-    virtual void undo();
-    virtual void redo();
+    void Execute(bool b);
+     void undo();
+     void redo();
 };
 

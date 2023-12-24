@@ -16,7 +16,7 @@
 #include "figure_type.h"
 #include "figure_color.h"
 #include "figure_typeandcolor.h"
-
+#include "Actions/playrecord.h"
 #include "to_drawmood.h"
 #include"Actions/ChangeColorAction.h"
 #include"DEFS.h"
@@ -38,7 +38,7 @@ using namespace std;
 //Constructor
 ApplicationManager::ApplicationManager()
 {
-	arr_recActions = new Action * [20];
+	//arr_recActions = new Action * [20];
 	//Create Input and output
 	pOut = new Output;
 	pIn = pOut->CreateInput();
@@ -51,21 +51,20 @@ ApplicationManager::ApplicationManager()
 	pLastAct = nullptr;
 
 	//Create an array of figure pointers and set them to NULL		
+
 	for (int i = 0; i < MaxFigCount; i++)
 	{
-		FigList[i] = NULL;
+		FigList[i] = nullptr;
 		DeletedFigList[i] = nullptr;
+		ActListun[i] = nullptr;
+		ActListre[i] = nullptr;
+
 	}
-	for (int i = 0; i < maxActionCount; i++)
-		ActListun[i] = NULL;
-	for (int i = 0; i < maxActionCount; i++)
-		ActListre[i] = NULL;
-	for (int i = 0; i < 5; i++) Pos[i] = { 100,100 };
 	for (int i = 0; i < 5; i++) {
 		fill[i] = UI.BkGrndColor;
-	}
-	for (int i = 0; i < 5; i++) {
+		Pos[i] = { 100,100 };
 		brush[i] = UI.BkGrndColor;
+
 	}
 }
 
@@ -192,6 +191,7 @@ void ApplicationManager::ExecuteAction(ActionType ActType, int numofrec)
 		break;
 
 	case FUNC_PLAY_REC:
+		pAct = new playrecord(this);
 		pOut->PrintMessage("PLAY");
 		break;
 
@@ -281,9 +281,26 @@ void ApplicationManager::AddDeletedFig(CFigure* del)
 ////////////////////////////////////////////////////////////////////////////////////
 
 
-void ApplicationManager::playrecord()
+void ApplicationManager::Playrecord()
 {
+	if (arr_recActions[0] != NULL)
+	{
+		ClearAll();
+		Sleep(1000);
+		for (int i = 0; i < 20; i++)
+		{
+			if (arr_recActions[i] == nullptr) break;
+			addToUndo(arr_recActions[i]);
 
+			arr_recActions[i]->Execute(0);
+			UpdateInterface();
+
+			Sleep(1000);
+		}
+		pOut->PrintMessage("All recorded actions have been played successfully");
+	}
+	else
+		pOut->PrintMessage("NO ACTIONS RECORDED!!");
 
 }
 
@@ -300,11 +317,11 @@ CFigure* ApplicationManager::DeleteFigure()
 	CFigure* deletedfigure;
 	if (FigCount >= 1)
 	{
-		deletedfigure = FigList[FigCount - 1];
+		DeletedFig = FigList[FigCount - 1];
 		FigList[FigCount - 1] = nullptr;
 		delete FigList[FigCount - 1];
 		FigCount--;
-		return deletedfigure;
+		return DeletedFig;
 	}
 	else
 		return nullptr;
@@ -460,9 +477,15 @@ void ApplicationManager::ClearAll()
 		delete DeletedFigList[i];
 		DeletedFigList[i] = nullptr;
 	}
+	/*for (int i = 0; i <20; i++)
+	{
+
+		arr_recActions[i] = NULL;
+		delete arr_recActions[i];
+	}*/
+
 	UpdateInterface();
 	FigCount = 0;
-
 	ActionCountun = 0;
 	ActionCountre = 0;
 	pOut->ClearDrawArea();

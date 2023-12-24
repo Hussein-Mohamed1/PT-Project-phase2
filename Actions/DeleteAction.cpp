@@ -13,7 +13,7 @@ void DeleteAction::ReadActionParameters()
 
 
 }
-void DeleteAction::Execute()
+void DeleteAction::Execute(bool b)
 {
 	Output* pOut = pManager->GetOutput();
 
@@ -22,8 +22,8 @@ void DeleteAction::Execute()
 		pOut->PrintMessage("NO SELECTED ");
 	else
 	{
-		pManager->DeleteFunction();
-		//deletedFigure = pManager->DeleteFigure();
+		
+		deletedFigure = pManager->DeleteFigure();
 	}
 
 

@@ -15,7 +15,7 @@ void figure_typeandcolor::ReadActionParameters()
 {
 	pManager->GetInput()->GetPointClicked(p.x, p.y);
 }
-void figure_typeandcolor::Execute()
+void figure_typeandcolor::Execute(bool b)
 {
 	int n;
 	string s;
@@ -23,7 +23,7 @@ void figure_typeandcolor::Execute()
 	by_color = colors(rand() % 6);
 	n = pManager->numof_figurewithcolor(by_fig, by_color);
 	if (n == 0)
-		Execute();
+		Execute(b);
 	else
 	{
 		s = "pick all of " + pManager->color_TO_String(by_color) + " " + pManager->figur_TO_String(by_fig) + " ---->click to start";

@@ -26,9 +26,9 @@ void SelectAction::ReadActionParameters()
 
 
 
-void SelectAction::Execute()
+void SelectAction::Execute(bool b)
 {
-
+	if (b)
 	ReadActionParameters();
 	Output* pOut = pManager->GetOutput();
 	ClickedFigure = pManager->GetFigure(p.x, p.y);

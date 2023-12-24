@@ -110,7 +110,7 @@ void CHexa::Load(string& line)
 
 
 ostream& operator<<(ostream& op, const CHexa& Fig) {
-	op << Fig.ID << " " << Fig.centre << " " << Fig.FigGfxInfo << endl;
+	op << Fig.id << " " << Fig.centre << " " << Fig.FigGfxInfo << endl;
 	return op;
 };
 void CHexa::PrintInfo(Output* pOut)

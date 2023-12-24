@@ -110,7 +110,7 @@ bool CTriangle::isInsideWindowBoundaries(const Point& newPos) const
 
 
 ostream& operator<<(ostream& op, const CTriangle& Fig) {
-	op << Fig.ID << " " << Fig.P1 << " " << Fig.P2 << " " << Fig.P3 << " " << " " << Fig.FigGfxInfo << endl;
+	op << Fig.id << " " << Fig.P1 << " " << Fig.P2 << " " << Fig.P3 << " " << " " << Fig.FigGfxInfo << endl;
 	return op;
 }
 void CTriangle::PrintInfo(Output* pOut)

@@ -138,7 +138,6 @@
     <ClCompile Include="Actions\DeleteAction.cpp" />
     <ClCompile Include="Actions\MoveFigure.cpp" />
     <ClCompile Include="Actions\playrecord.cpp" />
-    <ClCompile Include="Actions\playrecordcpp.cpp" />
     <ClCompile Include="Actions\playSound.cpp" />
     <ClCompile Include="Actions\PrepareExport.cpp" />
     <ClCompile Include="Actions\PrepareImport.cpp" />

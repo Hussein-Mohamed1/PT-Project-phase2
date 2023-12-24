@@ -55,7 +55,7 @@ void CSquare::Load(string& line)
 }
 
 ostream& operator<<(ostream& op, const CSquare& Fig) {
-	op << Fig.ID << " " << Fig.P1 << " " << Fig.P2 << " " << Fig.FigGfxInfo << endl;
+	op << Fig.id << " " << Fig.P1 << " " << Fig.P2 << " " << Fig.FigGfxInfo << endl;
 	return op;
 };
 bool CSquare::checkselection(int x, int y)

@@ -13,7 +13,7 @@ void clearAll::ReadActionParameters()
 {
 }
 
-void clearAll::Execute()
+void clearAll::Execute(bool b)
 {
 	pManager->ClearAll();
 	Output* pOut = pManager->GetOutput();

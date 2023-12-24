@@ -19,7 +19,7 @@ void PrepareImport::ReadActionParameters() {
 	name = pManager->GetInput()->GetString(pManager->GetOutput());
 
 }
-void PrepareImport::Execute() {
+void PrepareImport::Execute(bool b) {
 	ReadActionParameters();
 	// checks if the button isn't "-1" i.e ESC
 	name += ".txt";

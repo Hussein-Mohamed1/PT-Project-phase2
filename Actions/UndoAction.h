@@ -27,9 +27,9 @@ public:
 	
 
 	
-	 virtual void Execute() ;
-	 virtual void ReadActionParameters();
-	 virtual void undo();
-	 virtual void redo();
+	  void Execute(bool b) ;
+	  void ReadActionParameters();
+	 void undo();
+	  void redo();
 
 };

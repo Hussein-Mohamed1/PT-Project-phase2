@@ -22,7 +22,7 @@ void CRectangle::Draw(Output* pOut) const
 }
 ostream& operator<<(ostream& op, const CRectangle& Fig)
 {
-	op << Fig.ID << " " << Fig.Corner1 << " " << Fig.Corner2 << " " << Fig.FigGfxInfo << endl;
+	op << Fig.id << " " << Fig.Corner1 << " " << Fig.Corner2 << " " << Fig.FigGfxInfo << endl;
 	return op;
 }
 void CRectangle::Save(fstream& op) const
