@@ -26,13 +26,13 @@
 #include "Actions/playSound.h"
 #include "Actions/Action.h"
 #include "Actions/RedoAction.h"
+#include "CMUgraphicsLib/auxil.h"
+#include "to_drawmood.h"
+#include "StartandStopRec.h"
 int ApplicationManager::countrepos = 0;
 int ApplicationManager::countpos = 0;
 int ApplicationManager::countfill = 0;
 int ApplicationManager::countbrush = 0;
-#include "CMUgraphicsLib/auxil.h"
-#include "to_drawmood.h"
-#include "StartandStopRec.h"
 using namespace std;
 //class Action ;
 //Constructor
@@ -154,23 +154,33 @@ void ApplicationManager::ExecuteAction(ActionType ActType, int numofrec )
 		pAct = new to_drawmood(this);
 		break;
 	case FUNC_SAVE:
-		pAct = new PrepareExport(this);
+	//	pAct = new PrepareExport(this);
+		pOut->PrintMessage("SAVE");
+
 		break;
 
 	case FUNC_LOAD:
-		pAct = new PrepareImport(this);
+	//	pAct = new PrepareImport(this);
+		pOut->PrintMessage("LOAD");
+
 		break;
 
 	case FUNC_CLEAR_CANVAS:
-		pAct = new clearAll(this);
+	//	pAct = new clearAll(this);
+		pOut->PrintMessage("CLEAR ALL");
+
 		break;
 
 	case FUNC_UNDO:
-		pAct = new UndoAction(this);
+//		pAct = new UndoAction(this);
+		pOut->PrintMessage("UNDO");
 		break;
 
 	case FUNC_REDO:
-		pAct = new RedoAction(this);
+	//	pAct = new RedoAction(this);
+		pOut->PrintMessage("REDO");
+		break;
+
 
 	case FUNC_START_REC:
 		if (FigCount == 0)
@@ -193,8 +203,9 @@ void ApplicationManager::ExecuteAction(ActionType ActType, int numofrec )
 		playSound(this, FUNC_MOVE);
 		break;
 
-
-
+	case FUNC_EXIT_playMode:
+		break;
+    
 	case FUNC_EXIT:
 		break;
 
@@ -452,22 +463,17 @@ void ApplicationManager::ClearAll()
 }
 void ApplicationManager::addToUndo(Action* pAct)
 {
-	if (ActionCountun < 5 && ActionCountun >= 0)
-	{
-		ActListun[ActionCountun] = pAct;
+
+	if (ActionCountun > 4){
+
+		for (int j = 0; j < 4; j++)   //Overwriting Undoarr to make it always have the last five actions 
 		{
-			ActListun[ActionCountun] = pAct;
-
-
-			if (ActionCountun > 4)
-				for (int j = 0; j < 4; j++)   //Overwriting Undoarr to make it always have the last five actions 
-				{
-					ActListun[j] = ActListun[j + 1];
-				}
-			ActionCountun = 4;
+			ActListun[j] = ActListun[j + 1];
 		}
+	ActionCountun = 4;
+}
 		ActListun[ActionCountun++] = pAct;
-	}
+	
 }
 void ApplicationManager::addToRedo()
 {
@@ -489,6 +495,13 @@ Action* ApplicationManager::GetLastUndo()
 		return pLastAct;
 	}
 	return NULL;
+}
+CFigure* ApplicationManager::GetLastFigure()
+{
+		
+		
+		return FigList[FigCount-1];
+
 }
 Action* ApplicationManager::GetLastRedo()
 {

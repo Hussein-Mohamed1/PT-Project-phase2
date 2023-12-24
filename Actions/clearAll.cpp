@@ -3,6 +3,7 @@
 #include "..\GUI\Output.h"
 #include "..\ApplicationManager.h"
 #include "Action.h"
+
 clearAll::clearAll(ApplicationManager* pApp): Action(pApp) 
 {
 }

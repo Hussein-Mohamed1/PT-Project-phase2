@@ -104,7 +104,7 @@ void ChangeColorAction::undo()
 		{
 
 		
-		pManager->GetSelected_Figure()->ChngFillClr(UI.BkGrndColor);
+		pManager->GetLastFigure()->ChngFillClr(UI.BkGrndColor);
 		}
 
 	else
@@ -114,12 +114,12 @@ void ChangeColorAction::undo()
 		
 		ApplicationManager::countfill--;
 
-		pManager->GetSelected_Figure()->ChngFillClr(pManager->get_indx_fillcolor(ApplicationManager::countfill-1 ));
+		pManager->GetLastFigure()->ChngFillClr(pManager->get_indx_fillcolor(ApplicationManager::countfill-1 ));
 	}
 	else
 	{
 		ApplicationManager::countbrush--;
-		pManager->GetSelected_Figure()->ChngDrawClr(pManager->get_indx_brushcolor(ApplicationManager::countbrush ));
+		pManager->GetLastFigure()->ChngDrawClr(pManager->get_indx_brushcolor(ApplicationManager::countbrush ));
 	}
 }
 
@@ -130,11 +130,11 @@ void ChangeColorAction::redo()
 	{
 		
 		ApplicationManager::countfill++;
-		pManager->GetSelected_Figure()->ChngFillClr(pManager->get_indx_fillcolor(ApplicationManager::countfill-1 ));
+		pManager->GetLastFigure()->ChngFillClr(pManager->get_indx_fillcolor(ApplicationManager::countfill-1 ));
 	}
 	else {
 		ApplicationManager::countbrush++;
-		pManager->GetSelected_Figure()->ChngDrawClr(pManager->get_indx_brushcolor(ApplicationManager::countbrush ));
+		pManager->GetLastFigure()->ChngDrawClr(pManager->get_indx_brushcolor(ApplicationManager::countbrush ));
 
 
 	}

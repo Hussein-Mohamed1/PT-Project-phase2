@@ -71,6 +71,7 @@ public:
 	void addToRedo();
 
 	Action* GetLastUndo();
+	CFigure* GetLastFigure();
 
 	Action* GetLastRedo();
 	void addPoint(Point p);

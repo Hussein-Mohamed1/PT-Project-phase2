@@ -42,12 +42,13 @@ void moveFigure::Execute() {
 	else moveByDragging();
 }
 bool moveFigure::move() {
-	//CFigure* c = pManager->GetSelected_Figure();
-	//bool f = true;
 
-	//if (f && c != nullptr) {
-	//	pManager->addPoint(c->GetP1()); f = false;
-	//}
+	CFigure* c = pManager->GetSelected_Figure();
+
+
+	if (c != nullptr) {
+		pManager->addPoint(c->GetP1()); 
+	}
 
 	if ((newPos.x <= UI.width - 5 && newPos.x > 0) && (newPos.y < UI.height - UI.StatusBarHeight - 5) && (newPos.y > UI.ToolBarHeight + 5)) {
 		cFigure = pManager->GetSelected_Figure();
@@ -121,6 +122,15 @@ bool moveFigure::move() {
 
 		pManager->UpdateInterface();
 	}
+	lastPoint = newPos;
+	//add the center
+	bool notf = false;
+	if (notf) {
+
+		pManager->addPoint(pManager->GetSelected_Figure()-> GetP1());
+	}
+	notf = true;
+
 }
 
 void moveFigure::moveByDragging() {
@@ -142,21 +152,14 @@ void moveFigure::moveByDragging() {
 		}
 	}
 
-	//lastPoint = newPos;
-	////add the center
-	//bool notf = false;
-	//if (notf) {
-	//	pManager->addPoint(Selected_Figure->GetP1());
-	//}
-	//notf = true;
-
+	pManager->addPoint(newPos);
 }
 
 
 
 void moveFigure::undo()
 {
-	pManager->GetSelected_Figure()->move(pManager->getpoint(ApplicationManager::countpos - 1));
+	pManager->GetLastFigure()->move(pManager->getpoint(ApplicationManager::countpos - 1));
 
 	ApplicationManager::countpos--;
 	ApplicationManager::countrepos++;
@@ -170,12 +173,12 @@ void moveFigure::redo()
 
 	//else 
 	//cout << ApplicationManager::countpos + 1 << " " << pManager->getpoint(ApplicationManager::countpos + 1) << endl;
-	pManager->GetSelected_Figure()->move(pManager->getpoint(ApplicationManager::countpos + 1));
+	pManager->GetLastFigure()->move(pManager->getpoint(ApplicationManager::countpos + 1));
 
 	ApplicationManager::countpos++;
 
 	ApplicationManager::countrepos--;
-	if (ApplicationManager::countrepos == 0) pManager->GetSelected_Figure()->move(lastPoint);
+	if (ApplicationManager::countrepos == 0) pManager->GetLastFigure()->move(lastPoint);
 
 }
 
