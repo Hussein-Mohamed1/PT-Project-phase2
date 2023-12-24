@@ -5,12 +5,12 @@
 #include "..\Figures\CFigure.h"
 
 
-ChangeColorAction::ChangeColorAction(ApplicationManager* pApp,  bool CF):Action(pApp)
+ChangeColorAction::ChangeColorAction(ApplicationManager* pApp, bool CF) :Action(pApp)
 {
 	ChangeFill = CF;
 	ChoosenColor = WHITE;
-	
-	 
+
+
 
 }
 int ChangeColorAction::num_of_fill = 0;
@@ -62,20 +62,20 @@ void ChangeColorAction::Execute(bool b)
 		if (b)
 	ReadActionParameters();
 
-//	pManager->AddDeletedFig(pManager->GetSelected_Figure());
+	//	pManager->AddDeletedFig(pManager->GetSelected_Figure());
 
-//	pManager->CopyDeletedFigToFiglist();
+	//	pManager->CopyDeletedFigToFiglist();
 
 	if (pManager->GetSelected_Figure() == NULL)
 
 		pOut->PrintMessage("NO SELECTED ");
-	 else if(ChoosenColor==WHITE)
+	else if (ChoosenColor == WHITE)
 		pOut->PrintMessage("NO SELECTED COLOR  ");
 
-	 else
+	else
 	{
-	
-		
+
+
 		if (ChangeFill)
 		{
 			num_of_fill++;
@@ -83,7 +83,7 @@ void ChangeColorAction::Execute(bool b)
 			CFigure::IsAllNewFilled(true);
 			pOut->SetFillColor(ChoosenColor);
 			pManager->addfillcolor(ChoosenColor);
-			
+
 		}
 
 		else
@@ -93,8 +93,8 @@ void ChangeColorAction::Execute(bool b)
 			pOut->SetDraColor(ChoosenColor);
 			pManager->addbrushcolor(ChoosenColor);
 		}
-	
-		
+
+
 
 	}
 }
@@ -103,25 +103,22 @@ void ChangeColorAction::undo()
 
 {
 	if (ApplicationManager::countfill <= 1)
-		{
-
-		
-		pManager->GetLastFigure()->ChngFillClr(UI.BkGrndColor);
-		}
-
-	else
-
-	if (ChangeFill)
 	{
-		
+
+
+		pManager->GetLastFigure()->ChngFillClr(UI.BkGrndColor);
+	}
+
+	else if (ChangeFill)
+	{
+
 		ApplicationManager::countfill--;
 
-		pManager->GetLastFigure()->ChngFillClr(pManager->get_indx_fillcolor(ApplicationManager::countfill-1 ));
+		pManager->GetLastFigure()->ChngFillClr(pManager->get_indx_fillcolor(ApplicationManager::countfill - 1));
 	}
-	else
-	{
+	else {
 		ApplicationManager::countbrush--;
-		pManager->GetLastFigure()->ChngDrawClr(pManager->get_indx_brushcolor(ApplicationManager::countbrush ));
+		pManager->GetLastFigure()->ChngDrawClr(pManager->get_indx_brushcolor(ApplicationManager::countbrush));
 	}
 }
 
@@ -130,13 +127,13 @@ void ChangeColorAction::redo()
 {
 	if (ChangeFill)
 	{
-		
+
 		ApplicationManager::countfill++;
-		pManager->GetLastFigure()->ChngFillClr(pManager->get_indx_fillcolor(ApplicationManager::countfill-1 ));
+		pManager->GetLastFigure()->ChngFillClr(pManager->get_indx_fillcolor(ApplicationManager::countfill - 1));
 	}
 	else {
 		ApplicationManager::countbrush++;
-		pManager->GetLastFigure()->ChngDrawClr(pManager->get_indx_brushcolor(ApplicationManager::countbrush ));
+		pManager->GetLastFigure()->ChngDrawClr(pManager->get_indx_brushcolor(ApplicationManager::countbrush));
 
 
 	}

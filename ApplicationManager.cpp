@@ -45,27 +45,26 @@ ApplicationManager::ApplicationManager()
 	FigCount = 0;
 	DeletedFigCount = 0;
 	Selected_Figure = nullptr;
-
+	DeletedFig = nullptr;
 	ActionCountun = 0;
 	ActionCountre = 0;
 	pLastAct = nullptr;
 
 	//Create an array of figure pointers and set them to NULL		
+
 	for (int i = 0; i < MaxFigCount; i++)
 	{
-		FigList[i] = NULL;
+		FigList[i] = nullptr;
 		DeletedFigList[i] = nullptr;
+	
 	}
-	for (int i = 0; i < maxActionCount; i++)
-		ActListun[i] = NULL;
-	for (int i = 0; i < maxActionCount; i++)
-		ActListre[i] = NULL;
-	for (int i = 0; i < 5; i++) Pos[i] = { 100,100 };
 	for (int i = 0; i < 5; i++) {
+		ActListun[i] = nullptr;
+		ActListre[i] = nullptr;
 		fill[i] = UI.BkGrndColor;
-	}
-	for (int i = 0; i < 5; i++) {
+		Pos[i] = { 100,100 };
 		brush[i] = UI.BkGrndColor;
+
 	}
 }
 
@@ -83,12 +82,14 @@ ActionType ApplicationManager::GetUserAction() const
 ////////////////////////////////////////////////////////////////////////////////////
 //Creates an action and executes it
 
-void ApplicationManager::ExecuteAction(ActionType ActType, int numofrec )
+void ApplicationManager::ExecuteAction(ActionType ActType, int numofrec)
 {
 	Action* pAct = nullptr;
+	playSound(this, ActType);
 	//According to Action Type, create the corresponding action object
 	switch (ActType)
 	{
+
 	case DRAW_RECT:
 		pAct = new AddRectAction(this);
 		addToUndo(pAct);
@@ -172,7 +173,7 @@ void ApplicationManager::ExecuteAction(ActionType ActType, int numofrec )
 		break;
 
 	case FUNC_UNDO:
-	pAct = new UndoAction(this);
+		pAct = new UndoAction(this);
 		pOut->PrintMessage("UNDO");
 		break;
 
@@ -206,7 +207,7 @@ void ApplicationManager::ExecuteAction(ActionType ActType, int numofrec )
 
 	case FUNC_EXIT_playMode:
 		break;
-    
+
 	case FUNC_EXIT:
 
 		break;
@@ -291,18 +292,18 @@ void ApplicationManager::Playrecord()
 		{
 			if (arr_recActions[i] == nullptr) break;
 			addToUndo(arr_recActions[i]);
-			
+
 			arr_recActions[i]->Execute(0);
 			UpdateInterface();
-			
-				Sleep(1000);
+
+			Sleep(1000);
 		}
 		pOut->PrintMessage("All recorded actions have been played successfully");
 	}
 	else
 		pOut->PrintMessage("NO ACTIONS RECORDED!!");
 
-	}
+}
 
 
 //Remove a figure from the list of figures
@@ -400,7 +401,7 @@ void ApplicationManager::DeleteFunctionForPlayMood(CFigure* Del)
 		if (FigList[i] == Del)
 		{
 			AddDeletedFig(FigList[i]);
-			FigList[i] = NULL;
+			FigList[i] = nullptr;
 			UpdateInterface();
 			break;
 		}
@@ -410,14 +411,14 @@ void  ApplicationManager::CopyDeletedFigToFiglist()
 {
 	for (int i = 0; i < DeletedFigCount; i++)
 	{
-		if (DeletedFigList[i] != NULL)
+		if (DeletedFigList[i] != nullptr)
 		{
 			for (int j = 0; j < FigCount; j++)
 			{
-				if (FigList[j] == NULL)
+				if (FigList[j] == nullptr)
 				{
 					FigList[j] = DeletedFigList[i];
-					DeletedFigList[i] = NULL;
+					DeletedFigList[i] = nullptr;
 					break;
 				}
 
@@ -459,25 +460,23 @@ void ApplicationManager::ClearAll()
 	{
 		FigList[i]->SetSelected(false);
 		FigList[i]->clearColor();
-		FigList[i] = NULL;
 		delete FigList[i];
+		FigList[i] = nullptr;
 	}
 	for (int i = 0; i < ActionCountun; i++)
 	{
-		ActListun[i] = NULL;
 		delete ActListun[i];
+		ActListun[i] = nullptr;
 	}
 	for (int i = 0; i < ActionCountre; i++)
 	{
-
-		ActListre[i] = NULL;
 		delete ActListre[i];
+		ActListre[i] = nullptr;
 	}
 	for (int i = 0; i < FigCount; i++)
 	{
-
-		DeletedFigList[i] = NULL;
 		delete DeletedFigList[i];
+		DeletedFigList[i] = nullptr;
 	}
 	/*for (int i = 0; i <20; i++)
 	{
@@ -496,16 +495,16 @@ void ApplicationManager::ClearAll()
 void ApplicationManager::addToUndo(Action* pAct)
 {
 
-	if (ActionCountun > 4){
+	if (ActionCountun > 4) {
 
 		for (int j = 0; j < 4; j++)   //Overwriting Undoarr to make it always have the last five actions 
 		{
 			ActListun[j] = ActListun[j + 1];
 		}
-	ActionCountun = 4;
-}
-		ActListun[ActionCountun++] = pAct;
-	
+		ActionCountun = 4;
+	}
+	ActListun[ActionCountun++] = pAct;
+
 }
 void ApplicationManager::addToRedo()
 {
@@ -530,9 +529,9 @@ Action* ApplicationManager::GetLastUndo()
 }
 CFigure* ApplicationManager::GetLastFigure()
 {
-		
-		
-		return FigList[FigCount-1];
+
+
+	return FigList[FigCount - 1];
 
 }
 Action* ApplicationManager::GetLastRedo()
@@ -575,9 +574,12 @@ ApplicationManager::~ApplicationManager()
 	for (int i = 0; i < FigCount; i++)
 	{
 		if (FigList[i] != nullptr) { delete FigList[i]; FigList[i] = nullptr; }
-		if (DeletedFigList[i] != nullptr) { delete DeletedFigList[i]; }
-
+		if (DeletedFigList[i] != nullptr) { delete DeletedFigList[i]; DeletedFigList[i] = nullptr; }
+		if (arr_recActions[i] != nullptr) { delete arr_recActions[i]; arr_recActions[i] = nullptr; }
 	}
+	delete[] arr_recActions;
+	delete[] DeletedFigList;
+	delete[] FigList;
 	delete pIn;
 	delete pOut;
 

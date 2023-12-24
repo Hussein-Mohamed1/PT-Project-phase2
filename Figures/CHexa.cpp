@@ -6,15 +6,10 @@
 #include"string.h"
 #include<algorithm>
 using namespace std;
-CHexa::CHexa(Point c, GfxInfo FigureGfxInfo) : CFigure(FigureGfxInfo)
+CHexa::CHexa(Point c, GfxInfo FigureGfxInfo) : CFigure(FigureGfxInfo), centre(c), id(ID++), l(80)      //Here , if you want to change side lenght of Hexa 
+
 {
-	centre = c;
-	id = ID;
-	ID++;
-	l = 80;                       //Here , if you want to change side lenght of Hexa 
-
 }
-
 int CHexa::Getid()
 {
 	return id;
@@ -37,7 +32,7 @@ bool CHexa::checkselection(int x, int y)
 	//	return true;
 	//}
 	//return false;
-	   
+
 	// approach two 
 
 	int xc = centre.x, yc = centre.y;
@@ -84,7 +79,7 @@ void CHexa::move(const Point& newPos)
 {
 	centre = newPos;
 }
-CHexa::CHexa() {  };
+CHexa::CHexa() : l(80) {  };
 void CHexa::Save(fstream& op) const
 {
 
@@ -105,6 +100,7 @@ void CHexa::Load(string& line)
 	for (int i = 0; i < NoOfSpaces; i++) {
 		ss >> datum[i];
 	}
+	this->id = stoi(datum[1]);
 	this->centre.x = stoi(datum[2]);
 	this->centre.y = stoi(datum[3]);
 	this->FigGfxInfo.DrawClr = color(stoi(datum[4]), stoi(datum[5]), stoi(datum[6]));
@@ -115,7 +111,7 @@ void CHexa::Load(string& line)
 
 
 ostream& operator<<(ostream& op, const CHexa& Fig) {
-	op << Fig.ID << " " << Fig.centre << " " << Fig.FigGfxInfo << endl;
+	op << Fig.id << " " << Fig.centre << " " << Fig.FigGfxInfo << endl;
 	return op;
 };
 void CHexa::PrintInfo(Output* pOut)
@@ -124,7 +120,7 @@ void CHexa::PrintInfo(Output* pOut)
 
 	// to_string ()  is a function that cast int to strting
 	string printed = " Figure is Hexa         Figure id : " + to_string(id) + "        Side lenght : " + to_string(l)
-		+ "       Centre : ("+ to_string(centre.x) + "," + to_string(centre.y) + ")";
+		+ "       Centre : (" + to_string(centre.x) + "," + to_string(centre.y) + ")";
 	pOut->PrintMessage(printed);
 }
 color CHexa::get_fillcolor()

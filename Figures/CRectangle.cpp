@@ -22,7 +22,7 @@ void CRectangle::Draw(Output* pOut) const
 }
 ostream& operator<<(ostream& op, const CRectangle& Fig)
 {
-	op << Fig.ID << " " << Fig.Corner1 << " " << Fig.Corner2 << " " << Fig.FigGfxInfo << endl;
+	op << Fig.id << " " << Fig.Corner1 << " " << Fig.Corner2 << " " << Fig.FigGfxInfo << endl;
 	return op;
 }
 void CRectangle::Save(fstream& op) const
@@ -44,6 +44,7 @@ void CRectangle::Load(string& line)
 	for (int i = 0; i < NoOfSpaces; i++) {
 		ss >> datum[i];
 	}
+	this->id = stoi(datum[1]);
 	this->Corner1.x = stoi(datum[2]);
 	this->Corner1.y = stoi(datum[3]);
 	this->Corner2.x = stoi(datum[4]);

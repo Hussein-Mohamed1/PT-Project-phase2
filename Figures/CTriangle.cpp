@@ -78,6 +78,7 @@ void CTriangle::Load(string& line)
 	for (int i = 0; i < NoOfSpaces; i++) {
 		ss >> datum[i];
 	}
+	this->id = stoi(datum[1]);
 	this->P1.x = stoi(datum[2]);
 	this->P1.y = stoi(datum[3]);
 	this->P2.x = stoi(datum[4]);
@@ -110,7 +111,7 @@ bool CTriangle::isInsideWindowBoundaries(const Point& newPos) const
 
 
 ostream& operator<<(ostream& op, const CTriangle& Fig) {
-	op << Fig.ID << " " << Fig.P1 << " " << Fig.P2 << " " << Fig.P3 << " " << " " << Fig.FigGfxInfo << endl;
+	op << Fig.id << " " << Fig.P1 << " " << Fig.P2 << " " << Fig.P3 << " " << " " << Fig.FigGfxInfo << endl;
 	return op;
 }
 void CTriangle::PrintInfo(Output* pOut)

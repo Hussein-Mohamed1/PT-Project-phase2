@@ -42,7 +42,8 @@ void CSquare::Load(string& line)
 
 	for (int i = 0; i < NoOfSpaces; i++) {
 		ss >> datum[i];
-	}
+	}	this->id = stoi(datum[1]);
+
 	this->P1.x = stoi(datum[2]);
 	this->P1.y = stoi(datum[3]);
 	this->P2.x = stoi(datum[4]);
@@ -55,7 +56,7 @@ void CSquare::Load(string& line)
 }
 
 ostream& operator<<(ostream& op, const CSquare& Fig) {
-	op << Fig.ID << " " << Fig.P1 << " " << Fig.P2 << " " << Fig.FigGfxInfo << endl;
+	op << Fig.id << " " << Fig.P1 << " " << Fig.P2 << " " << Fig.FigGfxInfo << endl;
 	return op;
 };
 bool CSquare::checkselection(int x, int y)

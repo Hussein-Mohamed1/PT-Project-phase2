@@ -17,7 +17,7 @@ CFigure::CFigure() {}
 void CFigure::SetSelected(bool s)
 {
 	Selected = s;
-	
+
 }
 void CFigure::IsAllNewFilled(bool s)
 {
@@ -56,15 +56,15 @@ ostream& operator<<(ostream& op, const Point& p) {
 
 
 ostream& operator << (ostream& op, const GfxInfo& gfx) {
-	op << gfx.DrawClr << " " << gfx.FillClr << " " << gfx.isFilled << " " << gfx.BorderWdth;
+	op << gfx.DrawClr << " " << gfx.FillClr << " " << gfx.isFilled << " " << (gfx.BorderWdth > 0) ? gfx.BorderWdth : 0;
 	return op;
 }
 
 Point operator+(const Point& p1, const Point& p2) {
 	return { p1.x + p2.x,p1.y + p2.y };
 };
-Point operator/(const Point& p1,int i) {
-	return { p1.x /i,p1.y /i};
+Point operator/(const Point& p1, int i) {
+	return { p1.x / i,p1.y / i };
 };
 Point operator-(const Point& p1, const Point& p2) {
 	return { p1.x - p2.x,p1.y - p2.y };
