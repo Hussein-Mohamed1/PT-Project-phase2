@@ -32,10 +32,10 @@
 		 P1.y -= 60;
 	 }
 
-	// RectGfxInfo.isFilled = false;	//default is not filled
+	 SquareGfxInfo.isFilled = false;	//default is not filled
 	 //get drawing, filling colors and pen width from the interface
-	 RectGfxInfo.DrawClr = pOut->getCrntDrawColor();
-	 RectGfxInfo.FillClr = pOut->getCrntFillColor();
+	 SquareGfxInfo.DrawClr = pOut->getCrntDrawColor();
+	 SquareGfxInfo.FillClr = pOut->getCrntFillColor();
 
 	 pOut->ClearStatusBar();
 
@@ -47,7 +47,7 @@
 
 	 // Make a new square 
 
-	 CSquare* s = new CSquare(P1, P2, RectGfxInfo);
+	 CSquare* s = new CSquare(P1, P2, SquareGfxInfo);
 
 	 // Add Square to figure list 
 	  

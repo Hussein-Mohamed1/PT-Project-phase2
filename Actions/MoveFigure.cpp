@@ -13,8 +13,9 @@ moveFigure::moveFigure(ApplicationManager* pApp, bool byDragging) :Action(pApp),
 void moveFigure::ReadActionParameters() {
 	Output* pOut = pManager->GetOutput();
 	Input* pIn = pManager->GetInput();
+	cFigure = pManager->GetSelected_Figure();
 
-	if (pManager->GetSelected_Figure() != nullptr)
+	if (cFigure != nullptr)
 	{
 
 
@@ -42,16 +43,15 @@ void moveFigure::Execute(bool b) {
 	else moveByDragging();
 }
 bool moveFigure::move() {
+	if (!byDragging)
+	{
 
-	CFigure* c = pManager->GetSelected_Figure();
-
-
-	if (c != nullptr) {
-		pManager->addPoint(c->GetP1()); 
+		if (cFigure != nullptr) {
+			pManager->addPoint(cFigure->GetP1());
+		}
 	}
 
 	if ((newPos.x <= UI.width - 5 && newPos.x > 0) && (newPos.y < UI.height - UI.StatusBarHeight - 5) && (newPos.y > UI.ToolBarHeight + 5)) {
-		cFigure = pManager->GetSelected_Figure();
 		{if (dynamic_cast<CCircle*>(cFigure) != nullptr) {
 			if (cFigure->isInsideWindowBoundaries(newPos))
 			{
@@ -122,23 +122,22 @@ bool moveFigure::move() {
 
 		pManager->UpdateInterface();
 	}
-	lastPoint = newPos;
-	//add the center
-	bool notf = false;
-	if (notf) {
+	//lastPoint = newPos;
+	////add the center
+	//bool notf = false;
+	//if (notf) {
 
-		pManager->addPoint(pManager->GetSelected_Figure()-> GetP1());
-	}
-	notf = true;
+	//	pManager->addPoint(pManager->GetSelected_Figure()->GetP1());
+	//}
+	//notf = true;
 
 }
 
 void moveFigure::moveByDragging() {
 	int iX = 0, iY = 0;
 	Input* pIn = pManager->GetInput();
-	CFigure* Selected_Figure = pManager->GetSelected_Figure();
 	buttonstate btnstate = pIn->GetButtonState(LEFT_BUTTON, iX, iY); // just puts the current coords to iX and iY, nothing else
-	if (Selected_Figure->checkselection(iX, iY))
+	if (cFigure->checkselection(iX, iY))
 	{
 		Sleep(200);// necessary delay to capture the users double tap on a shape
 		btnstate = pIn->GetButtonState(LEFT_BUTTON, iX, iY);

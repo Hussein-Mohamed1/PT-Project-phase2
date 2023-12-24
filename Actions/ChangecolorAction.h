@@ -2,13 +2,12 @@
 #include "Action.h"
 //#include "color.h"
 class ChangeColorAction :
-    public Action
+	public Action
 {
     bool ChangeFill;
     color  ChoosenColor;
     int counter;
     CFigure* f;
- 
  
 
 public:

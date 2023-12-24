@@ -8,7 +8,7 @@ class AddcircleAction : public Action
 {
   private : 
     Point P1, P2;
-    GfxInfo RectGfxInfo;
+    GfxInfo CircleGfxInfo;
 	static int numofshapes;
 	CFigure* DeletedFig;
 public:

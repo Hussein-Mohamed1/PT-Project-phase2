@@ -5,7 +5,7 @@ class AddTriangleAction :
 {
 private :
     Point P1, P2, P3;
-    GfxInfo RectGfxInfo;
+    GfxInfo TriangleGfxInfo;
     CFigure* DeletedFig;
     static int numofshapes;
 public :

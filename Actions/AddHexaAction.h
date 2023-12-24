@@ -5,7 +5,7 @@ class AddHexaAction :
 {
 private:
     Point P1;
-    GfxInfo RectGfxInfo;
+    GfxInfo HexaGfxInfo;
     CFigure* DeletedFig;
     static int numofshapes;
 public :

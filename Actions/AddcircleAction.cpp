@@ -43,10 +43,10 @@ int AddcircleAction::getnumofshapes()
 
 	  }
 
-	 // RectGfxInfo.isFilled = false;	//default is not filled
+	  CircleGfxInfo.isFilled = false;	//default is not filled
 	  //get drawing, filling colors and pen width from the interface
-	  RectGfxInfo.DrawClr = pOut->getCrntDrawColor();
-	  RectGfxInfo.FillClr = pOut->getCrntFillColor();
+	  CircleGfxInfo.DrawClr = pOut->getCrntDrawColor();
+	  CircleGfxInfo.FillClr = pOut->getCrntFillColor();
 
 	  pOut->ClearStatusBar();
  
@@ -60,7 +60,7 @@ int AddcircleAction::getnumofshapes()
 	  //Create a circle with the parameters read from the user
 	  
 		//Create a rectangle with the parameters read from the user
-	  CCircle* c = new CCircle(P1,P2, RectGfxInfo);
+	  CCircle* c = new CCircle(P1,P2, CircleGfxInfo);
 
 	  //Add the rectangle to the list of figures
 	  pManager->AddFigure(c);
