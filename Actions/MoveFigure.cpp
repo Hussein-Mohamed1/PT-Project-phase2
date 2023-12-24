@@ -34,6 +34,7 @@ void moveFigure::ReadActionParameters() {
 	}
 }
 void moveFigure::Execute(bool b) {
+	cFigure = pManager->GetSelected_Figure();
 
 	if (!byDragging)
 	{
@@ -138,7 +139,6 @@ void moveFigure::moveByDragging() {
 	Input* pIn = pManager->GetInput();
 	buttonstate btnstate = pIn->GetButtonState(LEFT_BUTTON, iX, iY); // just puts the current coords to iX and iY, nothing else
 	if (cFigure == nullptr || cFigure == reinterpret_cast<decltype(cFigure)>(0xFFFFFFFF))
-
 	{
 		pManager->GetOutput()->PrintMessage("LOLLL");
 		cFigure = nullptr;
