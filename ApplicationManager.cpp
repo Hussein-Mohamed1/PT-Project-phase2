@@ -44,7 +44,7 @@ ApplicationManager::ApplicationManager()
 	pIn = pOut->CreateInput();
 	FigCount = 0;
 	DeletedFigCount = 0;
-	Selected_Figure = NULL;
+	Selected_Figure = nullptr;
 
 	ActionCountun = 0;
 	ActionCountre = 0;
@@ -332,7 +332,7 @@ CFigure* ApplicationManager::GetFigure(int x, int y) {
 
 	}pOut->PrintMessage(" No selected figure ");
 
-	return NULL;
+	return nullptr;
 
 }
 
