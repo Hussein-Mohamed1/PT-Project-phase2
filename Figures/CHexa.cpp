@@ -4,16 +4,12 @@
 #include "cstring"
 #include<iostream>
 #include"string.h"
+#include<algorithm>
 using namespace std;
-CHexa::CHexa(Point c, GfxInfo FigureGfxInfo) : CFigure(FigureGfxInfo)
+CHexa::CHexa(Point c, GfxInfo FigureGfxInfo) : CFigure(FigureGfxInfo), centre(c), id(ID++), l(80)      //Here , if you want to change side lenght of Hexa 
+
 {
-	centre = c;
-	id = ID;
-	ID++;
-	l = 80;                       //Here , if you want to change side lenght of Hexa 
-
 }
-
 int CHexa::Getid()
 {
 	return id;
@@ -28,13 +24,39 @@ Point& CHexa::GetP1()
 
 bool CHexa::checkselection(int x, int y)
 {
-	int dis = sqrt((x - centre.x) * (x - centre.x) + (y - centre.y) * (y - centre.y));
-	if (dis <=l-6)   // you must change it if you change lenght of Hexa to be finaly  l;
-	{
-		return true;
+	// approach one 
+	// 
+	//int dis = sqrt((x - centre.x) * (x - centre.x) + (y - centre.y) * (y - centre.y));
+	//if (dis <=l-6)   // you must change it if you change lenght of Hexa to be finaly  l;
+	//{
+	//	return true;
+	//}
+	//return false;
+
+	// approach two 
+
+	int xc = centre.x, yc = centre.y;
+	int small_height = l * 0.87;         // cos(60)  (from geometry of shape)
+	int small_lenght = l * 0.5;       // sin(60) (from geometry of shape)
+	int xcoordiantes[6] = { xc + l , xc + small_lenght,xc - small_lenght , xc - l , xc - small_lenght , xc + small_lenght };
+	int ycoordinates[6] = { yc     , yc - small_height,yc - small_height , yc     , yc + small_height , yc + small_height };
+
+
+	int count = 0;
+	for (int i = 0; i < 6; ++i) {
+		int j = (i + 1) % 6;
+		if ((ycoordinates[i] > y) != (ycoordinates[j] > y) &&
+			x < (xcoordiantes[j] - xcoordiantes[i]) * (y - ycoordinates[i]) / (ycoordinates[j] - ycoordinates[i]) + xcoordiantes[i]) {
+			count++;
+		}
 	}
-	return false;
+	return count % 2 == 1;
+
+
+
+
 }
+
 void CHexa::Draw(Output* pOut) const
 {
 	int xc = centre.x, yc = centre.y;
@@ -57,7 +79,7 @@ void CHexa::move(const Point& newPos)
 {
 	centre = newPos;
 }
-CHexa::CHexa() {  };
+CHexa::CHexa() : l(80) {  };
 void CHexa::Save(fstream& op) const
 {
 
@@ -97,7 +119,7 @@ void CHexa::PrintInfo(Output* pOut)
 
 	// to_string ()  is a function that cast int to strting
 	string printed = " Figure is Hexa         Figure id : " + to_string(id) + "        Side lenght : " + to_string(l)
-		+ "       Centre : ("+ to_string(centre.x) + "," + to_string(centre.y) + ")";
+		+ "       Centre : (" + to_string(centre.x) + "," + to_string(centre.y) + ")";
 	pOut->PrintMessage(printed);
 }
 color CHexa::get_fillcolor()

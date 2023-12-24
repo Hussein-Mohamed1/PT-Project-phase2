@@ -5,12 +5,12 @@
 #include "..\Figures\CFigure.h"
 
 
-ChangeColorAction::ChangeColorAction(ApplicationManager* pApp,  bool CF):Action(pApp)
+ChangeColorAction::ChangeColorAction(ApplicationManager* pApp, bool CF) :Action(pApp)
 {
 	ChangeFill = CF;
 	ChoosenColor = WHITE;
-	
-	 
+
+
 
 }
 int ChangeColorAction::num_of_fill = 0;
@@ -25,63 +25,64 @@ void ChangeColorAction::ReadActionParameters()
 	Output* pOut = pManager->GetOutput();
 	Input* pIn = pManager->GetInput();
 
-		pOut->PrintMessage("Choose  Color : ");
-		ActionType ActType;
-		ActType = pIn->GetUserAction();
-		switch (ActType)
-		{
-		case COLOR_BLACK:
-			ChoosenColor = BLACK;
-			break;
-		case COLOR_RED:
-			ChoosenColor = RED;
-			break;
-		case COLOR_BLUE:
-			ChoosenColor = BLUE;
-			break;
-		case COLOR_GREEN:
-			ChoosenColor = GREEN;
-			break;
-		case COLOR_YELLOW:
-			ChoosenColor = YELLOW;
-			break;
-		case COLOR_ORANGE:
-			ChoosenColor = ORANGE;
-			break;
-		default:
-			break;
-		}
-	
+	pOut->PrintMessage("Choose  Color : ");
+	ActionType ActType;
+	ActType = pIn->GetUserAction();
+	switch (ActType)
+	{
+	case COLOR_BLACK:
+		ChoosenColor = BLACK;
+		break;
+	case COLOR_RED:
+		ChoosenColor = RED;
+		break;
+	case COLOR_BLUE:
+		ChoosenColor = BLUE;
+		break;
+	case COLOR_GREEN:
+		ChoosenColor = GREEN;
+		break;
+	case COLOR_YELLOW:
+		ChoosenColor = YELLOW;
+		break;
+	case COLOR_ORANGE:
+		ChoosenColor = ORANGE;
+		break;
+	default:
+		break;
+	}
+
 
 }
 void ChangeColorAction::Execute()
 {
 	Output* pOut = pManager->GetOutput();
-		
-		
+
+
 	ReadActionParameters();
 
-//	pManager->AddDeletedFig(pManager->GetSelected_Figure());
+	//	pManager->AddDeletedFig(pManager->GetSelected_Figure());
 
-//	pManager->CopyDeletedFigToFiglist();
+	//	pManager->CopyDeletedFigToFiglist();
 
 	if (pManager->GetSelected_Figure() == NULL)
 
 		pOut->PrintMessage("NO SELECTED ");
-	 else if(ChoosenColor==WHITE)
+	else if (ChoosenColor == WHITE)
 		pOut->PrintMessage("NO SELECTED COLOR  ");
 
-	 else
+	else
 	{
-	
-		
+
+
 		if (ChangeFill)
 		{
 			num_of_fill++;
 			pManager->GetSelected_Figure()->ChngFillClr(ChoosenColor);
+			CFigure::IsAllNewFilled(true);
 			pOut->SetFillColor(ChoosenColor);
 			pManager->addfillcolor(ChoosenColor);
-			
+
 		}
 
 		else
@@ -91,8 +92,8 @@ void ChangeColorAction::Execute()
 			pOut->SetDraColor(ChoosenColor);
 			pManager->addbrushcolor(ChoosenColor);
 		}
-	
-		
+
+
 
 	}
 }
@@ -101,25 +102,22 @@ void ChangeColorAction::undo()
 
 {
 	if (ApplicationManager::countfill <= 1)
-		{
-
-		
-		pManager->GetLastFigure()->ChngFillClr(UI.BkGrndColor);
-		}
-
-	else
-
-	if (ChangeFill)
 	{
-		
+
+
+		pManager->GetLastFigure()->ChngFillClr(UI.BkGrndColor);
+	}
+
+	else if (ChangeFill)
+	{
+
 		ApplicationManager::countfill--;
 
-		pManager->GetLastFigure()->ChngFillClr(pManager->get_indx_fillcolor(ApplicationManager::countfill-1 ));
+		pManager->GetLastFigure()->ChngFillClr(pManager->get_indx_fillcolor(ApplicationManager::countfill - 1));
 	}
-	else
-	{
+	else {
 		ApplicationManager::countbrush--;
-		pManager->GetLastFigure()->ChngDrawClr(pManager->get_indx_brushcolor(ApplicationManager::countbrush ));
+		pManager->GetLastFigure()->ChngDrawClr(pManager->get_indx_brushcolor(ApplicationManager::countbrush));
 	}
 }
 
@@ -128,13 +126,13 @@ void ChangeColorAction::redo()
 {
 	if (ChangeFill)
 	{
-		
+
 		ApplicationManager::countfill++;
-		pManager->GetLastFigure()->ChngFillClr(pManager->get_indx_fillcolor(ApplicationManager::countfill-1 ));
+		pManager->GetLastFigure()->ChngFillClr(pManager->get_indx_fillcolor(ApplicationManager::countfill - 1));
 	}
 	else {
 		ApplicationManager::countbrush++;
-		pManager->GetLastFigure()->ChngDrawClr(pManager->get_indx_brushcolor(ApplicationManager::countbrush ));
+		pManager->GetLastFigure()->ChngDrawClr(pManager->get_indx_brushcolor(ApplicationManager::countbrush));
 
 
 	}

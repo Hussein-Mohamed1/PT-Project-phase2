@@ -31,10 +31,10 @@ void AddHexaAction::ReadActionParameters()
 
 	} while (invalid);
 
-	//RectGfxInfo.isFilled = false;	//default is not filled
+	HexaGfxInfo.isFilled = false;	//default is not filled
 	//get drawing, filling colors and pen width from the interface
-	RectGfxInfo.DrawClr = pOut->getCrntDrawColor();
-	RectGfxInfo.FillClr = pOut->getCrntFillColor();
+	HexaGfxInfo.DrawClr = pOut->getCrntDrawColor();
+	HexaGfxInfo.FillClr = pOut->getCrntFillColor();
 
 	pOut->ClearStatusBar();
 
@@ -45,7 +45,7 @@ void AddHexaAction::Execute()
 	ReadActionParameters();
 	/// create New Hexa
 
-	CHexa* H = new CHexa(P1, RectGfxInfo);
+	CHexa* H = new CHexa(P1, HexaGfxInfo);
 	// Add Hexa to Fig List
 
 	pManager->AddFigure(H);

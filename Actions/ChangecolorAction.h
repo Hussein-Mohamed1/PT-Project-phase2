@@ -4,12 +4,11 @@
 class ChangeColorAction :
 	public Action
 {
-	bool ChangeFill;
-	color  ChoosenColor;
-	int counter;
-	CFigure* f;
-
-
+    bool ChangeFill;
+    color  ChoosenColor;
+    int counter;
+    CFigure* f;
+ 
 
 public:
 	static int num_of_fill;

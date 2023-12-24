@@ -5,7 +5,7 @@ class AddSquareAction : public Action
 {
 private:
 	Point P1, P2;
-	GfxInfo RectGfxInfo;
+	GfxInfo SquareGfxInfo;
 	CFigure* DeletedFig;
 	static int numofshapes;
 public :

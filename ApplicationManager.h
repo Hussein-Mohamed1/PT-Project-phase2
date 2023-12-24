@@ -49,11 +49,8 @@ public:
 	//Reads the input command from the user and returns the corresponding action type
 	ActionType GetUserAction() const;
 	void ExecuteAction(ActionType , int numofrec=-1 ) ; //Creates an action and executes it
-	
 	void addfillcolor(color c);
 	void addbrushcolor(color c);
-
-
 	// -- Figures Management Functions
 	void playrecord();
 	void RemoveFigure(CFigure* pFig);          //Adds a new figure to the FigList
@@ -96,6 +93,7 @@ public:
 	 string figur_TO_String(figures);
 	 color get_indx_fillcolor(int indx);
 	 color get_indx_brushcolor(int indx);
+	
 };
 
 

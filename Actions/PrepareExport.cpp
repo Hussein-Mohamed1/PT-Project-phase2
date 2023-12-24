@@ -11,10 +11,11 @@ void PrepareExport::Execute() {
 	ReadActionParameters();
 	name += ".txt";
 	// checks if the button isn't "-1" i.e ESC and clears the file by using trunc access mode
-	fstream* OutputFile = (name != "-1.txt") ? new fstream(name, ios::trunc) : (pManager->GetOutput()->PrintMessage("Save File Cancelled."), 0);
+	fstream* OutputFile = (name != "-1.txt") ? new fstream(name, ios::trunc|ios::out| ios::in) : (pManager->GetOutput()->PrintMessage("Save File Cancelled."), 0);
 	// the fstream object is created with trunc mode to delete any text inside of the file
 	pManager->GetOutput()->ClearStatusBar();
 	if (OutputFile != nullptr) {
+		OutputFile->clear();
 		OutputFile->close();
 		delete OutputFile;
 		OutputFile = nullptr;
