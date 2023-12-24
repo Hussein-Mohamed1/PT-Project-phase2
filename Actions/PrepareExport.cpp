@@ -7,7 +7,7 @@ void PrepareExport::ReadActionParameters() {
 	pManager->GetOutput()->PrintMessage("Enter The file name without .txt or press ESC to cancel.");
 	name = pManager->GetInput()->GetString(pManager->GetOutput());
 }
-void PrepareExport::Execute() {
+void PrepareExport::Execute(bool b) {
 	ReadActionParameters();
 	name += ".txt";
 	// checks if the button isn't "-1" i.e ESC and clears the file by using trunc access mode

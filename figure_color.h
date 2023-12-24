@@ -11,7 +11,7 @@ class figure_color :public Action
 public:
 	figure_color(ApplicationManager* pApp);
 	void ReadActionParameters();
-	void Execute();
+	void Execute(bool b);
 	void manage_by_color(color, int n);
 	void redo() {};
 	void undo() {};

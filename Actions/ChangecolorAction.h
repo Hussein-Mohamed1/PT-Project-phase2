@@ -11,14 +11,13 @@ class ChangeColorAction :
  
 
 public:
-	static int num_of_fill;
-	ChangeColorAction(ApplicationManager* pApp, bool CF = 0);
+    ChangeColorAction(ApplicationManager* pApp,bool CF=0);
+  static int  num_of_fill ;
+    virtual void ReadActionParameters();
+  static  int if_exist_file();
+    void Execute(bool b);
 
-	virtual void ReadActionParameters();
-	static  int if_exist_file();
-	virtual void Execute();
-
-	virtual void undo();
-	virtual void redo();
+    void undo();
+     void redo();
 };
 

@@ -7,7 +7,7 @@
 
 playSound::playSound(ApplicationManager* pApp, ActionType act) :Action(pApp), act(act)
 {
-	Execute();
+	Execute(1);
 
 }
 
@@ -15,7 +15,7 @@ void playSound::ReadActionParameters()
 {
 }
 
-void playSound::Execute()
+void playSound::Execute(bool b)
 {
 	switch (act) {
 	case DRAW_RECT:

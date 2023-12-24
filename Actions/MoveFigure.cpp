@@ -33,15 +33,14 @@ void moveFigure::ReadActionParameters() {
 		pOut->ClearStatusBar();
 	}
 }
-void moveFigure::Execute() {
-	cFigure = pManager->GetSelected_Figure();
-	if (cFigure != nullptr)
-		if (!byDragging)
-		{
-			ReadActionParameters();
-			move();
-		}
-		else moveByDragging();
+void moveFigure::Execute(bool b) {
+
+	if (!byDragging)
+	{
+		ReadActionParameters();
+		move();
+	}
+	else moveByDragging();
 }
 bool moveFigure::move() {
 	if (!byDragging)

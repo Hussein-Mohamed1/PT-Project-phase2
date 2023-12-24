@@ -13,9 +13,9 @@ public :
 
     virtual void ReadActionParameters();
 
-    virtual void Execute() ;
-    virtual void undo();
-    virtual void redo();
+   void Execute(bool b) ;
+   void undo();
+     void redo();
     static int getnumofshapes();
 
 };

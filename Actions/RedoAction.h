@@ -24,7 +24,7 @@ public:
 	void AddToActions(Action* Act);
 
 
-	void Execute();
+	void Execute(bool b);
 	void ReadActionParameters();
 
 

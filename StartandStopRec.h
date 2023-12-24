@@ -8,7 +8,7 @@ class StartandStopRec : public Action
 public:
 	StartandStopRec(ApplicationManager* pApp);
 	void ReadActionParameters();
-	void Execute();
+	void Execute(bool b);
 	~StartandStopRec();
 	void redo() {};
 	void undo() {};

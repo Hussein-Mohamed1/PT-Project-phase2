@@ -42,7 +42,7 @@ void figure_color::manage_by_color(color c , int n)
 		}
 	}
 }
-void figure_color::Execute()
+void figure_color::Execute(bool b)
 {
 	string s;
 	 by_color = colors(rand() % 6);
@@ -58,7 +58,7 @@ void figure_color::Execute()
 			manage_by_color(BLACK, n);
 		}
 		else
-			Execute();
+			Execute(b);
 		break;
 	case red:
 		n = pManager->get_numofcolor(RED);
@@ -69,7 +69,7 @@ void figure_color::Execute()
 			manage_by_color(RED, n);
 		}
 		else
-			Execute();
+			Execute(b);
 		break;
 	case blue:
 		n = pManager->get_numofcolor(BLUE);
@@ -80,7 +80,7 @@ void figure_color::Execute()
 			manage_by_color(BLUE, n);
 		}
 		else
-			Execute();
+			Execute(b);
 		break;
 	case green:
 		n = pManager->get_numofcolor(GREEN);
@@ -91,7 +91,7 @@ void figure_color::Execute()
 			manage_by_color(GREEN, n);
 		}
 		else
-			Execute();
+			Execute(b);
 		break;
 	case yellow:
 		n = pManager->get_numofcolor(YELLOW);
@@ -102,7 +102,7 @@ void figure_color::Execute()
 			manage_by_color(YELLOW, n);
 		}
 		else
-			Execute();
+			Execute(b);
 		break;
 	case orange:
 		n = pManager->get_numofcolor(ORANGE);
@@ -113,7 +113,7 @@ void figure_color::Execute()
 			manage_by_color(ORANGE, n);
 		}
 		else
-			Execute();
+			Execute(b);
 		break;
 	default:
 		break;

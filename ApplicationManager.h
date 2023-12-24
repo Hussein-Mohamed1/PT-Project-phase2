@@ -15,7 +15,7 @@ class ApplicationManager
 
 
 private:
-	Action** arr_recActions;
+	Action* arr_recActions[20];
 	Action* ActListun[maxActionCount];       //actual array of actions
 	Action* ActListre[maxActionCount];
 	int ActionCountun = 0;
@@ -52,7 +52,7 @@ public:
 	void addfillcolor(color c);
 	void addbrushcolor(color c);
 	// -- Figures Management Functions
-	void playrecord();
+	void Playrecord();
 	void RemoveFigure(CFigure* pFig);          //Adds a new figure to the FigList
 	CFigure* DeleteFigure();          //Adds a new figure to the FigList
 	CFigure* GetFigure(int x, int y); //Search for a figure given a point inside the figure

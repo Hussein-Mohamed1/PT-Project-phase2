@@ -25,40 +25,41 @@ void ChangeColorAction::ReadActionParameters()
 	Output* pOut = pManager->GetOutput();
 	Input* pIn = pManager->GetInput();
 
-	pOut->PrintMessage("Choose  Color : ");
-	ActionType ActType;
-	ActType = pIn->GetUserAction();
-	switch (ActType)
-	{
-	case COLOR_BLACK:
-		ChoosenColor = BLACK;
-		break;
-	case COLOR_RED:
-		ChoosenColor = RED;
-		break;
-	case COLOR_BLUE:
-		ChoosenColor = BLUE;
-		break;
-	case COLOR_GREEN:
-		ChoosenColor = GREEN;
-		break;
-	case COLOR_YELLOW:
-		ChoosenColor = YELLOW;
-		break;
-	case COLOR_ORANGE:
-		ChoosenColor = ORANGE;
-		break;
-	default:
-		break;
-	}
-
+		pOut->PrintMessage("Choose  Color : ");
+		ActionType ActType;
+		
+		ActType = pIn->GetUserAction();
+		switch (ActType)
+		{
+		case COLOR_BLACK:
+			ChoosenColor = BLACK;
+			break;
+		case COLOR_RED:
+			ChoosenColor = RED;
+			break;
+		case COLOR_BLUE:
+			ChoosenColor = BLUE;
+			break;
+		case COLOR_GREEN:
+			ChoosenColor = GREEN;
+			break;
+		case COLOR_YELLOW:
+			ChoosenColor = YELLOW;
+			break;
+		case COLOR_ORANGE:
+			ChoosenColor = ORANGE;
+			break;
+		default:
+			break;
+		}
+	
 
 }
-void ChangeColorAction::Execute()
+void ChangeColorAction::Execute(bool b)
 {
 	Output* pOut = pManager->GetOutput();
-
-
+		
+		if (b)
 	ReadActionParameters();
 
 	//	pManager->AddDeletedFig(pManager->GetSelected_Figure());

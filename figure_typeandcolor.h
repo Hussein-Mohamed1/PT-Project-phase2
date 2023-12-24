@@ -12,7 +12,7 @@ class figure_typeandcolor:public Action
 public:
 	figure_typeandcolor(ApplicationManager* pApp);
 	 void ReadActionParameters();
-	 void Execute();
+	 void Execute(bool b);
 	 void redo() {};
 	 void undo() {};
 };
