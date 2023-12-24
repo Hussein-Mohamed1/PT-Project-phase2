@@ -5,8 +5,8 @@ class to_drawmood :public Action
 {
 public:
 	to_drawmood (ApplicationManager* pApp);
-	virtual void Execute();
-	virtual void ReadActionParameters();
+	 void Execute(bool b);
+	 void ReadActionParameters();
 	void redo() {};
 	void undo() {};
 };

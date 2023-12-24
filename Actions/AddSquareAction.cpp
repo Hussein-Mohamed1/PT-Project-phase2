@@ -40,8 +40,9 @@
 	 pOut->ClearStatusBar();
 
  }
- void AddSquareAction::Execute()
+ void AddSquareAction::Execute(bool b)
  {
+	 if (b)
 	 ReadActionParameters();
 
 	 // Make a new square 

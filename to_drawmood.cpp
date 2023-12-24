@@ -4,7 +4,7 @@ to_drawmood::to_drawmood(ApplicationManager *pApp):Action(pApp)
 {
 
 }
-void to_drawmood::Execute()
+void to_drawmood::Execute(bool b)
 {
 	Output* pOut = pManager->GetOutput();
 

@@ -8,9 +8,9 @@ class DeleteAction :  public Action
 public:
     DeleteAction(ApplicationManager* pApp);
     void  ReadActionParameters();
-    void Execute();
-    virtual void undo();
-    virtual void redo();
+    void Execute(bool b);
+   void undo();
+    void redo();
 
 };
 

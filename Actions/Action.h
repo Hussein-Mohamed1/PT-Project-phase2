@@ -44,7 +44,7 @@ public:
 	virtual void ReadActionParameters() {};
 
 	//Execute action (code depends on action type)
-	virtual void Execute() {};
+	virtual void Execute(bool b=1) {};
 
 };
 

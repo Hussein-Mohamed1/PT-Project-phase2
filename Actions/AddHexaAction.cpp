@@ -39,9 +39,9 @@ void AddHexaAction::ReadActionParameters()
 	pOut->ClearStatusBar();
 
 }
-void AddHexaAction::Execute()
+void AddHexaAction::Execute(bool b)
 {
-	
+	if (b)
 	ReadActionParameters();
 	/// create New Hexa
 

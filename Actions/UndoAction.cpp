@@ -18,7 +18,7 @@
  UndoAction::UndoAction(ApplicationManager* pApp) : Action(pApp) {}
  
 
-void UndoAction::Execute() {
+void UndoAction::Execute(bool b) {
 	Output* pOut = pManager->GetOutput();
 	Input* pIn = pManager->GetInput();
 

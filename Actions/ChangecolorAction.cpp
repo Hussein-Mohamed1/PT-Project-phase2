@@ -54,7 +54,7 @@ void ChangeColorAction::ReadActionParameters()
 	
 
 }
-void ChangeColorAction::Execute()
+void ChangeColorAction::Execute(bool b)
 {
 	Output* pOut = pManager->GetOutput();
 		

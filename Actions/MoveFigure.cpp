@@ -32,7 +32,7 @@ void moveFigure::ReadActionParameters() {
 		pOut->ClearStatusBar();
 	}
 }
-void moveFigure::Execute() {
+void moveFigure::Execute(bool b) {
 
 	if (!byDragging)
 	{

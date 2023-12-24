@@ -51,9 +51,9 @@ int AddcircleAction::getnumofshapes()
 	  pOut->ClearStatusBar();
  
 }
-  void AddcircleAction::Execute()
+  void AddcircleAction::Execute(bool b)
   {
-	  
+	  if (b)
 	  //This action needs to read some parameters first
 	  ReadActionParameters();
 

@@ -17,7 +17,7 @@ class figure_type : public Action
 public:
 	figure_type(ApplicationManager* pApp);
 	 void ReadActionParameters();
-	 void Execute();
+	 void Execute(bool b);
 	 void manage_byfigure();
 	 void redo() {};
 	 void undo() {};

@@ -6,7 +6,7 @@ class playSound :public Action {
 public:
 	playSound(ApplicationManager * pApp, ActionType act);
 	void ReadActionParameters();
-	void Execute();
+	void Execute(bool b);
 	void undo() ;
 	void redo() ;
 };

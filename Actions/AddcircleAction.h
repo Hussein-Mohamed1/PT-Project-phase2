@@ -18,9 +18,9 @@ public:
 	virtual void ReadActionParameters();
 	static int getnumofshapes();
 	//Add rectangle to the ApplicationManager
-	virtual void Execute();
-	virtual void undo();
-	virtual void redo();
+ void Execute(bool b);
+	 void undo();
+	void redo();
 };
 
 

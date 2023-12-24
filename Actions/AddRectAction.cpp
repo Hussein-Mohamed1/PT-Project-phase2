@@ -73,11 +73,11 @@ void AddRectAction::ReadActionParameters()
 }
 
 //Execute the action
-void AddRectAction::Execute() 
+void AddRectAction::Execute(bool b) 
 {
 
 	
-	
+	if (b)
 	//This action needs to read some parameters first
 	ReadActionParameters();
 	

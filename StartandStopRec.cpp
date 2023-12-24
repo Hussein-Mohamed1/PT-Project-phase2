@@ -6,7 +6,7 @@ void StartandStopRec::ReadActionParameters()
 {
 	current_action = pManager->GetUserAction();
 }
-void StartandStopRec::Execute()
+void StartandStopRec::Execute(bool b)
 {
 	pManager->GetOutput()->PrintMessage("recording is working...");
 	int numofaction=0;

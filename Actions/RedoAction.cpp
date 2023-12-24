@@ -25,31 +25,31 @@ void RedoAction::AddToActions(Action* Act)
 
 
 
-void RedoAction::Execute()
+void RedoAction::Execute(bool b)
 {
-	ReadActionParameters();
+	
+	Output* pOut = pManager->GetOutput();
+	Input* pIn = pManager->GetInput();
+	Action* pAct = pManager->GetLastRedo();
 
+
+	if (pAct != NULL)
+	{
+		pOut->PrintMessage("Redo the last operation");
+		pAct->redo();
+		pManager->addToUndo(pAct);
+
+
+	}
+	else
+	{
+		pOut->PrintMessage("there is not enough operations to redo!!");//if there is enough operations to undo
+	}
 }
 
 void RedoAction::ReadActionParameters()
 {
-	Output* pOut = pManager->GetOutput();
-	Input* pIn = pManager->GetInput();
-		Action* pAct=pManager->GetLastRedo();
 	
-
-		if (pAct != NULL)
-		{
-			pOut->PrintMessage("Redo the last operation");
-			pAct->redo();
-			pManager->addToUndo(pAct);
-			
-
-		}
-		else
-		{
-			pOut->PrintMessage("there is not enough operations to redo!!");//if there is enough operations to undo
-		}
 
 }
 

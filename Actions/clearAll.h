@@ -10,7 +10,7 @@ class clearAll : public Action
 public:
 	 clearAll(ApplicationManager* pApp);
 	void ReadActionParameters();
-	void Execute();
+	void Execute(bool b);
 	
 	virtual void undo();
 	virtual void redo();

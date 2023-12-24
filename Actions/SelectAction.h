@@ -11,7 +11,7 @@ private:
 public:
 	SelectAction(ApplicationManager* pApp);
 	void ReadActionParameters();
-	void Execute();
+	void Execute(bool b);
 	void redo() {};
 	void undo() {};
 

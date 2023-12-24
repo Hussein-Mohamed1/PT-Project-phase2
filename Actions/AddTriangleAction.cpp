@@ -43,9 +43,9 @@ void AddTriangleAction::ReadActionParameters()
 
 
 }
-void AddTriangleAction::Execute()  
+void AddTriangleAction::Execute(bool b)  
 {
-	
+	if (b)
 	// Read Parametes first 
 	ReadActionParameters();
 

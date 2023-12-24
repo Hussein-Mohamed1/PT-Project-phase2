@@ -11,10 +11,10 @@ private:
 public :
     AddHexaAction(ApplicationManager* pApp);
     void  ReadActionParameters();
-    void Execute();
+    void Execute(bool b);
 
-    virtual void undo();
-    virtual void redo();
+   void undo();
+    void redo();
     static int getnumofshapes();
 
 };
