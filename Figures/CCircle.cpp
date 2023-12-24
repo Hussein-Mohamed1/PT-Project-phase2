@@ -92,7 +92,7 @@ void CCircle::move(const Point& p) {
 	P2 = P2 + p - P1;
 	P1 = p;
 }
-bool CCircle::isInsideBoundaries(const Point& p) const
+bool CCircle::isInsideWindowBoundaries(const Point& p) const
 {
 	Point tempP2 = P2 + p - P1;
 	Point tempP1 = p;

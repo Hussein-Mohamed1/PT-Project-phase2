@@ -11,6 +11,7 @@ SelectAction::SelectAction(ApplicationManager* pApp) :Action(pApp)
 
 }
 
+
 void SelectAction::ReadActionParameters()
 {
 
@@ -22,6 +23,8 @@ void SelectAction::ReadActionParameters()
 	pIn->GetPointClicked(p.x, p.y);
 
 }
+
+
 
 void SelectAction::Execute()
 {
@@ -56,9 +59,7 @@ void SelectAction::Execute()
 		pManager->setSelectedFigure(ClickedFigure);
 	}
 }
-void SelectAction::redo(){
-	
-}
+
 
 //CFigure* SelectAction::GetSelected_Figure()
 //{

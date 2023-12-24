@@ -18,11 +18,10 @@ int CSquare::Getid()
 
 Point& CSquare::GetP1()
 {
-	return (P1+P2)/2;
+	return (P1 + P2) / 2;
 }
 
-
-CSquare::CSquare() {  };
+CSquare::CSquare() { };
 void CSquare::Draw(Output* pOut) const
 {
 	pOut->DrawRect(P1, P2, FigGfxInfo, Selected);
@@ -76,7 +75,7 @@ void CSquare::move(const Point& newPos)
 	P1 = newPos + P1 - Center;
 }
 
-bool CSquare::isInsideBoundaries(const Point& newPos) const
+bool CSquare::isInsideWindowBoundaries(const Point& newPos) const
 {
 
 	Point P2 = newPos + CSquare::P2 - (CSquare::P2 + CSquare::P1) / 2;
@@ -93,7 +92,7 @@ void CSquare::PrintInfo(Output* pOut)
 
 	// to_string ()  is a function that cast int to strting
 
-	string printed="Fiure is Square      Figure id : "+ to_string(id)+
+	string printed = "Fiure is Square      Figure id : " + to_string(id) +
 		"        Fisrt Corner :(" + to_string(P1.x) + "," + to_string(P1.y) + ")"
 		+ "        Second Corner :(" + to_string(P2.x) + "," + to_string(P2.y) + ")"
 		+ "        height " + to_string(hieght) + "        width " + to_string(hieght);   // hieght = widght becuase it's a square

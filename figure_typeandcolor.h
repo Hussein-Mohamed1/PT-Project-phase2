@@ -13,5 +13,7 @@ public:
 	figure_typeandcolor(ApplicationManager* pApp);
 	 void ReadActionParameters();
 	 void Execute();
+	 void redo() {};
+	 void undo() {};
 };
 

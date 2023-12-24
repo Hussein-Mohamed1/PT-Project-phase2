@@ -15,12 +15,12 @@ public:
 	void Save(fstream&)const;
 	void Load(string&);
 	void move(const Point&);
-	bool isInsideBoundaries(const Point&) const;
+	bool isInsideWindowBoundaries(const Point&) const;
 	bool checkselection(int x, int y);
 	int Getid();
-	Point & GetP1();
-	
-	 void PrintInfo(Output* pOut);
+	Point& GetP1();
+
+	void PrintInfo(Output* pOut);
 
 	//  void PrintInfo(Output* pOut);
 	color get_fillcolor();

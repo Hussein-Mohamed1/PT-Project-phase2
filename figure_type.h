@@ -19,5 +19,7 @@ public:
 	 void ReadActionParameters();
 	 void Execute();
 	 void manage_byfigure();
+	 void redo() {};
+	 void undo() {};
 };
 

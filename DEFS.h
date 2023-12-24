@@ -25,6 +25,7 @@ enum ActionType //The actions supported (you can add more if needed)
 
 	FUNC_UNDO,
 	FUNC_REDO,
+	FUNC_START_REC,
 	FUNC_FILL,
 	FUNC_MOVE,
 	DRAWING_AREA,
@@ -32,13 +33,12 @@ enum ActionType //The actions supported (you can add more if needed)
 	EMPTY,
 	FUNC_CLEAR_CANVAS,
 	FUNC_STOP_REC,
+	FUNC_PLAY_REC,
 	FUNC_SAVE,
 	FUNC_LOAD,
 	ENTER_PLAY_MODE,
 	FUNC_EXIT,
 	FUNC_EXIT_playMode,
-	FUNC_START_REC,
-	FUNC_PLAY_REC,
 	ENTER_DRAW_MODE,
 	BY_COLOR,
 	BY_SHAPE,
@@ -57,13 +57,13 @@ struct Point	//To be used for figures points
 public:
 
 
-Point operator =(const Point& p2)
- {
-	 x = p2.x;
-	 y = p2.y;
-	 return *this;
+	Point operator =(const Point& p2)
+	{
+		x = p2.x;
+		y = p2.y;
+		return *this;
 
- }
+	}
 };
 
 struct GfxInfo	//Graphical info of each figure (you may add more members)

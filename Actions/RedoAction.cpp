@@ -19,6 +19,10 @@
 
 RedoAction::RedoAction(ApplicationManager* pApp) : Action(pApp) {}
 
+void RedoAction::AddToActions(Action* Act)
+{
+}
+
 
 
 void RedoAction::Execute()
@@ -47,13 +51,5 @@ void RedoAction::ReadActionParameters()
 			pOut->PrintMessage("there is not enough operations to redo!!");//if there is enough operations to undo
 		}
 
-}
-
-void RedoAction::undo()
-{
-}
-
-void RedoAction::redo()
-{
 }
 

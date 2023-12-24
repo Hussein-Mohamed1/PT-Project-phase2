@@ -7,5 +7,7 @@ public:
 	to_drawmood (ApplicationManager* pApp);
 	virtual void Execute();
 	virtual void ReadActionParameters();
+	void redo() {};
+	void undo() {};
 };
 

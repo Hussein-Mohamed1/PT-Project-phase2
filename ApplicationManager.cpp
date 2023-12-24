@@ -60,13 +60,13 @@ ApplicationManager::ApplicationManager()
 		ActListun[i] = NULL;
 	for (int i = 0; i < maxActionCount; i++)
 		ActListre[i] = NULL;
-	for (int i = 0;i < 5;i++) Pos[i] = { 100,100 };
-	for (int i = 0;i < 5;i++) {
+	for (int i = 0; i < 5; i++) Pos[i] = { 100,100 };
+	for (int i = 0; i < 5; i++) {
 		fill[i] = UI.BkGrndColor;
 	}
-	for (int i = 0;i < 5;i++) {
+	for (int i = 0; i < 5; i++) {
 		brush[i] = UI.BkGrndColor;
-}
+	}
 }
 
 
@@ -75,16 +75,16 @@ ApplicationManager::ApplicationManager()
 //==================================================================================//
 ActionType ApplicationManager::GetUserAction() const
 {
+
 	//Ask the input to get the action from the user.
 	return pIn->GetUserAction();
 }
+
 ////////////////////////////////////////////////////////////////////////////////////
 //Creates an action and executes it
 
-
-void ApplicationManager::ExecuteAction(ActionType ActType , Action* Rec_action)
+void ApplicationManager::ExecuteAction(ActionType ActType, Action* Rec_action)
 {
-	pIn->FlushMouseQueue();
 	Action* pAct = nullptr;
 	//According to Action Type, create the corresponding action object
 	switch (ActType)
@@ -98,20 +98,13 @@ void ApplicationManager::ExecuteAction(ActionType ActType , Action* Rec_action)
 
 		pAct = new AddcircleAction(this);
 		addToUndo(pAct);
-	break;
+		break;
 
 	case DRAW_TRIA:
 		pAct = new AddTriangleAction(this);
 		addToUndo(pAct);
 		break;
 
-	case 	FUNC_MOVE:
-	{pAct = new moveFigure(this);
-	addToUndo(pAct);
-
-	}
-
-	break;
 	case DRAW_SQUA:
 		pAct = new AddSquareAction(this);
 		addToUndo(pAct);
@@ -120,30 +113,22 @@ void ApplicationManager::ExecuteAction(ActionType ActType , Action* Rec_action)
 	case DRAW_HEXA:
 		pAct = new AddHexaAction(this);
 		addToUndo(pAct);
-
-	break;
+		break;
 	case FUNC_SELECT:
 		pAct = new SelectAction(this);
 		break;
-	//case FUNC_SAVE:
-	//	pAct = new PrepareExport(this);
-	//	break;
-	//case FUNC_LOAD:
-	//	pAct = new PrepareImport(this);
-	//	break;
-
 	case ENTER_PLAY_MODE:
 		pAct = new to_playmood(this);
 		break;
 	case BY_SHAPE:
-		if(FigCount)
-		pAct = new figure_type(this);
+		if (FigCount)
+			pAct = new figure_type(this);
 		else
 			pOut->PrintMessage("no figures to pick it");
 		break;
 	case BY_COLOR:
-		if(ChangeColorAction::if_exist_file())
-		pAct = new figure_color(this);
+		if (ChangeColorAction::if_exist_file())
+			pAct = new figure_color(this);
 		else
 			pOut->PrintMessage("no figures to pick it");
 		break;
@@ -153,62 +138,21 @@ void ApplicationManager::ExecuteAction(ActionType ActType , Action* Rec_action)
 		else
 			pOut->PrintMessage("no figures to pick it");
 		break;
-		//case COLOR_BLACK:
-		//pAct = new ChangeColorAction(this,BLACK);
-		//	break;
-		//case COLOR_RED:
-		//pAct = new ChangeColorAction(this,RED);
-		//	break;
-		//case COLOR_GREEN :
-		//	pAct = new ChangeColorAction(this, GREEN);
-		//	break;
-		//case COLOR_ORANGE:
-		//	pAct = new ChangeColorAction(this, ORANGE);
-		//	break;
-		//case COLOR_YELLOW:
-		//	pAct = new ChangeColorAction(this, YELLOW);
-		//	break;
-		//case COLOR_BLUE:
-		//	pAct = new ChangeColorAction(this, BLUE);
-	//	break;
 	case FUNC_FILL:
-	{
 		playSound(this, FUNC_FILL);
-		
-	pAct = new ChangeColorAction(this, true);addToUndo(pAct);}
-break;
-	case FUNC_BRUSH:{
-		
+		pAct = new ChangeColorAction(this, true); addToUndo(pAct);
+		break;
+	case FUNC_BRUSH:
 		playSound(this, FUNC_BRUSH);
-		pAct = new ChangeColorAction(this);addToUndo(pAct);
-	}
+		pAct = new ChangeColorAction(this); addToUndo(pAct);
 		break;
 	case FUNC_DELETE:
-	{pAct = new DeleteAction(this);
-	addToUndo(pAct);}
+		pAct = new DeleteAction(this);
+		addToUndo(pAct);
 		break;
 	case ENTER_DRAW_MODE:
 		pAct = new to_drawmood(this);
 		break;
-		//case COLOR_BLACK:
-		//	pOut->PrintMessage("BLACK");
-		//	break;
-		//case COLOR_RED:
-		//	pOut->PrintMessage("RED");
-		//	break;
-		//case COLOR_BLUE:
-		//	pOut->PrintMessage("BLUE");
-		//	break;
-		//case COLOR_GREEN:
-		//	pOut->PrintMessage("GREEN");
-		//	break;
-		//case COLOR_YELLOW:
-		//	pOut->PrintMessage("YELLOW");
-		//	break;
-		//case COLOR_ORANGE:
-		//	pOut->PrintMessage("ORANGE");
-		//	break;
-
 	case FUNC_SAVE:
 		pAct = new PrepareExport(this);
 		break;
@@ -227,17 +171,14 @@ break;
 
 	case FUNC_REDO:
 		pAct = new RedoAction(this);
+
 	case FUNC_START_REC:
 		if (FigCount == 0)
 			pAct = new StartandStopRec(this);
 		else
 			pOut->PrintMessage("can't recording you should delete all");
+		pOut->PrintMessage("START");
 		break;
-	case FUNC_EXIT_playMode:
-		pAct = new to_drawmood(this);
-		break;
-
-
 
 	case FUNC_PLAY_REC:
 		pOut->PrintMessage("PLAY");
@@ -246,12 +187,24 @@ break;
 	case FUNC_STOP_REC:
 		pOut->PrintMessage("stop");
 		break;
+	case FUNC_MOVE:
+
+		pAct = new moveFigure(this);
+		addToUndo(pAct);
+		playSound(this, FUNC_MOVE);
+		break;
+
+
 
 	case FUNC_EXIT:
 		break;
-		
+
 	case STATUS:	//a click on the status bar ==> no action
 		return;
+	case DRAWING_AREA:
+		if (Selected_Figure != nullptr) //a figure must be selected to call a "move by dragging" activity
+			pAct = new moveFigure(this, 1);
+		break;
 	}
 	//Execute the created action
 	if (Rec_action && pAct)
@@ -262,6 +215,7 @@ break;
 	}
 	else if (pAct != NULL)
 	{
+		pIn->FlushMouseQueue();
 		//addToUndo(pAct);
 		//addToRedo();
 		pAct->Execute(); //Execute
@@ -272,8 +226,8 @@ break;
 }
 
 void ApplicationManager::addfillcolor(color c)
-{ 
-	
+{
+
 	fill[countfill] = c;
 	countfill++;
 }
@@ -349,20 +303,20 @@ CFigure* ApplicationManager::GetFigure(int x, int y) {
 			}
 
 
-	}
+		}
 
-	// if the point dosen't belong to any figure
+		// if the point dosen't belong to any figure
 
-	pOut->PrintMessage(" No selected figure ");
+		pOut->PrintMessage(" No selected figure ");
 
-	//Add your code here to search for a figure given a point x,y
-	//Remember that ApplicationManager only calls functions do NOT implement it.
+		//Add your code here to search for a figure given a point x,y
+		//Remember that ApplicationManager only calls functions do NOT implement it.
 
-		
+
 	}pOut->PrintMessage(" No selected figure ");
 
-return NULL;
-	
+	return NULL;
+
 }
 
 void ApplicationManager::setSelectedFigure(CFigure* const sf)
@@ -371,38 +325,6 @@ void ApplicationManager::setSelectedFigure(CFigure* const sf)
 }
 
 
-//bool ApplicationManager :: Select(CFigure* figure)
-//{
-//	if (Selected_Figure==figure) {
-//		Selected_Figure->SetSelected(false);
-//		Selected_Figure = nullptr;
-//	}
-//	else if (Selected_Figure == nullptr)
-//	{
-//		Selected_Figure = figure;
-//		Selected_Figure->SetSelected(true);
-//	}
-//	else  //if (Selected_Figure != figure)
-//	{
-//		Selected_Figure->SetSelected(false);
-//		Selected_Figure = nullptr;
-//		Selected_Figure = figure;
-//		Selected_Figure->SetSelected(true);
-//
-//	}
-//
-//}
-//
-//CFigure* ApplicationManager:: GetFigureByPoint(int x, int y)
-//{
-//	for (int i = 0; i < FigCount; i++)
-//	{
-//		if (FigList[i]->checkselection(x, y))
-//		{
-//			return FigList[i];
-//		}
-//	}
-//}
 
 //==================================================================================//
 //							Interface Management Functions							//
@@ -493,6 +415,8 @@ void ApplicationManager::SaveAll(fstream& OutputFile) const {
 		OutputFile.close();
 	}
 }
+
+
 void ApplicationManager::ClearAll()
 {
 
@@ -510,43 +434,40 @@ void ApplicationManager::ClearAll()
 	}
 	for (int i = 0; i < ActionCountre; i++)
 	{
-		
+
 		ActListre[i] = NULL;
 		delete ActListre[i];
 	}
 	for (int i = 0; i < FigCount; i++)
 	{
-	
+
 		DeletedFigList[i] = NULL;
 		delete DeletedFigList[i];
 	}
 	UpdateInterface();
 	FigCount = 0;
 
-	 ActionCountun = 0;
+	ActionCountun = 0;
 	ActionCountre = 0;
 	pOut->ClearDrawArea();
 }
-
-
 void ApplicationManager::addToUndo(Action* pAct)
 {
 	if (ActionCountun < 5 && ActionCountun >= 0)
 	{
 		ActListun[ActionCountun] = pAct;
-
-
-		if (ActionCountun > 4)
 		{
+			ActListun[ActionCountun] = pAct;
 
-			for (int j = 0; j < 4; j++)   //Overwriting Undoarr to make it always have the last five actions 
-			{
-				ActListun[j] = ActListun[j + 1];
-			}
+
+			if (ActionCountun > 4)
+				for (int j = 0; j < 4; j++)   //Overwriting Undoarr to make it always have the last five actions 
+				{
+					ActListun[j] = ActListun[j + 1];
+				}
 			ActionCountun = 4;
 		}
 		ActListun[ActionCountun++] = pAct;
-
 	}
 }
 void ApplicationManager::addToRedo()
@@ -556,6 +477,8 @@ void ApplicationManager::addToRedo()
 	ActionCountre++;
 
 }
+
+
 
 Action* ApplicationManager::GetLastUndo()
 {
@@ -589,11 +512,11 @@ void ApplicationManager::addPoint(Point p)
 
 Point ApplicationManager::getpoint(int index)
 {
-	return Pos[index] ;
+	return Pos[index];
 }
 
 void ApplicationManager::addColor(color c)
-{ 
+{
 }
 
 void ApplicationManager::getColor()
@@ -603,6 +526,8 @@ void ApplicationManager::getColor()
 //Destructor
 ApplicationManager::~ApplicationManager()
 {
+
+
 	for (int i = 0; i < FigCount; i++)
 	{
 		if (FigList[i] != nullptr) { delete FigList[i]; FigList[i] = nullptr; }
@@ -617,6 +542,7 @@ CFigure* ApplicationManager::GetSelected_Figure()
 {
 	return Selected_Figure;
 }
+
 void  ApplicationManager::SetSelectedFig(CFigure* S)
 {
 	// case one if there is no selected figure before 
@@ -648,7 +574,6 @@ void  ApplicationManager::SetSelectedFig(CFigure* S)
 
 
 }
-
 
 void ApplicationManager::set_figure(CFigure* fig)
 {
@@ -753,6 +678,7 @@ int ApplicationManager::get_numofcolor(color c)
 }
 int ApplicationManager::numof_figurewithcolor(figures fig, colors c)
 {
+
 	CFigure* check_fig;
 	int n = 0;
 	switch (fig)

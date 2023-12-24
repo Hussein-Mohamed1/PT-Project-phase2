@@ -6,5 +6,6 @@ public :
 	to_playmood(ApplicationManager* pApp);
 	virtual void Execute();
 	virtual void ReadActionParameters();
+
 };
 
