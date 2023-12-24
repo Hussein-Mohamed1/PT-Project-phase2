@@ -30,7 +30,7 @@ int main()
 		//Update the interface
 		AppManager.UpdateInterface();	
 
-	} while(ActType != FUNC_EXIT);
+	} while(ActType != FUNC_EXIT && ActType !=FUNC_EXIT_playMode);
 	
 
 	

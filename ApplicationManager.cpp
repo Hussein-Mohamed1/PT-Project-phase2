@@ -154,30 +154,41 @@ void ApplicationManager::ExecuteAction(ActionType ActType, Action* Rec_action)
 		pAct = new to_drawmood(this);
 		break;
 	case FUNC_SAVE:
-		pAct = new PrepareExport(this);
+	//	pAct = new PrepareExport(this);
+		pOut->PrintMessage("SAVE");
+
 		break;
 
 	case FUNC_LOAD:
-		pAct = new PrepareImport(this);
+	//	pAct = new PrepareImport(this);
+		pOut->PrintMessage("LOAD");
+
 		break;
 
 	case FUNC_CLEAR_CANVAS:
-		pAct = new clearAll(this);
+	//	pAct = new clearAll(this);
+		pOut->PrintMessage("CLEAR ALL");
+
 		break;
 
 	case FUNC_UNDO:
-		pAct = new UndoAction(this);
+//		pAct = new UndoAction(this);
+		pOut->PrintMessage("UNDO");
 		break;
 
 	case FUNC_REDO:
-		pAct = new RedoAction(this);
+	//	pAct = new RedoAction(this);
+		pOut->PrintMessage("REDO");
+		break;
+
 
 	case FUNC_START_REC:
-		if (FigCount == 0)
-			pAct = new StartandStopRec(this);
-		else
-			pOut->PrintMessage("can't recording you should delete all");
-		pOut->PrintMessage("START");
+		//if (FigCount == 0)
+		//	pAct = new StartandStopRec(this);
+		//else
+		//	pOut->PrintMessage("can't recording you should delete all");
+		//pOut->PrintMessage("START");
+		pOut->PrintMessage("START REC");
 		break;
 
 	case FUNC_PLAY_REC:
@@ -194,8 +205,9 @@ void ApplicationManager::ExecuteAction(ActionType ActType, Action* Rec_action)
 		playSound(this, FUNC_MOVE);
 		break;
 
-
-
+	case FUNC_EXIT_playMode:
+		break;
+    
 	case FUNC_EXIT:
 		break;
 
@@ -348,12 +360,11 @@ void ApplicationManager::DeleteFunction()
 	{
 		if (FigList[i] == Selected_Figure)
 		{
-			//Selected_Figure->SetSelected(false);             
-		   //		pOut->ClearDrawArea();                 
 			pOut->ClearStatusBar();
-			delete FigList[i];
-			FigList[i] = NULL;
+			FigList[FigCount] = FigList[i];
+			FigList[i] = FigList[FigCount - 1];
 			Selected_Figure = NULL;
+			delete FigList[FigCount--];
 			break;
 		}
 	}
