@@ -35,5 +35,5 @@ void StartandStopRec::Execute()
 }
 StartandStopRec::~StartandStopRec()
 {
-	delete[] arr_Actions;
+	
 }
