@@ -19,6 +19,7 @@ Output::Output()
 	UI.wy = 10;
 
 
+
 	UI.StatusBarHeight = 50;
 	UI.ToolBarHeight = 50;
 	UI.MenuItemWidth = 45;
@@ -259,6 +260,7 @@ int Output::getCrntPenWidth() const		//get current pen width
 
 void Output::SetDraColor(color c)
 {
+     
 	UI.DrawColor = c;
 }
 void Output::SetFillColor(color c)

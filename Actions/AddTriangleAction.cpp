@@ -34,10 +34,10 @@ void AddTriangleAction::ReadActionParameters()
 	} while (invalid);
 
 
-	//RectGfxInfo.isFilled = false;	//default is not filled
+	TriangleGfxInfo.isFilled = false;	//default is not filled
 	//get drawing, filling colors and pen width from the interface
-	RectGfxInfo.DrawClr = pOut->getCrntDrawColor();
-	RectGfxInfo.FillClr = pOut->getCrntFillColor();
+	TriangleGfxInfo.DrawClr = pOut->getCrntDrawColor();
+	TriangleGfxInfo.FillClr = pOut->getCrntFillColor();
 
 	pOut->ClearStatusBar();
 
@@ -51,7 +51,7 @@ void AddTriangleAction::Execute()
 
 	// create a Triangle 
 
-	CTriangle* T = new CTriangle(P1, P2, P3, RectGfxInfo);
+	CTriangle* T = new CTriangle(P1, P2, P3, TriangleGfxInfo);
 
     // Add Triangle to Figures
 	pManager->AddFigure(T);

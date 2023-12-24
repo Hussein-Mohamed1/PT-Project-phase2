@@ -1,10 +1,13 @@
 #include "CFigure.h"
 
+bool CFigure::NewIsFilled = false;
 int CFigure::ID = 1;
 
 CFigure::CFigure(GfxInfo FigureGfxInfo)
 {
 	FigGfxInfo = FigureGfxInfo;	//Default status is non-filled.
+	if (NewIsFilled)
+		FigGfxInfo.isFilled = true;
 	Selected = false;
 }
 
@@ -15,6 +18,10 @@ void CFigure::SetSelected(bool s)
 {
 	Selected = s;
 	
+}
+void CFigure::IsAllNewFilled(bool s)
+{
+	NewIsFilled = s;
 }
 
 bool CFigure::IsSelected() const
