@@ -360,12 +360,11 @@ void ApplicationManager::DeleteFunction()
 	{
 		if (FigList[i] == Selected_Figure)
 		{
-			//Selected_Figure->SetSelected(false);             
-		   //		pOut->ClearDrawArea();                 
 			pOut->ClearStatusBar();
-			delete FigList[i];
-			FigList[i] = NULL;
+			FigList[FigCount] = FigList[i];
+			FigList[i] = FigList[FigCount - 1];
 			Selected_Figure = NULL;
+			delete FigList[FigCount--];
 			break;
 		}
 	}
