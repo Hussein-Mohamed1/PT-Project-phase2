@@ -208,6 +208,7 @@ void ApplicationManager::ExecuteAction(ActionType ActType, int numofrec )
 		break;
     
 	case FUNC_EXIT:
+
 		break;
 
 	case STATUS:	//a click on the status bar ==> no action
@@ -490,6 +491,7 @@ void ApplicationManager::ClearAll()
 	ActionCountun = 0;
 	ActionCountre = 0;
 	pOut->ClearDrawArea();
+	//cFigure->id = 0;
 }
 void ApplicationManager::addToUndo(Action* pAct)
 {
