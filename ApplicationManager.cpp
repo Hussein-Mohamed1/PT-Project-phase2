@@ -38,7 +38,7 @@ using namespace std;
 //Constructor
 ApplicationManager::ApplicationManager()
 {
-
+	arr_recActions = new Action * [20];
 	//Create Input and output
 	pOut = new Output;
 	pIn = pOut->CreateInput();
@@ -83,7 +83,7 @@ ActionType ApplicationManager::GetUserAction() const
 ////////////////////////////////////////////////////////////////////////////////////
 //Creates an action and executes it
 
-void ApplicationManager::ExecuteAction(ActionType ActType, Action* Rec_action)
+void ApplicationManager::ExecuteAction(ActionType ActType, int numofrec )
 {
 	Action* pAct = nullptr;
 	//According to Action Type, create the corresponding action object
@@ -177,7 +177,6 @@ void ApplicationManager::ExecuteAction(ActionType ActType, Action* Rec_action)
 			pAct = new StartandStopRec(this);
 		else
 			pOut->PrintMessage("can't recording you should delete all");
-		pOut->PrintMessage("START");
 		break;
 
 	case FUNC_PLAY_REC:
@@ -207,9 +206,9 @@ void ApplicationManager::ExecuteAction(ActionType ActType, Action* Rec_action)
 		break;
 	}
 	//Execute the created action
-	if (Rec_action && pAct)
+	if (numofrec != -1)
 	{
-		Rec_action = pAct;
+		arr_recActions[numofrec] = pAct;
 		pAct->Execute();
 		pAct = NULL;
 	}

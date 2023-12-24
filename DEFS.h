@@ -25,7 +25,6 @@ enum ActionType //The actions supported (you can add more if needed)
 
 	FUNC_UNDO,
 	FUNC_REDO,
-	FUNC_START_REC,
 	FUNC_FILL,
 	FUNC_MOVE,
 	DRAWING_AREA,
@@ -33,6 +32,7 @@ enum ActionType //The actions supported (you can add more if needed)
 	EMPTY,
 	FUNC_CLEAR_CANVAS,
 	FUNC_STOP_REC,
+	FUNC_START_REC,
 	FUNC_PLAY_REC,
 	FUNC_SAVE,
 	FUNC_LOAD,

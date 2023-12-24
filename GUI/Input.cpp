@@ -168,13 +168,16 @@ ActionType Input::GetUserAction() const
 				return FUNC_REDO;
 			k++;
 			if (x >= start + UI.MenuItemWidth * k + k * space && x <= start + UI.MenuItemWidth * (k + 1) + space * k)
-				return FUNC_START_REC;
+				return FUNC_CLEAR_CANVAS ;
 			k++;
 			if (x >= start + UI.MenuItemWidth * k + k * space && x <= start + UI.MenuItemWidth * (k + 1) + space * k)
-				return FUNC_PLAY_REC;
+				return FUNC_START_REC ;
 			k++;
 			if (x >= start + UI.MenuItemWidth * k + k * space && x <= start + UI.MenuItemWidth * (k + 1) + space * k)
 				return FUNC_STOP_REC;
+			k++;
+			if (x >= start + UI.MenuItemWidth * k + k * space && x <= start + UI.MenuItemWidth * (k + 1) + space * k)
+				return FUNC_PLAY_REC;
 			k++;
 			if (x >= start + UI.MenuItemWidth * k + k * space && x <= start + UI.MenuItemWidth * (k + 1) + space * k)
 				return FUNC_SAVE;
@@ -183,10 +186,7 @@ ActionType Input::GetUserAction() const
 				return FUNC_LOAD;
 			k++;
 			if (x >= start + UI.MenuItemWidth * k + k * space && x <= start + UI.MenuItemWidth * (k + 1) + space * k)
-				return ENTER_PLAY_MODE;
-			k++;
-			if (x >= start + UI.MenuItemWidth * k + k * space && x <= start + UI.MenuItemWidth * (k + 1) + space * k)
-				return FUNC_CLEAR_CANVAS;
+				return ENTER_PLAY_MODE ;
 			k++;
 			if (x >= start + UI.MenuItemWidth * k + k * space && x <= start + UI.MenuItemWidth * (k + 1) + space * k)
 				return FUNC_EXIT;
