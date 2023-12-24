@@ -78,6 +78,7 @@ void CTriangle::Load(string& line)
 	for (int i = 0; i < NoOfSpaces; i++) {
 		ss >> datum[i];
 	}
+	this->id = stoi(datum[1]);
 	this->P1.x = stoi(datum[2]);
 	this->P1.y = stoi(datum[3]);
 	this->P2.x = stoi(datum[4]);

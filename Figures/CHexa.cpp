@@ -100,6 +100,7 @@ void CHexa::Load(string& line)
 	for (int i = 0; i < NoOfSpaces; i++) {
 		ss >> datum[i];
 	}
+	this->id = stoi(datum[1]);
 	this->centre.x = stoi(datum[2]);
 	this->centre.y = stoi(datum[3]);
 	this->FigGfxInfo.DrawClr = color(stoi(datum[4]), stoi(datum[5]), stoi(datum[6]));

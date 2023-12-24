@@ -44,6 +44,7 @@ void CRectangle::Load(string& line)
 	for (int i = 0; i < NoOfSpaces; i++) {
 		ss >> datum[i];
 	}
+	this->id = stoi(datum[1]);
 	this->Corner1.x = stoi(datum[2]);
 	this->Corner1.y = stoi(datum[3]);
 	this->Corner2.x = stoi(datum[4]);
