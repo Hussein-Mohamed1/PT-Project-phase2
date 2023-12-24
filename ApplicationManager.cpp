@@ -154,30 +154,30 @@ void ApplicationManager::ExecuteAction(ActionType ActType, int numofrec )
 		pAct = new to_drawmood(this);
 		break;
 	case FUNC_SAVE:
-	//	pAct = new PrepareExport(this);
+		pAct = new PrepareExport(this);
 		pOut->PrintMessage("SAVE");
 
 		break;
 
 	case FUNC_LOAD:
-	//	pAct = new PrepareImport(this);
+		pAct = new PrepareImport(this);
 		pOut->PrintMessage("LOAD");
 
 		break;
 
 	case FUNC_CLEAR_CANVAS:
-	//	pAct = new clearAll(this);
+	pAct = new clearAll(this);
 		pOut->PrintMessage("CLEAR ALL");
 
 		break;
 
 	case FUNC_UNDO:
-//		pAct = new UndoAction(this);
+		pAct = new UndoAction(this);
 		pOut->PrintMessage("UNDO");
 		break;
 
 	case FUNC_REDO:
-	//	pAct = new RedoAction(this);
+		pAct = new RedoAction(this);
 		pOut->PrintMessage("REDO");
 		break;
 

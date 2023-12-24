@@ -96,7 +96,6 @@ public:
 	 string figur_TO_String(figures);
 	 color get_indx_fillcolor(int indx);
 	 color get_indx_brushcolor(int indx);
-	 bool if_allowedAction(ActionType);
 };
 
 
