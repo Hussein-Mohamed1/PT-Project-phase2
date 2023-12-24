@@ -54,9 +54,14 @@ ApplicationManager::ApplicationManager()
 
 	for (int i = 0; i < MaxFigCount; i++)
 	{
+
 		FigList[i] = nullptr;
 		DeletedFigList[i] = nullptr;
-	
+
+	}
+	for (int i = 0; i < 20; i++)
+	{
+		arr_recActions[i] = nullptr;
 	}
 	for (int i = 0; i < 5; i++) {
 		ActListun[i] = nullptr;
@@ -220,8 +225,9 @@ void ApplicationManager::ExecuteAction(ActionType ActType, int numofrec)
 		break;
 	}
 	//Execute the created action
-	if (numofrec != -1)
+	if (numofrec != -1 && pAct != nullptr)
 	{
+
 		arr_recActions[numofrec] = pAct;
 		pAct->Execute();
 		pAct = NULL;
