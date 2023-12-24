@@ -166,18 +166,18 @@ void ApplicationManager::ExecuteAction(ActionType ActType, Action* Rec_action)
 		break;
 
 	case FUNC_CLEAR_CANVAS:
-	//	pAct = new clearAll(this);
+		pAct = new clearAll(this);
 		pOut->PrintMessage("CLEAR ALL");
 
 		break;
 
 	case FUNC_UNDO:
-//		pAct = new UndoAction(this);
+	pAct = new UndoAction(this);
 		pOut->PrintMessage("UNDO");
 		break;
 
 	case FUNC_REDO:
-	//	pAct = new RedoAction(this);
+		pAct = new RedoAction(this);
 		pOut->PrintMessage("REDO");
 		break;
 
@@ -279,6 +279,13 @@ void ApplicationManager::AddDeletedFig(CFigure* del)
 }
 
 ////////////////////////////////////////////////////////////////////////////////////
+
+
+void ApplicationManager::playrecord()
+{
+	
+
+	}
 
 
 //Remove a figure from the list of figures

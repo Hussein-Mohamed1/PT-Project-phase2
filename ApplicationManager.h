@@ -55,7 +55,7 @@ public:
 
 
 	// -- Figures Management Functions
-
+	void playrecord();
 	void RemoveFigure(CFigure* pFig);          //Adds a new figure to the FigList
 	CFigure* DeleteFigure();          //Adds a new figure to the FigList
 	CFigure* GetFigure(int x, int y); //Search for a figure given a point inside the figure
