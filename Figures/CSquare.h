@@ -6,6 +6,7 @@ class CSquare :
 private:
 	Point P1, P2;
 	int id;
+
 public:
 	CSquare(Point p1, Point p2, GfxInfo FigureGfxInfo);
 	CSquare();

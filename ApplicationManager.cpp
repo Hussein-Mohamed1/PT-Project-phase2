@@ -91,41 +91,34 @@ void ApplicationManager::ExecuteAction(ActionType ActType, Action* Rec_action)
 	{
 	case DRAW_RECT:
 		pAct = new AddRectAction(this);
-		playSound(this, DRAW_RECT);
 		addToUndo(pAct);
 		break;
 
 	case DRAW_CIRC:
 
 		pAct = new AddcircleAction(this);
-		playSound(this, DRAW_CIRC);
 		addToUndo(pAct);
 		break;
 
 	case DRAW_TRIA:
 		pAct = new AddTriangleAction(this);
-		playSound(this, DRAW_TRIA);
 		addToUndo(pAct);
 		break;
 
 	case DRAW_SQUA:
 		pAct = new AddSquareAction(this);
-		playSound(this, DRAW_SQUA);
 		addToUndo(pAct);
 		break;
 
 	case DRAW_HEXA:
 		pAct = new AddHexaAction(this);
-		playSound(this, DRAW_HEXA);
 		addToUndo(pAct);
 		break;
 	case FUNC_SELECT:
 		pAct = new SelectAction(this);
-		playSound(this, FUNC_SELECT);
 		break;
 	case ENTER_PLAY_MODE:
 		pAct = new to_playmood(this);
-		playSound(this, ENTER_PLAY_MODE);
 		break;
 	case BY_SHAPE:
 		if (FigCount)

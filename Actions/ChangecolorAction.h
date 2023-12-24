@@ -8,7 +8,7 @@ class ChangeColorAction :
     color  ChoosenColor;
     int counter;
     CFigure* f;
- 
+    static int num_of_fill;
  
 
 public:
