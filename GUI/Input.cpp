@@ -148,7 +148,7 @@ ActionType Input::GetUserAction() const
 			//case ITM_SAVE: return FUNC_SAVE;
 			//case ITM_LOAD: return FUNC_LOAD;
 			//case PLAY_MODE: return ENTER_PLAY_MODE;
-			case CLEAR_CANVAS: return FUNC_CLEAR_CANVAS;
+			//case CLEAR_CANVAS: return FUNC_CLEAR_CANVAS;
 			//case ITM_EXIT: return FUNC_EXIT;
 			case ITM_FILL: return FUNC_FILL;
 			case ITM_MOVE: return FUNC_MOVE;
@@ -158,41 +158,59 @@ ActionType Input::GetUserAction() const
 			}
 
 			//  Icons After Colors
-			start = UI.MenuItemWidth * 13 + 5;
-			space = 1;
-			k = 1;
+			//start = UI.MenuItemWidth * 13 + 5;
+			//space = 1;
+			//k = 1;
 
-			if (x >= start && x <= start + UI.MenuItemWidth)
-				return FUNC_UNDO;
-			if (x >= start + UI.MenuItemWidth * k + k * space && x <= start + UI.MenuItemWidth * (k + 1) + space * k)
-				return FUNC_REDO;
-			k++;
-			if (x >= start + UI.MenuItemWidth * k + k * space && x <= start + UI.MenuItemWidth * (k + 1) + space * k)
-				return FUNC_START_REC;
-			k++;
-			if (x >= start + UI.MenuItemWidth * k + k * space && x <= start + UI.MenuItemWidth * (k + 1) + space * k)
-				return FUNC_PLAY_REC;
-			k++;
-			if (x >= start + UI.MenuItemWidth * k + k * space && x <= start + UI.MenuItemWidth * (k + 1) + space * k)
-				return FUNC_STOP_REC;
-			k++;
-			if (x >= start + UI.MenuItemWidth * k + k * space && x <= start + UI.MenuItemWidth * (k + 1) + space * k)
-				return FUNC_SAVE;
-			k++;
-			if (x >= start + UI.MenuItemWidth * k + k * space && x <= start + UI.MenuItemWidth * (k + 1) + space * k)
-				return FUNC_LOAD;
-			k++;
-			if (x >= start + UI.MenuItemWidth * k + k * space && x <= start + UI.MenuItemWidth * (k + 1) + space * k)
-				return ENTER_PLAY_MODE;
-			k++;
-			if (x >= start + UI.MenuItemWidth * k + k * space && x <= start + UI.MenuItemWidth * (k + 1) + space * k)
-				return FUNC_CLEAR_CANVAS;
-			k++;
-			if (x >= start + UI.MenuItemWidth * k + k * space && x <= start + UI.MenuItemWidth * (k + 1) + space * k)
-				return FUNC_EXIT;
-			k++;
+			//if (x >= start && x <= start + UI.MenuItemWidth)
+			//	return FUNC_UNDO;
+			//if (x >= start + UI.MenuItemWidth * k + k * space && x <= start + UI.MenuItemWidth * (k + 1) + space * k)
+			//	return FUNC_REDO;
+			//k++;
+			//if (x >= start + UI.MenuItemWidth * k + k * space && x <= start + UI.MenuItemWidth * (k + 1) + space * k)
+			//	return FUNC_START_REC;
+			//k++;
+			//if (x >= start + UI.MenuItemWidth * k + k * space && x <= start + UI.MenuItemWidth * (k + 1) + space * k)
+			//	return FUNC_PLAY_REC;
+			//k++;
+			//if (x >= start + UI.MenuItemWidth * k + k * space && x <= start + UI.MenuItemWidth * (k + 1) + space * k)
+			//	return FUNC_STOP_REC;
+			//k++;
+			//if (x >= start + UI.MenuItemWidth * k + k * space && x <= start + UI.MenuItemWidth * (k + 1) + space * k)
+			//	return FUNC_SAVE;
+			//k++;
+			//if (x >= start + UI.MenuItemWidth * k + k * space && x <= start + UI.MenuItemWidth * (k + 1) + space * k)
+			//	return FUNC_LOAD;
+			//k++;
+			//if (x >= start + UI.MenuItemWidth * k + k * space && x <= start + UI.MenuItemWidth * (k + 1) + space * k)
+			//	return ENTER_PLAY_MODE;
+			//k++;
+			//if (x >= start + UI.MenuItemWidth * k + k * space && x <= start + UI.MenuItemWidth * (k + 1) + space * k)
+			//	return FUNC_CLEAR_CANVAS;
+			//k++;
+			//if (x >= start + UI.MenuItemWidth * k + k * space && x <= start + UI.MenuItemWidth * (k + 1) + space * k)
+			//	return FUNC_EXIT;
+			//k++;
+
+			//return EMPTY;
+
+			int ClickedMouseAfterColors = ((x / UI.MenuItemWidth) + 4);
+			switch (ClickedMouseAfterColors)
+			{
+			case ITM_UNDO:  return FUNC_UNDO;
+			case ITM_REDO: return FUNC_REDO;
+		    case ITM_START_REC: return FUNC_START_REC;
+			case ITM_PLAY_REC: return FUNC_PLAY_REC;
+			case ITM_STOP_REC: return FUNC_STOP_REC;
+			case PLAY_MODE: return ENTER_PLAY_MODE;
+			case CLEAR_CANVAS: return FUNC_CLEAR_CANVAS;
+			case ITM_EXIT: return FUNC_EXIT;
+			case ITM_SAVE: return FUNC_SAVE;
+            case ITM_LOAD: return FUNC_LOAD;
+			}
 
 			return EMPTY;
+
 
 		}
 

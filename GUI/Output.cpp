@@ -223,9 +223,10 @@ void Output::ClearDrawArea() const
 }
 void Output::createIntro()
 {
-	pWind->DrawImage("images\\MenuItems\\PaintLogo.jpg", 0, 0, UI.width, UI.height);
+	pWind->DrawImage("images\\MenuItems\\PaintLogo.jpg", 0, 0, UI.width, UI.height-UI.StatusBarHeight);
 	PlaySound(".\\sounds\\Welcome Sound.wav", NULL, SND_SYNC | SND_FILENAME);
 
+	Sleep(100);
 }
 //////////////////////////////////////////////////////////////////////////////////////////
 
