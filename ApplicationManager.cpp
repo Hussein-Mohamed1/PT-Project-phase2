@@ -56,11 +56,11 @@ ApplicationManager::ApplicationManager()
 	{
 		FigList[i] = nullptr;
 		DeletedFigList[i] = nullptr;
-		ActListun[i] = nullptr;
-		ActListre[i] = nullptr;
-
+	
 	}
 	for (int i = 0; i < 5; i++) {
+		ActListun[i] = nullptr;
+		ActListre[i] = nullptr;
 		fill[i] = UI.BkGrndColor;
 		Pos[i] = { 100,100 };
 		brush[i] = UI.BkGrndColor;
