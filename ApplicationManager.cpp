@@ -26,13 +26,13 @@
 #include "Actions/playSound.h"
 #include "Actions/Action.h"
 #include "Actions/RedoAction.h"
+#include "CMUgraphicsLib/auxil.h"
+#include "to_drawmood.h"
+#include "StartandStopRec.h"
 int ApplicationManager::countrepos = 0;
 int ApplicationManager::countpos = 0;
 int ApplicationManager::countfill = 0;
 int ApplicationManager::countbrush = 0;
-#include "CMUgraphicsLib/auxil.h"
-#include "to_drawmood.h"
-#include "StartandStopRec.h"
 using namespace std;
 //class Action ;
 //Constructor
@@ -465,22 +465,17 @@ void ApplicationManager::ClearAll()
 }
 void ApplicationManager::addToUndo(Action* pAct)
 {
-	if (ActionCountun < 5 && ActionCountun >= 0)
-	{
-		ActListun[ActionCountun] = pAct;
+
+	if (ActionCountun > 4){
+
+		for (int j = 0; j < 4; j++)   //Overwriting Undoarr to make it always have the last five actions 
 		{
-			ActListun[ActionCountun] = pAct;
-
-
-			if (ActionCountun > 4)
-				for (int j = 0; j < 4; j++)   //Overwriting Undoarr to make it always have the last five actions 
-				{
-					ActListun[j] = ActListun[j + 1];
-				}
-			ActionCountun = 4;
+			ActListun[j] = ActListun[j + 1];
 		}
+	ActionCountun = 4;
+}
 		ActListun[ActionCountun++] = pAct;
-	}
+	
 }
 void ApplicationManager::addToRedo()
 {
@@ -502,6 +497,13 @@ Action* ApplicationManager::GetLastUndo()
 		return pLastAct;
 	}
 	return NULL;
+}
+CFigure* ApplicationManager::GetLastFigure()
+{
+		
+		
+		return FigList[FigCount-1];
+
 }
 Action* ApplicationManager::GetLastRedo()
 {
