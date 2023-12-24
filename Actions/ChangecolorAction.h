@@ -9,7 +9,7 @@ class ChangeColorAction :
     int counter;
     CFigure* f;
  
- 
+    static int num_of_fill;
 
 public:
     ChangeColorAction(ApplicationManager* pApp,bool CF=0);
