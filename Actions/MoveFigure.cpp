@@ -35,7 +35,6 @@ void moveFigure::ReadActionParameters() {
 }
 void moveFigure::Execute(bool b) {
 	cFigure = pManager->GetSelected_Figure();
-
 	if (!byDragging)
 	{
 		if (b)

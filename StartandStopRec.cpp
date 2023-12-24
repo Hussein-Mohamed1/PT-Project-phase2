@@ -14,7 +14,7 @@ void StartandStopRec::Execute(bool b)
 	{
 		ReadActionParameters();
 		pManager->GetOutput()->PrintMessage("recording is working...");
-		if (current_action > 23)
+		if (current_action > FUNC_STOP_REC)
 			pManager->GetOutput()->PrintMessage("can't recording this action choose anothor action");
 		else if (current_action == DRAWING_AREA || current_action == STATUS || current_action == EMPTY)
 			continue;
