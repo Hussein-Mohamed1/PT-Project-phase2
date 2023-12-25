@@ -27,7 +27,7 @@ void ChangeColorAction::ReadActionParameters()
 		pOut->PrintMessage("Choose  Color : ");
 		ActionType ActType;
 		
-		ActType = pIn->GetUserAction();
+		 ActType = pIn->GetUserAction();
 		switch (ActType)
 		{
 		case COLOR_BLACK:
@@ -102,6 +102,11 @@ void ChangeColorAction::Execute(bool b)
 
 
 	}
+}
+
+void ChangeColorAction::addundofirst(Action* pAct)
+{
+	pManager->addToUndo(this);
 }
 
 void ChangeColorAction::undo()

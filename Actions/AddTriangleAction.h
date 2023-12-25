@@ -15,7 +15,7 @@ public :
     AddTriangleAction(ApplicationManager* pApp);
 
     virtual void ReadActionParameters();
-
+    void addundofirst(Action* pAct);
    void Execute(bool b) ;
    void undo();
      void redo();
