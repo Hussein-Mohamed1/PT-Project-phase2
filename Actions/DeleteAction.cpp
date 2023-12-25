@@ -21,8 +21,8 @@ void DeleteAction::Execute(bool b)
 		pOut->PrintMessage("NO SELECTED ");
 	else
 	{
-		
-		deletedFigure = pManager->DeleteFigure();
+		pManager->DeleteFunction();
+		//deletedFigure = pManager->DeleteFigure();
 	}
 
 
