@@ -11,7 +11,6 @@ DeleteAction::DeleteAction(ApplicationManager* pApp) :Action(pApp)
 void DeleteAction::ReadActionParameters()
 {
 
-
 }
 void DeleteAction::Execute(bool b)
 {
@@ -38,4 +37,8 @@ void DeleteAction::undo()
 void DeleteAction::redo()
 {
 	deletedFigure = pManager->DeleteFigure();
+}
+
+void DeleteAction::addundofirst(Action* pAct)
+{
 }

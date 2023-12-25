@@ -13,7 +13,7 @@ public:
 	void ReadActionParameters();
 	bool move();
 	void moveByDragging();
-
+void addundofirst(Action* pAct);
 	void Execute(bool b);
 	 void undo();
 	 void redo();

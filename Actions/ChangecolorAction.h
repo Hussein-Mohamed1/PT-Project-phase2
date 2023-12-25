@@ -17,7 +17,7 @@ public:
     virtual void ReadActionParameters();
   static  int if_exist_file();
     void Execute(bool b);
-
+  void addundofirst(Action* pAct);
     void undo();
      void redo();
 };

@@ -16,7 +16,7 @@ public :
 
 	virtual void ReadActionParameters();
 	 void Execute(bool b);
-
+	 void addundofirst(Action* pAct);
 	 void undo();
 	void redo();
 	Point  GetP1();

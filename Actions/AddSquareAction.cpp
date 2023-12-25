@@ -55,6 +55,11 @@
 
  }
 
+ void AddSquareAction::addundofirst(Action* pAct)
+ {
+	 pManager->addToUndo(this);
+ }
+
  void AddSquareAction::undo()
  {
 	 DeletedFig = pManager->DeleteFigure();

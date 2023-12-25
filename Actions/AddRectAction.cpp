@@ -55,6 +55,11 @@ void AddRectAction::ReadActionParameters()
 
 }
 
+void AddRectAction::addundofirst(Action* pAct)
+{
+	pManager->addToUndo(this);
+}
+
 //Execute the action
 void AddRectAction::Execute(bool b) 
 {

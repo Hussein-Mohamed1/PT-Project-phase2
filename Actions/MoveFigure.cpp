@@ -54,6 +54,7 @@ void moveFigure::Execute(bool b) {
 	}
 	else moveByDragging();
 }
+
 bool moveFigure::move() {
 	if (!byDragging)
 	{
@@ -175,6 +176,11 @@ void moveFigure::moveByDragging() {
 		}
 
 	pManager->addPoint(newPos);
+}
+
+void moveFigure::addundofirst(Action* pAct)
+{
+	pManager->addToUndo(this);
 }
 
 

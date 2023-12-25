@@ -65,7 +65,7 @@ ApplicationManager::ApplicationManager() : ActionCountre(0), ActionCountun(0)
 	for (int i = 0; i < 20; i++)
 	{
 		arr_recActions[i] = nullptr;
-	}
+	}	
 	for (int i = 0; i < 5; i++) {
 		ActListun[i] = nullptr;
 		ActListre[i] = nullptr;
@@ -99,28 +99,28 @@ void ApplicationManager::ExecuteAction(ActionType ActType, int numofrec)
 
 	case DRAW_RECT:
 		pAct = new AddRectAction(this);
-		addToUndo(pAct);
+	//	addToUndo(pAct);
 		break;
 
 	case DRAW_CIRC:
 
 		pAct = new AddcircleAction(this);
-		addToUndo(pAct);
+	//	addToUndo(pAct);
 		break;
 
 	case DRAW_TRIA:
 		pAct = new AddTriangleAction(this);
-		addToUndo(pAct);
+		//addToUndo(pAct);
 		break;
 
 	case DRAW_SQUA:
 		pAct = new AddSquareAction(this);
-		addToUndo(pAct);
+	//	addToUndo(pAct);
 		break;
 
 	case DRAW_HEXA:
 		pAct = new AddHexaAction(this);
-		addToUndo(pAct);
+	//	addToUndo(pAct);
 		break;
 	case FUNC_SELECT:
 		pAct = new SelectAction(this);
@@ -156,7 +156,7 @@ void ApplicationManager::ExecuteAction(ActionType ActType, int numofrec)
 		break;
 	case FUNC_DELETE:
 		pAct = new DeleteAction(this);
-		addToUndo(pAct);
+		//addToUndo(pAct);
 		break;
 	case ENTER_DRAW_MODE:
 		pAct = new to_drawmood(this);
@@ -239,9 +239,13 @@ void ApplicationManager::ExecuteAction(ActionType ActType, int numofrec)
 		pIn->FlushMouseQueue();
 		//addToUndo(pAct);
 		//addToRedo();
+
+		
+
 		pAct->Execute(1); //Execute
 		//ActList[ActionCount++] = pAct;
 
+       pAct->addundofirst(pAct);
 		pAct = NULL;
 	}
 }
@@ -301,11 +305,11 @@ void ApplicationManager::Playrecord()
 		{
 			counter++;
 			if (arr_recActions[i] == nullptr) break;
-
-			//if(!(dynamic_cast<UndoAction*>(arr_recActions[i])&& dynamic_cast<SelectAction*>(arr_recActions[i])))
-			addToUndo(arr_recActions[i]);
-
-
+	
+			
+			arr_recActions[i]->addundofirst(arr_recActions[i]);
+			
+		
 
 			arr_recActions[i]->Execute(0);
 
@@ -331,6 +335,7 @@ void ApplicationManager::RemoveFigure(CFigure* pFig)
 
 CFigure* ApplicationManager::DeleteFigure()
 {
+
 	CFigure* deletedfigure;
 	if (FigCount >= 1)
 	{
@@ -340,6 +345,7 @@ CFigure* ApplicationManager::DeleteFigure()
 		FigCount--;
 		return deletedfigure;
 	}
+
 	else
 		return nullptr;
 }
@@ -583,6 +589,8 @@ Point ApplicationManager::getpoint(int index)
 {
 	return Pos[index];
 }
+
+
 
 void ApplicationManager::addColor(color c)
 {

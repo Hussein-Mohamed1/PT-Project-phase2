@@ -43,6 +43,10 @@ void AddTriangleAction::ReadActionParameters()
 
 
 }
+void AddTriangleAction::addundofirst(Action* pAct)
+{
+	pManager->addToUndo(this);
+}
 void AddTriangleAction::Execute(bool b)  
 {
 	if (b)
