@@ -65,7 +65,7 @@ ApplicationManager::ApplicationManager() : ActionCountre(0), ActionCountun(0)
 	for (int i = 0; i < 20; i++)
 	{
 		arr_recActions[i] = nullptr;
-	}	
+	}
 	for (int i = 0; i < 5; i++) {
 		ActListun[i] = nullptr;
 		ActListre[i] = nullptr;
@@ -99,13 +99,13 @@ void ApplicationManager::ExecuteAction(ActionType ActType, int numofrec)
 
 	case DRAW_RECT:
 		pAct = new AddRectAction(this);
-	//	addToUndo(pAct);
+		//	addToUndo(pAct);
 		break;
 
 	case DRAW_CIRC:
 
 		pAct = new AddcircleAction(this);
-	//	addToUndo(pAct);
+		//	addToUndo(pAct);
 		break;
 
 	case DRAW_TRIA:
@@ -115,12 +115,12 @@ void ApplicationManager::ExecuteAction(ActionType ActType, int numofrec)
 
 	case DRAW_SQUA:
 		pAct = new AddSquareAction(this);
-	//	addToUndo(pAct);
+		//	addToUndo(pAct);
 		break;
 
 	case DRAW_HEXA:
 		pAct = new AddHexaAction(this);
-	//	addToUndo(pAct);
+		//	addToUndo(pAct);
 		break;
 	case FUNC_SELECT:
 		pAct = new SelectAction(this);
@@ -222,7 +222,7 @@ void ApplicationManager::ExecuteAction(ActionType ActType, int numofrec)
 	case STATUS:	//a click on the status bar ==> no action
 		return;
 	case DRAWING_AREA:
-		if (Selected_Figure != nullptr && Selected_Figure->checkselection(iX, iY)) //a figure must be selected to call a "move by dragging" activity
+		if (Selected_Figure != nullptr) //a figure must be selected to call a "move by dragging" activity
 			pAct = new moveFigure(this, 1);
 		break;
 	}
@@ -237,15 +237,8 @@ void ApplicationManager::ExecuteAction(ActionType ActType, int numofrec)
 	else if (pAct != NULL)
 	{
 		pIn->FlushMouseQueue();
-		//addToUndo(pAct);
-		//addToRedo();
-
-		
-
 		pAct->Execute(1); //Execute
-		//ActList[ActionCount++] = pAct;
-
-       pAct->addundofirst(pAct);
+		pAct->addundofirst(pAct);
 		pAct = NULL;
 	}
 
@@ -306,11 +299,11 @@ void ApplicationManager::Playrecord()
 		{
 			counter++;
 			if (arr_recActions[i] == nullptr) break;
-	
-			
+
+
 			arr_recActions[i]->addundofirst(arr_recActions[i]);
-			
-		
+
+
 
 			arr_recActions[i]->Execute(0);
 
@@ -559,7 +552,7 @@ void ApplicationManager::addToRedo()
 
 Action* ApplicationManager::GetLastUndo()
 {
-	if (ActionCountun >= 1)
+	if (ActionCountun >= 1 && ActionCountun <= 5)
 	{
 		pLastAct = ActListun[ActionCountun - 1];
 		ActListun[ActionCountun - 1] = NULL;
