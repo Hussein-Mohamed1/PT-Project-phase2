@@ -74,7 +74,7 @@ void ChangeColorAction::addcolor(bool notaReverseAction)
 	if (pManager->GetSelected_Figure() == NULL)
 
 		pOut->PrintMessage("NO SELECTED ");
-	else if (ChoosenColor == WHITE)
+	else if (ChoosenColor == UI.BkGrndColor)
 		pOut->PrintMessage("NO SELECTED COLOR  ");
 
 	else

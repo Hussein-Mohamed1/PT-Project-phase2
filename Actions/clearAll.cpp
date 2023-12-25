@@ -15,10 +15,15 @@ void clearAll::ReadActionParameters()
 
 void clearAll::Execute(bool b)
 {
+
 	pManager->ClearAll();
 
 	pManager->clearUndoRedoFuncs();
+
 	Output* pOut = pManager->GetOutput();
+
+	CFigure::ResetID();
+	
 
 	pOut->PrintMessage("Everything is cleared");
 

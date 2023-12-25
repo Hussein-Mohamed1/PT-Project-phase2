@@ -40,8 +40,11 @@ void moveFigure::Execute(bool b) {
 	{
 		if (b)
 		{
-			ReadActionParameters();
-			move();
+			if (cFigure != nullptr)
+			{
+				ReadActionParameters();
+				move();
+			}
 		}
 	}
 	else moveByDragging();

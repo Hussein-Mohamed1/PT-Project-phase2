@@ -150,7 +150,7 @@ void Output::CreateDrawToolBar() const
 			int k = 0;
 			for (int j = 11; j < 14; j++)
 			{
-				pWind->DrawImage(MenuItemImages[j], ((j)*UI.MenuItemWidth - k * 22), 1, UI.MenuItemWidth - 30, UI.ToolBarHeight - 30);
+				pWind->DrawImage(MenuItemImages[j], ((j)*UI.MenuItemWidth - k * 22), 1, UI.MiniColorWidth, UI.MiniColorHeight);
 				k++;
 				i = j;
 			}
