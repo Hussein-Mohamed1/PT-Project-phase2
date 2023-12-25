@@ -43,6 +43,7 @@ public:
 	virtual void PrintInfo(Output* pOut) =0;
 	virtual color get_fillcolor();
 	 static void IsAllNewFilled(bool s=false);
+	 static void ResetID();
 
 	
 		//Save the figure parameters to the file

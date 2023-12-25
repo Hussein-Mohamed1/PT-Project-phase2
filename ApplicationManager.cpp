@@ -394,8 +394,9 @@ void ApplicationManager::setSelectedFigure(CFigure* const sf)
 void ApplicationManager::UpdateInterface()
 {
 	pOut->ClearDrawArea();
+
 	for (int i = 0; i < FigCount; i++)
-		if (FigList[i] != NULL)
+		if (FigList[i] != nullptr)
 		{
 			FigList[i]->Draw(pOut);
 		}          //Call Draw function (virtual member fn)
@@ -483,54 +484,56 @@ void ApplicationManager::ClearAll()
 
 	for (int i = 0; i < FigCount; i++)
 	{
+
 		if (FigList[i] != nullptr)
 		{
+		
 			delete FigList[i];
 			FigList[i] = nullptr;
 
 		}
 		if (DeletedFigList[i] != nullptr)
 		{
-			delete DeletedFigList[i];
+		    delete DeletedFigList[i];
 			DeletedFigList[i] = nullptr;
 
-		}
-		if (Selected_Figure != nullptr)
-		{
-			delete Selected_Figure;
-			Selected_Figure = nullptr;
 		}
 
 	}
 
+   
 
-	UpdateInterface();
+	//UpdateInterface();
+
+
 	FigCount = 0;
+	DeletedFigCount = 0;
+	pLastAct = nullptr;
+	DeletedFig = nullptr;
+	Selected_Figure = nullptr;
 
-	pOut->ClearDrawArea();
+	UI.DrawColor = BLUE;
+	CFigure::IsAllNewFilled(false);
+
+	//pOut->ClearDrawArea();
 
 }
 void ApplicationManager::clearUndoRedoFuncs()
 {
-
-	for (int i = 0; i < ActionCountun; i++)
-	{
-		if (ActListun[i] != nullptr)
+	
+		for (int i = 0; i < ActionCountun; i++)
 		{
-			delete ActListun[i];
-			ActListun[i] = nullptr;
+				ActListun[i] = nullptr;
 		}
-	}
+
 	for (int i = 0; i < ActionCountre; i++)
 	{
-		if (ActListre[i] != nullptr)
-		{
-			delete ActListre[i];
 			ActListre[i] = nullptr;
-		}
 	}
+
 	ActionCountun = 0;
 	ActionCountre = 0;
+
 }
 void ApplicationManager::addToUndo(Action* pAct)
 {
@@ -616,6 +619,7 @@ ApplicationManager::~ApplicationManager()
 
 	clearUndoRedoFuncs();
 
+	//  arr_recActions      remeber : must be deleted         
 
 	delete pIn;
 	delete pOut;
