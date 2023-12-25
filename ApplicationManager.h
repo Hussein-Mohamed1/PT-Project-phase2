@@ -18,8 +18,8 @@ private:
 	Action* arr_recActions[20];
 	Action* ActListun[maxActionCount];       //actual array of actions
 	Action* ActListre[maxActionCount];
-	int ActionCountun = 0;
-	int ActionCountre = 0;
+	int ActionCountun;
+	int ActionCountre;
 	int FigCount;		//Actual number of figures
 	int DeletedFigCount;
 
@@ -51,8 +51,8 @@ public:
 	// -- Action-Related Functions
 	//Reads the input command from the user and returns the corresponding action type
 	ActionType GetUserAction() const;
-	void ExecuteAction(ActionType , int numofrec=-1 ) ; //Creates an action and executes it
-	void addfillcolor(color c,int i);
+	void ExecuteAction(ActionType, int numofrec = -1); //Creates an action and executes it
+	void addfillcolor(color c, int i);
 	void addbrushcolor(color c);
 	// -- Figures Management Functions
 	void Playrecord();

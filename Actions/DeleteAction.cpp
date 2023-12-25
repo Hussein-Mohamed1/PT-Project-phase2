@@ -4,7 +4,7 @@
 #include "..\ApplicationManager.h"
 
 
-DeleteAction::DeleteAction(ApplicationManager* pApp):Action(pApp)
+DeleteAction::DeleteAction(ApplicationManager* pApp) :Action(pApp)
 {
 	deletedFigure = nullptr;
 }
@@ -22,8 +22,8 @@ void DeleteAction::Execute(bool b)
 		pOut->PrintMessage("NO SELECTED ");
 	else
 	{
-		
-		deletedFigure = pManager->DeleteFigure();
+		deletedFigure = pManager->GetSelected_Figure();
+		pManager->DeleteFunction();
 	}
 
 
@@ -32,9 +32,10 @@ void DeleteAction::Execute(bool b)
 void DeleteAction::undo()
 {
 	pManager->AddFigure(deletedFigure);
-	
+
 }
 
 void DeleteAction::redo()
-{ deletedFigure = pManager->DeleteFigure();
+{
+	deletedFigure = pManager->DeleteFigure();
 }

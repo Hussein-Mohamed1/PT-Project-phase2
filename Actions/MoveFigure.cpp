@@ -15,14 +15,14 @@ moveFigure::moveFigure(ApplicationManager* pApp, bool byDragging) :Action(pApp),
 void moveFigure::ReadActionParameters() {
 	Output* pOut = pManager->GetOutput();
 	Input* pIn = pManager->GetInput();
-//	CFigure pfig=
+	//	CFigure pfig=
 	cFigure = pManager->GetSelected_Figure();
 
 
 	/***/
 
-	if (ApplicationManager::countpos==0)
-	pManager->addPoint(cFigure->GetP1());
+	if (ApplicationManager::countpos == 0 && cFigure != nullptr)
+		pManager->addPoint(cFigure->GetP1());
 	/***/
 	if (cFigure != nullptr)
 	{
@@ -57,9 +57,9 @@ void moveFigure::Execute(bool b) {
 bool moveFigure::move() {
 	if (!byDragging)
 	{
-        if (cFigure != nullptr) {
+		if (cFigure != nullptr) {
 			pManager->addPoint(cFigure->GetP1());
-		 }
+		}
 		/**/
 	}
 	pManager->set_figure(cFigure);
@@ -141,10 +141,10 @@ bool moveFigure::move() {
 	//if (ApplicationManager::countpos==0)
 		//ApplicationManager::countpos++;
 	/*******************/
-		pManager->addPoint(cFigure->GetP1());
+	pManager->addPoint(cFigure->GetP1());
 	/*********************/
-	
-		cout << pManager->getpoint(ApplicationManager::countpos ) << " " << ApplicationManager::countpos  << " " << endl;
+
+	cout << pManager->getpoint(ApplicationManager::countpos) << " " << ApplicationManager::countpos << " " << endl;
 	//}
 	//notf = true;
 
@@ -182,18 +182,18 @@ void moveFigure::moveByDragging() {
 void moveFigure::undo()
 {
 	cFigure->move(pManager->getpoint(ApplicationManager::countpos - 1));
-    cout << pManager->getpoint(ApplicationManager::countpos - 1) << " " << ApplicationManager::countpos - 1 << " "<<endl;
+	cout << pManager->getpoint(ApplicationManager::countpos - 1) << " " << ApplicationManager::countpos - 1 << " " << endl;
 	ApplicationManager::countpos--;
 	ApplicationManager::countrepos++;
 
-	
+
 }
 
 void moveFigure::redo()
 {
-	
+
 	cFigure->move(pManager->getpoint(ApplicationManager::countpos + 1));
-	cout << pManager->getpoint(ApplicationManager::countpos + 1) << " "<<ApplicationManager::countpos + 1<<" "<<endl;
+	cout << pManager->getpoint(ApplicationManager::countpos + 1) << " " << ApplicationManager::countpos + 1 << " " << endl;
 	//ApplicationManager::countpos++;
 	ApplicationManager::countrepos--;
 	if (ApplicationManager::countrepos == 0) cFigure->move(lastPoint);

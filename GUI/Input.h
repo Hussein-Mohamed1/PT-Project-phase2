@@ -18,7 +18,7 @@ public:
 	string GetString(Output* pO) const;	 //Returns a string entered by the user
 	buttonstate GetButtonState(const button btMouse, int& iX, int& iY);
 	void FlushMouseQueue();
-	ActionType GetUserAction(int& iX, int& iY) const; //Read the user click and map to an action
+	ActionType GetUserAction() const; //Read the user click and map to an action
 
 	~Input();
 };
