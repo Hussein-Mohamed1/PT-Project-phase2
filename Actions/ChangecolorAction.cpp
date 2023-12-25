@@ -18,12 +18,9 @@ int ChangeColorAction::if_exist_file()
 }
 void ChangeColorAction::ReadActionParameters()
 {
-
 	Output* pOut = pManager->GetOutput();
 	Input* pIn = pManager->GetInput();
 	f = pManager->GetSelected_Figure();
-
-
 		pOut->PrintMessage("Choose  Color : ");
 		ActionType ActType;
 		
@@ -55,18 +52,24 @@ void ChangeColorAction::ReadActionParameters()
 
 }
 void ChangeColorAction::Execute(bool b)
+{         if (b)
+		ReadActionParameters();
+	    addcolor();
+}
+
+
+void ChangeColorAction::addcolor(bool notaReverseAction)
 {
+	if (  notaReverseAction == true) {
+		lastcolor =(ChoosenColor);
+	}
+	
 	Output* pOut = pManager->GetOutput();
-		
-		if (b)
-	     ReadActionParameters();
 
-		f = pManager->GetSelected_Figure();
-		
 
-	//	pManager->AddDeletedFig(pManager->GetSelected_Figure());
 
-	//	pManager->CopyDeletedFigToFiglist();
+	f = pManager->GetSelected_Figure();
+
 
 	if (pManager->GetSelected_Figure() == NULL)
 
@@ -80,15 +83,14 @@ void ChangeColorAction::Execute(bool b)
 
 		if (ChangeFill)
 		{
-			
+
 			CFigure::IsAllNewFilled(true);
 			pOut->SetFillColor(ChoosenColor);
-	      
-			pManager->addfillcolor(ChoosenColor, countfill); 
+			pManager->addfillcolor(ChoosenColor, countfill);
 			countfill++;
-		    num_of_fill++;
+			num_of_fill++;
 			f->ChngFillClr(ChoosenColor);
-		
+
 		}
 
 		else
@@ -98,9 +100,6 @@ void ChangeColorAction::Execute(bool b)
 			pOut->SetDraColor(ChoosenColor);
 			pManager->addbrushcolor(ChoosenColor);
 		}
-
-
-
 	}
 }
 
@@ -109,12 +108,31 @@ void ChangeColorAction::addundofirst(Action* pAct)
 	pManager->addToUndo(this);
 }
 
+
 void ChangeColorAction::undo()
+{
+	swap(lastcolor, ChoosenColor);
+	addcolor(false);
+}
+
+void ChangeColorAction::redo()
+{
+	swap(lastcolor, ChoosenColor);
+	addcolor(false);
+}
+
+
+
+
+
+
+
+/*void ChangeColorAction::undo()
 
 {
-	
-	
-				if (countfill <= 1)
+
+
+	if (countfill <= 1)
 	{
 
 
@@ -124,15 +142,15 @@ void ChangeColorAction::undo()
 	else
 
 		if (ChangeFill)
-	{
-				countfill--;
-		f->ChngFillClr(pManager->get_indx_fillcolor(countfill - 1));	
-	
-	}
-	else {
-		ApplicationManager::countbrush--;
-		f->ChngDrawClr(pManager->get_indx_brushcolor(ApplicationManager::countbrush));
-	}
+		{
+			countfill--;
+			f->ChngFillClr(pManager->get_indx_fillcolor(countfill - 1));
+
+		}
+		else {
+			ApplicationManager::countbrush--;
+			f->ChngDrawClr(pManager->get_indx_brushcolor(ApplicationManager::countbrush));
+		}
 }
 
 
@@ -140,15 +158,12 @@ void ChangeColorAction::redo()
 {
 	if (ChangeFill)
 	{
-     
+
 		countfill = 0;
 		f->ChngFillClr(pManager->get_indx_fillcolor(countfill + 1)); countfill++;
 	}
 	else {
 		ApplicationManager::countbrush++;
 		f->ChngDrawClr(pManager->get_indx_brushcolor(ApplicationManager::countbrush));
-
-
 	}
-}
-
+}*/
