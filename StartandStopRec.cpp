@@ -13,6 +13,7 @@ void StartandStopRec::Execute(bool b)
 	while (!stop_rec || numofaction>20)
 	{
 		ReadActionParameters();
+
 		pManager->GetOutput()->PrintMessage("recording is working...");
 		if (current_action > FUNC_STOP_REC)
 			pManager->GetOutput()->PrintMessage("can't recording this action choose anothor action");

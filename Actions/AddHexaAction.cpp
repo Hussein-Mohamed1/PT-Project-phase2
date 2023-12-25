@@ -45,7 +45,7 @@ void AddHexaAction::Execute(bool b)
 	ReadActionParameters();
 	/// create New Hexa
 
-	CHexa* H = new CHexa(P1, HexaGfxInfo);
+	 H = new CHexa(P1, HexaGfxInfo);
 	// Add Hexa to Fig List
 
 	pManager->AddFigure(H);

@@ -10,13 +10,12 @@ playrecord::playrecord(ApplicationManager* pApp) :Action(pApp)
 
 void playrecord::ReadActionParameters()
 {
-	Output* pOut = pManager->GetOutput();
-	Input* pIn = pManager->GetInput();
-
+	
 }	
 
 void playrecord::Execute(bool b)
 { pManager->Playrecord();
+
 }
 
 void playrecord::undo()

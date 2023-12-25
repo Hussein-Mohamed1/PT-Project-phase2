@@ -47,7 +47,7 @@
 
 	 // Make a new square 
 
-	 CSquare* s = new CSquare(P1, P2, SquareGfxInfo);
+ s = new CSquare(P1, P2, SquareGfxInfo);
 
 	 // Add Square to figure list 
 	  

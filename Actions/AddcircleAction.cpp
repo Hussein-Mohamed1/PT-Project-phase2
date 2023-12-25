@@ -60,7 +60,7 @@ int AddcircleAction::getnumofshapes()
 	  //Create a circle with the parameters read from the user
 	  
 		//Create a rectangle with the parameters read from the user
-	  CCircle* c = new CCircle(P1,P2, CircleGfxInfo);
+	  c = new CCircle(P1,P2, CircleGfxInfo);
 
 	  //Add the rectangle to the list of figures
 	  pManager->AddFigure(c);

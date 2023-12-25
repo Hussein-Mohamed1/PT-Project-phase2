@@ -29,9 +29,10 @@
 #include "CMUgraphicsLib/auxil.h"
 #include "to_drawmood.h"
 #include "StartandStopRec.h"
-int ApplicationManager::countrepos = 0;
+#include "Figures/CFigure.h"
 int ApplicationManager::countpos = 0;
-int ApplicationManager::countfill = 0;
+//int ApplicationManager::countfill = 0;
+int ApplicationManager::countrepos = 0;
 int ApplicationManager::countbrush = 0;
 using namespace std;
 //class Action ;
@@ -228,7 +229,7 @@ void ApplicationManager::ExecuteAction(ActionType ActType, int numofrec)
 	if (numofrec != -1)
 	{
 		arr_recActions[numofrec] = pAct;
-		pAct->Execute();
+		pAct->Execute(1);
 		pAct = NULL;
 	}
 	else if (pAct != NULL)
@@ -236,18 +237,18 @@ void ApplicationManager::ExecuteAction(ActionType ActType, int numofrec)
 		pIn->FlushMouseQueue();
 		//addToUndo(pAct);
 		//addToRedo();
-		pAct->Execute(); //Execute
+		pAct->Execute(1); //Execute
 		//ActList[ActionCount++] = pAct;
 
 		pAct = NULL;
 	}
 }
 
-void ApplicationManager::addfillcolor(color c)
+void ApplicationManager::addfillcolor(color c,int i)
 {
 
-	fill[countfill] = c;
-	countfill++;
+	fill[i] = c;
+	
 }
 
 void ApplicationManager::addbrushcolor(color c)
@@ -291,14 +292,22 @@ void ApplicationManager::Playrecord()
 {
 	if (arr_recActions[0] != NULL)
 	{
+		
 		ClearAll();
 		Sleep(1000);
 		for (int i = 0; i < 20; i++)
 		{
+			counter++;
 			if (arr_recActions[i] == nullptr) break;
+	
+			//if(!(dynamic_cast<UndoAction*>(arr_recActions[i])&& dynamic_cast<SelectAction*>(arr_recActions[i])))
 			addToUndo(arr_recActions[i]);
+		
+		
 
-			arr_recActions[i]->Execute(0);
+				arr_recActions[i]->Execute(0);
+			
+			
 			UpdateInterface();
 
 			Sleep(1000);
@@ -323,11 +332,11 @@ CFigure* ApplicationManager::DeleteFigure()
 	CFigure* deletedfigure;
 	if (FigCount >= 1)
 	{
-		DeletedFig = FigList[FigCount - 1];
+		deletedfigure = FigList[FigCount - 1];
 		FigList[FigCount - 1] = nullptr;
 		delete FigList[FigCount - 1];
 		FigCount--;
-		return DeletedFig;
+		return deletedfigure;
 	}
 	else
 		return nullptr;
@@ -474,18 +483,13 @@ void ApplicationManager::ClearAll()
 		delete DeletedFigList[i];
 		DeletedFigList[i] = nullptr;
 	}
-	/*for (int i = 0; i <20; i++)
-	{
-
-		arr_recActions[i] = NULL;
-		delete arr_recActions[i];
-	}*/
+	
 	UpdateInterface();
 	FigCount = 0;
-	ActionCountun = 0;
-	ActionCountre = 0;
+	
 	pOut->ClearDrawArea();
-	//cFigure->id = 0;
+	//CFigure:: ID = 0;
+	
 }
 void ApplicationManager::clear()
 {
@@ -500,10 +504,19 @@ void ApplicationManager::clear()
 		delete ActListre[i];
 		ActListre[i] = nullptr;
 	}
+	for (int i = 0; i <20; i++)
+	{
+
+		arr_recActions[i] = NULL;
+		delete arr_recActions[i];
+	}
+	ActionCountun = 0;
+	ActionCountre = 0;
 }
 void ApplicationManager::addToUndo(Action* pAct)
 {
-
+	
+	ActListun[0] = NULL;delete ActListun[0];
 	if (ActionCountun > 4) {
 
 		for (int j = 0; j < 4; j++)   //Overwriting Undoarr to make it always have the last five actions 
@@ -545,6 +558,7 @@ CFigure* ApplicationManager::GetLastFigure()
 }
 Action* ApplicationManager::GetLastRedo()
 {
+
 	if (ActionCountre >= 1)
 	{
 		pLastAct = ActListre[ActionCountre - 1];
@@ -556,10 +570,9 @@ Action* ApplicationManager::GetLastRedo()
 	return NULL;
 }
 void ApplicationManager::addPoint(Point p)
-{
-	Pos[countpos] = p;
-	countpos++;
-
+{	 
+	Pos[countpos++] = p;
+	cout << p;
 }
 
 Point ApplicationManager::getpoint(int index)

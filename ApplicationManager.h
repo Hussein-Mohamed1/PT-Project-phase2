@@ -31,7 +31,7 @@ private:
 	CFigure* DeletedFig;
 
 	CFigure* Selected_Figure;
-
+	int counter = 0;
 	CFigure* DeletedFigList[MaxFigCount];
 
 	//Pointers to Input and Output classes
@@ -40,7 +40,7 @@ private:
 public:	
 	static int countpos;
 	static int countrepos;
-	static int countfill;
+	//static int countfill;
 	static int countbrush;
 	ApplicationManager(); 
 	~ApplicationManager();
@@ -50,7 +50,7 @@ public:
 	//Reads the input command from the user and returns the corresponding action type
 	ActionType GetUserAction() const;
 	void ExecuteAction(ActionType , int numofrec=-1 ) ; //Creates an action and executes it
-	void addfillcolor(color c);
+	void addfillcolor(color c,int i);
 	void addbrushcolor(color c);
 	// -- Figures Management Functions
 	void Playrecord();

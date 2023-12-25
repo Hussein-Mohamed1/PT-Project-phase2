@@ -1,6 +1,8 @@
 #pragma once
 #include "Action.h"
 #include "..\DefS.h"
+#include "..\Figures\CSquare.h"
+
 class AddSquareAction : public Action
 {
 private:
@@ -8,6 +10,7 @@ private:
 	GfxInfo SquareGfxInfo;
 	CFigure* DeletedFig;
 	static int numofshapes;
+	CSquare* s;
 public :
 	AddSquareAction(ApplicationManager* pApp);
 

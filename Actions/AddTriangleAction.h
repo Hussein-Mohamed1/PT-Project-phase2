@@ -1,5 +1,7 @@
 #pragma once
 #include "Action.h"
+#include"..\Figures\CTriangle.h"
+
 class AddTriangleAction :
     public Action
 {
@@ -8,6 +10,7 @@ private :
     GfxInfo TriangleGfxInfo;
     CFigure* DeletedFig;
     static int numofshapes;
+    CTriangle* T;
 public :
     AddTriangleAction(ApplicationManager* pApp);
 

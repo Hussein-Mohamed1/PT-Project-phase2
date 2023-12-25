@@ -16,9 +16,12 @@ void clearAll::ReadActionParameters()
 void clearAll::Execute(bool b)
 {
 	pManager->ClearAll();
+
+	pManager->clear();
 	Output* pOut = pManager->GetOutput();
 
 	pOut->PrintMessage("Everything is cleared");
+
 }
 
 void clearAll::undo()

@@ -8,13 +8,22 @@
 #include "../Figures/CSquare.h"
 #include "../Figures/CRectangle.h"
 
-moveFigure::moveFigure(ApplicationManager* pApp, bool byDragging) :Action(pApp), newPos{ -1,-1 }, byDragging(byDragging), cFigure(nullptr) {};
+moveFigure::moveFigure(ApplicationManager* pApp, bool byDragging) :Action(pApp), newPos{ -1,-1 }, byDragging(byDragging), cFigure(nullptr) {
+
+};
 
 void moveFigure::ReadActionParameters() {
 	Output* pOut = pManager->GetOutput();
 	Input* pIn = pManager->GetInput();
+//	CFigure pfig=
 	cFigure = pManager->GetSelected_Figure();
 
+
+	/***/
+
+	if (ApplicationManager::countpos==0)
+	pManager->addPoint(cFigure->GetP1());
+	/***/
 	if (cFigure != nullptr)
 	{
 
@@ -46,10 +55,10 @@ void moveFigure::Execute(bool b) {
 bool moveFigure::move() {
 	if (!byDragging)
 	{
-
-		if (cFigure != nullptr) {
+        if (cFigure != nullptr) {
 			pManager->addPoint(cFigure->GetP1());
-		}
+		 }
+		/**/
 	}
 	pManager->set_figure(cFigure);
 	if ((newPos.x <= UI.width - 5 && newPos.x > 0) && (newPos.y < UI.height - UI.StatusBarHeight - 5) && (newPos.y > UI.ToolBarHeight + 5)) {
@@ -123,14 +132,19 @@ bool moveFigure::move() {
 
 		pManager->UpdateInterface();
 	}
-	lastPoint = newPos;
+	//lastPoint = newPos;
 	//add the center
-	bool notf = false;
-	if (notf) {
-
-		pManager->addPoint(pManager->GetSelected_Figure()->GetP1());
-	}
-	notf = true;
+//	bool notf = false;
+//	if (notf) {
+	//if (ApplicationManager::countpos==0)
+		//ApplicationManager::countpos++;
+	/*******************/
+		pManager->addPoint(cFigure->GetP1());
+	/*********************/
+	
+		cout << pManager->getpoint(ApplicationManager::countpos ) << " " << ApplicationManager::countpos  << " " << endl;
+	//}
+	//notf = true;
 
 }
 
@@ -164,26 +178,22 @@ void moveFigure::moveByDragging() {
 
 void moveFigure::undo()
 {
-	pManager->GetLastFigure()->move(pManager->getpoint(ApplicationManager::countpos - 1));
-
+	cFigure->move(pManager->getpoint(ApplicationManager::countpos - 1));
+    cout << pManager->getpoint(ApplicationManager::countpos - 1) << " " << ApplicationManager::countpos - 1 << " "<<endl;
 	ApplicationManager::countpos--;
 	ApplicationManager::countrepos++;
 
-
+	
 }
 
 void moveFigure::redo()
 {
-	//if (ApplicationManager::countrepos==1) pManager->GetSelected_Figure()->move(pManager->getpoint(ApplicationManager::countpos));
-
-	//else 
-	//cout << ApplicationManager::countpos + 1 << " " << pManager->getpoint(ApplicationManager::countpos + 1) << endl;
-	pManager->GetLastFigure()->move(pManager->getpoint(ApplicationManager::countpos + 1));
-
-	ApplicationManager::countpos++;
-
+	
+	cFigure->move(pManager->getpoint(ApplicationManager::countpos + 1));
+	cout << pManager->getpoint(ApplicationManager::countpos + 1) << " "<<ApplicationManager::countpos + 1<<" "<<endl;
+	//ApplicationManager::countpos++;
 	ApplicationManager::countrepos--;
-	if (ApplicationManager::countrepos == 0) pManager->GetLastFigure()->move(lastPoint);
+	if (ApplicationManager::countrepos == 0) cFigure->move(lastPoint);
 
 }
 

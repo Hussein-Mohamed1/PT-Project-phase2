@@ -51,7 +51,7 @@ void AddTriangleAction::Execute(bool b)
 
 	// create a Triangle 
 
-	CTriangle* T = new CTriangle(P1, P2, P3, TriangleGfxInfo);
+	T = new CTriangle(P1, P2, P3, TriangleGfxInfo);
 
     // Add Triangle to Figures
 	pManager->AddFigure(T);

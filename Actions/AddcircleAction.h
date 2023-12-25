@@ -1,7 +1,7 @@
 #pragma once
 #include "Action.h"
 #include "..\DefS.h"
-
+#include "..\Figures\CCircle.h"
 //Add circle Action class
 
 class AddcircleAction : public Action
@@ -10,6 +10,7 @@ class AddcircleAction : public Action
     Point P1, P2;
     GfxInfo CircleGfxInfo;
 	static int numofshapes;
+	CCircle* c;
 	CFigure* DeletedFig;
 public:
 	AddcircleAction(ApplicationManager* pApp);
