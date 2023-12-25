@@ -28,7 +28,10 @@ bool CFigure::IsSelected() const
 {
 	return Selected;
 }
-
+void CFigure::ResetID()
+{
+	ID = 1;
+}
 
 
 void CFigure::ChngDrawClr(color Dclr)
