@@ -47,7 +47,7 @@ public:
 	ApplicationManager();
 	~ApplicationManager();
 	void ClearAll();
-	void clear();
+	void clearUndoRedoFuncs();
 	// -- Action-Related Functions
 	//Reads the input command from the user and returns the corresponding action type
 	ActionType GetUserAction() const;

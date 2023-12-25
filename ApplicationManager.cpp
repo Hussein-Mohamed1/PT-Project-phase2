@@ -248,6 +248,7 @@ void ApplicationManager::ExecuteAction(ActionType ActType, int numofrec)
        pAct->addundofirst(pAct);
 		pAct = NULL;
 	}
+
 }
 
 void ApplicationManager::addfillcolor(color c, int i)
@@ -502,11 +503,6 @@ void ApplicationManager::ClearAll()
 
 	}
 
-	//for (int i = 0; i < FigCount; i++)
-	//{
-	//	delete DeletedFigList[i];
-	//	DeletedFigList[i] = nullptr;
-	//}
 
 	UpdateInterface();
 	FigCount = 0;
@@ -514,7 +510,7 @@ void ApplicationManager::ClearAll()
 	pOut->ClearDrawArea();
 
 }
-void ApplicationManager::clear()
+void ApplicationManager::clearUndoRedoFuncs()
 {
 
 	for (int i = 0; i < ActionCountun; i++)
@@ -531,14 +527,6 @@ void ApplicationManager::clear()
 		{
 			delete ActListre[i];
 			ActListre[i] = nullptr;
-		}
-	}
-	for (int i = 0; i < 20; i++)
-	{
-		if (arr_recActions[i] != nullptr)
-		{
-			delete arr_recActions[i];
-			arr_recActions[i] = NULL;
 		}
 	}
 	ActionCountun = 0;
@@ -624,17 +612,11 @@ void ApplicationManager::getColor()
 //Destructor
 ApplicationManager::~ApplicationManager()
 {
+	ClearAll();
+
+	clearUndoRedoFuncs();
 
 
-	for (int i = 0; i < FigCount; i++)
-	{
-		if (FigList[i] != nullptr) { delete FigList[i]; FigList[i] = nullptr; }
-		if (DeletedFigList[i] != nullptr) { delete DeletedFigList[i]; DeletedFigList[i] = nullptr; }
-		if (arr_recActions[i] != nullptr) { delete arr_recActions[i]; arr_recActions[i] = nullptr; }
-	}
-	delete[] arr_recActions;
-	delete[] DeletedFigList;
-	delete[] FigList;
 	delete pIn;
 	delete pOut;
 

@@ -17,7 +17,7 @@ void clearAll::Execute(bool b)
 {
 	pManager->ClearAll();
 
-	pManager->clear();
+	pManager->clearUndoRedoFuncs();
 	Output* pOut = pManager->GetOutput();
 
 	pOut->PrintMessage("Everything is cleared");
