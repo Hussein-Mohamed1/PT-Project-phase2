@@ -83,7 +83,7 @@ ApplicationManager::ApplicationManager()
 ActionType ApplicationManager::GetUserAction() const
 {
 	//Ask the input to get the action from the user.
-	return pIn->GetUserAction(iX, iY);
+	return pIn->GetUserAction();
 }
 
 ////////////////////////////////////////////////////////////////////////////////////

@@ -47,8 +47,9 @@ void Input::FlushMouseQueue()
 }
 
 //This function reads the position where the user clicks to determine the desired action
-ActionType Input::GetUserAction(int& x, int&y) const
+ActionType Input::GetUserAction() const
 {
+	int x, y;
 	pWind->WaitMouseClick(x, y);	//Get the coordinates of the user click
 
 	if (UI.InterfaceMode == MODE_DRAW)	//GUI in the DRAW mode
