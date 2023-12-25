@@ -50,43 +50,44 @@ void moveFigure::Execute(bool b) {
 	else moveByDragging();
 }
 
-bool moveFigure::move(bool notaReverseAction) {
+void moveFigure::move(bool notaReverseAction) {
 	if (!byDragging && cFigure != nullptr && notaReverseAction == true)
 	{
 		lastPoint = cFigure->GetP1();
 	}
 	pManager->set_figure(cFigure);
 	if ((newPos.x <= UI.width - 5 && newPos.x > 0) && (newPos.y < UI.height - UI.StatusBarHeight - 5) && (newPos.y > UI.ToolBarHeight + 5)) {
+		if (cFigure->isInsideWindowBoundaries(newPos))
 		{
-			if (cFigure->isInsideWindowBoundaries(newPos))
-			{
-				cFigure->move(newPos);
-				return 1;
-			}
-			else {
-				pManager->GetOutput()->PrintMessage("Invalid Position! Please try again.....");
-				Pause(1000);
-				pManager->GetOutput()->ClearStatusBar();
-				return 0;
-			}
-
+			cFigure->move(newPos);
+		}
+		else {
+			pManager->GetOutput()->PrintMessage("Invalid Position! Please try again.....");
+			Pause(1000);
+			pManager->GetOutput()->ClearStatusBar();
 		}
 		pManager->UpdateInterface();
 	}
 }
 
 void moveFigure::moveByDragging() {
-	int iX = 0, iY = 0;
 	Input* pIn = pManager->GetInput();
-	buttonstate btnstate = pIn->GetButtonState(LEFT_BUTTON, iX, iY); // just puts the current coords to iX and iY, nothing else
-	if (cFigure->checkselection(iX, iY) == true) {
+	pIn->GetButtonState(LEFT_BUTTON, newPos.x, newPos.y); // just puts the current coords to iX and iY, nothing else
+	if (cFigure->checkselection(newPos.x, newPos.y) == true) {
 		lastPoint = cFigure->GetP1();
-		pIn->FlushMouseQueue();
-		Sleep(500);// necessary delay to capture the users double tap on a shape
-		while (pIn->GetButtonState(LEFT_BUTTON, iX, iY) == BUTTON_DOWN) {
-			if (!move())
+		Sleep(200);// necessary delay to capture the users double tap on a shape
+		while (pIn->GetButtonState(RIGHT_BUTTON, newPos.x, newPos.y) == BUTTON_DOWN || pIn->GetButtonState(LEFT_BUTTON, newPos.x, newPos.y) == BUTTON_DOWN) {
+			if (cFigure->isInsideWindowBoundaries(newPos))
+				move();
+			else
+			{
+				pManager->GetOutput()->PrintMessage("Invalid Position! Please try again.....");
+				Pause(1000);
+				pManager->GetOutput()->ClearStatusBar();
 				break;
+			}
 			Sleep(80); // necessary delay to avoid breaking the gui
+			cFigure->PrintInfo(pManager->GetOutput());
 			pManager->UpdateInterface();
 
 		}

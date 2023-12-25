@@ -11,7 +11,7 @@ class moveFigure : public Action
 public:
 	moveFigure(ApplicationManager* pApp, bool byDragging = 0);
 	void ReadActionParameters();
-	bool move(bool notaReverseAction = true);
+	void move(bool notaReverseAction = true);
 	void moveByDragging();
 	void addundofirst(Action* pAct);
 	void Execute(bool b);

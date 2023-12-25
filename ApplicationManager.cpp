@@ -92,7 +92,7 @@ ActionType ApplicationManager::GetUserAction() const
 void ApplicationManager::ExecuteAction(ActionType ActType, int numofrec)
 {
 	Action* pAct = nullptr;
-	//playSound(this, ActType);
+	playSound(this, ActType);
 	//According to Action Type, create the corresponding action object
 	switch (ActType)
 	{
@@ -209,21 +209,22 @@ void ApplicationManager::ExecuteAction(ActionType ActType, int numofrec)
 
 		pAct = new moveFigure(this);
 		addToUndo(pAct);
-		playSound(this, FUNC_MOVE);
 		break;
 
 	case FUNC_EXIT_playMode:
 		break;
 
 	case FUNC_EXIT:
-
 		break;
 
 	case STATUS:	//a click on the status bar ==> no action
 		return;
 	case DRAWING_AREA:
 		if (Selected_Figure != nullptr) //a figure must be selected to call a "move by dragging" activity
+		{
 			pAct = new moveFigure(this, 1);
+
+		}
 		break;
 	}
 	//Execute the created action
@@ -236,7 +237,7 @@ void ApplicationManager::ExecuteAction(ActionType ActType, int numofrec)
 	}
 	else if (pAct != NULL)
 	{
-		pIn->FlushMouseQueue();
+		pIn->FlushMouseQueue(); // written to prevent handeling and delayed clicks
 		pAct->Execute(1); //Execute
 		pAct->addundofirst(pAct);
 		pAct = NULL;
@@ -480,21 +481,21 @@ void ApplicationManager::ClearAll()
 
 		if (FigList[i] != nullptr)
 		{
-		
+
 			delete FigList[i];
 			FigList[i] = nullptr;
 
 		}
 		if (DeletedFigList[i] != nullptr)
 		{
-		    delete DeletedFigList[i];
+			delete DeletedFigList[i];
 			DeletedFigList[i] = nullptr;
 
 		}
 
 	}
 
-   
+
 
 	//UpdateInterface();
 
@@ -513,15 +514,15 @@ void ApplicationManager::ClearAll()
 }
 void ApplicationManager::clearUndoRedoFuncs()
 {
-	
-		for (int i = 0; i < ActionCountun; i++)
-		{
-				ActListun[i] = nullptr;
-		}
+
+	for (int i = 0; i < ActionCountun; i++)
+	{
+		ActListun[i] = nullptr;
+	}
 
 	for (int i = 0; i < ActionCountre; i++)
 	{
-			ActListre[i] = nullptr;
+		ActListre[i] = nullptr;
 	}
 
 	ActionCountun = 0;
