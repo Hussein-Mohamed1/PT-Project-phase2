@@ -305,11 +305,11 @@ void ApplicationManager::Playrecord()
 		{
 			counter++;
 			if (arr_recActions[i] == nullptr) break;
-
-
+	
+			
 			arr_recActions[i]->addundofirst(arr_recActions[i]);
-
-
+			
+		
 
 			arr_recActions[i]->Execute(0);
 
@@ -482,23 +482,36 @@ void ApplicationManager::ClearAll()
 
 	for (int i = 0; i < FigCount; i++)
 	{
-		FigList[i]->SetSelected(false);
-		FigList[i]->clearColor();
-		delete FigList[i];
-		FigList[i] = nullptr;
+		if (FigList[i] != nullptr)
+		{
+			delete FigList[i];
+			FigList[i] = nullptr;
+
+		}
+		if (DeletedFigList[i] != nullptr)
+		{
+			delete DeletedFigList[i];
+			DeletedFigList[i] = nullptr;
+
+		}
+		if (Selected_Figure != nullptr)
+		{
+			delete Selected_Figure;
+			Selected_Figure = nullptr;
+		}
+
 	}
 
-	for (int i = 0; i < FigCount; i++)
-	{
-		delete DeletedFigList[i];
-		DeletedFigList[i] = nullptr;
-	}
+	//for (int i = 0; i < FigCount; i++)
+	//{
+	//	delete DeletedFigList[i];
+	//	DeletedFigList[i] = nullptr;
+	//}
 
 	UpdateInterface();
 	FigCount = 0;
 
 	pOut->ClearDrawArea();
-	//CFigure:: ID = 0;
 
 }
 void ApplicationManager::clear()
@@ -506,19 +519,27 @@ void ApplicationManager::clear()
 
 	for (int i = 0; i < ActionCountun; i++)
 	{
-		delete ActListun[i];
-		ActListun[i] = nullptr;
+		if (ActListun[i] != nullptr)
+		{
+			delete ActListun[i];
+			ActListun[i] = nullptr;
+		}
 	}
 	for (int i = 0; i < ActionCountre; i++)
 	{
-		delete ActListre[i];
-		ActListre[i] = nullptr;
+		if (ActListre[i] != nullptr)
+		{
+			delete ActListre[i];
+			ActListre[i] = nullptr;
+		}
 	}
 	for (int i = 0; i < 20; i++)
 	{
-
-		arr_recActions[i] = NULL;
-		delete arr_recActions[i];
+		if (arr_recActions[i] != nullptr)
+		{
+			delete arr_recActions[i];
+			arr_recActions[i] = NULL;
+		}
 	}
 	ActionCountun = 0;
 	ActionCountre = 0;
