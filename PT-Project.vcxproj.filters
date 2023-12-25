@@ -7,9 +7,6 @@
     <Filter Include="CMUgraphicsLib\JPEG">
       <UniqueIdentifier>{74881736-22be-4b44-90b6-09a29eb1aa85}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Figures Classes">
-      <UniqueIdentifier>{4cc0cf48-df46-46a1-a59b-ffb63f7dd89f}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Action Classes">
       <UniqueIdentifier>{cc2f4f46-2b97-4337-b924-0771e382c57b}</UniqueIdentifier>
     </Filter>
@@ -18,6 +15,9 @@
     </Filter>
     <Filter Include="Application Manager">
       <UniqueIdentifier>{be3a4e10-d854-4bf8-9add-2f85904b4103}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GUI Classes\Figures Classes">
+      <UniqueIdentifier>{4cc0cf48-df46-46a1-a59b-ffb63f7dd89f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -127,10 +127,10 @@
       <Filter>CMUgraphicsLib\JPEG</Filter>
     </ClCompile>
     <ClCompile Include="Figures\CFigure.cpp">
-      <Filter>Figures Classes</Filter>
+      <Filter>GUI Classes\Figures Classes</Filter>
     </ClCompile>
     <ClCompile Include="Figures\CRectangle.cpp">
-      <Filter>Figures Classes</Filter>
+      <Filter>GUI Classes\Figures Classes</Filter>
     </ClCompile>
     <ClCompile Include="Actions\AddRectAction.cpp">
       <Filter>Action Classes</Filter>
@@ -148,10 +148,10 @@
       <Filter>CMUgraphicsLib</Filter>
     </ClCompile>
     <ClCompile Include="Figures\CCircle.cpp">
-      <Filter>Figures Classes</Filter>
+      <Filter>GUI Classes\Figures Classes</Filter>
     </ClCompile>
     <ClCompile Include="Figures\CTriangle.cpp">
-      <Filter>Figures Classes</Filter>
+      <Filter>GUI Classes\Figures Classes</Filter>
     </ClCompile>
     <ClCompile Include="Actions\AddTriangleAction.cpp">
       <Filter>Action Classes</Filter>
@@ -160,7 +160,7 @@
       <Filter>Action Classes</Filter>
     </ClCompile>
     <ClCompile Include="Figures\CSquare.cpp">
-      <Filter>Figures Classes</Filter>
+      <Filter>GUI Classes\Figures Classes</Filter>
     </ClCompile>
     <ClCompile Include="Actions\AddcircleAction.cpp">
       <Filter>Action Classes</Filter>
@@ -169,7 +169,7 @@
       <Filter>Action Classes</Filter>
     </ClCompile>
     <ClCompile Include="Figures\CHexa.cpp">
-      <Filter>Figures Classes</Filter>
+      <Filter>GUI Classes\Figures Classes</Filter>
     </ClCompile>
     <ClCompile Include="Actions\SelectAction.cpp">
       <Filter>Action Classes</Filter>
@@ -281,10 +281,10 @@
       <Filter>CMUgraphicsLib\JPEG</Filter>
     </ClInclude>
     <ClInclude Include="Figures\CFigure.h">
-      <Filter>Figures Classes</Filter>
+      <Filter>GUI Classes\Figures Classes</Filter>
     </ClInclude>
     <ClInclude Include="Figures\CRectangle.h">
-      <Filter>Figures Classes</Filter>
+      <Filter>GUI Classes\Figures Classes</Filter>
     </ClInclude>
     <ClInclude Include="Actions\Action.h">
       <Filter>Action Classes</Filter>
@@ -306,10 +306,10 @@
     </ClInclude>
     <ClInclude Include="DEFS.h" />
     <ClInclude Include="Figures\CCircle.h">
-      <Filter>Figures Classes</Filter>
+      <Filter>GUI Classes\Figures Classes</Filter>
     </ClInclude>
     <ClInclude Include="Figures\CTriangle.h">
-      <Filter>Figures Classes</Filter>
+      <Filter>GUI Classes\Figures Classes</Filter>
     </ClInclude>
     <ClInclude Include="Actions\AddTriangleAction.h">
       <Filter>Action Classes</Filter>
@@ -318,7 +318,7 @@
       <Filter>Action Classes</Filter>
     </ClInclude>
     <ClInclude Include="Figures\CSquare.h">
-      <Filter>Figures Classes</Filter>
+      <Filter>GUI Classes\Figures Classes</Filter>
     </ClInclude>
     <ClInclude Include="Actions\AddcircleAction.h">
       <Filter>Action Classes</Filter>
@@ -327,7 +327,7 @@
       <Filter>Action Classes</Filter>
     </ClInclude>
     <ClInclude Include="Figures\CHexa.h">
-      <Filter>Figures Classes</Filter>
+      <Filter>GUI Classes\Figures Classes</Filter>
     </ClInclude>
     <ClInclude Include="Actions\SelectAction.h">
       <Filter>Action Classes</Filter>
