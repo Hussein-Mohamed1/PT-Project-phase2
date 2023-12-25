@@ -12,6 +12,10 @@ AddcircleAction::AddcircleAction(ApplicationManager* pApp) :Action(pApp)
 	numofshapes++;
 
 }
+void AddcircleAction::addundofirst(Action* pAct)
+{
+	pManager->addToUndo(this);
+}
 int AddcircleAction::numofshapes = 0;
 int AddcircleAction::getnumofshapes()
 {
@@ -66,7 +70,6 @@ int AddcircleAction::getnumofshapes()
 	  pManager->AddFigure(c);
 
   }
-
 
   void AddcircleAction::undo()
   {

@@ -17,7 +17,7 @@ public:
 
 	//Reads rectangle parameters
 	virtual void ReadActionParameters();
-	
+void addundofirst(Action* pAct);
 	//Add rectangle to the ApplicationManager
 	 void Execute(bool b) ;
      void undo();

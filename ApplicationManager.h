@@ -77,7 +77,8 @@ public:
 	void addPoint(Point p);
 
 	Point getpoint(int index);
-
+	
+	
 	void addColor(color c);
 	void getColor();
 	CFigure* GetSelected_Figure();

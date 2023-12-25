@@ -51,6 +51,11 @@ void AddHexaAction::Execute(bool b)
 	pManager->AddFigure(H);
 }
 
+void AddHexaAction::addundofirst(Action* pAct)
+{
+	pManager->addToUndo(this);
+}
+
 void AddHexaAction::undo()
 {
 	DeletedFig = pManager->DeleteFigure();

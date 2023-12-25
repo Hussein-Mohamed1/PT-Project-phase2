@@ -14,7 +14,7 @@ class AddcircleAction : public Action
 	CFigure* DeletedFig;
 public:
 	AddcircleAction(ApplicationManager* pApp);
-
+	 void addundofirst(Action* pAct);
 	//Reads rectangle parameters
 	virtual void ReadActionParameters();
 	static int getnumofshapes();
@@ -22,6 +22,7 @@ public:
  void Execute(bool b);
 	 void undo();
 	void redo();
+	
 };
 
 

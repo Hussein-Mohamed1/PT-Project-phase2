@@ -16,7 +16,7 @@ public :
     AddHexaAction(ApplicationManager* pApp);
     void  ReadActionParameters();
     void Execute(bool b);
-
+  void addundofirst(Action* pAct);
    void undo();
     void redo();
     static int getnumofshapes();

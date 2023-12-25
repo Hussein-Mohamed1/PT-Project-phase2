@@ -11,6 +11,6 @@ public:
     void Execute(bool b);
    void undo();
     void redo();
-
+   void addundofirst(Action* pAct);
 };
 

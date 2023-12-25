@@ -26,7 +26,7 @@ public:
 	Action(ActionType act) {};
 
 
-
+	virtual void addundofirst(Action* pAct);
 	virtual void undo();
 	 virtual void redo();
 	 int CheckAction() { return 0; };
