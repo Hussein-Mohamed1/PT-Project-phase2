@@ -35,14 +35,16 @@ private:
 	CFigure* DeletedFigList[MaxFigCount];
 
 	//Pointers to Input and Output classes
-	Input *pIn;
-	Output *pOut;
-public:	
+	Input* pIn;
+	Output* pOut;
+public:
+	static int iX;
+	static int iY;
 	static int countpos;
 	static int countrepos;
 	//static int countfill;
 	static int countbrush;
-	ApplicationManager(); 
+	ApplicationManager();
 	~ApplicationManager();
 	void ClearAll();
 	void clear();
@@ -73,28 +75,28 @@ public:
 
 	Action* GetLastRedo();
 	void addPoint(Point p);
-	
+
 	Point getpoint(int index);
 
 	void addColor(color c);
 	void getColor();
-	 CFigure* GetSelected_Figure();
-	 void DeleteFunction();
-	 void SetSelectedFig(CFigure* S);
-	 void DeleteFunctionForPlayMood(CFigure* Del);
-	 void CopyDeletedFigToFiglist();
-	 void AddDeletedFig(CFigure* del);
+	CFigure* GetSelected_Figure();
+	void DeleteFunction();
+	void SetSelectedFig(CFigure* S);
+	void DeleteFunctionForPlayMood(CFigure* Del);
+	void CopyDeletedFigToFiglist();
+	void AddDeletedFig(CFigure* del);
 	// void DeleteFigure(CFigure* Del);
 	 //bool Select(CFigure* figure);
 	 //CFigure* GetFigureByPoint(int x, int y);
-	 int get_numofcolor(color );
-	 int numof_figurewithcolor(figures, colors);
-	 color get_fillcolor(colors);
-	 string color_TO_String(colors c);
-	 string figur_TO_String(figures);
-	 color get_indx_fillcolor(int indx);
-	 color get_indx_brushcolor(int indx);
-	
+	int get_numofcolor(color);
+	int numof_figurewithcolor(figures, colors);
+	color get_fillcolor(colors);
+	string color_TO_String(colors c);
+	string figur_TO_String(figures);
+	color get_indx_fillcolor(int indx);
+	color get_indx_brushcolor(int indx);
+
 };
 
 

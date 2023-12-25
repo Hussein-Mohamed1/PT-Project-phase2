@@ -34,6 +34,9 @@ int ApplicationManager::countpos = 0;
 //int ApplicationManager::countfill = 0;
 int ApplicationManager::countrepos = 0;
 int ApplicationManager::countbrush = 0;
+int ApplicationManager::iX = 0;
+int ApplicationManager::iY = 0;
+
 using namespace std;
 //class Action ;
 //Constructor
@@ -50,7 +53,6 @@ ApplicationManager::ApplicationManager()
 	ActionCountun = 0;
 	ActionCountre = 0;
 	pLastAct = nullptr;
-
 	//Create an array of figure pointers and set them to NULL		
 
 	for (int i = 0; i < MaxFigCount; i++)
@@ -80,9 +82,8 @@ ApplicationManager::ApplicationManager()
 //==================================================================================//
 ActionType ApplicationManager::GetUserAction() const
 {
-
 	//Ask the input to get the action from the user.
-	return pIn->GetUserAction();
+	return pIn->GetUserAction(iX, iY);
 }
 
 ////////////////////////////////////////////////////////////////////////////////////
@@ -221,13 +222,14 @@ void ApplicationManager::ExecuteAction(ActionType ActType, int numofrec)
 	case STATUS:	//a click on the status bar ==> no action
 		return;
 	case DRAWING_AREA:
-		if (Selected_Figure != nullptr) //a figure must be selected to call a "move by dragging" activity
+		if (Selected_Figure != nullptr && Selected_Figure->checkselection(iX, iY)) //a figure must be selected to call a "move by dragging" activity
 			pAct = new moveFigure(this, 1);
 		break;
 	}
 	//Execute the created action
-	if (numofrec != -1)
+	if (numofrec != -1 && pAct != nullptr)
 	{
+
 		arr_recActions[numofrec] = pAct;
 		pAct->Execute(1);
 		pAct = NULL;

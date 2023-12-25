@@ -25,6 +25,7 @@ void PrepareImport::Execute(bool b) {
 	name += ".txt";
 	fstream* OutputFile = (name != "-1.txt") ? new fstream(name, ios::in) : (pManager->GetOutput()->PrintMessage("Load File Cancelled."), 0);
 	pManager->GetOutput()->ClearStatusBar();
+	pManager->ClearAll();
 	if (OutputFile != nullptr) {
 		{if (OutputFile->is_open())
 		{

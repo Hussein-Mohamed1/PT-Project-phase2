@@ -47,8 +47,10 @@ void moveFigure::Execute(bool b) {
 	if (!byDragging)
 	{
 		if (b)
-		ReadActionParameters();
-		move();
+		{
+			ReadActionParameters();
+			move();
+		}
 	}
 	else moveByDragging();
 }
@@ -152,24 +154,25 @@ void moveFigure::moveByDragging() {
 	int iX = 0, iY = 0;
 	Input* pIn = pManager->GetInput();
 	buttonstate btnstate = pIn->GetButtonState(LEFT_BUTTON, iX, iY); // just puts the current coords to iX and iY, nothing else
-	if (cFigure == nullptr || cFigure == reinterpret_cast<decltype(cFigure)>(0xFFFFFFFF))
+	if (cFigure == nullptr || cFigure == reinterpret_cast<decltype(cFigure)>(0xffffffff))
 	{
-		pManager->GetOutput()->PrintMessage("LOLLL");
+		pManager->GetOutput()->PrintMessage("lolll");
 		cFigure = nullptr;
 		return;
 	}
-	else if (cFigure->checkselection(iX, iY) == true) {
-		Pause(100);// necessary delay to capture the users double tap on a shape
-		btnstate = pIn->GetButtonState(LEFT_BUTTON, iX, iY);
-		while (pIn->GetButtonState(LEFT_BUTTON, iX, iY) != BUTTON_UP) {
-			newPos = Point{ iX,iY };
-			if (!move())
-				break;
-			Pause(80); // necessary delay to avoid breaking the gui
-			pManager->UpdateInterface();
+	else
+		if (cFigure->checkselection(iX, iY) == true) {
+			Pause(100);// necessary delay to capture the users double tap on a shape
+			btnstate = pIn->GetButtonState(LEFT_BUTTON, iX, iY);
+			while (pIn->GetButtonState(LEFT_BUTTON, iX, iY) != BUTTON_UP) {
+				newPos = Point{ iX,iY };
+				if (!move())
+					break;
+				Pause(80); // necessary delay to avoid breaking the gui
+				pManager->UpdateInterface();
 
+			}
 		}
-	}
 
 	pManager->addPoint(newPos);
 }
