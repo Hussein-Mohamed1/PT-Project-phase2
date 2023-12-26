@@ -31,6 +31,10 @@
 #include "StartandStopRec.h"
 #include "Figures/CFigure.h"
 #include "Actions/resizeByDragging.h"
+#include "Actions/playSound.h"
+#include <cstdlib> 
+
+
 int ApplicationManager::countpos = 0;
 //int ApplicationManager::countfill = 0;
 int ApplicationManager::countrepos = 0;
@@ -214,7 +218,7 @@ void ApplicationManager::ExecuteAction(ActionType ActType, int numofrec)
 		break;
 
 	case FUNC_EXIT_playMode:
-		
+
 		break;
 
 	case FUNC_EXIT:
@@ -477,13 +481,17 @@ Output* ApplicationManager::GetOutput() const
 	return pOut;
 }
 ////////////////////////////////////////////////////////////////////////////////////
+
 // Makes Each Figure save its data
 void ApplicationManager::SaveAll(fstream& OutputFile) const {
+	// Check if the output file stream is in a good state
 	if (OutputFile.good()) {
+		// Iterate through the array of figures
 		for (int i = 0; i < FigCount; i++) {
-			if (FigList[i] != nullptr)
-				FigList[i]->Save(OutputFile);
+			if (FigList[i] != nullptr) // Check if the figure at index i is not nullptr
+				FigList[i]->Save(OutputFile);	// Call the Save function for the non-null figure to save its data
 		}
+		// Close the output file stream after saving all figures' data
 		OutputFile.close();
 	}
 }
@@ -640,6 +648,9 @@ void ApplicationManager::getColor()
 //Destructor
 ApplicationManager::~ApplicationManager()
 {
+
+
+
 	ClearAll();
 
 	clearUndoRedoFuncs();

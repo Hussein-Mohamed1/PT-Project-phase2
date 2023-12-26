@@ -48,7 +48,8 @@ enum ActionType //The actions supported (you can add more if needed)
 	CorrectChoose ,
 	WrongChoose,
 	GameOver,
-	WinSound
+	WinSound, 
+	// end of game 
 
 	///TODO: Add the other action types of the two modes
 };
