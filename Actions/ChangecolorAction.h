@@ -27,6 +27,6 @@ public:
      void redo();
    static  void decrement_fill();
    static void resetnumoffill();
-    
+   static void increment_numoffill();
 };
 

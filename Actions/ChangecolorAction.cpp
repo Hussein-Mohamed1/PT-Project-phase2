@@ -88,7 +88,7 @@ void ChangeColorAction::addcolor(bool notaReverseAction)
 			pOut->SetFillColor(ChoosenColor);
 			pManager->addfillcolor(ChoosenColor, countfill);
 			countfill++;
-			num_of_fill++;
+			increment_numoffill();
 			f->ChngFillClr(ChoosenColor);
 
 		}
@@ -123,7 +123,10 @@ void ChangeColorAction::redo()
 	swap(lastcolor, ChoosenColor);
 	addcolor(false);
 }
-
+void ChangeColorAction::increment_numoffill()
+{
+	num_of_fill++;
+}
 
 
 
@@ -172,6 +175,7 @@ void ChangeColorAction::redo()
 
 	}
 }
+*/
 void ChangeColorAction::resetnumoffill()
 {
 	num_of_fill = 0;

@@ -277,7 +277,8 @@ color ApplicationManager::get_indx_brushcolor(int indx)
 //Add a figure to the list of figures
 void ApplicationManager::AddFigure(CFigure* pFig)
 {
-
+	if (pFig->is_filled())
+		ChangeColorAction::increment_numoffill();
 	if (FigCount < MaxFigCount)
 		FigList[FigCount++] = pFig;
 
