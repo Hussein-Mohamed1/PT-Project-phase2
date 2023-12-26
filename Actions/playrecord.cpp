@@ -14,7 +14,8 @@ void playrecord::ReadActionParameters()
 }	
 
 void playrecord::Execute(bool b)
-{ pManager->Playrecord();
+{ 
+	pManager->Playrecord();
 
 }
 

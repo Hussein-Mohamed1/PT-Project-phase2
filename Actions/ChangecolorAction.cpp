@@ -63,14 +63,8 @@ void ChangeColorAction::addcolor(bool notaReverseAction)
 	if (  notaReverseAction == true) {
 		lastcolor =(ChoosenColor);
 	}
-	
 	Output* pOut = pManager->GetOutput();
-
-
-
 	f = pManager->GetSelected_Figure();
-
-
 	if (pManager->GetSelected_Figure() == NULL)
 
 		pOut->PrintMessage("NO SELECTED ");
@@ -79,8 +73,6 @@ void ChangeColorAction::addcolor(bool notaReverseAction)
 
 	else
 	{
-
-
 		if (ChangeFill)
 		{
 
@@ -90,9 +82,7 @@ void ChangeColorAction::addcolor(bool notaReverseAction)
 			countfill++;
 			num_of_fill++;
 			f->ChngFillClr(ChoosenColor);
-
 		}
-
 		else
 		{
 			//pManager->GetSelected_Figure()->ChngFillClr(BLACK);
@@ -101,11 +91,12 @@ void ChangeColorAction::addcolor(bool notaReverseAction)
 			pManager->addbrushcolor(ChoosenColor);
 		}
 	}
+	//newcolor = (ChoosenColor);
 }
 
 void ChangeColorAction::addundofirst(Action* pAct)
 {
-	pManager->addToUndo(this);
+  pManager->addToUndo(this);
 }
 
 
@@ -113,6 +104,8 @@ void ChangeColorAction::undo()
 {
 	swap(lastcolor, ChoosenColor);
 	addcolor(false);
+	
+
 }
 
 void ChangeColorAction::redo()
