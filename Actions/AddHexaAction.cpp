@@ -20,9 +20,15 @@ void AddHexaAction::ReadActionParameters()
 
 	do
 	{
+
+		int sidelenght = 80;               //   !!! if side lenght is changed from Hexa class it must be Changed here !!!
+		int small_height = sidelenght * 0.87;         // cos(60)  (from geometry of shape)
+		int small_lenght = sidelenght * 0.5;       // sin(60) (from geometry of shape)
+
+
 		pIn->GetPointClicked(P1.x, P1.y);  // CENTRE OF HEXA
-		if ((P1.y) - 80 < (UI.ToolBarHeight + 5) || (P1.y) + 61 > (UI.height - UI.StatusBarHeight + 5)  //  vertical validation : window hieght - tool bat height + 5 to be in safe
-			|| ((P1.x) + 80) > (UI.width - 5) || (P1.x) - 80 < 0)           // horizontal validation 
+		if ((P1.y) - small_height< (UI.ToolBarHeight + 5) || (P1.y) + small_height > (UI.height - UI.StatusBarHeight + 5)  //  vertical validation : window hieght - tool bat height + 5 to be in safe
+			|| ((P1.x) + sidelenght) > (UI.width - 5) || (P1.x) - sidelenght < 0)           // horizontal validation 
 		{
 			pOut->PrintMessage("Invalid centre , click anthor centre ");
 

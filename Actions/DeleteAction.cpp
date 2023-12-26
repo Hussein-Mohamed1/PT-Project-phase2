@@ -16,7 +16,7 @@ void DeleteAction::Execute(bool b)
 {
 	Output* pOut = pManager->GetOutput();
 
-
+	    
 	if (pManager->GetSelected_Figure() == NULL)
 		pOut->PrintMessage("NO SELECTED ");
 	else

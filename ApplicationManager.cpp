@@ -532,7 +532,6 @@ void ApplicationManager::ClearAll(bool calledfromplay)
 	}
 
 
-	//UpdateInterface();
 
 
 	FigCount = 0;
@@ -544,7 +543,6 @@ void ApplicationManager::ClearAll(bool calledfromplay)
 	UI.DrawColor = BLUE;
 	CFigure::IsAllNewFilled(false);
 
-	//pOut->ClearDrawArea();
 
 }
 void ApplicationManager::clearUndoRedoFuncs()

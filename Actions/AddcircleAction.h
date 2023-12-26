@@ -14,9 +14,9 @@ class AddcircleAction : public Action
 public:
 	AddcircleAction(ApplicationManager* pApp);
 	 void addundofirst(Action* pAct);
-	//Reads rectangle parameters
+	//Reads Circle  parameters
 	virtual void ReadActionParameters();
-	//Add rectangle to the ApplicationManager
+	//Add Circle to the ApplicationManager
  void Execute(bool b);
 	 void undo();
 	void redo();
