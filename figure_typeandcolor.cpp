@@ -102,6 +102,7 @@ void figure_typeandcolor::Execute(bool b)
 		if (correct > incorrect)
 		{
 			s = "final record is---->  correct picks=  " + to_string(correct) + "    incorrect picks=  " + to_string(incorrect) + "  BRAVOOO";
+			playSound(pManager, WinSound);
 			pManager->GetOutput()->PrintMessage(s);
 		}
 		else if (incorrect > correct)

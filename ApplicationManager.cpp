@@ -73,7 +73,6 @@ ApplicationManager::ApplicationManager() : ActionCountre(0), ActionCountun(0)
 		fill[i] = UI.BkGrndColor;
 		Pos[i] = { 100,100 };
 		brush[i] = UI.BkGrndColor;
-
 	}
 }
 

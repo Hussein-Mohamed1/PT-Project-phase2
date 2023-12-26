@@ -38,7 +38,6 @@ Output::Output()
 	pWind = CreateWind(UI.width, UI.height, UI.wx, UI.wy);
 
 	pWind->ChangeTitle("Paint for Kids - Programming Techniques Project");
-	Names();
 	createIntro();
 
 	CreateStatusBar();
@@ -226,7 +225,9 @@ void Output::ClearDrawArea() const
 }
 void Output::createIntro()
 {
+
 	pWind->DrawImage("images\\MenuItems\\PaintLogo.jpg", 0, 0, UI.width, UI.height - UI.StatusBarHeight);
+	Names();
 	PlaySound(".\\sounds\\Welcome Sound.wav", NULL, SND_SYNC | SND_FILENAME);
 
 	Sleep(100);
