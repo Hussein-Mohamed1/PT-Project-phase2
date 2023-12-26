@@ -20,8 +20,9 @@ void figure_typeandcolor::ReadActionParameters()
 }
 void figure_typeandcolor::manage_typeandcolor()
 {
+	//managing playing by both
 	string s;
-	if (selected_fig && selected_fig->get_fillcolor() == pManager->get_fillcolor(by_color))
+	if (selected_fig && selected_fig->get_fillcolor() == pManager->get_fillcolor(by_color)) //check if pick correct and increment counter
 	{
 		pManager->DeleteFunctionForPlayMood(selected_fig);
 		correct++;
@@ -30,7 +31,7 @@ void figure_typeandcolor::manage_typeandcolor()
 		pManager->GetOutput()->PrintMessage(s);
 		numoffigbycolor--;
 	}
-	else
+	else //check if pick incorrect and increment counter
 	{
 		pManager->DeleteFunctionForPlayMood(pManager->GetFigure(p.x, p.y));
 		incorrect++;
@@ -42,8 +43,8 @@ void figure_typeandcolor::manage_typeandcolor()
 void figure_typeandcolor::Execute(bool b)
 {
 	string s;
-	by_fig = figures(rand() % 5);
-	by_color = colors(rand() % 6);
+	by_fig = figures(rand() % 5); //get random shape
+	by_color = colors(rand() % 6); //get random color
 	numoffigbycolor = pManager->numof_figurewithcolor(by_fig, by_color);
 	if (numoffigbycolor == 0)
 		Execute(b);
@@ -67,8 +68,8 @@ void figure_typeandcolor::Execute(bool b)
 				}
 					
 				break;
-			case rect:
-				if (pManager->GetFigure(p.x, p.y))
+			case rect: 
+				if (pManager->GetFigure(p.x, p.y)) //detect what shape choosen
 				{
 					selected_fig = dynamic_cast<CRectangle*>(pManager->GetFigure(p.x, p.y));
 					manage_typeandcolor();
@@ -99,7 +100,7 @@ void figure_typeandcolor::Execute(bool b)
 				break;
 			}
 		}
-		if (correct > incorrect)
+		if (correct > incorrect)  // show result
 		{
 			s = "final record is---->  correct picks=  " + to_string(correct) + "    incorrect picks=  " + to_string(incorrect) + "  BRAVOOO";
 			playSound(pManager, WinSound);

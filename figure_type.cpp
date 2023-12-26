@@ -24,10 +24,10 @@ void figure_type::ReadActionParameters()
 }
 void figure_type::manage_byfigure()
 {
+	//managing playing by figure
 	string s;
-	if (selected_fig)
+	if (selected_fig) //check if pick correct and increment counter
 	{
-		//playSound(pManager, BY_COLOR);
 		pManager->DeleteFunctionForPlayMood(selected_fig);
 		correct++;
 		playSound(pManager, CorrectChoose);
@@ -35,9 +35,8 @@ void figure_type::manage_byfigure()
 		pManager->GetOutput()->PrintMessage(s);
 		numoffigure--;
 	}
-	else
+	else //check if pick incorrect and increment counter
 	{
-		//playSound(pManager, BY_SHAPE);
 		pManager->DeleteFunctionForPlayMood(pManager->GetFigure(p.x , p.y));
 		incorrect++;
 		playSound(pManager, WrongChoose);
@@ -49,8 +48,8 @@ void figure_type::manage_byfigure()
 void figure_type::Execute(bool b)
 {
 
-	by_fig = figures(rand() % 5);
-	switch (by_fig)
+	by_fig = figures(rand() % 5); //get random shape
+	switch (by_fig) //check any will selected by child and return its number
 	{
 	case squr:
 		numoffigure = CSquare::getnumofshapes();
@@ -91,7 +90,7 @@ void figure_type::Execute(bool b)
 		while (numoffigure && (p.y > 50))
 		{
 			ReadActionParameters();
-			if (pManager->GetFigure(p.x, p.y))
+			if (pManager->GetFigure(p.x, p.y)) //detect what shape choosen
 			{
 				switch (by_fig)
 				{
@@ -120,7 +119,7 @@ void figure_type::Execute(bool b)
 				}
 			}
 		}
-		if (correct > incorrect)
+		if (correct > incorrect) // show result
 		{
 			s = "final record is---->  correct picks=  " + to_string(correct) + "    incorrect picks=  " + to_string(incorrect) + "  BRAVOOO";
 			playSound(pManager, WinSound);
