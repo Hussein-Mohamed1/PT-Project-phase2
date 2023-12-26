@@ -93,7 +93,7 @@ ActionType ApplicationManager::GetUserAction() const
 void ApplicationManager::ExecuteAction(ActionType ActType, int numofrec)
 {
 	Action* pAct = nullptr;
-	//playSound(this, ActType);
+	playSound(this, ActType);
 	//According to Action Type, create the corresponding action object
 	switch (ActType)
 	{
@@ -210,7 +210,6 @@ void ApplicationManager::ExecuteAction(ActionType ActType, int numofrec)
 
 		pAct = new moveFigure(this);
 		addToUndo(pAct);
-		playSound(this, FUNC_MOVE);
 		break;
 
 	case FUNC_EXIT_playMode:
@@ -224,8 +223,11 @@ void ApplicationManager::ExecuteAction(ActionType ActType, int numofrec)
 	case STATUS:	//a click on the status bar ==> no action
 		return;
 	case DRAWING_AREA:
-		if (Selected_Figure != nullptr && Selected_Figure->checkselection(iX, iY)) //a figure must be selected to call a "move by dragging" activity
+		if (Selected_Figure != nullptr) //a figure must be selected to call a "move by dragging" activity
+		{
 			pAct = new moveFigure(this, 1);
+
+		}
 		break;
 	}
 	//Execute the created action
@@ -238,15 +240,8 @@ void ApplicationManager::ExecuteAction(ActionType ActType, int numofrec)
 	}
 	else if (pAct != NULL)
 	{
-		pIn->FlushMouseQueue();
-		//addToUndo(pAct);
-		//addToRedo();
-
-
-
+		pIn->FlushMouseQueue(); // written to prevent handeling and delayed clicks
 		pAct->Execute(1); //Execute
-		//ActList[ActionCount++] = pAct;
-
 		pAct->addundofirst(pAct);
 		pAct = NULL;
 	}
@@ -308,11 +303,11 @@ void ApplicationManager::Playrecord()
 		{
 			counter++;
 			if (arr_recActions[i] == nullptr) break;
-	
-			
+
+
 			arr_recActions[i]->addundofirst(arr_recActions[i]);
-			
-		
+
+
 
 			arr_recActions[i]->Execute(0);
 
@@ -493,14 +488,14 @@ void ApplicationManager::ClearAll(bool calledfromplay)
 
 		if (FigList[i] != nullptr)
 		{
-		
+
 			delete FigList[i];
 			FigList[i] = nullptr;
 
 		}
 		if (DeletedFigList[i] != nullptr)
 		{
-		    delete DeletedFigList[i];
+			delete DeletedFigList[i];
 			DeletedFigList[i] = nullptr;
 
 		}
@@ -540,15 +535,15 @@ void ApplicationManager::ClearAll(bool calledfromplay)
 }
 void ApplicationManager::clearUndoRedoFuncs()
 {
-	
-		for (int i = 0; i < ActionCountun; i++)
-		{
-				ActListun[i] = nullptr;
-		}
+
+	for (int i = 0; i < ActionCountun; i++)
+	{
+		ActListun[i] = nullptr;
+	}
 
 	for (int i = 0; i < ActionCountre; i++)
 	{
-			ActListre[i] = nullptr;
+		ActListre[i] = nullptr;
 	}
 
 	ActionCountun = 0;
