@@ -34,7 +34,6 @@ Output::Output()
 	UI.StatusBarColor = TURQUOISE;
 	UI.PenWidth = 3;	//width of the figures frames
 
-
 	//Create the output window
 	pWind = CreateWind(UI.width, UI.height, UI.wx, UI.wy);
 
@@ -289,7 +288,7 @@ void Output::DrawRect(Point P1, Point P2, GfxInfo RectGfxInfo, bool selected) co
 	else
 		DrawingClr = RectGfxInfo.DrawClr;
 
-	pWind->SetPen(DrawingClr, 1);
+	pWind->SetPen(DrawingClr, RectGfxInfo.BorderWdth);
 	drawstyle style;
 	if (RectGfxInfo.isFilled)
 	{
@@ -310,8 +309,7 @@ void Output::DrawCirc(Point P1, Point P2, GfxInfo RectGfxInfo, bool selected) co
 		DrawingClr = UI.HighlightColor; //Figure should be drawn highlighted
 	else
 		DrawingClr = RectGfxInfo.DrawClr;
-
-	pWind->SetPen(DrawingClr, 1);
+	pWind->SetPen(DrawingClr, RectGfxInfo.BorderWdth);
 	drawstyle style;
 	if (RectGfxInfo.isFilled)
 	{
@@ -332,7 +330,7 @@ void Output::Drawrtriangle(int x1, int y1, int x2, int y2, int x3, int y3, GfxIn
 	else
 		DrawingClr = RectGfxInfo.DrawClr;
 
-	pWind->SetPen(DrawingClr, 1);
+	pWind->SetPen(DrawingClr, RectGfxInfo.BorderWdth);
 	drawstyle style;
 	if (RectGfxInfo.isFilled)
 	{
@@ -354,7 +352,7 @@ void Output::Drawhexagon(const int* xcoordinates, const int* ycoordinates, GfxIn
 	else
 		DrawingClr = RectGfxInfo.DrawClr;
 
-	pWind->SetPen(DrawingClr, 1);
+	pWind->SetPen(DrawingClr, RectGfxInfo.BorderWdth);
 	drawstyle style;
 	if (RectGfxInfo.isFilled)
 	{

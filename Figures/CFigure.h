@@ -11,26 +11,25 @@ protected:
 	static int ID;		//Each figure has an ID
 	bool Selected;	//true if the figure is selected.
 	GfxInfo FigGfxInfo;	//Figure graphis info
-	 static bool NewIsFilled;
-	
+	static bool NewIsFilled;
 	/// Add more parameters if needed.
 
 public:
 	CFigure(GfxInfo FigureGfxInfo);
 	CFigure();
-	virtual  void decrementnumofshapes() ;
+	virtual  void decrementnumofshapes();
 	void SetSelected(bool s);	 //select/unselect the figure
 	bool IsSelected() const;	//check whether fig is selected
 	virtual  bool checkselection(int x, int y) = 0;
 	virtual int Getid() = 0;
-	virtual Point& GetP1() =0;
-	
+	virtual Point& GetP1() = 0;
+
 	virtual void Draw(Output* pOut) const = 0;		//Draw the figure
 
 	//void ChngDrawClr(color Dclr);	//changes the figure's drawing color
 
-	 void ChngDrawClr(color Dclr);
-	 void clearColor();
+	void ChngDrawClr(color Dclr);
+	void clearColor();
 	void ChngFillClr(color Fclr);	//changes the figure's filling color
 	///The following functions should be supported by the figure class
 	///It should be overridden by each inherited figure
@@ -40,14 +39,14 @@ public:
 	virtual void move(const Point&) = 0;
 	virtual void Save(fstream& OutFile) const = 0;	//Save the figure parameters to the file
 	virtual void Load(string&) = 0;	//Load the figure parameters to the file
-	virtual void PrintInfo(Output* pOut) =0;
+	virtual void PrintInfo(Output* pOut) = 0;
 	virtual color get_fillcolor();
-	 static void IsAllNewFilled(bool s=false);
-	 static void ResetID();
+	static void IsAllNewFilled(bool s = false);
+	static void ResetID();
 
-	
-		//Save the figure parameters to the file
-		//Load the figure parameters to the file
+
+	//Save the figure parameters to the file
+	//Load the figure parameters to the file
 
 };
 
