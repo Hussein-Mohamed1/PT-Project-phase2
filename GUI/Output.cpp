@@ -222,6 +222,7 @@ void Output::ClearDrawArea() const
 	pWind->SetPen(BLACK, 3);
 	pWind->DrawLine(0, UI.ToolBarHeight, UI.width, UI.ToolBarHeight);
 
+
 }
 void Output::createIntro()
 {
@@ -238,8 +239,8 @@ void Output::PrintMessage(string msg) const	//Prints a message on status bar
 {
 	ClearStatusBar();	//First clear the status bar
 
-	pWind->SetPen(UI.MsgColor, 50);
-	pWind->SetFont(20, BOLD, BY_NAME, "Arial");
+	pWind->SetPen(UI.MsgColor, 25);
+	pWind->SetFont(17, BOLD, BY_NAME, "Arial");
 	pWind->DrawString(10, UI.height - (int)(UI.StatusBarHeight / 1.5), msg);
 }
 //////////////////////////////////////////////////////////////////////////////////////////
@@ -299,8 +300,9 @@ void Output::DrawRect(Point P1, Point P2, GfxInfo RectGfxInfo, bool selected) co
 	else
 		style = FRAME;
 
-
+	
 	pWind->DrawRectangle(P1.x, P1.y, P2.x, P2.y, style);
+
 
 }
 void Output::DrawCirc(Point P1, Point P2, GfxInfo RectGfxInfo, bool selected) const  //Draw a Circle

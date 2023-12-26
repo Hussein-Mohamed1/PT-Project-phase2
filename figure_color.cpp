@@ -18,6 +18,7 @@ void figure_color::ReadActionParameters()
 }
 void figure_color::manage_by_color(color c , int n)
 {
+	//managing playing by color
 	string s;
 	s = "correct picks= " + to_string(correct) + "    incorrect picks= " + to_string(incorrect);
 	pManager->GetOutput()->PrintMessage(s);
@@ -25,7 +26,7 @@ void figure_color::manage_by_color(color c , int n)
 	{
 		ReadActionParameters();
 		selected_fig = pManager->GetFigure(p.x, p.y);
-		if (selected_fig)
+		if (selected_fig) //check if pick correct and increment counter
 		{
 			if (selected_fig->get_fillcolor() == c)
 			{
@@ -36,7 +37,7 @@ void figure_color::manage_by_color(color c , int n)
 				pManager->GetOutput()->PrintMessage(s);
 				n--;
 			}
-			else
+			else //check if pick incorrect and increment counter
 			{
 				pManager->DeleteFunctionForPlayMood(selected_fig);
 				incorrect++;
@@ -50,9 +51,9 @@ void figure_color::manage_by_color(color c , int n)
 void figure_color::Execute(bool b)
 {
 	string s;
-	 by_color = colors(rand() % 6);
+	 by_color = colors(rand() % 6); // get random color
 	int n;//num of figure should selected_by_colors
-	switch (by_color)
+	switch (by_color) //detect what shape choosen
 	{
 	case black:
 		n=pManager->get_numofcolor(BLACK);
@@ -123,7 +124,7 @@ void figure_color::Execute(bool b)
 	default:
 		break;
 	}
-	if (correct > incorrect)
+	if (correct > incorrect) // show result
 	{
 		s = "final record is---->  correct picks=  " + to_string(correct) + "    incorrect picks=  " + to_string(incorrect) + "  BRAVOOO";
 		playSound(pManager, WinSound);
