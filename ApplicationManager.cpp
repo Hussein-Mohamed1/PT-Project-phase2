@@ -31,6 +31,10 @@
 #include "StartandStopRec.h"
 #include "Figures/CFigure.h"
 #include "Actions/resizeByDragging.h"
+#include "Actions/playSound.h"
+#include <cstdlib> 
+
+
 int ApplicationManager::countpos = 0;
 //int ApplicationManager::countfill = 0;
 int ApplicationManager::countrepos = 0;
@@ -640,6 +644,9 @@ void ApplicationManager::getColor()
 //Destructor
 ApplicationManager::~ApplicationManager()
 {
+
+
+
 	ClearAll();
 
 	clearUndoRedoFuncs();
