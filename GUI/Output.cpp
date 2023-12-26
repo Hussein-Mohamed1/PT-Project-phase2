@@ -34,12 +34,14 @@ Output::Output()
 	UI.StatusBarColor = TURQUOISE;
 	UI.PenWidth = 3;	//width of the figures frames
 
-
 	//Create the output window
 	pWind = CreateWind(UI.width, UI.height, UI.wx, UI.wy);
 
 	pWind->ChangeTitle("Paint for Kids - Programming Techniques Project");
+	Names();
 	createIntro();
+
+	CreateStatusBar();
 
 	ClearDrawArea();
 	//Change the title
@@ -143,6 +145,7 @@ void Output::CreateDrawToolBar() const
 	for (int i = 0; i < DRAW_ITM_COUNT; i++)
 	{
 		//pWind->DrawImage(MenuItemImages[i], i * UI.MenuItemWidth, 5, UI.MenuItemWidth - 5, UI.ToolBarHeight - 5);
+
 
 		if (i == ITM_BLACK)
 		{
@@ -285,7 +288,7 @@ void Output::DrawRect(Point P1, Point P2, GfxInfo RectGfxInfo, bool selected) co
 	else
 		DrawingClr = RectGfxInfo.DrawClr;
 
-	pWind->SetPen(DrawingClr, 1);
+	pWind->SetPen(DrawingClr, RectGfxInfo.BorderWdth);
 	drawstyle style;
 	if (RectGfxInfo.isFilled)
 	{
@@ -306,8 +309,7 @@ void Output::DrawCirc(Point P1, Point P2, GfxInfo RectGfxInfo, bool selected) co
 		DrawingClr = UI.HighlightColor; //Figure should be drawn highlighted
 	else
 		DrawingClr = RectGfxInfo.DrawClr;
-
-	pWind->SetPen(DrawingClr, 1);
+	pWind->SetPen(DrawingClr, RectGfxInfo.BorderWdth);
 	drawstyle style;
 	if (RectGfxInfo.isFilled)
 	{
@@ -328,7 +330,7 @@ void Output::Drawrtriangle(int x1, int y1, int x2, int y2, int x3, int y3, GfxIn
 	else
 		DrawingClr = RectGfxInfo.DrawClr;
 
-	pWind->SetPen(DrawingClr, 1);
+	pWind->SetPen(DrawingClr, RectGfxInfo.BorderWdth);
 	drawstyle style;
 	if (RectGfxInfo.isFilled)
 	{
@@ -350,7 +352,7 @@ void Output::Drawhexagon(const int* xcoordinates, const int* ycoordinates, GfxIn
 	else
 		DrawingClr = RectGfxInfo.DrawClr;
 
-	pWind->SetPen(DrawingClr, 1);
+	pWind->SetPen(DrawingClr, RectGfxInfo.BorderWdth);
 	drawstyle style;
 	if (RectGfxInfo.isFilled)
 	{
@@ -362,6 +364,14 @@ void Output::Drawhexagon(const int* xcoordinates, const int* ycoordinates, GfxIn
 
 
 	pWind->DrawPolygon(xcoordinates, ycoordinates, 6, style);
+
+}
+void Output::Names()
+{
+   
+	pWind->SetPen(BLACK, 20);
+	pWind->SetFont(20, BOLD, BY_NAME, "Arial");
+	pWind->DrawString(10, UI.height - (int)(UI.StatusBarHeight / 1.5)-10, " Created By :    Salah         Hussin       Noser        Esraa");
 
 }
 
