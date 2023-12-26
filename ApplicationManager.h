@@ -87,9 +87,6 @@ public:
 	void DeleteFunctionForPlayMood(CFigure* Del);
 	void CopyDeletedFigToFiglist();
 	void AddDeletedFig(CFigure* del);
-	// void DeleteFigure(CFigure* Del);
-	 //bool Select(CFigure* figure);
-	 //CFigure* GetFigureByPoint(int x, int y);
 	int get_numofcolor(color);
 	int numof_figurewithcolor(figures, colors);
 	color get_fillcolor(colors);

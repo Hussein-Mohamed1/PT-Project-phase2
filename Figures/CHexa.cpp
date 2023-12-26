@@ -84,7 +84,8 @@ void CHexa::Draw(Output* pOut) const
 
 }
 
-bool CHexa::isInsideWindowsBoundaries(const Point& newPos) const {
+bool CHexa::isInsideWindowsBoundaries(const Point& newPos) const
+{
 	Point tCentre = newPos;
 	if ((newPos.y) - l < (UI.ToolBarHeight + UI.wx) || (newPos.y) + sqrt(pow(l, 2) - pow(l / 2, 2)) >(UI.height - (UI.StatusBarHeight))
 		|| ((newPos.x) + l) > (UI.width - UI.wx) || (newPos.x) - l < 0) return 0;

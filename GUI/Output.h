@@ -31,7 +31,7 @@ public:
 	color getCrntFillColor() const;	//get current filling color
 	int getCrntPenWidth() const;		//get current pen width
 
-	void Names();
+	void Names();                      
 
 	void SetDraColor(color c);
 	void SetFillColor(color c);

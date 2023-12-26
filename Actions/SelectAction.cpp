@@ -31,7 +31,9 @@ void SelectAction::Execute(bool b)
 	if (b)
 		ReadActionParameters();
 	Output* pOut = pManager->GetOutput();
+
 	ClickedFigure = pManager->GetFigure(p.x, p.y);
+
 	CFigure* oldSelected_Figure = pManager->GetSelected_Figure();
 	if (oldSelected_Figure == nullptr && ClickedFigure != nullptr)
 	{
@@ -61,7 +63,3 @@ void SelectAction::Execute(bool b)
 }
 
 
-//CFigure* SelectAction::GetSelected_Figure()
-//{
-//	return Selected_Figure;
-//}
