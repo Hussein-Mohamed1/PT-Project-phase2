@@ -1,6 +1,9 @@
 #include "figure_color.h"
 #include "GUI/Output.h"
 #include "GUI/Input.h"
+#include "Actions/playSound.h"
+#include <cstdlib> 
+
 figure_color::figure_color(ApplicationManager* pApp):Action(pApp)
 {
 	pManager->GetOutput()->ClearStatusBar();
@@ -28,6 +31,7 @@ void figure_color::manage_by_color(color c , int n)
 			{
 				pManager->DeleteFunctionForPlayMood(selected_fig);
 				correct++;
+				playSound(pManager, CorrectChoose);
 				s = "nice pick----> correct picks= " + to_string(correct) + "    incorrect picks= " + to_string(incorrect);
 				pManager->GetOutput()->PrintMessage(s);
 				n--;
@@ -36,6 +40,7 @@ void figure_color::manage_by_color(color c , int n)
 			{
 				pManager->DeleteFunctionForPlayMood(selected_fig);
 				incorrect++;
+				playSound(pManager, WrongChoose);
 				s = "wrong pick----> correct picks= " + to_string(correct) + "    incorrect picks= " + to_string(incorrect);
 				pManager->GetOutput()->PrintMessage(s);
 			}
@@ -126,6 +131,7 @@ void figure_color::Execute(bool b)
 	else if (incorrect > correct)
 	{
 		s = "final record is---->  correct picks=  " + to_string(correct) + "    incorrect picks=  " + to_string(incorrect) + "  not good, try again";
+		playSound(pManager, GameOver);
 		pManager->GetOutput()->PrintMessage(s);
 	}
 	else
