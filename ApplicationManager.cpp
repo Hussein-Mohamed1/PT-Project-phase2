@@ -74,7 +74,6 @@ ApplicationManager::ApplicationManager() : ActionCountre(0), ActionCountun(0)
 		fill[i] = UI.BkGrndColor;
 		Pos[i] = { 100,100 };
 		brush[i] = UI.BkGrndColor;
-
 	}
 }
 
@@ -215,11 +214,12 @@ void ApplicationManager::ExecuteAction(ActionType ActType, int numofrec)
 		break;
 
 	case FUNC_EXIT_playMode:
-		pIn->set_exit();
+		
 		break;
 
 	case FUNC_EXIT:
 		pIn->set_exit();
+
 		break;
 
 	case STATUS:	//a click on the status bar ==> no action
@@ -498,7 +498,7 @@ void ApplicationManager::ClearAll(bool calledfromplay)
 
 		if (FigList[i] != nullptr)
 		{
-
+			FigList[i]->resetnumoffig();
 			delete FigList[i];
 			FigList[i] = nullptr;
 

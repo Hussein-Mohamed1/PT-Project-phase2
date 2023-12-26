@@ -40,6 +40,8 @@ Output::Output()
 	pWind->ChangeTitle("Paint for Kids - Programming Techniques Project");
 	createIntro();
 
+	CreateStatusBar();
+
 	ClearDrawArea();
 	//Change the title
 	//pWind->ChangeTitle("Paint for Kids - Programming Techniques Project");
@@ -143,6 +145,7 @@ void Output::CreateDrawToolBar() const
 	{
 		//pWind->DrawImage(MenuItemImages[i], i * UI.MenuItemWidth, 5, UI.MenuItemWidth - 5, UI.ToolBarHeight - 5);
 
+
 		if (i == ITM_BLACK)
 		{
 			int k = 0;
@@ -222,7 +225,9 @@ void Output::ClearDrawArea() const
 }
 void Output::createIntro()
 {
+
 	pWind->DrawImage("images\\MenuItems\\PaintLogo.jpg", 0, 0, UI.width, UI.height - UI.StatusBarHeight);
+	Names();
 	PlaySound(".\\sounds\\Welcome Sound.wav", NULL, SND_SYNC | SND_FILENAME);
 
 	Sleep(100);
@@ -360,6 +365,14 @@ void Output::Drawhexagon(const int* xcoordinates, const int* ycoordinates, GfxIn
 
 
 	pWind->DrawPolygon(xcoordinates, ycoordinates, 6, style);
+
+}
+void Output::Names()
+{
+   
+	pWind->SetPen(BLACK, 20);
+	pWind->SetFont(20, BOLD, BY_NAME, "Arial");
+	pWind->DrawString(10, UI.height - (int)(UI.StatusBarHeight / 1.5)-10, " Created By :    Salah         Hussin       Noser        Esraa");
 
 }
 

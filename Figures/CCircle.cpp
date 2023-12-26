@@ -46,7 +46,7 @@ void CCircle::Draw(Output* pOut) const
 	pOut->DrawCirc(P1, P2, FigGfxInfo, Selected);
 
 }
-CCircle::CCircle() {  };
+CCircle::CCircle() { numofshapes++; };
 
 ostream& operator<<(ostream& op, const CCircle& c)
 {
@@ -148,4 +148,8 @@ bool CCircle::is_filled()
 CCircle::~CCircle()
 {
 	numofshapes--;
+}
+void CCircle::resetnumoffig()
+{
+	numofshapes = 0;
 }

@@ -29,6 +29,7 @@ public:
 	void decrementnumofshapes();
 	bool is_filled();
 	~CCircle();
+	void resetnumoffig();
 };
 
 

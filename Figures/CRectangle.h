@@ -29,9 +29,10 @@ public:
 	//void PrintInfo(Output* pOut);
 	Point& GetCenter();
 	static int getnumofshapes();
-	void decrementnumofshapes();
-	bool is_filled();
-	~CRectangle();
+	 void decrementnumofshapes();
+	 bool is_filled();
+	 ~CRectangle();
+	 void resetnumoffig();
 };
 
 #endif

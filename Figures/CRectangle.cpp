@@ -43,7 +43,7 @@ int CRectangle::OutlineClickValidation(const Point& tempPoint)
 		return 2;
 	}return 0;
 }
-CRectangle::CRectangle() {}
+CRectangle::CRectangle() { numofshapes++; }
 void CRectangle::Draw(Output* pOut) const
 {
 	//Call Output::DrawRect to draw a rectangle on the screen	
@@ -157,7 +157,10 @@ CRectangle::~CRectangle()
 {
 	numofshapes--;
 }
-
+void CRectangle::resetnumoffig()
+{
+	numofshapes = 0;
+}
 
 
 

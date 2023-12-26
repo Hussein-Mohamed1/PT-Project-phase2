@@ -49,6 +49,10 @@ public:
 
 	//Save the figure parameters to the file
 	//Load the figure parameters to the file
+	 virtual void resetnumoffig();
+	
+		//Save the figure parameters to the file
+		//Load the figure parameters to the file
 
 };
 

@@ -27,8 +27,9 @@ public:
 	//	void PrintInfo(Output* pOut);
 	color get_fillcolor();
 	static int getnumofshapes();
-	void decrementnumofshapes();
-	bool is_filled();
-	~CHexa();
+	 void decrementnumofshapes();
+	 bool is_filled();
+	 ~CHexa();
+	 void resetnumoffig();
 };
 
