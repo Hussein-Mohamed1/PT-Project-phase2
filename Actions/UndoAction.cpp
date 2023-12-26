@@ -49,6 +49,7 @@ void UndoAction::ReadActionParameters() {
 
 void UndoAction::undo()
 {
+	
 }
 
 void UndoAction::redo()

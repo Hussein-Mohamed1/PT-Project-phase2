@@ -41,4 +41,5 @@ void DeleteAction::redo()
 
 void DeleteAction::addundofirst(Action* pAct)
 {
+	pManager->addToUndo(this);
 }

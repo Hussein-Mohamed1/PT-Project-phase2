@@ -209,7 +209,8 @@ void ApplicationManager::ExecuteAction(ActionType ActType, int numofrec)
 	case FUNC_MOVE:
 
 		pAct = new moveFigure(this);
-		addToUndo(pAct);
+		//addToUndo(pAct);
+		playSound(this, FUNC_MOVE);
 		break;
 
 	case FUNC_EXIT_playMode:
@@ -308,9 +309,16 @@ void ApplicationManager::Playrecord()
 
 
 			arr_recActions[i]->addundofirst(arr_recActions[i]);
+			
+		/*if (dynamic_cast<UndoAction*>(arr_recActions[i]))
+			{
+				for (int j = 0;j < counter;j++) {
+					arr_recActions[j]->undo();
+			}
 
-
-
+			}*/
+			
+				
 			arr_recActions[i]->Execute(0);
 
 

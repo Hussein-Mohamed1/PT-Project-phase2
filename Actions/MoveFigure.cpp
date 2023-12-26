@@ -43,9 +43,9 @@ void moveFigure::Execute(bool b) {
 			if (cFigure != nullptr)
 			{
 				ReadActionParameters();
-				move();
-			}
-		}
+				
+			} 
+		}move();
 	}
 	else moveByDragging();
 }
@@ -96,10 +96,8 @@ void moveFigure::moveByDragging() {
 
 void moveFigure::addundofirst(Action* pAct)
 {
-
+	pManager->addToUndo(this);
 }
-
-
 
 void moveFigure::undo()
 {
