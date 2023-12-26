@@ -14,12 +14,12 @@ void resizeByDragging::Execute(bool b)
 		pIn->GetButtonState(LEFT_BUTTON, newPos.x, newPos.y); // just puts the current coords to iX and iY, nothing else
 		int cornerNumber = sFigure->OutlineClickValidation(newPos);
 		if (cornerNumber) { // checks if the mouse is on the outlines of the selected figure
-			Sleep(200);// necessary delay to capture the users double tap on a shape
+			Sleep(100);// necessary delay to capture the users double tap on a shape
 			while (pIn->GetButtonState(RIGHT_BUTTON, newPos.x, newPos.y) == BUTTON_DOWN ||
 				pIn->GetButtonState(LEFT_BUTTON, newPos.x, newPos.y) == BUTTON_DOWN)
 			{
 				if (sFigure->isInsideWindowsBoundaries(sFigure->GetCenter()))
-					sFigure->resize(newPos);
+					sFigure->resize(newPos, cornerNumber);
 				else
 				{
 					pManager->GetOutput()->PrintMessage("Invalid Position! Please try again.....");

@@ -116,9 +116,10 @@ void CTriangle::Load(string& line)
 
 void CTriangle::move(const Point& newPos)
 {
-	P2 = P2 + newPos - P1;
-	P3 = P3 + newPos - P1;
-	P1 = newPos;
+	Point center = GetCenter();
+	P2 = P2 + newPos - center;
+	P3 = P3 + newPos - center;
+	P1 = P1 + newPos - center;
 }
 
 bool CTriangle::isInsideWindowsBoundaries(const Point& newPos) const

@@ -116,7 +116,7 @@ int CCircle::OutlineClickValidation(const Point& mousePosition)
 {
 	int Cicle_radius = sqrt((P1.x - P2.x) * (P1.x - P2.x) + (P1.y - P2.y) * (P1.y - P2.y));
 	int ClickRadius = sqrt(pow((mousePosition.x - P1.x), 2) + pow((mousePosition.y - P1.y), 2));
-	if (ClickRadius <= Cicle_radius + FigGfxInfo.BorderWdth / 2 && ClickRadius >= Cicle_radius - FigGfxInfo.BorderWdth / 2) {
+	if (ClickRadius <= Cicle_radius + FigGfxInfo.BorderWdth && ClickRadius >= Cicle_radius - FigGfxInfo.BorderWdth ) {
 		// checks if the user's Click Radius is on the outline of the circle
 		return 1;
 	}return 0;
