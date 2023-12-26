@@ -47,7 +47,8 @@ enum ActionType //The actions supported (you can add more if needed)
 	/// play Mood Sound 
 	CorrectChoose ,
 	WrongChoose,
-	GameOver
+	GameOver,
+	WinSound
 
 	///TODO: Add the other action types of the two modes
 };

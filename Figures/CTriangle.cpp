@@ -11,7 +11,7 @@ CTriangle::CTriangle(Point p1, Point p2, Point p3, GfxInfo FigureGfxInfo) : CFig
 }
 int CTriangle::numofshapes = 0;
 
-CTriangle::CTriangle() {  };
+CTriangle::CTriangle() { numofshapes++; };
 
 int CTriangle::Getid()
 {
@@ -116,9 +116,10 @@ void CTriangle::Load(string& line)
 
 void CTriangle::move(const Point& newPos)
 {
-	P2 = P2 + newPos - P1;
-	P3 = P3 + newPos - P1;
-	P1 = newPos;
+	Point center = GetCenter();
+	P2 = P2 + newPos - center;
+	P3 = P3 + newPos - center;
+	P1 = P1 + newPos - center;
 }
 
 bool CTriangle::isInsideWindowsBoundaries(const Point& newPos) const
@@ -159,4 +160,8 @@ color CTriangle::get_fillcolor()
 CTriangle::~CTriangle()
 {
 	numofshapes--;
+}
+void CTriangle::resetnumoffig()
+{
+	numofshapes = 0;
 }

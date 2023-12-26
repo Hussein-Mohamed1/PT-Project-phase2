@@ -64,6 +64,10 @@ void playSound::Execute(bool b)
 	case GameOver:
 		PlaySound(".\\sounds\\gameover.wav", NULL, SND_ASYNC | SND_FILENAME);
 		break;
+	case WinSound:
+		PlaySound(".\\sounds\\Winsound.wav", NULL, SND_ASYNC | SND_FILENAME);
+		break;
+
 	}Pause(100);
 }
 void playSound::undo()
