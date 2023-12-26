@@ -141,6 +141,7 @@
     <ClCompile Include="Actions\playSound.cpp" />
     <ClCompile Include="Actions\PrepareExport.cpp" />
     <ClCompile Include="Actions\PrepareImport.cpp" />
+    <ClCompile Include="Actions\resizeByDragging.cpp" />
     <ClCompile Include="Actions\SelectAction.cpp" />
     <ClCompile Include="Actions\RedoAction.cpp" />
     <ClCompile Include="Actions\UndoAction.cpp" />
@@ -210,6 +211,7 @@
     <ClInclude Include="Actions\playrecord.h" />
     <ClInclude Include="Actions\playSound.h" />
     <ClInclude Include="Actions\RedoAction.h" />
+    <ClInclude Include="Actions\resizeByDragging.h" />
     <ClInclude Include="Actions\UndoAction.h" />
     <ClInclude Include="Actions\PrepareExport.h" />
     <ClInclude Include="Actions\PrepareImport.h" />

@@ -23,11 +23,27 @@ int CSquare::Getid()
 {
 	return id;
 }
+void CSquare::resize(const Point& tempPoint, int cornerNumber)
+{
+	if (cornerNumber == 1)
+		P1 = tempPoint;
+	else P2 = tempPoint;
+
+}
+int CSquare::OutlineClickValidation(const Point& tempPoint)
+{
+	if (sqrt(pow((tempPoint.x - P1.x), 2) + pow((tempPoint.y - P1.y), 2)) <= FigGfxInfo.BorderWdth) {
+		return 1;
+	}
+	else if (sqrt(pow((tempPoint.x - P2.x), 2) + pow((tempPoint.y - P2.y), 2)) <= FigGfxInfo.BorderWdth) {
+		return 2;
+	}return 0;
+}
 bool CSquare::is_filled()
 {
 	return FigGfxInfo.isFilled;
 }
-Point& CSquare::GetP1()
+Point& CSquare::GetCenter()
 {
 	return (P1 + P2) / 2;
 }
@@ -72,7 +88,7 @@ ostream& operator<<(ostream& op, const CSquare& Fig) {
 };
 bool CSquare::checkselection(int x, int y)
 {
-	if ((x >= P1.x && x <= P2.x) && (y >= P1.y && y <= P2.y))
+	if (((x >= P1.x && x <= P2.x) || (x <= P1.x && x >= P2.x)) && ((y >= P1.y && y <= P2.y) || (y <= P1.y && y >= P2.y)))
 	{
 		return true;
 	}
@@ -87,18 +103,19 @@ void CSquare::move(const Point& newPos)
 	P1 = newPos + P1 - Center;
 }
 
-bool CSquare::isInsideWindowBoundaries(const Point& newPos) const
+bool CSquare::isInsideWindowsBoundaries(const Point& newPos) const
 {
 
 	Point P2 = newPos + CSquare::P2 - (CSquare::P2 + CSquare::P1) / 2;
 	Point P1 = newPos + CSquare::P1 - (CSquare::P2 + CSquare::P1) / 2;
-	if ((!(P1.y > UI.ToolBarHeight + 5 && P1.y < UI.height - UI.StatusBarHeight - 5)) || (!(P2.y > UI.ToolBarHeight + 5 && P2.y < UI.height - UI.StatusBarHeight - 5)) || (P1.x < 5 || P2.x >= UI.width - 5))
+	if ((!(P1.y > UI.ToolBarHeight + UI.wx && P1.y < UI.height - UI.StatusBarHeight - UI.wx)) || (!(P2.y > UI.ToolBarHeight + UI.wx && P2.y < UI.height - UI.StatusBarHeight - UI.wx)) || (P1.x < UI.wx || P2.x >= UI.width - UI.wx))
 		return 0;
 	return 1;
 }
 void CSquare::PrintInfo(Output* pOut)
 {
 	int hieght = abs(P1.y - P2.y);
+	int width = abs(P1.x - P2.x);
 
 	// concatination to print one sting contaion all data of figure
 
@@ -107,7 +124,7 @@ void CSquare::PrintInfo(Output* pOut)
 	string printed = "Fiure is Square      Figure id : " + to_string(id) +
 		"        Fisrt Corner :(" + to_string(P1.x) + "," + to_string(P1.y) + ")"
 		+ "        Second Corner :(" + to_string(P2.x) + "," + to_string(P2.y) + ")"
-		+ "        height " + to_string(hieght) + "        width " + to_string(hieght);   // hieght = widght becuase it's a square
+		+ "        height " + to_string(hieght) + "        width " + to_string(width);   // hieght = widght becuase it's a square
 
 	pOut->PrintMessage(printed);
 

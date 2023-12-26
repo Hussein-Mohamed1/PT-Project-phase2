@@ -72,7 +72,7 @@
 
  }
 
- Point AddSquareAction::GetP1()
+ Point AddSquareAction::GetCenter()
  {
 	 return P1;
  }

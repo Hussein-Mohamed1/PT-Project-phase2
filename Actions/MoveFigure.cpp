@@ -19,7 +19,7 @@ void moveFigure::ReadActionParameters() {
 
 	if (cFigure != nullptr)
 	{
-		newPos = (cFigure->GetP1());
+		newPos = (cFigure->GetCenter());
 		pOut->PrintMessage("Click a point to move the figure to.");
 		pIn->GetPointClicked(newPos.x, newPos.y);
 		//pManager->GetFigure(newPos.x, newPos.y);
@@ -43,8 +43,8 @@ void moveFigure::Execute(bool b) {
 			if (cFigure != nullptr)
 			{
 				ReadActionParameters();
-				
-			} 
+
+			}
 		}move();
 	}
 	else moveByDragging();
@@ -53,11 +53,11 @@ void moveFigure::Execute(bool b) {
 void moveFigure::move(bool notaReverseAction) {
 	if (!byDragging && cFigure != nullptr && notaReverseAction == true)
 	{
-		lastPoint = cFigure->GetP1();
+		lastPoint = cFigure->GetCenter();
 	}
 	pManager->set_figure(cFigure);
 	if ((newPos.x <= UI.width - 5 && newPos.x > 0) && (newPos.y < UI.height - UI.StatusBarHeight - 5) && (newPos.y > UI.ToolBarHeight + 5)) {
-		if (cFigure->isInsideWindowBoundaries(newPos))
+		if (cFigure->isInsideWindowsBoundaries(newPos))
 		{
 			cFigure->move(newPos);
 		}
@@ -74,10 +74,10 @@ void moveFigure::moveByDragging() {
 	Input* pIn = pManager->GetInput();
 	pIn->GetButtonState(LEFT_BUTTON, newPos.x, newPos.y); // just puts the current coords to iX and iY, nothing else
 	if (cFigure->checkselection(newPos.x, newPos.y) == true) {
-		lastPoint = cFigure->GetP1();
+		lastPoint = cFigure->GetCenter();
 		Sleep(200);// necessary delay to capture the users double tap on a shape
 		while (pIn->GetButtonState(RIGHT_BUTTON, newPos.x, newPos.y) == BUTTON_DOWN || pIn->GetButtonState(LEFT_BUTTON, newPos.x, newPos.y) == BUTTON_DOWN) {
-			if (cFigure->isInsideWindowBoundaries(newPos))
+			if (cFigure->isInsideWindowsBoundaries(newPos))
 				move();
 			else
 			{

@@ -15,18 +15,20 @@ public:
 	void Save(fstream&)const;
 	void Load(string&);
 	void move(const Point&);
-	bool isInsideWindowBoundaries(const Point&) const;
+	bool isInsideWindowsBoundaries(const Point&) const;
 	bool checkselection(int x, int y);
 	int Getid();
-	Point& GetP1();
+	void resize(const Point&, int = 0);
+	int OutlineClickValidation(const Point& tempPoint);
+	Point& GetCenter();
 
 	void PrintInfo(Output* pOut);
 
 	//  void PrintInfo(Output* pOut);
 	color get_fillcolor();
 	static int getnumofshapes();
-	 void decrementnumofshapes();
-	 bool is_filled();
-	 ~CSquare();
+	void decrementnumofshapes();
+	bool is_filled();
+	~CSquare();
 };
 

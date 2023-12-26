@@ -55,13 +55,13 @@ void playSound::Execute(bool b)
 	case FUNC_MOVE:
 		PlaySound(".\\sounds\\move.wav", NULL, SND_ASYNC | SND_FILENAME);
 		break;
-	case BY_SHAPE:
+	case WrongChoose:
 		PlaySound(".\\sounds\\wrongpick.wav", NULL, SND_ASYNC | SND_FILENAME);
 		break;
-	case BY_COLOR:
+	case CorrectChoose:
 		PlaySound(".\\sounds\\correct.wav", NULL, SND_ASYNC | SND_FILENAME);
 		break;
-	case BY_COLOR_SHAPE:
+	case GameOver:
 		PlaySound(".\\sounds\\gameover.wav", NULL, SND_ASYNC | SND_FILENAME);
 		break;
 	}Pause(100);

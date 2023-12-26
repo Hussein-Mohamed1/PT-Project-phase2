@@ -29,7 +29,7 @@ void CCircle::decrementnumofshapes()
 {
 	numofshapes--;
 }
-Point& CCircle::GetP1()
+Point& CCircle::GetCenter()
 {
 	return P2;
 }
@@ -101,17 +101,30 @@ void CCircle::move(const Point& p) {
 	P2 = P2 + p - P1;
 	P1 = p;
 }
-bool CCircle::isInsideWindowBoundaries(const Point& p) const
+bool CCircle::isInsideWindowsBoundaries(const Point& p) const
 {
 	Point tempP2 = P2 + p - P1;
 	Point tempP1 = p;
 	int r = sqrt((tempP1.x - tempP2.x) * (tempP1.x - tempP2.x) + (tempP1.y - tempP2.y) * (tempP1.y - tempP2.y));
-	return !(!((tempP1.y - r) > UI.ToolBarHeight + 5 && (tempP1.y + r) < UI.height - UI.StatusBarHeight) || (tempP1.x - r) < 5 || (tempP1.x + r) >= UI.width - 15);
+	return !(!((tempP1.y - r) > UI.ToolBarHeight + UI.wx && (tempP1.y + r) < UI.height - UI.StatusBarHeight) || (tempP1.x - r) < UI.wx || (tempP1.x + r) >= UI.width - UI.wx);
+}
+void CCircle::resize(const Point& tempPoint, int)
+{
+	P2 = tempPoint;
+}
+int CCircle::OutlineClickValidation(const Point& mousePosition)
+{
+	int Cicle_radius = sqrt((P1.x - P2.x) * (P1.x - P2.x) + (P1.y - P2.y) * (P1.y - P2.y));
+	int ClickRadius = sqrt(pow((mousePosition.x - P1.x), 2) + pow((mousePosition.y - P1.y), 2));
+	if (ClickRadius <= Cicle_radius + FigGfxInfo.BorderWdth / 2 && ClickRadius >= Cicle_radius - FigGfxInfo.BorderWdth / 2) {
+		// checks if the user's Click Radius is on the outline of the circle
+		return 1;
+	}return 0;
 }
 void CCircle::PrintInfo(Output* pOut)
 {
 	// raduis of circle 
-	int Cicle_radius = sqrt((P1.x - P2.x) * (P1.x - P2.x) + (P1.y - P2.y) * (P1.y - P2.y)); 
+	int Cicle_radius = sqrt((P1.x - P2.x) * (P1.x - P2.x) + (P1.y - P2.y) * (P1.y - P2.y));
 	Point centre;
 	centre.x = (P1.x - P2.x);   centre.y = (P1.y - P2.y);
 
@@ -121,7 +134,7 @@ void CCircle::PrintInfo(Output* pOut)
 	string printed = " Figure is Circle         Figure id :" + to_string(id) + "         Radius : " + to_string(Cicle_radius)
 		+ "       Centre : (" + to_string(centre.x) + "," + to_string(centre.y) + ")";
 	pOut->PrintMessage(printed);
-	
+
 
 }
 color CCircle::get_fillcolor()

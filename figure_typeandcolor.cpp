@@ -4,6 +4,9 @@
 #include "Figures/CRectangle.h"
 #include "Figures/CSquare.h"
 #include "Figures/CTriangle.h"
+#include "Actions/playSound.h"
+#include <cstdlib> 
+
 figure_typeandcolor::figure_typeandcolor(ApplicationManager* pApp) :Action(pApp)
 {
 	pManager->GetOutput()->ClearStatusBar();
@@ -22,6 +25,7 @@ void figure_typeandcolor::manage_typeandcolor()
 	{
 		pManager->DeleteFunctionForPlayMood(selected_fig);
 		correct++;
+		playSound(pManager, CorrectChoose);
 		s = "nice pick----> correct picks= " + to_string(correct) + "    incorrect picks= " + to_string(incorrect);
 		pManager->GetOutput()->PrintMessage(s);
 		numoffigbycolor--;
@@ -30,6 +34,7 @@ void figure_typeandcolor::manage_typeandcolor()
 	{
 		pManager->DeleteFunctionForPlayMood(pManager->GetFigure(p.x, p.y));
 		incorrect++;
+		playSound(pManager, WrongChoose);
 		s = "wrong pick----> correct picks= " + to_string(correct) + "    incorrect picks= " + to_string(incorrect);
 		pManager->GetOutput()->PrintMessage(s);
 	}
@@ -102,6 +107,7 @@ void figure_typeandcolor::Execute(bool b)
 		else if (incorrect > correct)
 		{
 			s = "final record is---->  correct picks=  " + to_string(correct) + "    incorrect picks=  " + to_string(incorrect) + "  not good, try again";
+			playSound(pManager, GameOver);
 			pManager->GetOutput()->PrintMessage(s);
 		}
 		else

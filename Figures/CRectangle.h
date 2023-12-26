@@ -19,18 +19,19 @@ public:
 	friend ostream& operator<<(ostream&, const CRectangle&);
 	void Save(fstream&)const;
 	void Load(string&);
-	bool isInsideWindowBoundaries(const Point&) const;
+	bool isInsideWindowsBoundaries(const Point&) const;
 	bool checkselection(int x, int y);
 	int Getid();
-
+	void resize(const Point&, int = 0);
+	int OutlineClickValidation(const Point&tempPoint);
 	void PrintInfo(Output* pOut);
 	color get_fillcolor();
 	//void PrintInfo(Output* pOut);
-	Point&  GetP1();
+	Point& GetCenter();
 	static int getnumofshapes();
-	 void decrementnumofshapes();
-	 bool is_filled();
-	 ~CRectangle();
+	void decrementnumofshapes();
+	bool is_filled();
+	~CRectangle();
 };
 
 #endif

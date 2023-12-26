@@ -42,7 +42,13 @@ enum ActionType //The actions supported (you can add more if needed)
 	ENTER_DRAW_MODE,
 	BY_COLOR,
 	BY_SHAPE,
-	BY_COLOR_SHAPE
+	BY_COLOR_SHAPE,
+
+	/// play Mood Sound 
+	CorrectChoose ,
+	WrongChoose,
+	GameOver
+
 	///TODO: Add the other action types of the two modes
 };
 

@@ -19,7 +19,7 @@ public :
 	 void addundofirst(Action* pAct);
 	 void undo();
 	void redo();
-	Point  GetP1();
+	Point  GetCenter();
 	Point Getp2();
 	
 

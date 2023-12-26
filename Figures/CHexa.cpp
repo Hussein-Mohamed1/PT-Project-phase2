@@ -24,9 +24,22 @@ void CHexa::decrementnumofshapes()
 {
 	numofshapes--;
 }
-Point& CHexa::GetP1()
+Point& CHexa::GetCenter()
 {
 	return centre;
+}
+
+int CHexa::OutlineClickValidation(const Point& mousePosition)
+{
+	if (sqrt(pow((mousePosition.x - centre.x), 2) + pow((mousePosition.y - centre.y), 2)) <= UI.wx + l) {
+		return 1;
+	};
+	return 0;
+}
+
+void CHexa::resize(const Point& tempPoint, int)
+{
+	l = sqrt(pow((tempPoint.x - centre.x), 2) + pow((tempPoint.y - centre.y), 2));
 }
 
 bool CHexa::is_filled()
@@ -36,16 +49,6 @@ bool CHexa::is_filled()
 
 bool CHexa::checkselection(int x, int y)
 {
-	// approach one 
-	// 
-	//int dis = sqrt((x - centre.x) * (x - centre.x) + (y - centre.y) * (y - centre.y));
-	//if (dis <=l-6)   // you must change it if you change lenght of Hexa to be finaly  l;
-	//{
-	//	return true;
-	//}
-	//return false;
-
-	// approach two 
 
 	int xc = centre.x, yc = centre.y;
 	int small_height = l * 0.87;         // cos(60)  (from geometry of shape)
@@ -81,10 +84,10 @@ void CHexa::Draw(Output* pOut) const
 
 }
 
-bool CHexa::isInsideWindowBoundaries(const Point& newPos) const {
+bool CHexa::isInsideWindowsBoundaries(const Point& newPos) const {
 	Point tCentre = newPos;
-	if ((newPos.y) - 80 < (UI.ToolBarHeight + UI.wx) || (newPos.y) + 61 > (UI.height - (UI.StatusBarHeight + UI.wx))
-		|| ((newPos.x) + 80) > (UI.width - UI.wx) || (newPos.x) - 80 < 0) return 0;
+	if ((newPos.y) - l < (UI.ToolBarHeight + UI.wx) || (newPos.y) + sqrt(pow(l, 2) - pow(l / 2, 2)) >(UI.height - (UI.StatusBarHeight))
+		|| ((newPos.x) + l) > (UI.width - UI.wx) || (newPos.x) - l < 0) return 0;
 	return 1;
 }
 void CHexa::move(const Point& newPos)
