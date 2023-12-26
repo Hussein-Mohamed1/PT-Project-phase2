@@ -48,9 +48,9 @@ void figure_typeandcolor::Execute(bool b)
 		pManager->GetOutput()->PrintMessage(s);
 		ReadActionParameters();
 		s = "correct picks= " + to_string(correct) + "    incorrect picks= " + to_string(incorrect);
+		pManager->GetOutput()->PrintMessage(s);
 		while (numoffigbycolor && (p.y>50))
 		{
-			pManager->GetOutput()->PrintMessage(s);
 			ReadActionParameters();
 			switch (by_fig)
 			{

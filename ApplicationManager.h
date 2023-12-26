@@ -15,7 +15,7 @@ class ApplicationManager
 
 
 private:
-	Action* arr_recActions[20];
+	Action** arr_recActions;
 	Action* ActListun[maxActionCount];       //actual array of actions
 	Action* ActListre[maxActionCount];
 	int ActionCountun;
@@ -46,7 +46,7 @@ public:
 	static int countbrush;
 	ApplicationManager();
 	~ApplicationManager();
-	void ClearAll();
+	void ClearAll(bool calledfromplay=false);
 	void clearUndoRedoFuncs();
 	// -- Action-Related Functions
 	//Reads the input command from the user and returns the corresponding action type

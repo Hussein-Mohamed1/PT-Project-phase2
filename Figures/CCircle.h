@@ -6,6 +6,7 @@ class CCircle : public CFigure
 private:
 	Point P1, P2;
 	int id;
+	static int numofshapes;
 public:
 	CCircle(Point, Point, GfxInfo FigureGfxInfo);
 	Point&  GetP1();
@@ -21,6 +22,10 @@ public:
 	int Getid();
 	void PrintInfo(Output* pOut);
 	color get_fillcolor();
+	static int getnumofshapes();
+	void decrementnumofshapes();
+	bool is_filled();
+	~CCircle();
 };
 
 

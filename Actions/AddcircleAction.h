@@ -9,7 +9,6 @@ class AddcircleAction : public Action
   private : 
     Point P1, P2;
     GfxInfo CircleGfxInfo;
-	static int numofshapes;
 	CCircle* c;
 	CFigure* DeletedFig;
 public:
@@ -17,7 +16,6 @@ public:
 	 void addundofirst(Action* pAct);
 	//Reads rectangle parameters
 	virtual void ReadActionParameters();
-	static int getnumofshapes();
 	//Add rectangle to the ApplicationManager
  void Execute(bool b);
 	 void undo();

@@ -6,7 +6,7 @@ private:
 	Point centre;
 	int id;
 	int l;  //side lenght of Hexa
-
+	static int numofshapes;
 public:
 
 	CHexa(Point c, GfxInfo FigureGfxInfo);
@@ -25,6 +25,9 @@ public:
 	void PrintInfo(Output* pOut);
 	//	void PrintInfo(Output* pOut);
 	color get_fillcolor();
-
+	static int getnumofshapes();
+	 void decrementnumofshapes();
+	 bool is_filled();
+	 ~CHexa();
 };
 

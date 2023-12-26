@@ -9,7 +9,7 @@ private:
 	Point P1, P2;
 	GfxInfo SquareGfxInfo;
 	CFigure* DeletedFig;
-	static int numofshapes;
+	
 	CSquare* s;
 public :
 	AddSquareAction(ApplicationManager* pApp);
@@ -21,7 +21,7 @@ public :
 	void redo();
 	Point  GetP1();
 	Point Getp2();
-	static int getnumofshapes();
+	
 
 
 };

@@ -7,6 +7,7 @@ class CTriangle :
 private:
 	Point P1, P2, P3;
 	int id;
+	static int numofshapes;
 public:
 
 	CTriangle(Point p1, Point p2, Point p3, GfxInfo FigureGfxInfo);
@@ -24,4 +25,8 @@ public:
 	
 	void PrintInfo(Output* pOut);
 	color get_fillcolor();
+	static int getnumofshapes();
+	 void decrementnumofshapes();
+	 bool is_filled();
+	 ~CTriangle();
 };

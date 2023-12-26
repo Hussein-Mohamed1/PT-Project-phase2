@@ -18,7 +18,7 @@ protected:
 public:
 	CFigure(GfxInfo FigureGfxInfo);
 	CFigure();
-	
+	virtual  void decrementnumofshapes() ;
 	void SetSelected(bool s);	 //select/unselect the figure
 	bool IsSelected() const;	//check whether fig is selected
 	virtual  bool checkselection(int x, int y) = 0;
@@ -34,7 +34,7 @@ public:
 	void ChngFillClr(color Fclr);	//changes the figure's filling color
 	///The following functions should be supported by the figure class
 	///It should be overridden by each inherited figure
-	
+	virtual bool is_filled();
 	///Decide the parameters that you should pass to each function	
 	virtual bool isInsideWindowBoundaries(const Point&) const = 0;
 	virtual void move(const Point&) = 0;

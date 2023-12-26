@@ -9,6 +9,7 @@ private:
 	Point Corner1;
 	Point Corner2;
 	int id;
+	static int numofshapes;
 public:
 	CRectangle(Point, Point, GfxInfo FigureGfxInfo);
 	CRectangle();
@@ -26,7 +27,10 @@ public:
 	color get_fillcolor();
 	//void PrintInfo(Output* pOut);
 	Point&  GetP1();
-	
+	static int getnumofshapes();
+	 void decrementnumofshapes();
+	 bool is_filled();
+	 ~CRectangle();
 };
 
 #endif
