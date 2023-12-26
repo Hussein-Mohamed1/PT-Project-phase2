@@ -27,18 +27,20 @@ void figure_type::manage_byfigure()
 	string s;
 	if (selected_fig)
 	{
-		playSound(pManager, BY_COLOR);
+		//playSound(pManager, BY_COLOR);
 		pManager->DeleteFunctionForPlayMood(selected_fig);
 		correct++;
+		playSound(pManager, CorrectChoose);
 		s = "nice pick----> correct picks= " + to_string(correct) + "    incorrect picks= " + to_string(incorrect);
 		pManager->GetOutput()->PrintMessage(s);
 		numoffigure--;
 	}
 	else
 	{
-		playSound(pManager, BY_SHAPE);
+		//playSound(pManager, BY_SHAPE);
 		pManager->DeleteFunctionForPlayMood(pManager->GetFigure(p.x , p.y));
 		incorrect++;
+		playSound(pManager, WrongChoose);
 		s = "wrong pick----> correct picks= " + to_string(correct) + "    incorrect picks= " + to_string(incorrect);
 		pManager->GetOutput()->PrintMessage(s);
 	}
@@ -120,14 +122,13 @@ void figure_type::Execute(bool b)
 		}
 		if (correct > incorrect)
 		{
-			playSound(pManager, BY_COLOR_SHAPE);
 			s = "final record is---->  correct picks=  " + to_string(correct) + "    incorrect picks=  " + to_string(incorrect) + "  BRAVOOO";
 			pManager->GetOutput()->PrintMessage(s);
 		}
 		else if (incorrect > correct)
 		{
-			playSound(pManager, BY_COLOR_SHAPE);
 			s = "final record is---->  correct picks=  " + to_string(correct) + "    incorrect picks=  " + to_string(incorrect) + "  not good, try again";
+			playSound(pManager, GameOver);
 			pManager->GetOutput()->PrintMessage(s);
 		}
 		else

@@ -135,7 +135,6 @@ void Output::CreateDrawToolBar() const
 	MenuItemImages[ITM_SAVE] = "images\\MenuItems\\export.jpg";
 	MenuItemImages[ITM_LOAD] = "images\\MenuItems\\import.jpg";
 	MenuItemImages[PLAY_MODE] = "images\\MenuItems\\playmode.jpg";
-	MenuItemImages[ADD_IMAGE] = "images\\MenuItems\\importImage.jpg";
 	MenuItemImages[CLEAR_CANVAS] = "images\\MenuItems\\clearCanvas.jpg";
 	MenuItemImages[ITM_FILL] = "images\\MenuItems\\fill.jpg";
 	MenuItemImages[ITM_MOVE] = "images\\MenuItems\\move.jpg";
@@ -145,17 +144,17 @@ void Output::CreateDrawToolBar() const
 	{
 		//pWind->DrawImage(MenuItemImages[i], i * UI.MenuItemWidth, 5, UI.MenuItemWidth - 5, UI.ToolBarHeight - 5);
 
-		if (i == 11)
+		if (i == ITM_BLACK)
 		{
 			int k = 0;
-			for (int j = 11; j < 14; j++)
+			for (int j = ITM_BLACK; j < ITM_GREEN; j++)
 			{
 				pWind->DrawImage(MenuItemImages[j], ((j)*UI.MenuItemWidth - k * 22), 1, UI.MiniColorWidth, UI.MiniColorHeight);
 				k++;
 				i = j;
 			}
 			k = 0;
-			for (int j = 14; j < 17; j++)
+			for (int j = ITM_GREEN; j <= ITM_ORANGE; j++)
 			{
 				pWind->DrawImage(MenuItemImages[j], ((j - 3) * UI.MenuItemWidth - k * 22), 25, UI.MiniColorWidth, UI.MiniColorHeight);
 				k++;
@@ -166,7 +165,7 @@ void Output::CreateDrawToolBar() const
 
 		}
 		else
-			if (i > 16)                         /// condition to shift back 
+			if (i > ITM_ORANGE)                         /// condition to shift back 
 				pWind->DrawImage(MenuItemImages[i], (i - 4) * UI.MenuItemWidth, 5, UI.MenuItemWidth - 5, UI.ToolBarHeight - 5);
 			else
 				pWind->DrawImage(MenuItemImages[i], i * UI.MenuItemWidth, 5, UI.MenuItemWidth - 5, UI.ToolBarHeight - 5);
@@ -224,7 +223,7 @@ void Output::ClearDrawArea() const
 }
 void Output::createIntro()
 {
-	pWind->DrawImage("images\\MenuItems\\PaintLogo.jpg", 0, 0, UI.width, UI.height-UI.StatusBarHeight);
+	pWind->DrawImage("images\\MenuItems\\PaintLogo.jpg", 0, 0, UI.width, UI.height - UI.StatusBarHeight);
 	PlaySound(".\\sounds\\Welcome Sound.wav", NULL, SND_SYNC | SND_FILENAME);
 
 	Sleep(100);
@@ -260,7 +259,7 @@ int Output::getCrntPenWidth() const		//get current pen width
 
 void Output::SetDraColor(color c)
 {
-     
+
 	UI.DrawColor = c;
 }
 void Output::SetFillColor(color c)
