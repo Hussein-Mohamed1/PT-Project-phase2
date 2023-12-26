@@ -50,7 +50,10 @@ void CFigure::ChngFillClr(color Fclr)
 	FigGfxInfo.FillClr = Fclr;
 
 }
-
+bool CFigure::is_filled()
+{
+	return true;
+}
 
 ostream& operator<<(ostream& op, const Point& p) {
 	op << p.x << " " << p.y;
@@ -79,4 +82,8 @@ Point operator-(const Point& p1, const Point& p2) {
 color CFigure::get_fillcolor()
 {
 	return FigGfxInfo.FillClr;
+}
+void CFigure::decrementnumofshapes()
+{
+
 }

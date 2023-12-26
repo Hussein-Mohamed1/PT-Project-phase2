@@ -7,15 +7,20 @@ CTriangle::CTriangle(Point p1, Point p2, Point p3, GfxInfo FigureGfxInfo) : CFig
 	P3 = p3;
 	id = ID;
 	ID++;
-
+	numofshapes++;
 }
+int CTriangle::numofshapes = 0;
+
 CTriangle::CTriangle() {  };
 
 int CTriangle::Getid()
 {
 	return id;
 }
-
+bool CTriangle::is_filled()
+{
+	return FigGfxInfo.isFilled;
+}
 Point& CTriangle::GetP1()
 {
 
@@ -25,7 +30,14 @@ Point& CTriangle::GetP1()
 
 
 }
-
+int CTriangle::getnumofshapes()
+{
+	return numofshapes;
+}
+void CTriangle::decrementnumofshapes()
+{
+	numofshapes--;
+}
 
 
 void CTriangle::Draw(Output* pOut) const
@@ -132,4 +144,7 @@ color CTriangle::get_fillcolor()
 {
 	return FigGfxInfo.FillClr;
 }
-
+CTriangle::~CTriangle()
+{
+	numofshapes--;
+}

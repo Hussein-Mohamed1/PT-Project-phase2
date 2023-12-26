@@ -1,13 +1,14 @@
 #include "figure_type.h"
 #include "GUI/Output.h"
 #include "GUI/Input.h"
-#include "Actions/AddcircleAction.h"
-#include "Actions/AddHexaAction.h"
-#include "Actions/AddRectAction.h"
-#include "Actions/AddSquareAction.h"
-#include "Actions/AddTriangleAction.h"
+#include "Figures/CCircle.h"
+#include "Figures/CHexa.h"
+#include "Figures/CRectangle.h"
+#include "Figures/CSquare.h"
+#include "Figures/CTriangle.h"
 #include <cstdlib> 
 #include "Actions/DeleteAction.h"
+#include "Actions/playSound.h"
 figure_type::figure_type(ApplicationManager* pApp) :Action(pApp)
 {
 	pManager->GetOutput()->ClearStatusBar();
@@ -26,6 +27,7 @@ void figure_type::manage_byfigure()
 	string s;
 	if (selected_fig)
 	{
+		playSound(pManager, BY_COLOR);
 		pManager->DeleteFunctionForPlayMood(selected_fig);
 		correct++;
 		s = "nice pick----> correct picks= " + to_string(correct) + "    incorrect picks= " + to_string(incorrect);
@@ -34,6 +36,7 @@ void figure_type::manage_byfigure()
 	}
 	else
 	{
+		playSound(pManager, BY_SHAPE);
 		pManager->DeleteFunctionForPlayMood(pManager->GetFigure(p.x , p.y));
 		incorrect++;
 		s = "wrong pick----> correct picks= " + to_string(correct) + "    incorrect picks= " + to_string(incorrect);
@@ -48,27 +51,27 @@ void figure_type::Execute(bool b)
 	switch (by_fig)
 	{
 	case squr:
-		numoffigure = AddSquareAction::getnumofshapes();
+		numoffigure = CSquare::getnumofshapes();
 		if (numoffigure != 0)
 			pManager->GetOutput()->PrintMessage("pick all of squares click to start");
 		break;
 	case rect:
-		numoffigure = AddRectAction::getnumofshapes();
+		numoffigure = CRectangle::getnumofshapes();
 		if (numoffigure != 0)
 			pManager->GetOutput()->PrintMessage("pick all of rectangles click to start");
 		break;
 	case circ:
-		numoffigure = AddcircleAction::getnumofshapes();
+		numoffigure = CCircle::getnumofshapes();
 		if (numoffigure != 0)
 			pManager->GetOutput()->PrintMessage("pick all of circles click to start");
 		break;
 	case tria:
-		numoffigure = AddTriangleAction::getnumofshapes();
+		numoffigure = CTriangle::getnumofshapes();
 		if (numoffigure != 0)
 			pManager->GetOutput()->PrintMessage("pick all of triangles click to start");
 		break;
 	case hexa:
-		numoffigure = AddHexaAction::getnumofshapes();
+		numoffigure = CHexa::getnumofshapes();
 		if (numoffigure != 0)
 			pManager->GetOutput()->PrintMessage("pick all of hexagines click to start");
 		break;
@@ -117,11 +120,13 @@ void figure_type::Execute(bool b)
 		}
 		if (correct > incorrect)
 		{
+			playSound(pManager, BY_COLOR_SHAPE);
 			s = "final record is---->  correct picks=  " + to_string(correct) + "    incorrect picks=  " + to_string(incorrect) + "  BRAVOOO";
 			pManager->GetOutput()->PrintMessage(s);
 		}
 		else if (incorrect > correct)
 		{
+			playSound(pManager, BY_COLOR_SHAPE);
 			s = "final record is---->  correct picks=  " + to_string(correct) + "    incorrect picks=  " + to_string(incorrect) + "  not good, try again";
 			pManager->GetOutput()->PrintMessage(s);
 		}

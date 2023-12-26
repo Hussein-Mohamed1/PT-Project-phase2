@@ -8,11 +8,11 @@ class ChangeColorAction :
     color  ChoosenColor;
     int counter;
     CFigure* f;
-  
+    static int  num_of_fill;
+
 
 public:
     ChangeColorAction(ApplicationManager* pApp,bool CF=0);
-  static int  num_of_fill ;
   static int countfill;
     virtual void ReadActionParameters();
   static  int if_exist_file();
@@ -20,5 +20,7 @@ public:
   void addundofirst(Action* pAct);
     void undo();
      void redo();
+   static  void decrement_fill();
+   static void resetnumoffill();
 };
 

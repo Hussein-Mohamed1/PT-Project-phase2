@@ -10,7 +10,7 @@ private:
     Point P1;
     GfxInfo HexaGfxInfo;
     CFigure* DeletedFig;
-    static int numofshapes;
+   
     CHexa* H;
 public :
     AddHexaAction(ApplicationManager* pApp);
@@ -19,7 +19,7 @@ public :
   void addundofirst(Action* pAct);
    void undo();
     void redo();
-    static int getnumofshapes();
+   
 
 };
 

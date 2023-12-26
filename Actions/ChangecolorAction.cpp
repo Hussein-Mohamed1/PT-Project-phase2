@@ -103,7 +103,10 @@ void ChangeColorAction::Execute(bool b)
 
 	}
 }
-
+void ChangeColorAction::decrement_fill()
+{
+	num_of_fill--;
+}
 void ChangeColorAction::addundofirst(Action* pAct)
 {
 	pManager->addToUndo(this);
@@ -150,5 +153,9 @@ void ChangeColorAction::redo()
 
 
 	}
+}
+void ChangeColorAction::resetnumoffill()
+{
+	num_of_fill = 0;
 }
 

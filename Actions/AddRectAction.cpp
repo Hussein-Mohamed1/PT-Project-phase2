@@ -9,18 +9,13 @@
 #include <windows.h>
 #include <mmsystem.h>
 #pragma comment(lib, "winmm.lib") 
-int AddRectAction::numofshapes = 0;
-int AddRectAction::getnumofshapes()
-{
-	return numofshapes;
-}
 
 
 
 AddRectAction::AddRectAction(ApplicationManager* pApp) :Action(pApp)
 {
 	//pManager->GetOutput()->PrintMessage(" PLEASE , Wait until sound finished ");
-	numofshapes++;
+	
 }
 
 void AddRectAction::ReadActionParameters()

@@ -62,6 +62,7 @@ ApplicationManager::ApplicationManager() : ActionCountre(0), ActionCountun(0)
 		DeletedFigList[i] = nullptr;
 
 	}
+	arr_recActions = new Action * [20];
 	for (int i = 0; i < 20; i++)
 	{
 		arr_recActions[i] = nullptr;
@@ -213,10 +214,11 @@ void ApplicationManager::ExecuteAction(ActionType ActType, int numofrec)
 		break;
 
 	case FUNC_EXIT_playMode:
+		pIn->set_exit();
 		break;
 
 	case FUNC_EXIT:
-
+		pIn->set_exit();
 		break;
 
 	case STATUS:	//a click on the status bar ==> no action
@@ -229,7 +231,7 @@ void ApplicationManager::ExecuteAction(ActionType ActType, int numofrec)
 	//Execute the created action
 	if (numofrec != -1 && pAct != nullptr)
 	{
-
+		pAct->addundofirst(pAct);
 		arr_recActions[numofrec] = pAct;
 		pAct->Execute(1);
 		pAct = NULL;
@@ -299,8 +301,8 @@ void ApplicationManager::Playrecord()
 {
 	if (arr_recActions[0] != NULL)
 	{
-
-		ClearAll();
+		bool calledfromplay=true;
+		ClearAll(calledfromplay);
 		Sleep(1000);
 		for (int i = 0; i < 20; i++)
 		{
@@ -409,6 +411,9 @@ void ApplicationManager::DeleteFunction()
 	{
 		if (FigList[i] == Selected_Figure)
 		{
+			Selected_Figure->decrementnumofshapes();
+			if (Selected_Figure->is_filled())
+				ChangeColorAction::decrement_fill();
 			pOut->ClearStatusBar();
 			FigList[i]->SetSelected(false);
 			FigList[FigCount] = FigList[i];
@@ -479,8 +484,9 @@ void ApplicationManager::SaveAll(fstream& OutputFile) const {
 }
 
 
-void ApplicationManager::ClearAll()
+void ApplicationManager::ClearAll(bool calledfromplay)
 {
+	ChangeColorAction::resetnumoffill();
 
 	for (int i = 0; i < FigCount; i++)
 	{
@@ -500,7 +506,21 @@ void ApplicationManager::ClearAll()
 		}
 
 	}
+	if (!calledfromplay)
+	{
+		for (int i = 0; i < 20; i++)
+		{
 
+			if (arr_recActions[i] != nullptr)
+			{
+
+				delete arr_recActions[i];
+				arr_recActions[i] = nullptr;
+
+			}
+
+		}
+	}
    
 
 	//UpdateInterface();

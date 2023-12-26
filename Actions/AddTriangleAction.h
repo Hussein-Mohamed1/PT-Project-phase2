@@ -9,7 +9,7 @@ private :
     Point P1, P2, P3;
     GfxInfo TriangleGfxInfo;
     CFigure* DeletedFig;
-    static int numofshapes;
+ 
     CTriangle* T;
 public :
     AddTriangleAction(ApplicationManager* pApp);
@@ -19,7 +19,7 @@ public :
    void Execute(bool b) ;
    void undo();
      void redo();
-    static int getnumofshapes();
+   
 
 };
 
