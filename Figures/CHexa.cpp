@@ -6,21 +6,33 @@
 #include"string.h"
 #include<algorithm>
 using namespace std;
+int CHexa::numofshapes = 0;
 CHexa::CHexa(Point c, GfxInfo FigureGfxInfo) : CFigure(FigureGfxInfo), centre(c), id(ID++), l(80)      //Here , if you want to change side lenght of Hexa 
 
 {
+	numofshapes++;
 }
 int CHexa::Getid()
 {
 	return id;
 }
-
+int CHexa::getnumofshapes()
+{
+	return numofshapes;
+}
+void CHexa::decrementnumofshapes()
+{
+	numofshapes--;
+}
 Point& CHexa::GetP1()
 {
 	return centre;
 }
 
-
+bool CHexa::is_filled()
+{
+	return FigGfxInfo.isFilled;
+}
 
 bool CHexa::checkselection(int x, int y)
 {
@@ -126,4 +138,8 @@ void CHexa::PrintInfo(Output* pOut)
 color CHexa::get_fillcolor()
 {
 	return FigGfxInfo.FillClr;
+}
+CHexa::~CHexa()
+{
+	numofshapes--;
 }

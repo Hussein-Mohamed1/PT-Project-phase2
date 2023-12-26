@@ -6,10 +6,22 @@ CRectangle::CRectangle(Point P1, Point P2, GfxInfo FigureGfxInfo) :CFigure(Figur
 	Corner2 = P2;
 	id = ID;
 	ID++;
+	numofshapes++;
 }
+int CRectangle::numofshapes = 0;
 
-
-
+int CRectangle::getnumofshapes()
+{
+	return numofshapes;
+}
+void CRectangle::decrementnumofshapes()
+{
+	numofshapes--;
+}
+bool CRectangle::is_filled()
+{
+	return FigGfxInfo.isFilled;
+}
 int CRectangle::Getid()
 {
 	return id;
@@ -124,7 +136,10 @@ Point& CRectangle::GetP1()
 
 	return *p;
 }
-
+CRectangle::~CRectangle()
+{
+	numofshapes--;
+}
 
 
 

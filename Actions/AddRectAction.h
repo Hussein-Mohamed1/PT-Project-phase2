@@ -11,7 +11,7 @@ private:
 	GfxInfo RectGfxInfo;
 	CFigure* DeletedFig;
 	CRectangle* R;
-	static int numofshapes;
+
 public:
 	AddRectAction(ApplicationManager *pApp);
 
@@ -24,7 +24,7 @@ void addundofirst(Action* pAct);
 	 void redo();
 
 	
-	static int getnumofshapes();
+	
 };
 
 #endif

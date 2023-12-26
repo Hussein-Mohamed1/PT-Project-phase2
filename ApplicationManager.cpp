@@ -62,6 +62,7 @@ ApplicationManager::ApplicationManager() : ActionCountre(0), ActionCountun(0)
 		DeletedFigList[i] = nullptr;
 
 	}
+	arr_recActions = new Action * [20];
 	for (int i = 0; i < 20; i++)
 	{
 		arr_recActions[i] = nullptr;
@@ -92,7 +93,7 @@ ActionType ApplicationManager::GetUserAction() const
 void ApplicationManager::ExecuteAction(ActionType ActType, int numofrec)
 {
 	Action* pAct = nullptr;
-	//playSound(this, ActType);
+	playSound(this, ActType);
 	//According to Action Type, create the corresponding action object
 	switch (ActType)
 	{
@@ -213,38 +214,35 @@ void ApplicationManager::ExecuteAction(ActionType ActType, int numofrec)
 		break;
 
 	case FUNC_EXIT_playMode:
+		pIn->set_exit();
 		break;
 
 	case FUNC_EXIT:
-
+		pIn->set_exit();
 		break;
 
 	case STATUS:	//a click on the status bar ==> no action
 		return;
 	case DRAWING_AREA:
-		if (Selected_Figure != nullptr && Selected_Figure->checkselection(iX, iY)) //a figure must be selected to call a "move by dragging" activity
+		if (Selected_Figure != nullptr) //a figure must be selected to call a "move by dragging" activity
+		{
 			pAct = new moveFigure(this, 1);
+			pOut->PrintMessage("Double click on the selected figure and drag it to a new position.");
+		}
 		break;
 	}
 	//Execute the created action
 	if (numofrec != -1 && pAct != nullptr)
 	{
-
+		pAct->addundofirst(pAct);
 		arr_recActions[numofrec] = pAct;
 		pAct->Execute(1);
 		pAct = NULL;
 	}
 	else if (pAct != NULL)
 	{
-		pIn->FlushMouseQueue();
-		//addToUndo(pAct);
-		//addToRedo();
-
-
-
+		pIn->FlushMouseQueue(); // written to prevent handeling and delayed clicks
 		pAct->Execute(1); //Execute
-		//ActList[ActionCount++] = pAct;
-
 		pAct->addundofirst(pAct);
 		pAct = NULL;
 	}
@@ -280,7 +278,8 @@ color ApplicationManager::get_indx_brushcolor(int indx)
 //Add a figure to the list of figures
 void ApplicationManager::AddFigure(CFigure* pFig)
 {
-
+	if (pFig->is_filled())
+		ChangeColorAction::increment_numoffill();
 	if (FigCount < MaxFigCount)
 		FigList[FigCount++] = pFig;
 
@@ -299,26 +298,26 @@ void ApplicationManager::Playrecord()
 {
 	if (arr_recActions[0] != NULL)
 	{
-
-		ClearAll();
+		bool calledfromplay = true;
+		ClearAll(calledfromplay);
 		Sleep(1000);
 		for (int i = 0; i < 20; i++)
 		{
 			counter++;
 			if (arr_recActions[i] == nullptr) break;
-	
-			
-			arr_recActions[i]->addundofirst(arr_recActions[i]);
-			
-		
-			if (dynamic_cast<UndoAction*>(arr_recActions[i]))
-			{
-				for (int j = 0;j < counter;j++) {
-					arr_recActions[j]->undo();
-			}
 
-			}
-				
+
+			arr_recActions[i]->addundofirst(arr_recActions[i]);
+
+			/*if (dynamic_cast<UndoAction*>(arr_recActions[i]))
+				{
+					for (int j = 0;j < counter;j++) {
+						arr_recActions[j]->undo();
+				}
+
+				}*/
+
+
 			arr_recActions[i]->Execute(0);
 
 
@@ -416,6 +415,9 @@ void ApplicationManager::DeleteFunction()
 	{
 		if (FigList[i] == Selected_Figure)
 		{
+			Selected_Figure->decrementnumofshapes();
+			if (Selected_Figure->is_filled())
+				ChangeColorAction::decrement_fill();
 			pOut->ClearStatusBar();
 			FigList[i]->SetSelected(false);
 			FigList[FigCount] = FigList[i];
@@ -486,29 +488,44 @@ void ApplicationManager::SaveAll(fstream& OutputFile) const {
 }
 
 
-void ApplicationManager::ClearAll()
+void ApplicationManager::ClearAll(bool calledfromplay)
 {
+	ChangeColorAction::resetnumoffill();
 
 	for (int i = 0; i < FigCount; i++)
 	{
 
 		if (FigList[i] != nullptr)
 		{
-		
+
 			delete FigList[i];
 			FigList[i] = nullptr;
 
 		}
 		if (DeletedFigList[i] != nullptr)
 		{
-		    delete DeletedFigList[i];
+			delete DeletedFigList[i];
 			DeletedFigList[i] = nullptr;
 
 		}
 
 	}
+	if (!calledfromplay)
+	{
+		for (int i = 0; i < 20; i++)
+		{
 
-   
+			if (arr_recActions[i] != nullptr)
+			{
+
+				delete arr_recActions[i];
+				arr_recActions[i] = nullptr;
+
+			}
+
+		}
+	}
+
 
 	//UpdateInterface();
 
@@ -527,15 +544,15 @@ void ApplicationManager::ClearAll()
 }
 void ApplicationManager::clearUndoRedoFuncs()
 {
-	
-		for (int i = 0; i < ActionCountun; i++)
-		{
-				ActListun[i] = nullptr;
-		}
+
+	for (int i = 0; i < ActionCountun; i++)
+	{
+		ActListun[i] = nullptr;
+	}
 
 	for (int i = 0; i < ActionCountre; i++)
 	{
-			ActListre[i] = nullptr;
+		ActListre[i] = nullptr;
 	}
 
 	ActionCountun = 0;
@@ -673,93 +690,6 @@ void ApplicationManager::set_figure(CFigure* fig)
 {
 	Selected_Figure = fig;
 }
-
-/*
-*
-*   CFigure* ApplicationManager::GetFigure(int x, int y)
-	{
-	  for (int i = 0; i < FigCount; i++)
-	{
-		  if (FigList[i] != NULL)                  // Validation to prevent crash if Figure is deleted
-	  {
-			  if (FigList[i]->checkselection(x, y))           /// to check whether point is in figure or not
-			  {
-				  // case one if there is no selected figure before
-
-				  if (Selected_Figure == NULL)
-				  {
-					  Selected_Figure = FigList[i];
-					  Selected_Figure->SetSelected(true);
-					  Selected_Figure->PrintInfo(pOut);
-					  return Selected_Figure;
-				  }
-
-				  // case two if selected figure is seclected before make it unselected and return NUL
-
-				  else if (Selected_Figure == FigList[i])
-				  {
-					  Selected_Figure->SetSelected(false);
-					  Selected_Figure = NULL;
-					  return NULL;
-				  }
-
-					//  case 3 if the seleced figure isn't the selected before
-
-				  else            //if (Selected_Figure != FigList[i])
-				  {
-					  Selected_Figure->SetSelected(false);
-					  Selected_Figure = FigList[i];
-					  Selected_Figure->SetSelected(true);
-					  Selected_Figure->PrintInfo(pOut);
-					  return Selected_Figure;
-				  }
-
-
-			  }
-
-		  }
-
-
-	}
-
-					// if the point dosen't belong to any figure
-
-	  pOut->PrintMessage(" No selected figure ");
-
-	  //Add your code here to search for a figure given a point x,y
-	//	//Remember that ApplicationManager only calls functions do NOT implement it.
-	//
-	  return NULL;
-	}
-*/
-
-
-
-
-
-
-
-//if (FigList[i]->IsSelected())                 /// check any figure is selected
-//{
-//	FigList[i]->SetSelected(false);          // case selected before  un select it
-//	return NULL;
-//}
-//else                                         // case unselected before select it
-//{
-//	FigList[i]->SetSelected(true);
-//}
-
-//int k = 0;
-//while (k != FigCount)                       // to validate multiply selection 
-//{
-//	if (FigList[k] != FigList[i])
-//	{
-//		FigList[k]->SetSelected(false);
-//	}
-//	k++;
-//}
-
-//return FigList[i];
 int ApplicationManager::get_numofcolor(color c)
 {
 	int num = 0;

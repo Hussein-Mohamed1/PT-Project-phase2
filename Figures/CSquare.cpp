@@ -7,15 +7,26 @@ CSquare::CSquare(Point p1, Point p2, GfxInfo FigureGfxInfo) :CFigure(FigureGfxIn
 	P2 = p2;
 	id = ID;
 	ID++;
-
+	numofshapes++;
 }
-
+int CSquare::numofshapes = 0;
+int CSquare::getnumofshapes()
+{
+	return numofshapes;
+}
+void CSquare::decrementnumofshapes()
+{
+	numofshapes--;
+}
 
 int CSquare::Getid()
 {
 	return id;
 }
-
+bool CSquare::is_filled()
+{
+	return FigGfxInfo.isFilled;
+}
 Point& CSquare::GetP1()
 {
 	return (P1 + P2) / 2;
@@ -104,4 +115,8 @@ void CSquare::PrintInfo(Output* pOut)
 color CSquare::get_fillcolor()
 {
 	return FigGfxInfo.FillClr;
+}
+CSquare::~CSquare()
+{
+	numofshapes--;
 }

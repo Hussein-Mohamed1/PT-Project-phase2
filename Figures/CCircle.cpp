@@ -12,15 +12,23 @@ ostream& operator<<(ostream& op, const color& c) {
 	op << int(c.ucRed) << " " << int(c.ucGreen) << " " << int(c.ucBlue);
 	return op;
 }
+int CCircle::numofshapes = 0;
 CCircle::CCircle(Point p1, Point p2, GfxInfo FigureGfxInfo) : CFigure(FigureGfxInfo)
 {
 	P1 = p1;
 	P2 = p2;
 	id = ID;
 	ID++;
-
+	numofshapes++;
 }
-
+int CCircle::getnumofshapes()
+{
+	return numofshapes;
+}
+void CCircle::decrementnumofshapes()
+{
+	numofshapes--;
+}
 Point& CCircle::GetP1()
 {
 	return P2;
@@ -119,4 +127,12 @@ void CCircle::PrintInfo(Output* pOut)
 color CCircle::get_fillcolor()
 {
 	return FigGfxInfo.FillClr;
+}
+bool CCircle::is_filled()
+{
+	return FigGfxInfo.isFilled;
+}
+CCircle::~CCircle()
+{
+	numofshapes--;
 }

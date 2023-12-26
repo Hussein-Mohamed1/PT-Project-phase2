@@ -80,7 +80,7 @@ void ChangeColorAction::addcolor(bool notaReverseAction)
 			pOut->SetFillColor(ChoosenColor);
 			pManager->addfillcolor(ChoosenColor, countfill);
 			countfill++;
-			num_of_fill++;
+			increment_numoffill();
 			f->ChngFillClr(ChoosenColor);
 		}
 		else
@@ -93,7 +93,10 @@ void ChangeColorAction::addcolor(bool notaReverseAction)
 	}
 	//newcolor = (ChoosenColor);
 }
-
+void ChangeColorAction::decrement_fill()
+{
+	num_of_fill--;
+}
 void ChangeColorAction::addundofirst(Action* pAct)
 {
   pManager->addToUndo(this);
@@ -113,7 +116,10 @@ void ChangeColorAction::redo()
 	swap(lastcolor, ChoosenColor);
 	addcolor(false);
 }
-
+void ChangeColorAction::increment_numoffill()
+{
+	num_of_fill++;
+}
 
 
 
@@ -158,5 +164,13 @@ void ChangeColorAction::redo()
 	else {
 		ApplicationManager::countbrush++;
 		f->ChngDrawClr(pManager->get_indx_brushcolor(ApplicationManager::countbrush));
+
+
 	}
-}*/
+}
+*/
+void ChangeColorAction::resetnumoffill()
+{
+	num_of_fill = 0;
+}
+

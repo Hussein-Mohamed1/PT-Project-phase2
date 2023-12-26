@@ -11,6 +11,7 @@ class Input		//The application manager should have a pointer to this class
 {
 private:
 	window* pWind;	//Pointer to the Graphics Window
+	bool EXIT = false;
 public:
 	Input(window* pW);		//Consturctor
 	void GetPointClicked(int& x, int& y) const;
@@ -19,7 +20,7 @@ public:
 	buttonstate GetButtonState(const button btMouse, int& iX, int& iY);
 	void FlushMouseQueue();
 	ActionType GetUserAction() const; //Read the user click and map to an action
-
+	void set_exit();
 	~Input();
 };
 
