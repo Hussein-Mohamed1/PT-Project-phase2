@@ -31,6 +31,7 @@ public:
 	 void decrementnumofshapes();
 	 bool is_filled();
 	 ~CRectangle();
+	 void resetnumoffig();
 };
 
 #endif

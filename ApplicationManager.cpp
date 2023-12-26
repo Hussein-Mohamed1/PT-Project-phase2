@@ -498,7 +498,7 @@ void ApplicationManager::ClearAll(bool calledfromplay)
 
 		if (FigList[i] != nullptr)
 		{
-
+			FigList[i]->resetnumoffig();
 			delete FigList[i];
 			FigList[i] = nullptr;
 

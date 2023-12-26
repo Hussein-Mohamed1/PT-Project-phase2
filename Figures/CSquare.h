@@ -28,5 +28,6 @@ public:
 	 void decrementnumofshapes();
 	 bool is_filled();
 	 ~CSquare();
+	 void resetnumoffig();
 };
 

@@ -32,7 +32,7 @@ Point& CSquare::GetP1()
 	return (P1 + P2) / 2;
 }
 
-CSquare::CSquare() { };
+CSquare::CSquare() { numofshapes++; };
 void CSquare::Draw(Output* pOut) const
 {
 	pOut->DrawRect(P1, P2, FigGfxInfo, Selected);
@@ -119,4 +119,8 @@ color CSquare::get_fillcolor()
 CSquare::~CSquare()
 {
 	numofshapes--;
+}
+void CSquare::resetnumoffig()
+{
+	numofshapes = 0;
 }

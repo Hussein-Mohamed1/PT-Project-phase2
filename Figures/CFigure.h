@@ -44,7 +44,7 @@ public:
 	virtual color get_fillcolor();
 	 static void IsAllNewFilled(bool s=false);
 	 static void ResetID();
-
+	 virtual void resetnumoffig();
 	
 		//Save the figure parameters to the file
 		//Load the figure parameters to the file

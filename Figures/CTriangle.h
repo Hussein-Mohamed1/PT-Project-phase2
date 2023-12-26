@@ -29,4 +29,5 @@ public:
 	 void decrementnumofshapes();
 	 bool is_filled();
 	 ~CTriangle();
+	 void resetnumoffig();
 };

@@ -91,7 +91,7 @@ void CHexa::move(const Point& newPos)
 {
 	centre = newPos;
 }
-CHexa::CHexa() : l(80) {  };
+CHexa::CHexa() : l(80) { numofshapes++; };
 void CHexa::Save(fstream& op) const
 {
 
@@ -142,4 +142,8 @@ color CHexa::get_fillcolor()
 CHexa::~CHexa()
 {
 	numofshapes--;
+}
+void CHexa::resetnumoffig()
+{
+	numofshapes = 0;
 }

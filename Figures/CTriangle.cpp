@@ -11,7 +11,7 @@ CTriangle::CTriangle(Point p1, Point p2, Point p3, GfxInfo FigureGfxInfo) : CFig
 }
 int CTriangle::numofshapes = 0;
 
-CTriangle::CTriangle() {  };
+CTriangle::CTriangle() { numofshapes++; };
 
 int CTriangle::Getid()
 {
@@ -147,4 +147,8 @@ color CTriangle::get_fillcolor()
 CTriangle::~CTriangle()
 {
 	numofshapes--;
+}
+void CTriangle::resetnumoffig()
+{
+	numofshapes = 0;
 }

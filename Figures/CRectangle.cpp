@@ -26,7 +26,7 @@ int CRectangle::Getid()
 {
 	return id;
 }
-CRectangle::CRectangle() {}
+CRectangle::CRectangle() { numofshapes++; }
 void CRectangle::Draw(Output* pOut) const
 {
 	//Call Output::DrawRect to draw a rectangle on the screen	
@@ -140,7 +140,10 @@ CRectangle::~CRectangle()
 {
 	numofshapes--;
 }
-
+void CRectangle::resetnumoffig()
+{
+	numofshapes = 0;
+}
 
 
 

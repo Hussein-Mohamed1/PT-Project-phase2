@@ -87,3 +87,7 @@ void CFigure::decrementnumofshapes()
 {
 
 }
+void CFigure::resetnumoffig()
+{
+
+}

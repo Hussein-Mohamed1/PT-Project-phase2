@@ -29,5 +29,6 @@ public:
 	 void decrementnumofshapes();
 	 bool is_filled();
 	 ~CHexa();
+	 void resetnumoffig();
 };
 
