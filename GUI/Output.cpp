@@ -39,7 +39,10 @@ Output::Output()
 	pWind = CreateWind(UI.width, UI.height, UI.wx, UI.wy);
 
 	pWind->ChangeTitle("Paint for Kids - Programming Techniques Project");
+	Names();
 	createIntro();
+
+	CreateStatusBar();
 
 	ClearDrawArea();
 	//Change the title
@@ -143,6 +146,7 @@ void Output::CreateDrawToolBar() const
 	for (int i = 0; i < DRAW_ITM_COUNT; i++)
 	{
 		//pWind->DrawImage(MenuItemImages[i], i * UI.MenuItemWidth, 5, UI.MenuItemWidth - 5, UI.ToolBarHeight - 5);
+
 
 		if (i == ITM_BLACK)
 		{
@@ -362,6 +366,14 @@ void Output::Drawhexagon(const int* xcoordinates, const int* ycoordinates, GfxIn
 
 
 	pWind->DrawPolygon(xcoordinates, ycoordinates, 6, style);
+
+}
+void Output::Names()
+{
+   
+	pWind->SetPen(BLACK, 20);
+	pWind->SetFont(20, BOLD, BY_NAME, "Arial");
+	pWind->DrawString(10, UI.height - (int)(UI.StatusBarHeight / 1.5)-10, " Created By :    Salah         Hussin       Noser        Esraa");
 
 }
 
