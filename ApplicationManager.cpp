@@ -308,16 +308,16 @@ void ApplicationManager::Playrecord()
 
 
 			arr_recActions[i]->addundofirst(arr_recActions[i]);
+			
+		/*if (dynamic_cast<UndoAction*>(arr_recActions[i]))
+			{
+				for (int j = 0;j < counter;j++) {
+					arr_recActions[j]->undo();
+			}
 
-			/*if (dynamic_cast<UndoAction*>(arr_recActions[i]))
-				{
-					for (int j = 0;j < counter;j++) {
-						arr_recActions[j]->undo();
-				}
-
-				}*/
-
-
+			}*/
+			
+				
 			arr_recActions[i]->Execute(0);
 
 
