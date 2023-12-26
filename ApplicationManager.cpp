@@ -227,7 +227,7 @@ void ApplicationManager::ExecuteAction(ActionType ActType, int numofrec)
 		if (Selected_Figure != nullptr) //a figure must be selected to call a "move by dragging" activity
 		{
 			pAct = new moveFigure(this, 1);
-
+			pOut->PrintMessage("Double click on the selected figure and drag it to a new position.");
 		}
 		break;
 	}
@@ -298,7 +298,7 @@ void ApplicationManager::Playrecord()
 {
 	if (arr_recActions[0] != NULL)
 	{
-		bool calledfromplay=true;
+		bool calledfromplay = true;
 		ClearAll(calledfromplay);
 		Sleep(1000);
 		for (int i = 0; i < 20; i++)
@@ -525,7 +525,7 @@ void ApplicationManager::ClearAll(bool calledfromplay)
 
 		}
 	}
-   
+
 
 	//UpdateInterface();
 
@@ -690,93 +690,6 @@ void ApplicationManager::set_figure(CFigure* fig)
 {
 	Selected_Figure = fig;
 }
-
-/*
-*
-*   CFigure* ApplicationManager::GetFigure(int x, int y)
-	{
-	  for (int i = 0; i < FigCount; i++)
-	{
-		  if (FigList[i] != NULL)                  // Validation to prevent crash if Figure is deleted
-	  {
-			  if (FigList[i]->checkselection(x, y))           /// to check whether point is in figure or not
-			  {
-				  // case one if there is no selected figure before
-
-				  if (Selected_Figure == NULL)
-				  {
-					  Selected_Figure = FigList[i];
-					  Selected_Figure->SetSelected(true);
-					  Selected_Figure->PrintInfo(pOut);
-					  return Selected_Figure;
-				  }
-
-				  // case two if selected figure is seclected before make it unselected and return NUL
-
-				  else if (Selected_Figure == FigList[i])
-				  {
-					  Selected_Figure->SetSelected(false);
-					  Selected_Figure = NULL;
-					  return NULL;
-				  }
-
-					//  case 3 if the seleced figure isn't the selected before
-
-				  else            //if (Selected_Figure != FigList[i])
-				  {
-					  Selected_Figure->SetSelected(false);
-					  Selected_Figure = FigList[i];
-					  Selected_Figure->SetSelected(true);
-					  Selected_Figure->PrintInfo(pOut);
-					  return Selected_Figure;
-				  }
-
-
-			  }
-
-		  }
-
-
-	}
-
-					// if the point dosen't belong to any figure
-
-	  pOut->PrintMessage(" No selected figure ");
-
-	  //Add your code here to search for a figure given a point x,y
-	//	//Remember that ApplicationManager only calls functions do NOT implement it.
-	//
-	  return NULL;
-	}
-*/
-
-
-
-
-
-
-
-//if (FigList[i]->IsSelected())                 /// check any figure is selected
-//{
-//	FigList[i]->SetSelected(false);          // case selected before  un select it
-//	return NULL;
-//}
-//else                                         // case unselected before select it
-//{
-//	FigList[i]->SetSelected(true);
-//}
-
-//int k = 0;
-//while (k != FigCount)                       // to validate multiply selection 
-//{
-//	if (FigList[k] != FigList[i])
-//	{
-//		FigList[k]->SetSelected(false);
-//	}
-//	k++;
-//}
-
-//return FigList[i];
 int ApplicationManager::get_numofcolor(color c)
 {
 	int num = 0;
