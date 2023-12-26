@@ -21,7 +21,7 @@ bool CTriangle::is_filled()
 {
 	return FigGfxInfo.isFilled;
 }
-Point& CTriangle::GetP1()
+Point& CTriangle::GetCenter()
 {
 
 	Point* p = new Point;
@@ -29,6 +29,28 @@ Point& CTriangle::GetP1()
 	return *p;
 
 
+}
+void CTriangle::resize(const Point& tempPoint, int cornerNumber)
+{
+	if (cornerNumber == 1) {
+		P1 = tempPoint;
+	}
+	else if (cornerNumber == 2) {
+		P2 = tempPoint;
+	}
+	else P3 = tempPoint;
+
+}
+int CTriangle::OutlineClickValidation(const Point& tempPoint)
+{		//checks the distance between where the user has clicked a corner
+	if (sqrt(pow((tempPoint.x - P1.x), 2) + pow((tempPoint.y - P1.y), 2)) <= UI.wx) {
+		return 1;
+	}
+	else if (sqrt(pow((tempPoint.x - P2.x), 2) + pow((tempPoint.y - P2.y), 2)) <= UI.wx) {
+		return 2;
+	}
+	else return 3;
+	return 0;
 }
 int CTriangle::getnumofshapes()
 {
@@ -46,17 +68,6 @@ void CTriangle::Draw(Output* pOut) const
 }
 bool CTriangle::checkselection(int x, int y)
 {
-	//int x1 = P1.x;	int x2 = P2.x;	int x3 = P3.x;
-	//int y1 = P1.y;	int y2 = P2.y;	int y3 = P3.y;
-
-	//int a1 = abs((x1 * (y2 - y3) + x2 * (y3 - y1) + x3 * (y1 - y2)) / 2);
-	//int a2 = abs((x * (y2 - y3) + x2 * (y3 - y) + x3 * (y - y2)) / 2);
-	//int a3 = abs((x1 * (y - y3) + x * (y3 - y1) + x3 * (y1 - y)) / 2);
-	//int a4 = abs((x1 * (y2 - y) + x2 * (y - y1) + x * (y1 - y2)) / 2);
-	//if (a1 == a2 + a3 + a4)
-	//	return true;
-
-	//return false;
 
 	int x1 = P1.x;	int x2 = P2.x;	int x3 = P3.x;
 	int y1 = P1.y;	int y2 = P2.y;	int y3 = P3.y;
@@ -110,13 +121,14 @@ void CTriangle::move(const Point& newPos)
 	P1 = newPos;
 }
 
-bool CTriangle::isInsideWindowBoundaries(const Point& newPos) const
+bool CTriangle::isInsideWindowsBoundaries(const Point& newPos) const
 {
 	Point tP1, tP2, tP3;
 	tP2 = tP2 + newPos - tP1;
 	tP3 = tP3 + newPos - tP1;
 	tP1 = newPos;
-	if ((tP1.y) < (UI.ToolBarHeight + 5) || (tP2.y) < (UI.ToolBarHeight + 5) || (tP3.y) < (UI.ToolBarHeight + 5) || (tP1.y) > (UI.height - UI.StatusBarHeight + 5) || (tP2.y) > (UI.height - UI.StatusBarHeight + 5) || (tP3.y) > (UI.height - UI.StatusBarHeight + 5))
+	if ((tP1.y) < (UI.ToolBarHeight + UI.wx) || (tP2.y) < (UI.ToolBarHeight + UI.wx) || (tP3.y) < (UI.ToolBarHeight + UI.wx) || (tP1.y) > (UI.height - UI.StatusBarHeight + UI.wx)
+		|| (tP2.y) > (UI.height - UI.StatusBarHeight + UI.wx) || (tP3.y) > (UI.height - UI.StatusBarHeight + UI.wx))
 		return false;
 	return true;
 }

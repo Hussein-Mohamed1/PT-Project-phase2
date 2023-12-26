@@ -18,11 +18,11 @@ public:
 	friend ostream& operator<<(ostream&, const CTriangle&);
 	void Load(string&);
 	void move(const Point&);
-	bool isInsideWindowBoundaries(const Point&) const;
+	bool isInsideWindowsBoundaries(const Point&) const;
 	int Getid();
-	Point&  GetP1();
-	
-	
+	Point& GetCenter();
+	void resize(const Point&, int = 0);
+	int OutlineClickValidation(const Point&);
 	void PrintInfo(Output* pOut);
 	color get_fillcolor();
 	static int getnumofshapes();

@@ -22,7 +22,7 @@ public:
 	bool IsSelected() const;	//check whether fig is selected
 	virtual  bool checkselection(int x, int y) = 0;
 	virtual int Getid() = 0;
-	virtual Point& GetP1() = 0;
+	virtual Point& GetCenter() = 0;
 
 	virtual void Draw(Output* pOut) const = 0;		//Draw the figure
 
@@ -35,7 +35,9 @@ public:
 	///It should be overridden by each inherited figure
 	virtual bool is_filled();
 	///Decide the parameters that you should pass to each function	
-	virtual bool isInsideWindowBoundaries(const Point&) const = 0;
+	virtual bool isInsideWindowsBoundaries(const Point&) const = 0;
+	virtual void resize(const Point&, int = 0) = 0;
+	virtual int OutlineClickValidation(const Point&) = 0;
 	virtual void move(const Point&) = 0;
 	virtual void Save(fstream& OutFile) const = 0;	//Save the figure parameters to the file
 	virtual void Load(string&) = 0;	//Load the figure parameters to the file

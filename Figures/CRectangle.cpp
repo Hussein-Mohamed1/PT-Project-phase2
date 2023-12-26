@@ -26,6 +26,23 @@ int CRectangle::Getid()
 {
 	return id;
 }
+void CRectangle::resize(const Point& tempPoint, int cornerNumber)
+{
+	if (cornerNumber == 1) // if the OutlineClickValidation returns 1 then the user has clicked on the first corner
+	{
+		Corner1 = tempPoint;
+	}
+	else Corner2 = tempPoint;
+}
+int CRectangle::OutlineClickValidation(const Point& tempPoint)
+{
+	if (sqrt(pow((tempPoint.x - Corner1.x), 2) + pow((tempPoint.y - Corner1.y), 2)) <= UI.wx) {
+		return 1;
+	}
+	else if (sqrt(pow((tempPoint.x - Corner2.x), 2) + pow((tempPoint.y - Corner2.y), 2)) <= UI.wx) {
+		return 2;
+	}return 0;
+}
 CRectangle::CRectangle() { numofshapes++; }
 void CRectangle::Draw(Output* pOut) const
 {
@@ -97,12 +114,12 @@ bool CRectangle::checkselection(int x, int y)
 	return false;
 
 }
-bool CRectangle::isInsideWindowBoundaries(const Point& newPos) const
+bool CRectangle::isInsideWindowsBoundaries(const Point& newPos) const
 {
 
 	Point tCorner2 = newPos + Corner2 - (Corner1 + Corner2) / 2;
 	Point tCorner1 = newPos + Corner1 - (Corner1 + Corner2) / 2;
-	if ((tCorner1.y > UI.ToolBarHeight + 5 && tCorner1.y < UI.height - UI.StatusBarHeight - 5) && (tCorner2.y > UI.ToolBarHeight + 5 && tCorner2.y < UI.height - UI.StatusBarHeight - 5)) //check if the second corner will be valid
+	if ((tCorner1.y > UI.ToolBarHeight + UI.wx && tCorner1.y < UI.height - UI.StatusBarHeight - UI.wx) && (tCorner2.y > UI.ToolBarHeight + UI.wx && tCorner2.y < UI.height - UI.StatusBarHeight - UI.wx)) //check if the second corner will be valid
 		return 1;
 	return 0;
 }
@@ -128,10 +145,10 @@ color CRectangle::get_fillcolor()
 	return FigGfxInfo.FillClr;
 }
 
-Point& CRectangle::GetP1()
+Point& CRectangle::GetCenter()
 {
-	Point* p = new Point{ (Corner1.x + Corner2.x),
-		(Corner1.y + Corner2.y) };
+	Point* p = new Point{ (Corner1.x + Corner2.x) / 2,
+		(Corner1.y + Corner2.y) / 2 };
 
 
 	return *p;

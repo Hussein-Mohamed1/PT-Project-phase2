@@ -30,6 +30,7 @@
 #include "to_drawmood.h"
 #include "StartandStopRec.h"
 #include "Figures/CFigure.h"
+#include "Actions/resizeByDragging.h"
 #include "Actions/playSound.h"
 #include <cstdlib> 
 
@@ -228,12 +229,20 @@ void ApplicationManager::ExecuteAction(ActionType ActType, int numofrec)
 	case STATUS:	//a click on the status bar ==> no action
 		return;
 	case DRAWING_AREA:
-		if (Selected_Figure != nullptr) //a figure must be selected to call a "move by dragging" activity
-		{
-			pAct = new moveFigure(this, 1);
-			pOut->PrintMessage("Double click on the selected figure and drag it to a new position.");
+		Point MousePos;
+		pIn->GetButtonState(LEFT_BUTTON, MousePos.x, MousePos.y);
+		if (Selected_Figure != nullptr) {
+			if (Selected_Figure->OutlineClickValidation(MousePos))
+			{
+				pAct = new resizeByDragging(this);
+			}
+			if (Selected_Figure->checkselection(MousePos.x, MousePos.y)) //a figure must be selected to call a "move by dragging" activity
+			{
+				pAct = new moveFigure(this, 1);
+				pOut->PrintMessage("Double click on the selected figure and drag it to a new position or on its outline to resize it.");
+			}
 		}
-		break;
+		else break;
 	}
 	//Execute the created action
 	if (numofrec != -1 && pAct != nullptr)
@@ -312,16 +321,8 @@ void ApplicationManager::Playrecord()
 
 
 			arr_recActions[i]->addundofirst(arr_recActions[i]);
-			
-		/*if (dynamic_cast<UndoAction*>(arr_recActions[i]))
-			{
-				for (int j = 0;j < counter;j++) {
-					arr_recActions[j]->undo();
-			}
 
-			}*/
-			
-				
+
 			arr_recActions[i]->Execute(0);
 
 

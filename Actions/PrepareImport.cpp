@@ -29,6 +29,7 @@ void PrepareImport::Execute(bool b) {
 	if (OutputFile != nullptr) {
 		{if (OutputFile->is_open())
 		{
+			pManager->ClearAll();
 			CFigure* p = nullptr;
 			string line;
 

@@ -62,7 +62,7 @@ ostream& operator<<(ostream& op, const Point& p) {
 
 
 ostream& operator << (ostream& op, const GfxInfo& gfx) {
-	op << gfx.DrawClr << " " << gfx.FillClr << " " << gfx.isFilled << " " << (gfx.BorderWdth > 0) ? gfx.BorderWdth : 0;
+	op << gfx.DrawClr << " " << gfx.FillClr << " " << gfx.isFilled << " " << gfx.BorderWdth;
 	return op;
 }
 

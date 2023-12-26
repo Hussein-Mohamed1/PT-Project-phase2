@@ -17,11 +17,12 @@ public:
 	void Save(fstream&)const;
 	void Load(string&);
 	bool  checkselection(int x, int y);
-	bool isInsideWindowBoundaries(const Point&) const;
+	bool isInsideWindowsBoundaries(const Point&) const;
 	void move(const Point&);
 	int Getid();
-	Point&  GetP1();
-	
+	Point& GetCenter();
+	int OutlineClickValidation(const Point&mousePosition);
+	void resize(const Point&, int = 0);
 	void PrintInfo(Output* pOut);
 	//	void PrintInfo(Output* pOut);
 	color get_fillcolor();

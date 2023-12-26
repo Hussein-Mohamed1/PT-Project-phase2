@@ -29,7 +29,7 @@ void SelectAction::ReadActionParameters()
 void SelectAction::Execute(bool b)
 {
 	if (b)
-	ReadActionParameters();
+		ReadActionParameters();
 	Output* pOut = pManager->GetOutput();
 	ClickedFigure = pManager->GetFigure(p.x, p.y);
 	CFigure* oldSelected_Figure = pManager->GetSelected_Figure();
