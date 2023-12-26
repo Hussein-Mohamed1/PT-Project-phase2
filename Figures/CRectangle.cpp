@@ -133,10 +133,10 @@ void CRectangle::PrintInfo(Output* pOut)
 
 		// to_string ()  is a function that cast int to strting
 
-	string printed = "Figure is Rectangle          Figure id : " + to_string(id) +
-		"        Fisrt Corner :(" + to_string(Corner1.x) + "," + to_string(Corner1.y) + ")"
-		+ "        Second Corner :(" + to_string(Corner2.x) + "," + to_string(Corner2.y) + ")"
-		+ "        height " + to_string(hieght) + "        width " + to_string(widght);
+	string printed = "Figure is Rectangle   Figure id : " + to_string(id) +
+		"   Fisrt Corner :(" + to_string(Corner1.x) + "," + to_string(Corner1.y) + ")"
+		+ "  Second Corner :(" + to_string(Corner2.x) + "," + to_string(Corner2.y) + ")"
+		+ "   height " + to_string(hieght) + "    width " + to_string(widght) + "     (To Resize by Drag click the top left corner or bottom Right) ";
 	pOut->PrintMessage(printed);
 
 }
