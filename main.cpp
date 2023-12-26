@@ -2,6 +2,9 @@
 #include <windows.h>
 #include <mmsystem.h>
 #pragma comment(lib, "winmm.lib") 
+#include "Actions/playSound.h"
+#include <cstdlib> 
+
 
 
 
@@ -32,6 +35,8 @@ int main()
 
 	} while(ActType != FUNC_EXIT && ActType !=FUNC_EXIT_playMode);
 	
+	PlaySound(".\\sounds\\EndGame.wav", NULL, SND_ASYNC | SND_FILENAME);
+	Sleep(600);
 
 	
 	return 0;
